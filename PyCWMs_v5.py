@@ -559,7 +559,7 @@ class ConservedWaters(Frame):
         v5.set('Mobility')
         OptionMenu(frame1, v5, 'Mobility', 'Normalized B-factors').grid(row=4, column=1, sticky=W)
 
-        Label(frame1, text="Custer diameter cutoff").grid(row=5, column=0, sticky=W)
+        Label(frame1, text="Custer diameter").grid(row=5, column=0, sticky=W)
         Button(frame1,text=" Help  ",command=cluster_diameter_help).grid(row=5, column=2, sticky=W)
         v6 = StringVar(master=frame1)
         v6.set("1.5")
