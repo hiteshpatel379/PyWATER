@@ -11,13 +11,15 @@ Copyright 2013 Hitesh Patel and B. Gruening
 
 """
 
-import os, urllib, shutil, re
+import os
+import urllib
+import shutil
+import re
 import scipy.cluster.hierarchy as hcluster
 from xml.dom.minidom import parseString
 import numpy as np
 from Tkinter import *
 import tkMessageBox
-
 import pymol.cmd as cmd
 
 
@@ -25,43 +27,50 @@ import pymol.cmd as cmd
     TODO:
     - To make running in Windows and Mac
     - Write a log file with enough outputs..
+    - tmp_dir is not deleted
 """
 
 def __init__(self):
-   self.menuBar.addmenuitem('Plugin', 'command',
-                            'Find Conserved Waters',
-                            label = 'PyCWMs',
-                            command = main)
+    self.menuBar.addmenuitem('Plugin', 'command',
+                        'Find Conserved Waters',
+                        label = 'PyCWMs',
+                        command = main)
 
 
 def pdb_id_help():
-   tkMessageBox.showinfo(title = 'PDB Identifier', message = "The PDB id of the protein for which you like to find conserved waters.")
+    tkMessageBox.showinfo(title = 'PDB Identifier', 
+        message = "The PDB id of the protein for which you like to find conserved waters.")
 
 def chain_help():
-   tkMessageBox.showinfo(title = 'Chain Identifier', message = "The chain identifier of the protein for which you like to find conserved waters in above mentioned PDB.")
+    tkMessageBox.showinfo(title = 'Chain Identifier', 
+        message = "The chain identifier of the protein for which you like to find conserved waters in above mentioned PDB.")
 
 def seq_id_help():
-   tkMessageBox.showinfo(title = 'Sequence identity cutoff', message = """All the protein structures, clustered by BlastClust, having sequence identity more than given cutoff will be superimposed to find the conserved water molecules in query protein chain.
+    tkMessageBox.showinfo(title = 'Sequence identity cutoff', 
+        message = """All the protein structures, clustered by BlastClust, having sequence identity more than given cutoff will be superimposed to find the conserved water molecules in query protein chain.
 Minimum suggested Sequence identity cutoff is 95.""")
 
 def resolution_help():
-   tkMessageBox.showinfo(title = 'Structure resolution cutoff', message = """All the protein structures to be superimposed will be filtered first according to the structure resolution cutoff. Only structures with better resolution than given cutoff will be used further.
+    tkMessageBox.showinfo(title = 'Structure resolution cutoff', 
+        message = """All the protein structures to be superimposed will be filtered first according to the structure resolution cutoff. Only structures with better resolution than given cutoff will be used further.
 Maximum suggested structure resolution cutoff is 2.5 A.""")
 
 def refinement_quality_help():
-   tkMessageBox.showinfo(title = 'Filter by refinement quality', message = "Choose either Mobility or Normalized B-factor as criteria to assess the refinement quality of crystal structure. Program will filter out the water molecules with bad refinement quality.")
+    tkMessageBox.showinfo(title = 'Filter by refinement quality', message = "Choose either Mobility or Normalized B-factor as criteria to assess the refinement quality of crystal structure. Program will filter out the water molecules with bad refinement quality.")
 
 def cluster_diameter_help():
-    tkMessageBox.showinfo(title = 'Cluster diameter', message = """Only water molecules closer than given cutoff will be put in one cluster. The less cluster diameter ensures each water molecule in a cluster from different structures.
+    tkMessageBox.showinfo(title = 'Cluster diameter', 
+        message = """Only water molecules closer than given cutoff will be put in one cluster. The less cluster diameter ensures each water molecule in a cluster from different structures.
 Maximum suggested structure resolution cutoff is 2.0 A.""")
 
 def prob_help():
-   tkMessageBox.showinfo(title = 'Probability cutoff', message = """Water molecules will be considered CONSERVED if their probability of being conserved is above given cutoff.
+    tkMessageBox.showinfo(title = 'Probability cutoff', 
+        message = """Water molecules will be considered CONSERVED if their probability of being conserved is above given cutoff.
 Value ranges from 0 to 1.
 Minimum suggested value is 0.5
 """)
 
-def displayInputs(selectedStruturePDB,selectedStrutureChain,seq_id,resolution,cluster_diameter,prob):
+def displayInputs(selectedStruturePDB, selectedStrutureChain, seq_id, resolution, cluster_diameter, prob):
     print 'Input values are : '
     print 'PDB id : ' + selectedStruturePDB
     print 'Chain id : ' + selectedStrutureChain
@@ -71,23 +80,23 @@ def displayInputs(selectedStruturePDB,selectedStrutureChain,seq_id,resolution,cl
     print 'probability cutoff : ' + str(prob)
 
 
-def displayInPyMOL(outdir,selectedPDBChain):
-    pdbCWMs = os.path.join(outdir, selectedPDBChain+'_withConservedWaters.pdb')
-    pdb = os.path.join(outdir, selectedPDBChain+'.pdb')
+def displayInPyMOL(outdir, selectedPDBChain):
+    pdbCWMs = os.path.join(outdir, '%s_withConservedWaters.pdb' % selectedPDBChain)
+    pdb = os.path.join(outdir, '%s.pdb' % selectedPDBChain)
 
-    queryProteinCWMs = selectedPDBChain+'_withConservedWaters'
+    queryProteinCWMs = '%s_withConservedWaters' % selectedPDBChai
 
     cmd.load(pdbCWMs)
     cmd.orient(queryProteinCWMs)
     cmd.h_add(queryProteinCWMs)
 
-    cmd.select('cwm_protein','polymer and '+queryProteinCWMs)
-    cmd.select('cwm_waters','resn hoh and '+queryProteinCWMs)
-    cmd.select('cwm_ligand','organic and '+queryProteinCWMs)
+    cmd.select('cwm_protein','polymer and %s' % queryProteinCWMs)
+    cmd.select('cwm_waters','resn hoh and %s' % queryProteinCWMs)
+    cmd.select('cwm_ligand','organic and %s' % queryProteinCWMs)
 
     # h bonds between protein and waters
-    cmd.select('don', '(elem n,o and (neighbor hydro)) and '+queryProteinCWMs)
-    cmd.select('acc', '(elem o or (elem n and not (neighbor hydro))) and '+queryProteinCWMs)
+    cmd.select('don', '(elem n,o and (neighbor hydro)) and %s' % queryProteinCWMs)
+    cmd.select('acc', '(elem o or (elem n and not (neighbor hydro))) and %s' % queryProteinCWMs)
     cmd.distance ('PW_HBA', '(cwm_protein and acc)','(cwm_waters and don)', 3.2)
     cmd.distance ('PW_HBD', '(cwm_protein and don)','(cwm_waters and acc)', 3.2)
 
@@ -112,23 +121,23 @@ def displayInPyMOL(outdir,selectedPDBChain):
     cmd.show_as('spheres','cwm_waters')
 
     cmd.hide('labels','*_HB*')
-    cmd.remove('(hydro) and '+queryProteinCWMs)
+    cmd.remove('(hydro) and %s' % queryProteinCWMs)
 
     cmd.util.cbac('cwm_protein')
-    cmd.set('transparency',0.2)
-    cmd.show('surface','cwm_protein')
+    cmd.set('transparency', 0.2)
+    cmd.show('surface', 'cwm_protein')
 
     cmd.load(pdb)
-    cmd.create('all waters','resn hoh and '+selectedPDBChain)
-    cmd.color('red','ss h and '+selectedPDBChain)
-    cmd.color('yellow','ss s and '+selectedPDBChain)
-    cmd.color('green','ss l+ and '+selectedPDBChain)
-    cmd.show_as('cartoon',selectedPDBChain)
-    cmd.set('ray_shadows',0)
+    cmd.create('all waters', 'resn hoh and %s' % selectedPDBChain)
+    cmd.color('red','ss h and %s' % selectedPDBChain)
+    cmd.color('yellow','ss s and %s' % selectedPDBChain)
+    cmd.color('green','ss l+ and %s' % selectedPDBChain)
+    cmd.show_as('cartoon', selectedPDBChain)
+    cmd.set('ray_shadows', 0)
 
 
 
-def okMobility(pdbFile,mobilityCutoff=2.0):
+def okMobility(pdbFile, mobilityCutoff=2.0):
     normBfactors = []
     OccupancyAndBfactor = []
     for line in open(pdbFile):
@@ -148,11 +157,10 @@ def okMobility(pdbFile,mobilityCutoff=2.0):
             count+=1
     print count
     if count > 0:
-    #if count > (len(mobility)/20):
         considerPDB = False
     else:
         considerPDB = True
-    print pdbFile + 'is considered : ' + str(considerPDB)
+    print '%s is considered : %s ' % (pdbFile, considerPDB)
     return considerPDB
 
 
@@ -256,55 +264,55 @@ class ProteinsList():
             if key < 0 : #Handle negative indices
                 key += len( self.proteins )
             if key >= len( self.proteins ) :
-                raise IndexError, "The index (%d) is out of range."%key
+                raise IndexError, "The index (%d) is out of range." % key
             return self.proteins[key] #Get the data from elsewhere
         else:
             raise TypeError, "Invalid argument type."
 
 
 def makePDBwithConservedWaters(ProteinsList, temp_dir, outdir):
-    print 'prob is....' + str(ProteinsList.probability)
+    print 'prob is ... %s' % ProteinsList.probability
     cmd.delete('cwm_*')
-    print 'loading all pdb chains...'
+    print 'loading all pdb chains ...'
     for protein in ProteinsList:
-        cmd.load(os.path.join(temp_dir, protein.pdb_filename),'cwm_'+str(protein.pdb_id))
-        cmd.create('cwm_'+str(protein), 'cwm_%s & chain %s' % (protein.pdb_id, protein.chain))
-        cmd.delete( 'cwm_'+str(protein.pdb_id) )
+        cmd.load(os.path.join(temp_dir, protein.pdb_filename),'cwm_%s' % protein.pdb_id)
+        cmd.create('cwm_%s' % protein, 'cwm_%s & chain %s' % (protein.pdb_id, protein.chain))
+        cmd.delete( 'cwm_%s' % protein.pdb_id )
 
-    print 'Superimposing all pdb chains...'
+    print 'Superimposing all pdb chains ...'
     for protein in ProteinsList[1:]:
-        cmd.super('cwm_'+str(protein), 'cwm_'+str(ProteinsList[0])) # cmd.super(str(protein)+'////CA', str(ProteinsList[0])+'////CA')
-        cmd.orient( 'cwm_'+str(ProteinsList[0]) )
+        cmd.super('cwm_%s' % protein, 'cwm_%s' % ProteinsList[0]) # cmd.super(str(protein)+'////CA', str(ProteinsList[0])+'////CA')
+        cmd.orient( 'cwm_%s' % ProteinsList[0] )
 
-    print 'Creating new pymol objects of only water molecules for each pdb chains...'
+    print 'Creating new pymol objects of only water molecules for each pdb chains ...'
     for protein in ProteinsList:
         cmd.create('cwm_%s_Water' % protein, 'cwm_%s & resname hoh' % protein)
 
     print 'saving water molecules and proteins in separate pdb files for each pdb chains...'
     for protein in ProteinsList:
-        cmd.save(os.path.join(temp_dir, 'cwm_%s.pdb' % protein), 'cwm_'+str(protein))
+        cmd.save(os.path.join(temp_dir, 'cwm_%s.pdb' % protein), 'cwm_%s' % protein)
         cmd.save(os.path.join(temp_dir, 'cwm_%s_Water.pdb' % protein), 'cwm_%s_Water' % protein)
 
     cmd.delete('cwm_*')
 
     ### filter ProteinsList by mobility or normalized B factor cutoff
 
-    print '1. filtered ProteinsList.proteins is '+ str(len(ProteinsList.proteins))+' proteins long :'
+    print '1. filtered ProteinsList.proteins is %i proteins long :' % len(ProteinsList.proteins)
     print ProteinsList.proteins
     length = len(ProteinsList.proteins)
     if ProteinsList.refinement == 'Mobility':
         print 'Filter by Mobility'
         for protein in reversed(ProteinsList.proteins):
-            if not okMobility(os.path.join(temp_dir, 'cwm_%s_Water.pdb' % str(protein))):
+            if not okMobility(os.path.join(temp_dir, 'cwm_%s_Water.pdb' % protein)):
                 ProteinsList.proteins.remove(protein)
 
     if ProteinsList.refinement == 'Normalized B-factors': 
         print 'Filtering by Bfactors'
         for protein in reversed(ProteinsList.proteins):
-            if not okBfactor(os.path.join(temp_dir, 'cwm_%s_Water.pdb' % str(protein))):
+            if not okBfactor(os.path.join(temp_dir, 'cwm_%s_Water.pdb' % protein)):
                 ProteinsList.proteins.remove(protein)
 
-    print '2. filtered ProteinsList.proteins is '+ str(len(ProteinsList.proteins))+' proteins long :'
+    print '2. filtered ProteinsList.proteins is %s proteins long :' % len(ProteinsList.proteins)
     print ProteinsList.proteins
 
     ################# Filtered ProteinsList ##################
@@ -328,11 +336,13 @@ def makePDBwithConservedWaters(ProteinsList, temp_dir, outdir):
 #        print waterIDCoordinates
 
         if water_coordinates:
-            print 'number of water molecules to cluster : '+ str(len(water_coordinates))
-            if len(water_coordinates)<20000 and len(water_coordinates) != 1:
+            print 'number of water molecules to cluster : %s' % len(water_coordinates)
+            if len(water_coordinates) < 20000 and len(water_coordinates) != 1:
                 print 'clustering the water coordinates...'
                 # returns a list of clusternumbers
-                FD = hcluster.fclusterdata(water_coordinates, t=ProteinsList.cluster_diameter, criterion='distance', metric='euclidean', depth=2, method='complete')
+                FD = hcluster.fclusterdata(water_coordinates, 
+                        t=ProteinsList.cluster_diameter, criterion='distance', 
+                        metric='euclidean', depth=2, method='complete')
                 FDlist = list(FD)
                 fcDic = {}
                 print 'making flat cluster dictionary...'
@@ -354,7 +364,7 @@ def makePDBwithConservedWaters(ProteinsList, temp_dir, outdir):
                         if uniquePDBslen == waterMolsNumber:
                             probability = float(uniquePDBslen) / len(ProteinsList)
                             if probability > ProteinsList.probability:
-                                print 'probability is : '+str(probability) 
+                                print 'probability is : %s' % probability
                                 #print str(clusterNumber)
                                 for waterMol in waterMols:
                                     if conservedWaterDic.has_key(waterMol[:6]):
@@ -382,38 +392,38 @@ def makePDBwithConservedWaters(ProteinsList, temp_dir, outdir):
 
                     #####  add conserved waters to pdb file
                     cmd.delete('cwm_*')
-                    cmd.load( os.path.join(temp_dir, 'cwm_'+selectedPDBChain+'.pdb') )#############################error here
-                    cmd.load( os.path.join(temp_dir, 'cwm_'+selectedPDBChain+'_ConservedWatersOnly.pdb') )
-                    cmd.remove( 'resname hoh and '+'cwm_'+selectedPDBChain )
-                    cmd.save( os.path.join(temp_dir, 'cwm_'+selectedPDBChain+'_withConservedWaters.pdb'),'cwm_*')
+                    cmd.load( os.path.join(temp_dir, 'cwm_%s.pdb' % selectedPDBChain) )#############################error here
+                    cmd.load( os.path.join(temp_dir, 'cwm_%s_ConservedWatersOnly.pdb' % selectedPDBChain) )
+                    cmd.remove( 'resname hoh and '+'cwm_%s' % selectedPDBChain )
+                    cmd.save( os.path.join(temp_dir, 'cwm_%s_withConservedWaters.pdb' % selectedPDBChain), 'cwm_*')
                     cmd.delete('cwm_*')
-                    shutil.copy( os.path.join(temp_dir, 'cwm_'+selectedPDBChain+'_withConservedWaters.pdb'), outdir )
-                    shutil.copy(os.path.join(temp_dir, 'cwm_'+selectedPDBChain+'.pdb'),outdir)
+                    shutil.copy( os.path.join(temp_dir, 'cwm_%s_withConservedWaters.pdb' % selectedPDBChain), outdir)
+                    shutil.copy(os.path.join(temp_dir, 'cwm_%s.pdb' % selectedPDBChain),outdir)
                 else:
                     cmd.delete('cwm_*')
-                    print selectedPDBChain+" has no conserved waters"
+                    print "%s has no conserved waters" % selectedPDBChain
                     ### save pdb without any water
-                    cmd.load(os.path.join(temp_dir, 'cwm_'+selectedPDBChain+'.pdb'))
-                    cmd.remove('resname hoh and '+'cwm_'+selectedPDBChain)
-                    cmd.save(os.path.join(temp_dir, 'cwm_'+selectedPDBChain+'_withConservedWaters.pdb'),'cwm_*')
+                    cmd.load(os.path.join(temp_dir, 'cwm_%s.pdb' % selectedPDBChain))
+                    cmd.remove('resname hoh and '+'cwm_%s' % selectedPDBChain)
+                    cmd.save(os.path.join(temp_dir, 'cwm_%s_withConservedWaters.pdb' % selectedPDBChain),'cwm_*')
                     cmd.delete('cwm_*')
-                    shutil.copy(os.path.join(temp_dir, 'cwm_'+selectedPDBChain+'_withConservedWaters.pdb'),outdir)
-                    shutil.copy(os.path.join(temp_dir, 'cwm_'+selectedPDBChain+'.pdb'),outdir)
+                    shutil.copy(os.path.join(temp_dir, 'cwm_%s_withConservedWaters.pdb' % selectedPDBChain), outdir)
+                    shutil.copy(os.path.join(temp_dir, 'cwm_%s.pdb' % selectedPDBChain), outdir)
             else:
-                print selectedPDBChain+" has too many waters to cluster. Memory is not enough... OR only one water molecule..."
+                print "%s has too many waters to cluster. Memory is not enough... OR only one water molecule..." % selectedPDBChain
         else:
             cmd.delete('cwm_*')
-            print selectedPDBChain+" and other structures from the same CD-HIT cluster do not have any water molecules."
+            print "%s and other structures from the same CD-HIT cluster do not have any water molecules." % selectedPDBChain
             ### save pdb without any water
-            cmd.load(os.path.join(temp_dir, 'cwm_'+selectedPDBChain+'.pdb'))
-            cmd.remove('resname hoh and '+'cwm_'+selectedPDBChain)
-            cmd.save(os.path.join(temp_dir, 'cwm_'+selectedPDBChain+'_withConservedWaters.pdb'),'cwm_*')
+            cmd.load(os.path.join(temp_dir, 'cwm_%s.pdb' % selectedPDBChain))
+            cmd.remove('resname hoh and cwm_%s' % selectedPDBChain)
+            cmd.save(os.path.join(temp_dir, 'cwm_%s_withConservedWaters.pdb' % selectedPDBChain), 'cwm_*')
             cmd.delete('cwm_*')
-            shutil.copy(os.path.join(temp_dir, 'cwm_'+selectedPDBChain+'_withConservedWaters.pdb'),outdir)
+            shutil.copy(os.path.join(temp_dir, 'cwm_%s_withConservedWaters.pdb' % selectedPDBChain), outdir)
     else:
-        print selectedPDBChain+" has only one PDB structure. We need atleast 2 structures to superimpose."
-    if os.path.exists(os.path.join(outdir, 'cwm_'+selectedPDBChain+'_withConservedWaters.pdb')):
-        displayInPyMOL(outdir, 'cwm_'+selectedPDBChain)
+        print "%s has only one PDB structure. We need atleast 2 structures to superimpose." % selectedPDBChain
+    if os.path.exists(os.path.join(outdir, 'cwm_%s_withConservedWaters.pdb' % selectedPDBChain)):
+        displayInPyMOL(outdir, 'cwm_%s' % selectedPDBChain)
 #    shutil.rmtree(temp_dir)
 
 
@@ -427,7 +437,7 @@ def fetchpdbChainsList(selectedStruture,seq_id):
     else:
         seqCluster = parseString( toursurl_string )
         for xmlTag in seqCluster.getElementsByTagName('pdbChain'):
-            pdbChainsList.append(str(xmlTag.getAttribute('name')).replace('.',':'))
+            pdbChainsList.append(str(xmlTag.getAttribute('name')).replace('.', ':'))
         return pdbChainsList
 
 def filterbyResolution(pdbChainsList,resolutionCutoff):
@@ -458,27 +468,32 @@ def filterbyResolution(pdbChainsList,resolutionCutoff):
 def FindConservedWaters(selectedStruturePDB,selectedStrutureChain,seq_id,resolution,refinement,cluster_diameter,prob):# e.g: selectedStruturePDB='3qkl',selectedStrutureChain='A'
     if not re.compile('^[a-z0-9]{4}$').match(selectedStruturePDB):
         print 'The entered PDB id is not valid.'
-        tkMessageBox.showinfo(title = 'Error message', message = """The entered PDB id is not valid.""")
+        tkMessageBox.showinfo(title = 'Error message', 
+            message = """The entered PDB id is not valid.""")
         return None
     if not re.compile('[A-Z]').match(selectedStrutureChain):
         print 'The entered PDB chain id is not valid.'
-        tkMessageBox.showinfo(title = 'Error message', message = """The entered PDB chain id is not valid.""")
+        tkMessageBox.showinfo(title = 'Error message', 
+            message = """The entered PDB chain id is not valid.""")
         return None
     if resolution > 3.0:
         print 'The maximum allowed resolution cutoff is 3.0 A'
-        tkMessageBox.showinfo(title = 'Error message', message = """The maximum allowed resolution cutoff is 3.0 A.""")
+        tkMessageBox.showinfo(title = 'Error message', 
+            message = """The maximum allowed resolution cutoff is 3.0 A.""")
         return None
     if cluster_diameter > 2.4:
         print 'The maximum allowed cluster diameter is 2.4 A'
-        tkMessageBox.showinfo(title = 'Error message', message = """The maximum allowed cluster diameter is 2.4 A.""")
+        tkMessageBox.showinfo(title = 'Error message', 
+            message = """The maximum allowed cluster diameter is 2.4 A.""")
         return None
     if (prob > 1.0 or prob < 0.4):
         print 'The probability cutoff is allowed from 0.4 A to 1.0 A.'
-        tkMessageBox.showinfo(title = 'Error message', message = """The probability cutoff is allowed from 0.4 A to 1.0 A.""")
+        tkMessageBox.showinfo(title = 'Error message', 
+            message = """The probability cutoff is allowed from 0.4 A to 1.0 A.""")
         return None
     online_pdb_db = 'http://www.pdb.org/pdb/files/%s.pdb'
-    displayInputs(selectedStruturePDB,selectedStrutureChain,seq_id,resolution,cluster_diameter,prob)
-    tmp_dir = './temp/'
+    displayInputs(selectedStruturePDB, selectedStrutureChain, seq_id, resolution, cluster_diameter, prob)
+    tmp_dir = './temp/' # use tempfile
     if not os.path.exists(tmp_dir):
         os.mkdir(tmp_dir)
     outdir = './ConservedWaters_plugin_outdir/'
@@ -511,16 +526,13 @@ def FindConservedWaters(selectedStruturePDB,selectedStrutureChain,seq_id,resolut
         for protein in up:
             print protein
             print protein.pdb_id
-            if not os.path.exists(os.path.join(tmp_dir, protein.pdb_id+'.pdb')):
+            if not os.path.exists(os.path.join(tmp_dir, '%s.pdb' % protein.pdb_id)):
                 print 'retrieving pdb from website : '+ protein.pdb_id
                 urllib.urlretrieve(online_pdb_db % protein.pdb_id.upper(), os.path.join(tmp_dir, protein.pdb_id+'.pdb'))
         print 'making pdb with conserved waters...'
         makePDBwithConservedWaters(up, tmp_dir,outdir)
     else:
         print selectedPDBChain+" has only one PDB structure. We need atleast 2 structures to superimpose."
-
-################################################################################
-################################################################################
 
 class ConservedWaters(Frame):
     def __init__(self,parent):
@@ -579,7 +591,8 @@ class ConservedWaters(Frame):
         frame2 = Frame(self.parent)
         frame2.grid()
 
-        Button(frame2,text=" Find Conserved Water Molecules ",command= lambda: FindConservedWaters(str(v1.get()).lower(),str(v2.get()).upper(),int(v3.get()),float(v4.get()),str(v5.get()),float(v6.get()),float(v7.get()))).grid(row=0, column=1, sticky=W)
+        Button(frame2,text=" Find Conserved Water Molecules ",
+            command = lambda: FindConservedWaters(str(v1.get()).lower(),str(v2.get()).upper(),int(v3.get()),float(v4.get()),str(v5.get()),float(v6.get()),float(v7.get()))).grid(row=0, column=1, sticky=W)
 
 def main():
     root = Tk()
