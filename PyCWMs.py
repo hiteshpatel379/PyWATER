@@ -497,15 +497,15 @@ def FindConservedWaters(selectedStruturePDB,selectedStrutureChain,seq_id,resolut
     up.refinement = refinement
     up.probability = prob
     up.cluster_diameter = cluster_diameter
-    logging.info( 'selectedStruture is : %s' selectedStruture )
+    logging.info( 'selectedStruture is : %s' % selectedStruture )
     up.selectedPDBChain = Protein(selectedStruturePDB, selectedStrutureChain) # up.selectedPDBChain = 3qkl_a
     logging.info( 'up selectedPDBChain is : %s' % up.selectedPDBChain )
     selectedPDBChain = str(up.selectedPDBChain)
     logging.info( 'selectedPDBChain name is : %s' % selectedPDBChain )
     pdbChainsList = fetchpdbChainsList(selectedStruture,seq_id) # ['3QKL:A', '4EKL:A', '3QKM:A', '3QKK:A', '3OW4:A', '3OW4:B', '3OCB:A', '3OCB:B', '4EKK:A', '4EKK:B']
-    logging.info( 'pdbChainsList contains %i pdb chains.' % len(pdbChainsList)
+    logging.info( 'pdbChainsList contains %i pdb chains.' % len(pdbChainsList) )
     pdbChainsList = filterbyResolution(pdbChainsList,resolution)
-    logging.info( 'Filtered pdbChainsList contains %i pdb chains.' % len(pdbChainsList)
+    logging.info( 'Filtered pdbChainsList contains %i pdb chains.' % len(pdbChainsList) )
     for pdbChain in pdbChainsList:
         up.add_protein_from_string(pdbChain)
     logging.debug( 'up is : %s' % up.proteins ) #[3qkl_a, 4ekl_a, 3qkm_a, 3qkk_a, 3ow4_a, 3ow4_b, 3ocb_a, 3ocb_b, 4ekk_a, 4ekk_b]
