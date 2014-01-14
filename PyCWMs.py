@@ -11,7 +11,7 @@ Copyright 2013 Hitesh Patel and B. Gruening
 
 """
 
-import os, urllib, shutil, re, sys
+import os, urllib, shutil, re
 import scipy.cluster.hierarchy as hcluster
 from xml.dom.minidom import parseString
 import numpy as np
@@ -24,12 +24,7 @@ import pymol.cmd as cmd
 """
     TODO:
     - To make running in Windows and Mac
-    - Include in galaxy
     - Write a log file with enough outputs..
-    - Give an input parameter for cluster size cutoff
-    - Ask for Superimposition options.. like CA or other atoms..
-    - make it write out pymol session files with colored and styled protein, waters
-    - write out images
 """
 
 def __init__(self):
@@ -57,7 +52,7 @@ def refinement_quality_help():
    tkMessageBox.showinfo(title = 'Filter by refinement quality', message = "Choose either Mobility or Normalized B-factor as criteria to assess the refinement quality of crystal structure. Program will filter out the water molecules with bad refinement quality.")
 
 def cluster_diameter_help():
-    tkMessageBox.showinfo(title = 'Cluster diameter cutoff', message = """Only water molecules closer than given cutoff will be put in one cluster. The less cluster diameter ensures each water molecule in a cluster from different structures.
+    tkMessageBox.showinfo(title = 'Cluster diameter', message = """Only water molecules closer than given cutoff will be put in one cluster. The less cluster diameter ensures each water molecule in a cluster from different structures.
 Maximum suggested structure resolution cutoff is 2.0 A.""")
 
 def prob_help():
@@ -72,7 +67,7 @@ def displayInputs(selectedStruturePDB,selectedStrutureChain,seq_id,resolution,cl
     print 'Chain id : ' + selectedStrutureChain
     print 'Seqence identity cutoff : ' + str(seq_id)
     print 'Structure resolution cutoff : ' + str(resolution)
-    print 'Cluster diameter cutoff : ' + str(cluster_diameter)
+    print 'Cluster diameter : ' + str(cluster_diameter)
     print 'probability cutoff : ' + str(prob)
 
 
@@ -176,7 +171,7 @@ def okBfactor(pdbFile,normBCutoff=1.0):
         normBfactors.append((b-avg)/stddev)
     count = 0
     for b in normBfactors:
-        if b > 1.0:
+        if b > normBCutoff:
             count+=1
     if count > (len(normBfactors)/5):
         considerPDB = False
@@ -324,13 +319,20 @@ def makePDBwithConservedWaters(ProteinsList, temp_dir, outdir):
             print 'protein '+str(protein)+ ' coordinates length is :'+str(len(protein.water_coordinates))
             water_coordinates += protein.water_coordinates
             water_ids += protein.water_ids
+#            waterIDCoordinates.update(protein.waterIDCoordinates)
+#        print 'water_ids is : '
+#        print water_ids
+#        print 'water_coordinates is : '
+#        print water_coordinates
+#        print 'waterIDCoordinates is : '
+#        print waterIDCoordinates
 
         if water_coordinates:
             print 'number of water molecules to cluster : '+ str(len(water_coordinates))
             if len(water_coordinates)<20000 and len(water_coordinates) != 1:
                 print 'clustering the water coordinates...'
                 # returns a list of clusternumbers
-                FD = hcluster.fclusterdata(water_coordinates, t=ProteinsList.cluster_diameter, criterion='distance', metric='euclidean', depth=2, method='single')
+                FD = hcluster.fclusterdata(water_coordinates, t=ProteinsList.cluster_diameter, criterion='distance', metric='euclidean', depth=2, method='complete')
                 FDlist = list(FD)
                 fcDic = {}
                 print 'making flat cluster dictionary...'
@@ -345,23 +347,26 @@ def makePDBwithConservedWaters(ProteinsList, temp_dir, outdir):
                 for clusterNumber, waterMols in fcDic.items():
                     waterMolsNumber = len(waterMols)
                     #print '--',waterMols
-                    uniquePDBs = len(set([a[:6] for a in waterMols]))
-                    #print uniquePDBs, set([a[:6] for a in waterMols])
-                    if uniquePDBs == waterMolsNumber:
-                        probability = float(uniquePDBs) / len(ProteinsList)
-                        if probability > ProteinsList.probability:
-                            print 'probability is : '+str(probability) 
-                            #print str(clusterNumber)
-                            for waterMol in waterMols:
-                                if conservedWaterDic.has_key(waterMol[:6]):
-                                    conservedWaterDic[waterMol[:6]].append(waterMol[7:])
-                                else:
-                                    conservedWaterDic[waterMol[:6]] = [waterMol[7:]]
-                    elif uniquePDBs < waterMolsNumber:
-                        print 'Warning : cutoff distance is too large...'
+                    uniquePDBs = set([a[:6] for a in waterMols])
+                    if selectedPDBChain in uniquePDBs:
+                        uniquePDBslen = len(set([a[:6] for a in waterMols]))
+                        #print uniquePDBslen, set([a[:6] for a in waterMols])
+                        if uniquePDBslen == waterMolsNumber:
+                            probability = float(uniquePDBslen) / len(ProteinsList)
+                            if probability > ProteinsList.probability:
+                                print 'probability is : '+str(probability) 
+                                #print str(clusterNumber)
+                                for waterMol in waterMols:
+                                    if conservedWaterDic.has_key(waterMol[:6]):
+                                        conservedWaterDic[waterMol[:6]].append(waterMol[7:])
+                                    else:
+                                        conservedWaterDic[waterMol[:6]] = [waterMol[7:]]
+                        elif uniquePDBslen < waterMolsNumber:
+                            print 'Warning : cutoff distance is too large...'
 
                 print 'conservedWaterDic keys are: '
-                #print conservedWaterDic.keys()
+                print conservedWaterDic.keys()
+                print conservedWaterDic
                 #selectedPDBChain = str(ProteinsList[0])
                 if selectedPDBChain in conservedWaterDic.keys():
                     #####  save pdb file of conserved waters only for selected pdb
