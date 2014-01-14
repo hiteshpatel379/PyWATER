@@ -15,6 +15,7 @@ import os
 import urllib
 import shutil
 import re
+import tempfile
 import scipy.cluster.hierarchy as hcluster
 from xml.dom.minidom import parseString
 import numpy as np
@@ -27,7 +28,6 @@ import logging
     TODO:
     - To make running in Windows and Mac
     - Write a log file with enough outputs..
-    - tmp_dir is not deleted
 """
 
 # setup logging
@@ -270,10 +270,11 @@ class ProteinsList():
 
     def __getitem__( self, key ) :
         if isinstance( key, slice ) :
-            #Get the start, stop, and step from the slice
+            # Get the start, stop, and step from the slice
             return [self.proteins[ii] for ii in xrange(*key.indices(len(self)))]
-        elif isinstance( key, int ) :
-            if key < 0 : #Handle negative indices
+        elif isinstance( key, int ):
+            # Handle negative indices
+            if key < 0 :
                 key += len( self.proteins )
             if key >= len( self.proteins ) :
                 raise IndexError, "The index (%d) is out of range." % key
@@ -488,12 +489,9 @@ def FindConservedWaters(selectedStruturePDB,selectedStrutureChain,seq_id,resolut
         return None
     online_pdb_db = 'http://www.pdb.org/pdb/files/%s.pdb'
     displayInputs(selectedStruturePDB, selectedStrutureChain, seq_id, resolution, cluster_diameter, prob)
-    tmp_dir = './temp/' # use tempfile
-    if not os.path.exists(tmp_dir):
-        os.mkdir(tmp_dir)
-    outdir = './ConservedWaters_plugin_outdir/'
-    if not os.path.exists(outdir):
-        os.mkdir(outdir)
+    tmp_dir = tempfile.mkdtemp()
+    outdir = tempfile.mkdtemp( dir = tmp_dir )
+
     selectedStruture = ".".join([selectedStruturePDB.lower(),selectedStrutureChain.upper()]) # 3qkl:A
     up = ProteinsList(ProteinName = selectedStruture) # ProteinsList class instance up
     up.refinement = refinement
@@ -520,10 +518,11 @@ def FindConservedWaters(selectedStruturePDB,selectedStrutureChain,seq_id,resolut
                 logging.debug( 'retrieving pdb from website : %s' % protein.pdb_id)
                 urllib.urlretrieve(online_pdb_db % protein.pdb_id.upper(), os.path.join(tmp_dir, protein.pdb_id+'.pdb'))
         logging.info( 'making pdb with conserved waters...' )
-        makePDBwithConservedWaters(up, tmp_dir,outdir)
+        makePDBwithConservedWaters(up, tmp_dir, outdir)
     else:
         logging.info( "%s has only one PDB structure. We need atleast 2 structures to superimpose." % selectedPDBChain)
-#    shutil.rmtree(temp_dir)
+
+    shutil.rmtree(temp_dir)
 
 
 class ConservedWaters(Frame):
