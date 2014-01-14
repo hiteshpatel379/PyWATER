@@ -97,7 +97,7 @@ def displayInPyMOL(outdir, selectedPDBChain):
     pdbCWMs = os.path.join(outdir, '%s_withConservedWaters.pdb' % selectedPDBChain)
     pdb = os.path.join(outdir, '%s.pdb' % selectedPDBChain)
 
-    queryProteinCWMs = '%s_withConservedWaters' % selectedPDBChai
+    queryProteinCWMs = '%s_withConservedWaters' % selectedPDBChain
 
     cmd.load(pdbCWMs)
     cmd.orient(queryProteinCWMs)
@@ -337,7 +337,7 @@ def makePDBwithConservedWaters(ProteinsList, temp_dir, outdir):
         water_ids = list()
         for protein in ProteinsList:
             protein.calculate_water_coordinates( temp_dir )
-            logging.debug( 'protein %s coordinates length is :%i' % protein, len(protein.water_coordinates) )
+            logging.debug( 'protein %s coordinates length is :%i' % (protein, len(protein.water_coordinates)) )
             water_coordinates += protein.water_coordinates
             water_ids += protein.water_ids
 
@@ -522,7 +522,7 @@ def FindConservedWaters(selectedStruturePDB,selectedStrutureChain,seq_id,resolut
     else:
         logging.info( "%s has only one PDB structure. We need atleast 2 structures to superimpose." % selectedPDBChain)
 
-    shutil.rmtree(temp_dir)
+    shutil.rmtree(tmp_dir)
 
 
 class ConservedWaters(Frame):
