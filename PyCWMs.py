@@ -36,7 +36,7 @@ logger.setLevel(logging.DEBUG)
 fh = logging.FileHandler('pycwm.log')
 fh.setLevel(logging.DEBUG)
 ch = logging.StreamHandler()
-ch.setLevel(logging.ERROR)
+ch.setLevel(logging.INFO)
 formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
 fh.setFormatter(formatter)
 ch.setFormatter(formatter)
@@ -84,7 +84,7 @@ Minimum suggested value is 0.5
 """)
 
 def displayInputs(selectedStruturePDB, selectedStrutureChain, seq_id, resolution, cluster_diameter, prob):
-    logger.info( 'Input values')
+    logger.info( 'Input values' )
     logger.info( 'PDB id : ' + selectedStruturePDB)
     logger.info( 'Chain id : %s' % selectedStrutureChain)
     logger.info( 'Seqence identity cutoff : %s' % seq_id)
