@@ -161,42 +161,60 @@ def okMobility(pdbFile, mobilityCutoff=2.0):
     Bfactors = [a[1] for a in OccupancyAndBfactor]
     avgB = np.mean(Bfactors)
     avgO = np.mean(occupancy)
-    for a in OccupancyAndBfactor:
-        a.append((a[1]/avgB)/(a[0]/avgO))
-    mobility = [a[2] for a in OccupancyAndBfactor]
+    pdbFileLines = open(pdbFile).readlines()
+    nWaters = len(pdbFileLines)-1
+#    print 'nWaters is : '+str(nWaters)
     count = 0
-    for a in mobility:
-        if a >= mobilityCutoff:
-            count+=1
-    if count > 0:
+    for line in reversed(pdbFileLines):
+        if line.startswith('HETATM'):
+            m = ((float(line[60:66])/avgB)/(float(line[54:60])/avgO))
+            if m >= mobilityCutoff:
+                count+=1
+                pdbFileLines.remove(line)
+    print 'waters having higher mobility are : '+str(count)
+    if count > (nWaters/2):
         considerPDB = False
-    else:
+    elif count > 0:
+            outfile = open(pdbFile,'w')
+            outfile.write("".join(pdbFileLines))
+            outfile.close()
+            considerPDB = True
+    else:#(count  == 0)
         considerPDB = True
     logging.info( '%s is considered : %s ' % (pdbFile, considerPDB))
     return considerPDB
 
 
 def okBfactor(pdbFile,normBCutoff=1.0):
-    occupancy = []
     Bfactors = []
     normBfactors = []
     for line in open(pdbFile):
         line = line.strip()
         if line.startswith('HETATM'):
-            occupancy.append(float(line[54:60]))
             Bfactors.append(float(line[60:66]))
     avg = np.mean(Bfactors)
     stddev = np.sqrt(np.var(Bfactors))
-    for b in Bfactors:
-        normBfactors.append((b-avg)/stddev)
+    pdbFileLines = open(pdbFile).readlines()
+    nWaters = len(pdbFileLines)-1
+#    print 'nWaters is : '+str(nWaters)
     count = 0
-    for b in normBfactors:
-        if b > normBCutoff:
-            count+=1
-    if count > (len(normBfactors)/5):
+    for line in reversed(pdbFileLines):
+        if line.startswith('HETATM'):
+            normB = ((float(line[60:66])-avg)/stddev)
+            if normB >= normBCutoff:
+                count+=1
+                pdbFileLines.remove(line)
+    print 'waters having higher B factor are : '+str(count)
+    if count > (nWaters/2):
         considerPDB = False
-    else:
+    elif count > 0:
+            outfile = open(pdbFile,'w')
+            outfile.write("".join(pdbFileLines))
+            outfile.close()
+            considerPDB = True
+    else:#(count  == 0)
         considerPDB = True
+    logging.info( '%s is considered : %s ' % (pdbFile, considerPDB))
     return considerPDB
 
 
@@ -522,7 +540,7 @@ def FindConservedWaters(selectedStruturePDB,selectedStrutureChain,seq_id,resolut
     else:
         logging.info( "%s has only one PDB structure. We need atleast 2 structures to superimpose." % selectedPDBChain)
 
-    shutil.rmtree(tmp_dir)
+#    shutil.rmtree(tmp_dir)
 
 
 class ConservedWaters(Frame):
