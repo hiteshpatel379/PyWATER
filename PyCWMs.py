@@ -32,7 +32,7 @@ import logging
 
 # setup logging
 logger = logging.getLogger('PyCWMs')
-logger.setLevel(logging.DEBUG)
+logger.setLevel(logging.INFO)
 fh = logging.FileHandler('pycwm.log')
 fh.setLevel(logging.DEBUG)
 ch = logging.StreamHandler()
@@ -71,10 +71,10 @@ Maximum suggested structure resolution cutoff is 2.5 A.""")
 def refinement_quality_help():
     tkMessageBox.showinfo(title = 'Filter by refinement quality', message = "Choose either Mobility or Normalized B-factor as criteria to assess the refinement quality of crystal structure. Program will filter out the water molecules with bad refinement quality.")
 
-def cluster_diameter_help():
-    tkMessageBox.showinfo(title = 'Cluster diameter', 
-        message = """Only water molecules closer than given cutoff will be put in one cluster. The less cluster diameter ensures each water molecule in a cluster from different structures.
-Maximum suggested structure resolution cutoff is 2.0 A.""")
+def inconsistency_coefficient_help():
+    tkMessageBox.showinfo(title = 'Inconsistency coefficient threshold', 
+        message = """Any two clusters of water molecules will not be closer than given inconsistency coefficient threshold. The less threshold ensures each water molecule in a cluster from different structures.
+Maximum suggested inconsistency coefficient threshold is 2.4 A.""")
 
 def prob_help():
     tkMessageBox.showinfo(title = 'Probability cutoff', 
@@ -83,13 +83,13 @@ Value ranges from 0 to 1.
 Minimum suggested value is 0.5
 """)
 
-def displayInputs(selectedStruturePDB, selectedStrutureChain, seq_id, resolution, cluster_diameter, prob):
+def displayInputs(selectedStruturePDB, selectedStrutureChain, seq_id, resolution, inconsistency_coefficient, prob):
     logger.info( 'Input values' )
     logger.info( 'PDB id : ' + selectedStruturePDB)
     logger.info( 'Chain id : %s' % selectedStrutureChain)
     logger.info( 'Seqence identity cutoff : %s' % seq_id)
     logger.info( 'Structure resolution cutoff : %s' % resolution)
-    logger.info( 'Cluster diameter : %s' % cluster_diameter)
+    logger.info( 'Inconsistency coefficient threshold : %s' % inconsistency_coefficient)
     logger.info( 'probability cutoff : %s' % prob)
 
 
@@ -115,6 +115,9 @@ def displayInPyMOL(outdir, selectedPDBChain):
 
     cmd.distance ('LW_HBA', '(cwm_ligand and acc)','(cwm_waters and don)', 3.2)
     cmd.distance ('LW_HBD', '(cwm_ligand and don)','(cwm_waters and acc)', 3.2)
+
+    cmd.distance ('HW_HBA', '(cwm_waters and acc)','(cwm_waters and don)', 3.2)
+    cmd.distance ('HW_HBD', '(cwm_waters and don)','(cwm_waters and acc)', 3.2)
 
     cmd.delete('don')
     cmd.delete('acc')
@@ -252,7 +255,7 @@ class ProteinsList():
         self.proteins = list()
         self.selectedPDBChain = ''
         self.probability = 0.7
-        self.cluster_diameter = 1.5
+        self.inconsistency_coefficient = 2.0
         self.refinement = ''
 
     def add_protein(self, protein):
@@ -312,7 +315,8 @@ def makePDBwithConservedWaters(ProteinsList, temp_dir, outdir):
 
     logging.info( 'Superimposing all pdb chains ...' )
     for protein in ProteinsList[1:]:
-        cmd.super('cwm_%s' % protein, 'cwm_%s' % ProteinsList[0]) # cmd.super(str(protein)+'////CA', str(ProteinsList[0])+'////CA')
+        print 'superimposing : '+str(protein)
+        cmd.super('cwm_%s' % protein, 'cwm_%s' % ProteinsList[0])
         cmd.orient( 'cwm_%s' % ProteinsList[0] )
 
     logging.info( 'Creating new pymol objects of only water molecules for each pdb chains ...' )
@@ -328,7 +332,7 @@ def makePDBwithConservedWaters(ProteinsList, temp_dir, outdir):
 
     ### filter ProteinsList by mobility or normalized B factor cutoff
 
-    logging.debug( '1. filtered ProteinsList.proteins is %i proteins long :' % len(ProteinsList.proteins) )
+    logging.debug( '1. filtered ProteinsList.proteins is %s proteins long :' % len(ProteinsList.proteins) )
     length = len(ProteinsList.proteins)
     if ProteinsList.refinement == 'Mobility':
         logging.info( 'Filter by Mobility' )
@@ -355,18 +359,18 @@ def makePDBwithConservedWaters(ProteinsList, temp_dir, outdir):
         water_ids = list()
         for protein in ProteinsList:
             protein.calculate_water_coordinates( temp_dir )
-            logging.debug( 'protein %s coordinates length is :%i' % (protein, len(protein.water_coordinates)) )
+            logging.debug( 'protein %s coordinates length is :%i' % (protein, len(protein.water_coordinates)))
             water_coordinates += protein.water_coordinates
             water_ids += protein.water_ids
 
         if water_coordinates:
             logging.info( 'number of water molecules to cluster : %i' % len(water_coordinates) )
-            if len(water_coordinates) < 20000 and len(water_coordinates) != 1:
+            if len(water_coordinates) < 50000 and len(water_coordinates) != 1:
                 logging.debug( 'clustering the water coordinates...' )
                 # returns a list of clusternumbers
                 FD = hcluster.fclusterdata(water_coordinates, 
-                        t=ProteinsList.cluster_diameter, criterion='distance', 
-                        metric='euclidean', depth=2, method='complete')
+                        t=ProteinsList.inconsistency_coefficient, criterion='distance', 
+                        metric='euclidean', depth=2, method='average') #single, complete, average, weighted, median centroid, wards
                 FDlist = list(FD)
                 fcDic = {}
                 logging.debug( 'making flat cluster dictionary...' )
@@ -442,11 +446,12 @@ def makePDBwithConservedWaters(ProteinsList, temp_dir, outdir):
         logging.error( "%s has only one PDB structure. We need atleast 2 structures to superimpose." % selectedPDBChain )
     if os.path.exists(os.path.join(outdir, 'cwm_%s_withConservedWaters.pdb' % selectedPDBChain)):
         displayInPyMOL(outdir, 'cwm_%s' % selectedPDBChain)
+#    shutil.rmtree(temp_dir)
 
 
 def fetchpdbChainsList(selectedStruture,seq_id):
     pdbChainsList = []
-    seqClustAddress = 'http://pdb.org/pdb/rest/sequenceCluster?cluster=%d&structureId=%s' % (seq_id, selectedStruture) #http://pdb.org/pdb/rest/sequenceCluster?cluster=95&structureId=3qkl.A
+    seqClustAddress = 'http://pdb.org/pdb/rest/sequenceCluster?cluster=%s&structureId=%s' % (seq_id, selectedStruture) #http://pdb.org/pdb/rest/sequenceCluster?cluster=95&structureId=3qkl.A
     seqClustURL = urllib.urlopen(seqClustAddress)
     toursurl_string= seqClustURL.read()
     if toursurl_string.startswith('An error has occurred'):
@@ -479,7 +484,7 @@ def filterbyResolution(pdbChainsList,resolutionCutoff):
     return filteredpdbChainsList
 
 
-def FindConservedWaters(selectedStruturePDB,selectedStrutureChain,seq_id,resolution,refinement,cluster_diameter,prob):# e.g: selectedStruturePDB='3qkl',selectedStrutureChain='A'
+def FindConservedWaters(selectedStruturePDB,selectedStrutureChain,seq_id,resolution,refinement,inconsistency_coefficient,prob):# e.g: selectedStruturePDB='3qkl',selectedStrutureChain='A'
     if not re.compile('^[a-z0-9]{4}$').match(selectedStruturePDB):
         logging.info( 'The entered PDB id is not valid.' )
         tkMessageBox.showinfo(title = 'Error message', 
@@ -495,10 +500,10 @@ def FindConservedWaters(selectedStruturePDB,selectedStrutureChain,seq_id,resolut
         tkMessageBox.showinfo(title = 'Error message', 
             message = """The maximum allowed resolution cutoff is 3.0 A.""")
         return None
-    if cluster_diameter > 2.4:
-        logging.info( 'The maximum allowed cluster diameter is 2.4 A' )
+    if inconsistency_coefficient > 2.4:
+        logging.info( 'The maximum allowed inconsistency coefficient threshold is 2.4 A' )
         tkMessageBox.showinfo(title = 'Error message', 
-            message = """The maximum allowed cluster diameter is 2.4 A.""")
+            message = """The maximum allowed inconsistency coefficient threshold is 2.4 A.""")
         return None
     if prob > 1.0 or prob < 0.4:
         logging.info( 'The probability cutoff is allowed from 0.4 A to 1.0 A.' )
@@ -506,7 +511,7 @@ def FindConservedWaters(selectedStruturePDB,selectedStrutureChain,seq_id,resolut
             message = """The probability cutoff is allowed from 0.4 A to 1.0 A.""")
         return None
     online_pdb_db = 'http://www.pdb.org/pdb/files/%s.pdb'
-    displayInputs(selectedStruturePDB, selectedStrutureChain, seq_id, resolution, cluster_diameter, prob)
+    displayInputs(selectedStruturePDB,selectedStrutureChain,seq_id,resolution,inconsistency_coefficient,prob)
     tmp_dir = tempfile.mkdtemp()
     outdir = tempfile.mkdtemp( dir = tmp_dir )
 
@@ -514,7 +519,7 @@ def FindConservedWaters(selectedStruturePDB,selectedStrutureChain,seq_id,resolut
     up = ProteinsList(ProteinName = selectedStruture) # ProteinsList class instance up
     up.refinement = refinement
     up.probability = prob
-    up.cluster_diameter = cluster_diameter
+    up.inconsistency_coefficient = inconsistency_coefficient
     logging.info( 'selectedStruture is : %s' % selectedStruture )
     up.selectedPDBChain = Protein(selectedStruturePDB, selectedStrutureChain) # up.selectedPDBChain = 3qkl_a
     logging.info( 'up selectedPDBChain is : %s' % up.selectedPDBChain )
@@ -585,10 +590,10 @@ class ConservedWaters(Frame):
         v5.set('Mobility')
         OptionMenu(frame1, v5, 'Mobility', 'Normalized B-factors').grid(row=4, column=1, sticky=W)
 
-        Label(frame1, text="Custer diameter").grid(row=5, column=0, sticky=W)
-        Button(frame1,text=" Help  ",command=cluster_diameter_help).grid(row=5, column=2, sticky=W)
+        Label(frame1, text="Inconsistency coefficient threshold").grid(row=5, column=0, sticky=W)
+        Button(frame1,text=" Help  ",command=inconsistency_coefficient_help).grid(row=5, column=2, sticky=W)
         v6 = StringVar(master=frame1)
-        v6.set("1.5")
+        v6.set("2.0")
         Entry(frame1,textvariable=v6).grid(row=5, column=1, sticky=W)
 
         Label(frame1, text="Probability cutoff").grid(row=6, column=0, sticky=W)
@@ -601,7 +606,7 @@ class ConservedWaters(Frame):
         frame2.grid()
 
         Button(frame2,text=" Find Conserved Water Molecules ",
-            command = lambda: FindConservedWaters(str(v1.get()).lower(),str(v2.get()).upper(),int(v3.get()),float(v4.get()),str(v5.get()),float(v6.get()),float(v7.get()))).grid(row=0, column=1, sticky=W)
+            command = lambda: FindConservedWaters(str(v1.get()).lower(),str(v2.get()).upper(),str(v3.get()),float(v4.get()),str(v5.get()),float(v6.get()),float(v7.get()))).grid(row=0, column=1, sticky=W)
 
 def main():
     root = Tk()
@@ -610,4 +615,17 @@ def main():
 
 if __name__ == '__main__':
     main()
+
+def toPyCWMs(v1,v2,v3='95',v4=2.0,v5='Mobility',v6=2.0,v7=0.7):
+    selectedStruturePDB = str(v1).lower()
+    selectedStrutureChain = str(v2).upper()
+    seq_id = str(v3)
+    resolution = float(v4)
+    refinement = str(v5)
+    inconsistency_coefficient = float(v6)
+    prob = float(v7)
+    FindConservedWaters(selectedStruturePDB,selectedStrutureChain,seq_id,resolution,refinement,inconsistency_coefficient,prob)
+
+cmd.extend('pycwms', toPyCWMs)
+
 
