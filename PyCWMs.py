@@ -448,6 +448,16 @@ def makePDBwithConservedWaters(ProteinsList, temp_dir, outdir):
         displayInPyMOL(outdir, 'cwm_%s' % selectedPDBChain)
 #    shutil.rmtree(temp_dir)
 
+def isXray(pdb):
+    expInfoAddress='http://pdb.org/pdb/rest/customReport?pdbids=%s&customReportColumns=experimentalTechnique&service=wsdisplay&format=xml&ssa=n' % (pdb)
+    expInfoURL = urllib.urlopen(expInfoAddress)
+    url_string = expInfoURL.read()
+    expInfoXML = parseString(url_string)
+    expMethod = str(expInfoXML.getElementsByTagName('dimStructure.experimentalTechnique')[0].childNodes[0].nodeValue)
+    if expMethod == 'X-RAY DIFFRACTION':
+        return True
+    else:
+        return False
 
 def fetchpdbChainsList(selectedStruture,seq_id):
     pdbChainsList = []
@@ -459,7 +469,10 @@ def fetchpdbChainsList(selectedStruture,seq_id):
     else:
         seqCluster = parseString( toursurl_string )
         for xmlTag in seqCluster.getElementsByTagName('pdbChain'):
-            pdbChainsList.append(str(xmlTag.getAttribute('name')).replace('.', ':'))
+            pdbChain = str(xmlTag.getAttribute('name')).replace('.', ':')
+            pdb = pdbChain.split(':')[0]
+            if isXray(pdb):
+                pdbChainsList.append(pdbChain)
         return pdbChainsList
 
 def filterbyResolution(pdbChainsList,resolutionCutoff):
@@ -485,6 +498,11 @@ def filterbyResolution(pdbChainsList,resolutionCutoff):
 
 
 def FindConservedWaters(selectedStruturePDB,selectedStrutureChain,seq_id,resolution,refinement,inconsistency_coefficient,prob):# e.g: selectedStruturePDB='3qkl',selectedStrutureChain='A'
+    if not isXray(selectedStruturePDB):
+        logging.info( 'The entered PDB structure is not determined by X-ray crystallography.' )
+        tkMessageBox.showinfo(title = 'Error message', 
+            message = """The entered PDB structure is not determined by X-ray crystallography.""")
+        return None
     if not re.compile('^[a-z0-9]{4}$').match(selectedStruturePDB):
         logging.info( 'The entered PDB id is not valid.' )
         tkMessageBox.showinfo(title = 'Error message', 
