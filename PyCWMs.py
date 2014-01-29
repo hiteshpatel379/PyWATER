@@ -366,6 +366,7 @@ def makePDBwithConservedWaters(ProteinsList, temp_dir, outdir):
         if water_coordinates:
             logging.info( 'number of water molecules to cluster : %i' % len(water_coordinates) )
             if len(water_coordinates) < 50000 and len(water_coordinates) != 1:
+                cwm_count = 0
                 logging.debug( 'clustering the water coordinates...' )
                 # returns a list of clusternumbers
                 FD = hcluster.fclusterdata(water_coordinates, 
@@ -389,8 +390,9 @@ def makePDBwithConservedWaters(ProteinsList, temp_dir, outdir):
                         uniquePDBslen = len(set([a[:6] for a in waterMols]))
                         if uniquePDBslen == waterMolsNumber:
                             probability = float(uniquePDBslen) / len(ProteinsList)
+                            logging.debug( 'probability is : %s' % probability )
                             if probability > ProteinsList.probability:
-                                logging.debug( 'probability is : %s' % probability )
+                                cwm_count += 1
                                 for waterMol in waterMols:
                                     if conservedWaterDic.has_key(waterMol[:6]):
                                         conservedWaterDic[waterMol[:6]].append(waterMol[7:])
@@ -445,6 +447,7 @@ def makePDBwithConservedWaters(ProteinsList, temp_dir, outdir):
     else:
         logging.error( "%s has only one PDB structure. We need atleast 2 structures to superimpose." % selectedPDBChain )
     if os.path.exists(os.path.join(outdir, 'cwm_%s_withConservedWaters.pdb' % selectedPDBChain)):
+        logging.info( "%s structure has %s conserved water molecules." % (selectedPDBChain,cwm_count))
         displayInPyMOL(outdir, 'cwm_%s' % selectedPDBChain)
 #    shutil.rmtree(temp_dir)
 
