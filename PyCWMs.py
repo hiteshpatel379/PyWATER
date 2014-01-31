@@ -261,7 +261,7 @@ def okBfactor(pdbFile,normBCutoff=1.0):
 class Protein():
     def __init__(self, pdb_id, chain=False):
         self.pdb_id = pdb_id.lower()
-        self.chain = chain.lower()
+        self.chain = chain
         self.pdb_id_folder = self.pdb_id[1:3]
         self.pdb_filename = self.pdb_id + '.pdb'
         self.water_coordinates = list()
@@ -504,6 +504,17 @@ def isXray(pdb):
     else:
         return False
 
+# Check whether given chain id is valid for given PDB or not
+def chainPresent(pdb,chain):
+    chainInfoAddress='http://pdb.org/pdb/rest/customReport?pdbids=%s&customReportColumns=entityId&service=wsdisplay&format=xml&ssa=n' % pdb
+    chainInfoURL = urllib.urlopen(chainInfoAddress)
+    url_string = chainInfoURL.read()
+    chainInfoXML = parseString(url_string)
+    chains = [str(b.childNodes[0].nodeValue) for b in chainInfoXML.getElementsByTagName('dimEntity.chainId')]
+    if chain in chains:
+        return True
+    else:
+        return False
 
 # Fetch sequence cluster data from RCSB PDB for query protein.
 def fetchpdbChainsList(selectedStruture,seq_id):
@@ -558,10 +569,15 @@ def FindConservedWaters(selectedStruturePDB,selectedStrutureChain,seq_id,resolut
         tkMessageBox.showinfo(title = 'Error message', 
             message = """The entered PDB structure is not determined by X-ray crystallography.""")
         return None
-    if not re.compile('[A-Z]').match(selectedStrutureChain):
+    if not re.compile('^[A-Za-z0-9]{1}$').match(selectedStrutureChain):
         logger.info( 'The entered PDB chain id is not valid.' )
         tkMessageBox.showinfo(title = 'Error message', 
             message = """The entered PDB chain id is not valid.""")
+        return None
+    if not chainPresent(selectedStruturePDB,selectedStrutureChain):
+        logger.info( 'The entered PDB chain id is not valid for given PDB. Chain id is case sensitive.' )
+        tkMessageBox.showinfo(title = 'Error message', 
+            message = """The entered PDB chain id is not valid for given PDB. Chain id is case sensitive.""")
         return None
     if seq_id not in ['30', '40', '50', '70', '90', '95', '100']:
         logger.info( 'The entered sequence identity value is not valid. Please enter a value from list 30, 40, 50, 70, 90, 95 or 100' )
@@ -594,7 +610,7 @@ def FindConservedWaters(selectedStruturePDB,selectedStrutureChain,seq_id,resolut
     if not os.path.exists(outdir):
         os.mkdir(outdir)
 
-    selectedStruture = ".".join([selectedStruturePDB.lower(),selectedStrutureChain.upper()]) # 3qkl:A
+    selectedStruture = ".".join([selectedStruturePDB.lower(),selectedStrutureChain]) # 3qkl.A
     up = ProteinsList(ProteinName = selectedStruture) # ProteinsList class instance up
     up.refinement = refinement
     up.probability = prob
@@ -686,7 +702,7 @@ class ConservedWaters(Frame):
         frame2.grid()
 
         Button(frame2,text=" Find Conserved Water Molecules ",
-            command = lambda: FindConservedWaters(str(v1.get()).lower(),str(v2.get()).upper(),str(v3.get()),float(v4.get()),str(v5.get()),float(v6.get()),float(v7.get()))).grid(row=0, column=1, sticky=W)
+            command = lambda: FindConservedWaters(str(v1.get()).lower(),str(v2.get()),str(v3.get()),float(v4.get()),str(v5.get()),float(v6.get()),float(v7.get()))).grid(row=0, column=1, sticky=W)
 
 def main():
     root = Tk()
@@ -700,7 +716,7 @@ if __name__ == '__main__':
 # Convert data types of input parameters given by command line.
 def toPyCWMs(v1,v2,v3='95',v4=2.0,v5='Mobility',v6=2.0,v7=0.7):
     selectedStruturePDB = str(v1).lower()
-    selectedStrutureChain = str(v2).upper()
+    selectedStrutureChain = str(v2)
     seq_id = str(v3)
     resolution = float(v4)
     refinement = str(v5)
