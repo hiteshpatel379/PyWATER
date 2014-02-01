@@ -63,9 +63,11 @@ import logging
 
 
 # setup logging
+
+home_dir = os.path.expanduser("~")
 logger = logging.getLogger('PyCWMs')
 logger.setLevel(logging.INFO)
-fh = logging.FileHandler('pycwm.log')
+fh = logging.FileHandler( os.path.join( home_dir, 'pycwm.log' ) )
 fh.setLevel(logging.DEBUG)
 ch = logging.StreamHandler()
 ch.setLevel(logging.INFO)
@@ -87,11 +89,11 @@ def __init__(self):
 # Display help messages
 def pdb_id_help():
     tkMessageBox.showinfo(title = 'PDB Identifier', 
-        message = "The PDB id of the protein for which you like to find conserved waters.")
+        message = "The PDB id of the protein for which you like to find conserved waters, e.g. 3qkl.")
 
 def chain_help():
     tkMessageBox.showinfo(title = 'Chain Identifier', 
-        message = "The chain identifier of the protein for which you like to find conserved waters in above mentioned PDB.")
+        message = "The chain identifier of the protein for which you like to find conserved waters in above mentioned PDB, e.g. A.")
 
 def seq_id_help():
     tkMessageBox.showinfo(title = 'Sequence identity cutoff', 
@@ -190,8 +192,13 @@ def displayInPyMOL(outdir, selectedPDBChain):
     cmd.set('ray_shadows', 0)
 
 
-# Check if the mobility of water molecules is acceptable. Water oxygen atoms with mobility >= mobilityCutoff(default=2.0) are removed from the PDB. If more than 50 % of water oxygen atoms are removed than whole PDB is discarded 
 def okMobility(pdbFile, mobilityCutoff=2.0):
+    """
+    Check if the mobility of water molecules is acceptable. 
+    Water oxygen atoms with mobility >= mobilityCutoff(default=2.0) are 
+    removed from the PDB. If more than 50 % of water oxygen atoms 
+    are removed than whole PDB is discarded 
+    """
     normBfactors = []
     OccupancyAndBfactor = []
     for line in open(pdbFile):
@@ -225,8 +232,13 @@ def okMobility(pdbFile, mobilityCutoff=2.0):
     logger.info( '%s is considered : %s ' % (pdbFile, considerPDB))
     return considerPDB
 
-# Check if the normalized B-factor of water molecules is acceptable. Water oxygen atoms with normalized B-factor >= normBCutoff(default=1.0) are removed from the PDB. If more than 50 % of water oxygen atoms are removed than whole PDB is discarded 
 def okBfactor(pdbFile,normBCutoff=1.0):
+    """
+    Check if the normalized B-factor of water molecules is acceptable.
+    Water oxygen atoms with normalized B-factor >= normBCutoff(default=1.0) 
+    are removed from the PDB. If more than 50 % of water 
+    oxygen atoms are removed than whole PDB is discarded 
+    """
     Bfactors = []
     normBfactors = []
     for line in open(pdbFile):
@@ -253,7 +265,7 @@ def okBfactor(pdbFile,normBCutoff=1.0):
             outfile.write("".join(pdbFileLines))
             outfile.close()
             considerPDB = True
-    else:#(count  == 0)
+    else:
         considerPDB = True
     logger.info( '%s is considered : %s ' % (pdbFile, considerPDB))
     return considerPDB
@@ -401,16 +413,19 @@ def makePDBwithConservedWaters(ProteinsList, temp_dir, outdir):
             water_coordinates += protein.water_coordinates
             water_ids += protein.water_ids
 
-        if water_coordinates:# Process further only if there are any water molecules list of similar protein structures.
+        if water_coordinates:
+            # Process further only if there are any water molecules list of similar protein structures.
             logger.info( 'number of water molecules to cluster : %i' % len(water_coordinates) )
             if len(water_coordinates) != 1:
-                if len(water_coordinates) < 50000:# Process further only if total number of water molecules to cluster is less than 50000.
+                if len(water_coordinates) < 50000:
+                    # Process further only if total number of water molecules to cluster is less than 50000.
                     cwm_count = 0
                     logger.debug( 'clustering the water coordinates...' )
                     # returns a list of clusternumbers
+                    # available optoins: single, complete, average, weighted, median centroid, wards
                     FD = hcluster.fclusterdata(water_coordinates, 
                             t=ProteinsList.inconsistency_coefficient, criterion='distance', 
-                            metric='euclidean', depth=2, method='average') #single, complete, average, weighted, median centroid, wards
+                            metric='euclidean', depth=2, method='average')
                     FDlist = list(FD)
                     fcDic = {}
                     logger.debug( 'making flat cluster dictionary...' )
