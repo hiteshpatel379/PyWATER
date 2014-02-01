@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 
 """
 PyCWMs is a tool to find important or conserved waters in X-ray protein structure (pdb).
