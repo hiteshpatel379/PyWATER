@@ -13,7 +13,7 @@ Copyright 2013 Hitesh Patel and B. Gruening
 Installation
 ------------
 
-PyCWM can be used as PyMOL plugin and you can install from inside PyMOL.
+PyCWMs can be used as PyMOL plugin and you can install from inside PyMOL.
 - Run PyMOL ( on some systems you need to be an administrator.)
 - Install the PyCWMs plugin in pymol by following the path: `Plugins -> Manage Plugins -> install`
 - Restart the PyMol
@@ -24,14 +24,14 @@ Usage:
 
 
 After installation as plugin. It can be run from commandline in pymol:
-    `pycwm [PDB id , Chain id [, sequence identity [, resolution cutoff [, refinement accessment method [, inconsistency coefficient threshold [, degree of conservation]]]]]]`
+    `pycwms [PDB id , Chain id [, sequence identity [, resolution cutoff [, refinement accessment method [, inconsistency coefficient threshold [, degree of conservation]]]]]]`
 
 Or you can use it directly from your python script.
 
 ```python
 from pymol import cmd
 
-cmd.pycwm(PDB id , Chain id [, sequence identity [, resolution cutoff [, refinement accessment method [, inconsistency coefficient threshold [, degree of conservation]]]]])
+cmd.pycwms(PDB id , Chain id [, sequence identity [, resolution cutoff [, refinement accessment method [, inconsistency coefficient threshold [, degree of conservation]]]]])
 
 ```
 
