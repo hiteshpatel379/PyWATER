@@ -593,7 +593,7 @@ def FindConservedWaters(selectedStruturePDB,selectedStrutureChain,seq_id,resolut
         tkMessageBox.showinfo(title = 'Error message', 
             message = """The entered PDB structure is not determined by X-ray crystallography.""")
         return None
-    if not re.compile('^[A-Za-z0-9]{1}$').match(selectedStrutureChain):
+    if not re.compile('^[A-Z0-9]{1}$').match(selectedStrutureChain):
         logger.error( 'The entered PDB chain id is not valid.' )
         tkMessageBox.showinfo(title = 'Error message', 
             message = """The entered PDB chain id is not valid.""")
