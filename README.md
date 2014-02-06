@@ -36,15 +36,15 @@ cmd.pycwms(PDB id , Chain id [, sequence identity cutoff [, resolution cutoff [,
 ```
 
 
-Value    | Explanation
--------- | -----------
-PDB id | The PDB id of the protein for which you like to find conserved waters.
-Chain id | The chain identifier of the protein for which you like to find conserved waters in above mentioned PDB.
-sequence identity cutoff | All the protein structures, clustered by BlastClust, having sequence identity more than given cutoff will be superimposed to find the conserved water molecules in query protein chain.
-resolution cutoff | All the protein structures to be superimposed will be filtered first according to the structure resolution cutoff. Only structures with better resolution than given cutoff will be used further.
-refinement assessing method | Choose either 'Mobility' or 'Normalized B-factor' as criteria to assess the refinement quality of crystal structure. Program will filter out the water molecules with bad refinement quality.
-inconsistency coefficient threshold | Any two clusters of water molecules will not be closer than given inconsistency coefficient threshold. Value ranges from 0 to 2.4.
-degree of conservation | Water molecules will be considered CONSERVED if their probability of being conserved is above given cutoff. Value ranges from 0 to 1.
+Parameter    | Default Value | Explanation
+-------- | -------- | -----------
+PDB id | -- | The PDB id of the protein for which you like to find conserved waters.
+Chain id | -- | The chain identifier of the protein for which you like to find conserved waters in above mentioned PDB.
+sequence identity cutoff | 95 % | All the protein structures, clustered by BlastClust, having sequence identity more than given cutoff will be superimposed to find the conserved water molecules in query protein chain.
+resolution cutoff | 2.0 A | All the protein structures to be superimposed will be filtered first according to the structure resolution cutoff. Only structures with better resolution than given cutoff will be used further.
+refinement assessing method | Mobility | Choose either 'Mobility' or 'Normalized B-factor' as criteria to assess the refinement quality of crystal structure. Program will filter out the water molecules with bad refinement quality.
+inconsistency coefficient threshold | 2.0 A | Any two clusters of water molecules will not be closer than given inconsistency coefficient threshold. Value ranges from 0 to 2.4.
+degree of conservation | 0.7 | Water molecules will be considered CONSERVED if their probability of being conserved is above given cutoff. Value ranges from 0.4 to 1.
 
 
 =======
