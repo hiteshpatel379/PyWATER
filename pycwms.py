@@ -65,7 +65,7 @@ import logging
 # setup output directory
 home_dir = os.path.expanduser("~")
 
-outdir = os.path.join( home_dir, 'ConservedWaters_plugin_outdir' )
+outdir = os.path.join( home_dir, 'PyCWMs_outdir' )
 if not os.path.exists(outdir):
     os.mkdir(outdir)
 
@@ -643,12 +643,8 @@ def FindConservedWaters(selectedStruturePDB,selectedStrutureChain,seq_id,resolut
         return None
     online_pdb_db = 'http://www.pdb.org/pdb/files/%s.pdb'
     displayInputs(selectedStruturePDB,selectedStrutureChain,seq_id,resolution,inconsistency_coefficient,prob)
-    tmp_dir = tempfile.mkdtemp()
-#    outdir = tempfile.mkdtemp( dir = tmp_dir )
-#    tmp_dir = './temp/'
-#    if not os.path.exists(tmp_dir):
-#        os.mkdir(tmp_dir)
 
+    tmp_dir = tempfile.mkdtemp()
 
     selectedStruture = ".".join([selectedStruturePDB.lower(),selectedStrutureChain.upper()]) # 3qkl.A
     up = ProteinsList(ProteinName = selectedStruture) # ProteinsList class instance up
@@ -704,7 +700,7 @@ class ConservedWaters(Frame):
         v1.set('')
         Entry(frame1,textvariable=v1).grid(row=0, column=1, sticky=W)
 
-        Label(frame1, text="Chain").grid(row=1, column=0, sticky=W)
+        Label(frame1, text="Chain id").grid(row=1, column=0, sticky=W)
         Button(frame1,text=" Help  ",command=chain_help).grid(row=1, column=2, sticky=W)
         v2 = StringVar(master=frame1)
         v2.set('')
