@@ -24,14 +24,14 @@ Usage:
 
 
 After installation as plugin. It can be run from commandline in pymol:
-    `pycwms [PDB id , Chain id [, sequence identity [, resolution cutoff [, refinement accessment method [, inconsistency coefficient threshold [, degree of conservation]]]]]]`
+    `pycwms [PDB id , Chain id [, sequence identity cutoff [, resolution cutoff [, refinement assessing method [, inconsistency coefficient threshold [, degree of conservation]]]]]]`
 
 Or you can use it directly from your python script.
 
 ```python
 from pymol import cmd
 
-cmd.pycwms(PDB id , Chain id [, sequence identity [, resolution cutoff [, refinement accessment method [, inconsistency coefficient threshold [, degree of conservation]]]]])
+cmd.pycwms(PDB id , Chain id [, sequence identity cutoff [, resolution cutoff [, refinement assessing method [, inconsistency coefficient threshold [, degree of conservation]]]]])
 
 ```
 
@@ -40,9 +40,9 @@ Value    | Explanation
 -------- | -----------
 PDB id | The PDB id of the protein for which you like to find conserved waters.
 Chain id | The chain identifier of the protein for which you like to find conserved waters in above mentioned PDB.
-sequence identity | All the protein structures, clustered by BlastClust, having sequence identity more than given cutoff will be superimposed to find the conserved water molecules in query protein chain.
+sequence identity cutoff | All the protein structures, clustered by BlastClust, having sequence identity more than given cutoff will be superimposed to find the conserved water molecules in query protein chain.
 resolution cutoff | All the protein structures to be superimposed will be filtered first according to the structure resolution cutoff. Only structures with better resolution than given cutoff will be used further.
-refinement accessment method | Choose either 'Mobility' or 'Normalized B-factor' as criteria to assess the refinement quality of crystal structure. Program will filter out the water molecules with bad refinement quality.
+refinement assessing method | Choose either 'Mobility' or 'Normalized B-factor' as criteria to assess the refinement quality of crystal structure. Program will filter out the water molecules with bad refinement quality.
 inconsistency coefficient threshold | Any two clusters of water molecules will not be closer than given inconsistency coefficient threshold. Value ranges from 0 to 2.4.
 degree of conservation | Water molecules will be considered CONSERVED if their probability of being conserved is above given cutoff. Value ranges from 0 to 1.
 

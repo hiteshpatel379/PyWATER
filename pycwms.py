@@ -17,11 +17,11 @@ Steps to install in PyMOL:
     Restart the PyMol
 
 After installation as plugin. It can be run from command in pymol 
-    pycwms [PDB id , Chain id [, sequence identity [, resolution cutoff [, refinement accessment method [, inconsistency coefficient threshold [, degree of conservation]]]]]] 
+    pycwms [PDB id , Chain id [, sequence identity cutoff [, resolution cutoff [, refinement assessing method [, inconsistency coefficient threshold [, degree of conservation]]]]]] 
 
     API extension:
 
-    cmd.pycwms(PDB id , Chain id [, sequence identity [, resolution cutoff [, refinement accessment method [, inconsistency coefficient threshold [, degree of conservation]]]]])
+    cmd.pycwms(PDB id , Chain id [, sequence identity cutoff [, resolution cutoff [, refinement assessing method [, inconsistency coefficient threshold [, degree of conservation]]]]])
 
     PDB id
             string: The PDB id of the protein for which you like to find conserved waters. {default: None}
@@ -29,13 +29,13 @@ After installation as plugin. It can be run from command in pymol
     Chain id
             string: The chain identifier of the protein for which you like to find conserved waters in above mentioned PDB. {default: None}
 
-    sequence identity
+    sequence identity cutoff
             string: '30', '40', '50', '70', '90', '95'or '100'. All the protein structures, clustered by BlastClust, having sequence identity more than given cutoff will be superimposed to find the conserved water molecules in query protein chain. {default: '95'} 
 
     resolution cutoff
             float: All the protein structures to be superimposed will be filtered first according to the structure resolution cutoff. Only structures with better resolution than given cutoff will be used further. {default: 2.0}
 
-    refinement accessment method
+    refinement assessing method
             string: Choose either 'Mobility' or 'Normalized B-factor' as criteria to assess the refinement quality of crystal structure. Program will filter out the water molecules with bad refinement quality. {default: 'Mobility'}
 
     inconsistency coefficient threshold
@@ -113,7 +113,7 @@ def inconsistency_coefficient_help():
 Maximum suggested inconsistency coefficient threshold is 2.4 A.""")
 
 def prob_help():
-    tkMessageBox.showinfo(title = 'Probability cutoff', 
+    tkMessageBox.showinfo(title = 'Degree of conservation', 
         message = """Water molecules will be considered CONSERVED if their probability of being conserved is above given cutoff.
 Value ranges from 0 to 1.
 Minimum suggested value is 0.5
@@ -132,7 +132,7 @@ def displayInputs(selectedStruturePDB, selectedStrutureChain, seq_id, resolution
 
 
 # display PyMOL session with identified conserved waters, showing H-bonds with other conserved waters, ligands or protein.
-def displayInPyMOL(outdir, selectedPDBChain):
+def displayInPyMOL(outdir, selectedPDBChain, atomNumbersProbDic):
     pdbCWMs = os.path.join(outdir, '%s_withConservedWaters.pdb' % selectedPDBChain)
     pdb = os.path.join(outdir, '%s.pdb' % selectedPDBChain)
 
@@ -171,11 +171,19 @@ def displayInPyMOL(outdir, selectedPDBChain):
     cmd.util.cbam('cwm_ligand')
     cmd.show_as('sticks','cwm_ligand')
 
-    cmd.spectrum('b', 'blue_red', 'cwm_waters')
-    cmd.set('sphere_scale',0.30,'cwm_waters')
-    cmd.show_as('spheres','cwm_waters')
+    MinDoc = min(atomNumbersProbDic.values())
+    MaxDoc = max(atomNumbersProbDic.values())
+    cmd.create ('conserved_waters','cwm_waters')
+    for key, value in atomNumbersProbDic.items():
+        cmd.alter('/conserved_waters//A/HOH`%s/O' % key, 'b=%s' % value)
+
+    cmd.spectrum('b', 'red_blue', 'conserved_waters',minimum=MinDoc, maximum=MaxDoc)
+    cmd.ramp_new('DOC', 'conserved_waters', range = [MinDoc,MaxDoc], color = '[red,blue]')
+    cmd.set('sphere_scale',0.40,'conserved_waters')
+    cmd.show_as('spheres','conserved_waters')
 
     cmd.hide('labels','*_HB*')
+    cmd.remove('(hydro) and conserved_waters')
     cmd.remove('(hydro) and %s' % queryProteinCWMs)
 
     cmd.util.cbac('cwm_protein')
@@ -290,7 +298,7 @@ class Protein():
         for line in open(path):
             line = line.strip()
             if line.startswith('HETATM'):
-                key = self.__repr__()+'_'+str(i)
+                key = self.__repr__()+'_'+str(int(line[23:30])) # water oxygen atom number
                 self.waterIDCoordinates[key] = [line[30:38],line[38:46],line[46:54]]
                 self.water_coordinates.append([line[30:38],line[38:46],line[46:54]])
                 self.water_ids.append( key )
@@ -389,8 +397,8 @@ def makePDBwithConservedWaters(ProteinsList, temp_dir, outdir):
             if not okMobility(os.path.join(temp_dir, 'cwm_%s_Water.pdb' % protein)):
                 ProteinsList.proteins.remove(protein)
 
-    if ProteinsList.refinement == 'Normalized B-factors': 
-        logger.info( 'Filtering water oxygen atoms by Bfactors' )
+    if ProteinsList.refinement == 'Normalized B-factor': 
+        logger.info( 'Filtering water oxygen atoms by Normalized B-factor' )
         for protein in reversed(ProteinsList.proteins):
             if not okBfactor(os.path.join(temp_dir, 'cwm_%s_Water.pdb' % protein)):
                 ProteinsList.proteins.remove(protein)
@@ -470,7 +478,7 @@ def makePDBwithConservedWaters(ProteinsList, temp_dir, outdir):
                         selectedPDBChainIn = open(os.path.join(temp_dir, 'cwm_'+selectedPDBChain+'_Water.pdb'))
                         for line in selectedPDBChainIn:
                             if line.startswith('HETATM'):
-                                if line.split()[1] in atomNumbers:
+                                if str(int(line[23:30])) in atomNumbers: # 
                                     selectedPDBChainConservedWatersOut.write( line )
                         selectedPDBChainConservedWatersOut.write('END')
                         selectedPDBChainConservedWatersOut.close()
@@ -511,8 +519,8 @@ def makePDBwithConservedWaters(ProteinsList, temp_dir, outdir):
         logger.error( "%s has only one PDB structure. We need atleast 2 structures to superimpose." % selectedPDBChain )
     if os.path.exists(os.path.join(outdir, 'cwm_%s_withConservedWaters.pdb' % selectedPDBChain)):
         logger.info( "%s structure has %s conserved water molecules." % (selectedPDBChain,cwm_count))
-        displayInPyMOL(outdir, 'cwm_%s' % selectedPDBChain)
-#    shutil.rmtree(temp_dir)
+        displayInPyMOL(outdir, 'cwm_%s' % selectedPDBChain, atomNumbersProbDic)
+    shutil.rmtree(temp_dir)
 
 
 # Check whether the PDB structure is determined by X-ray or not.
@@ -554,6 +562,7 @@ def fetchpdbChainsList(selectedStruture,seq_id):
             pdb = pdbChain.split(':')[0]
             if isXray(pdb):
                 pdbChainsList.append(pdbChain)
+                logger.info('%s' % pdbChain)
         return pdbChainsList
 
 
@@ -570,7 +579,9 @@ def filterbyResolution(pdbChainsList,resolutionCutoff):
         getResolutionAddress ='http://pdb.org/pdb/rest/customReport?pdbids=%s&customReportColumns=resolution&service=wsfile&format=xml&ssa=n' % (pdb)
         pdbsResolution_string = urllib.urlopen(getResolutionAddress).read()
         pdbsResolutionXML = parseString(pdbsResolution_string)
-        pdbsResolution[pdb] = str(pdbsResolutionXML.getElementsByTagName('dimStructure.resolution')[0].childNodes[0].nodeValue)
+        res = str(pdbsResolutionXML.getElementsByTagName('dimStructure.resolution')[0].childNodes[0].nodeValue)
+        pdbsResolution[pdb] = res
+        logger.info('Resolution of pdb %s is : %s' % (pdb, res))
     logger.info( 'PDB chains with their resolution : %s' %pdbsResolution )
 
     for pdbChain in pdbChainsList:
@@ -619,9 +630,9 @@ def FindConservedWaters(selectedStruturePDB,selectedStrutureChain,seq_id,resolut
             message = """The maximum allowed inconsistency coefficient threshold is 2.4 A.""")
         return None
     if prob > 1.0 or prob < 0.4:
-        logger.info( 'The probability cutoff is allowed from 0.4 A to 1.0 A.' )
+        logger.info( 'The degree of conservation is allowed from 0.4 A to 1.0 A.' )
         tkMessageBox.showinfo(title = 'Error message', 
-            message = """The probability cutoff is allowed from 0.4 A to 1.0 A.""")
+            message = """The degree of conservation is allowed from 0.4 A to 1.0 A.""")
         return None
     online_pdb_db = 'http://www.pdb.org/pdb/files/%s.pdb'
     displayInputs(selectedStruturePDB,selectedStrutureChain,seq_id,resolution,inconsistency_coefficient,prob)
@@ -644,7 +655,8 @@ def FindConservedWaters(selectedStruturePDB,selectedStrutureChain,seq_id,resolut
     logger.info( 'up selectedPDBChain is : %s' % up.selectedPDBChain )
     selectedPDBChain = str(up.selectedPDBChain)
     logger.info( 'selectedPDBChain name is : %s' % selectedPDBChain )
-    logger.info( 'Fetching protein chains list from PDB clusters ...' )
+    logger.info( """Fetching protein chains list from PDB clusters ...
+    This cluater contains: """ )
     pdbChainsList = fetchpdbChainsList(selectedStruture,seq_id) # ['3QKL:A', '4EKL:A', '3QKM:A', '3QKK:A', '3OW4:A', '3OW4:B', '3OCB:A', '3OCB:B', '4EKK:A', '4EKK:B']
     logger.info( 'Protein chains list contains %i pdb chains : %s' % (len(pdbChainsList), pdbChainsList))
     logger.info( 'Filtering by resolution ...')
@@ -666,7 +678,6 @@ def FindConservedWaters(selectedStruturePDB,selectedStrutureChain,seq_id,resolut
     else:
         logger.info( "%s has only one PDB structure. We need atleast 2 structures to superimpose." % selectedPDBChain)
 
-#    shutil.rmtree(tmp_dir)
 
 
 # Makes plugin GUI
@@ -706,11 +717,11 @@ class ConservedWaters(Frame):
         v4.set("2.0")
         Entry(frame1,textvariable=v4).grid(row=3, column=1, sticky=W)
 
-        Label(frame1, text="Filter by refinement quality using").grid(row=4, column=0, sticky=W)
+        Label(frame1, text="Refinement assessing method").grid(row=4, column=0, sticky=W)
         Button(frame1,text=" Help  ",command=refinement_quality_help).grid(row=4, column=2, sticky=W)
         v5 = StringVar(master=frame1)
         v5.set('Mobility')
-        OptionMenu(frame1, v5, 'Mobility', 'Normalized B-factors').grid(row=4, column=1, sticky=W)
+        OptionMenu(frame1, v5, 'Mobility', 'Normalized B-factor').grid(row=4, column=1, sticky=W)
 
         Label(frame1, text="Inconsistency coefficient threshold").grid(row=5, column=0, sticky=W)
         Button(frame1,text=" Help  ",command=inconsistency_coefficient_help).grid(row=5, column=2, sticky=W)
@@ -718,7 +729,7 @@ class ConservedWaters(Frame):
         v6.set("2.0")
         Entry(frame1,textvariable=v6).grid(row=5, column=1, sticky=W)
 
-        Label(frame1, text="Probability cutoff").grid(row=6, column=0, sticky=W)
+        Label(frame1, text="Degree of conservation").grid(row=6, column=0, sticky=W)
         Button(frame1,text=" Help  ",command=prob_help).grid(row=6, column=2, sticky=W)
         v7 = StringVar(master=frame1)
         v7.set("0.7")
