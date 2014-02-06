@@ -62,12 +62,20 @@ import pymol.cmd as cmd
 import logging
 
 
+# setup output directory
+home_dir = os.path.expanduser("~")
+
+outdir = os.path.join( home_dir, 'ConservedWaters_plugin_outdir' )
+if not os.path.exists(outdir):
+    os.mkdir(outdir)
+
+
 # setup logging
 
-home_dir = os.path.expanduser("~")
+
 logger = logging.getLogger('PyCWMs')
 logger.setLevel(logging.DEBUG)
-fh = logging.FileHandler( os.path.join( home_dir, 'pycwms.log' ) )
+fh = logging.FileHandler( os.path.join( outdir, 'pycwms.log' ) )
 fh.setLevel(logging.DEBUG)
 ch = logging.StreamHandler()
 ch.setLevel(logging.INFO)
@@ -460,7 +468,7 @@ def makePDBwithConservedWaters(ProteinsList, temp_dir, outdir):
                                             conservedWaterDic[waterMol[:6]].append('_'.join([waterMol[7:],str(probability)]))
                                         else:
                                             conservedWaterDic[waterMol[:6]] = ['_'.join([waterMol[7:],str(probability)])]
-                                    logger.debug( 'Updated conserved waters dictionary is : %s' % conservedWaterDic )
+                                    #logger.debug( 'Updated conserved waters dictionary is : %s' % conservedWaterDic )
                             elif uniquePDBslen < waterMolsNumber:
                                 logger.debug( 'Warning : cutoff distance is too large...' )
 
@@ -470,7 +478,6 @@ def makePDBwithConservedWaters(ProteinsList, temp_dir, outdir):
                         atomNumbersProbDic = {}
                         atomNumbers_Prob = conservedWaterDic[selectedPDBChain]
                         logger.info( """Degree of conservation for each conserved water molecule in cwm_%s_withConservedWaters.pdb ['atomNumber_DegreeOfConservation']: %s""" % ( selectedPDBChain, atomNumbers_Prob) )
-                        print atomNumbers_Prob
                         for a in atomNumbers_Prob:
                             atomNumbersProbDic[a.split('_')[0]]=float(a.split('_')[1])
                         atomNumbers = atomNumbersProbDic.keys()
@@ -636,14 +643,12 @@ def FindConservedWaters(selectedStruturePDB,selectedStrutureChain,seq_id,resolut
         return None
     online_pdb_db = 'http://www.pdb.org/pdb/files/%s.pdb'
     displayInputs(selectedStruturePDB,selectedStrutureChain,seq_id,resolution,inconsistency_coefficient,prob)
-#    tmp_dir = tempfile.mkdtemp()
+    tmp_dir = tempfile.mkdtemp()
 #    outdir = tempfile.mkdtemp( dir = tmp_dir )
-    tmp_dir = './temp/'
-    if not os.path.exists(tmp_dir):
-        os.mkdir(tmp_dir)
-    outdir = './ConservedWaters_plugin_outdir/'
-    if not os.path.exists(outdir):
-        os.mkdir(outdir)
+#    tmp_dir = './temp/'
+#    if not os.path.exists(tmp_dir):
+#        os.mkdir(tmp_dir)
+
 
     selectedStruture = ".".join([selectedStruturePDB.lower(),selectedStrutureChain.upper()]) # 3qkl.A
     up = ProteinsList(ProteinName = selectedStruture) # ProteinsList class instance up
