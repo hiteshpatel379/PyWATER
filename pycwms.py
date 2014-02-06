@@ -527,7 +527,6 @@ def makePDBwithConservedWaters(ProteinsList, temp_dir, outdir):
     if os.path.exists(os.path.join(outdir, 'cwm_%s_withConservedWaters.pdb' % selectedPDBChain)):
         logger.info( "%s structure has %s conserved water molecules." % (selectedPDBChain,cwm_count))
         displayInPyMOL(outdir, 'cwm_%s' % selectedPDBChain, atomNumbersProbDic)
-    shutil.rmtree(temp_dir)
 
 
 # Check whether the PDB structure is determined by X-ray or not.
@@ -678,6 +677,7 @@ def FindConservedWaters(selectedStruturePDB,selectedStrutureChain,seq_id,resolut
         makePDBwithConservedWaters(up, tmp_dir, outdir)
     else:
         logger.info( "%s has only one PDB structure. We need atleast 2 structures to superimpose." % selectedPDBChain)
+    shutil.rmtree(tmp_dir)
 
 
 
