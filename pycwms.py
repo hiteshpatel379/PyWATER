@@ -197,6 +197,7 @@ def displayInPyMOL(outdir, selectedPDBChain, atomNumbersProbDic):
     cmd.util.cbac('cwm_protein')
     cmd.set('transparency', 0.2)
     cmd.show('surface', 'cwm_protein')
+    cmd.set('surface_color', 'gray', 'cwm_protein')
 
     cmd.load(pdb)
     cmd.create('all waters', 'resn hoh and %s' % selectedPDBChain)
