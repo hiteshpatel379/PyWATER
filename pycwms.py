@@ -513,34 +513,19 @@ def makePDBwithConservedWaters(ProteinsList, temp_dir, outdir):
                         cmd.delete('cwm_*')
                         shutil.copy( os.path.join(temp_dir, 'cwm_%s_withConservedWaters.pdb' % selectedPDBChain), outdir)
                         shutil.copy(os.path.join(temp_dir, 'cwm_%s.pdb' % selectedPDBChain),outdir)
+                        if os.path.exists(os.path.join(outdir, 'cwm_%s_withConservedWaters.pdb' % selectedPDBChain)):
+                            logger.info( "%s structure has %s conserved water molecules." % (selectedPDBChain,cwm_count))
+                            displayInPyMOL(outdir, 'cwm_%s' % selectedPDBChain, atomNumbersProbDic)
                     else:
-                        cmd.delete('cwm_*')
                         logger.info( "%s has no conserved waters" % selectedPDBChain )
-                        # save pdb without any water
-                        cmd.load(os.path.join(temp_dir, 'cwm_%s.pdb' % selectedPDBChain))
-                        cmd.remove('resname hoh and '+'cwm_%s' % selectedPDBChain)
-                        cmd.save(os.path.join(temp_dir, 'cwm_%s_withConservedWaters.pdb' % selectedPDBChain),'cwm_*')
-                        cmd.delete('cwm_*')
-                        shutil.copy(os.path.join(temp_dir, 'cwm_%s_withConservedWaters.pdb' % selectedPDBChain), outdir)
-                        shutil.copy(os.path.join(temp_dir, 'cwm_%s.pdb' % selectedPDBChain), outdir)
                 else:
                     logger.error( "%s has too many waters to cluster. Memory is not enough..." % selectedPDBChain )
             else:
                 logger.info( "%s has only one water molecule..." % selectedPDBChain )
         else:
-            cmd.delete('cwm_*')
             logger.info( "%s and other structures from the same cluster do not have any water molecules." % selectedPDBChain )
-            # save pdb without any water
-            cmd.load(os.path.join(temp_dir, 'cwm_%s.pdb' % selectedPDBChain))
-            cmd.remove('resname hoh and cwm_%s' % selectedPDBChain)
-            cmd.save(os.path.join(temp_dir, 'cwm_%s_withConservedWaters.pdb' % selectedPDBChain), 'cwm_*')
-            cmd.delete('cwm_*')
-            shutil.copy(os.path.join(temp_dir, 'cwm_%s_withConservedWaters.pdb' % selectedPDBChain), outdir)
     else:
         logger.error( "%s has only one PDB structure. We need atleast 2 structures to superimpose." % selectedPDBChain )
-    if os.path.exists(os.path.join(outdir, 'cwm_%s_withConservedWaters.pdb' % selectedPDBChain)):
-        logger.info( "%s structure has %s conserved water molecules." % (selectedPDBChain,cwm_count))
-        displayInPyMOL(outdir, 'cwm_%s' % selectedPDBChain, atomNumbersProbDic)
 
 
 # Check whether the PDB structure is determined by X-ray or not.
