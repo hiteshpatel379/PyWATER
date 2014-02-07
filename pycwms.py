@@ -516,6 +516,8 @@ def makePDBwithConservedWaters(ProteinsList, temp_dir, outdir):
                         if os.path.exists(os.path.join(outdir, 'cwm_%s_withConservedWaters.pdb' % selectedPDBChain)):
                             logger.info( "%s structure has %s conserved water molecules." % (selectedPDBChain,cwm_count))
                             displayInPyMOL(outdir, 'cwm_%s' % selectedPDBChain, atomNumbersProbDic)
+                        logger.info("""PDB file of query protein with conserved waters "cwm_%s_withConservedWaters.pdb" and 
+log file "pycwms.log" are saved in %s""" % ( selectedPDBChain, os.path.abspath(outdir)))
                     else:
                         logger.info( "%s has no conserved waters" % selectedPDBChain )
                 else:
@@ -690,8 +692,6 @@ def FindConservedWaters(selectedStruturePDB,selectedStrutureChain,seq_id,resolut
     else:
         logger.info( "%s has only one PDB structure. We need atleast 2 structures to superimpose." % selectedPDBChain)
     shutil.rmtree(tmp_dir)
-    logger.info("""PDB file of query protein with conserved waters "cwm_%s_withConservedWaters.pdb" and 
-log file "pycwms.log" are saved in %s""" % ( selectedPDBChain, os.path.abspath(outdir)))
 
 
 
