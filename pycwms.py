@@ -307,7 +307,7 @@ class Protein():
         for line in open(path):
             line = line.strip()
             if line.startswith('HETATM'):
-                key = self.__repr__()+'_'+str(int(line[23:30])) # water oxygen atom number
+                key = self.__repr__()+'_'+str(int(line[22:30])) # water oxygen atom number
                 self.waterIDCoordinates[key] = [line[30:38],line[38:46],line[46:54]]
                 self.water_coordinates.append([line[30:38],line[38:46],line[46:54]])
                 self.water_ids.append( key )
@@ -486,7 +486,7 @@ def makePDBwithConservedWaters(ProteinsList, temp_dir, outdir):
                         selectedPDBChainIn = open(os.path.join(temp_dir, 'cwm_'+selectedPDBChain+'_Water.pdb'))
                         for line in selectedPDBChainIn:
                             if line.startswith('HETATM'):
-                                if str(int(line[23:30])) in atomNumbers: # 
+                                if str(int(line[22:30])) in atomNumbers: # 
                                     selectedPDBChainConservedWatersOut.write( line )
                         selectedPDBChainConservedWatersOut.write('END')
                         selectedPDBChainConservedWatersOut.close()
@@ -679,6 +679,8 @@ def FindConservedWaters(selectedStruturePDB,selectedStrutureChain,seq_id,resolut
     else:
         logger.info( "%s has only one PDB structure. We need atleast 2 structures to superimpose." % selectedPDBChain)
     shutil.rmtree(tmp_dir)
+    logger.info("""PDB file of query protein with conserved waters "cwm_%s_withConservedWaters.pdb" and 
+log file "pycwms.log" are saved in %s""" % ( selectedPDBChain, os.path.abspath(outdir)))
 
 
 
