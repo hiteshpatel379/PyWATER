@@ -420,6 +420,11 @@ def makePDBwithConservedWaters(ProteinsList, temp_dir, outdir):
             if not okBfactor(os.path.join(temp_dir, 'cwm_%s_Water.pdb' % protein)):
                 ProteinsList.proteins.remove(protein)
 
+    # make sure query structure is not filtered out
+    queryStruct = ':'.join(str(ProteinsList.selectedPDBChain).upper().split('_'))
+    if queryStruct not in ProteinsList.proteins:
+        ProteinsList.add_protein_from_string(queryStruct)
+
     logger.debug( 'filtered proteins chains list is %s proteins long :' % len(ProteinsList.proteins) )
 
     """ 
@@ -675,6 +680,14 @@ def FindConservedWaters(selectedStruturePDB,selectedStrutureChain,seq_id,resolut
     logger.info( 'Protein chains list contains %i pdb chains : %s' % (len(pdbChainsList), pdbChainsList))
     logger.info( 'Filtering by resolution ...')
     pdbChainsList = filterbyResolution(pdbChainsList,resolution)
+    # make sure query structure is not filtered out
+    queryStr = ':'.join(selectedStruture.upper().split('.'))
+    if queryStr in pdbChainsList:
+        pdbChainsList.remove(queryStr)
+        pdbChainsList.insert(0,queryStr)
+    if queryStr not in pdbChainsList:
+        pdbChainsList.insert(0,queryStr)
+    # Added again If query structure filtered out..
     logger.info( 'Filtered protein chains list contains %i pdb chains. : %s' % (len(pdbChainsList), pdbChainsList) )
     for pdbChain in pdbChainsList:
         up.add_protein_from_string(pdbChain)
