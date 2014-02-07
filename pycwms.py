@@ -53,16 +53,25 @@ import urllib
 import shutil
 import re
 import tempfile
-import scipy.cluster.hierarchy as hcluster
 from xml.dom.minidom import parseString
-import numpy as np
 from Tkinter import *
 import tkMessageBox
 import pymol.cmd as cmd
 import logging
 
+try:
+    import numpy as np
+except:
+    sys.exit('Numpy not found')
+
+try:
+    import scipy.cluster.hierarchy as hcluster
+except:
+    sys.exit('Scipy  not found')
+
 
 # setup output directory
+
 home_dir = os.path.expanduser("~")
 
 outdir = os.path.join( home_dir, 'PyCWMs_outdir' )
@@ -71,7 +80,6 @@ if not os.path.exists(outdir):
 
 
 # setup logging
-
 
 logger = logging.getLogger('PyCWMs')
 logger.setLevel(logging.DEBUG)
@@ -601,6 +609,11 @@ def filterbyResolution(pdbChainsList,resolutionCutoff):
 
 # The main function, which run step by step events to identify conserved water molecules in given protein structure.
 def FindConservedWaters(selectedStruturePDB,selectedStrutureChain,seq_id,resolution,refinement,inconsistency_coefficient,prob):# e.g: selectedStruturePDB='3qkl',selectedStrutureChain='A'
+    try:
+        response=urllib.urlopen('http://74.125.228.100')
+    except:
+        logger.error('The PDB webserver is not reachable.')
+        return None
     if not re.compile('^[a-z0-9]{4}$').match(selectedStruturePDB):
         logger.error( 'The entered PDB id is not valid.' )
         tkMessageBox.showinfo(title = 'Error message', 
