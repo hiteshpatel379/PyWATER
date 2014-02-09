@@ -463,8 +463,6 @@ def makePDBwithConservedWaters(ProteinsList, temp_dir, outdir):
                     conservedWaterDic = {}
                     logger.info( 'extracting conserved waters from clusters...' )
                     for clusterNumber, waterMols in fcDic.items():
-                        print '--watermols..'
-                        print waterMols
                         waterMolsNumber = len(waterMols)
                         uniquePDBs = set([a[:6] for a in waterMols])
                         if selectedPDBChain in uniquePDBs:
