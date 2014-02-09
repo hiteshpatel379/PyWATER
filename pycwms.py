@@ -405,25 +405,21 @@ def makePDBwithConservedWaters(ProteinsList, temp_dir, outdir):
     cmd.delete('cwm_*')
 
     ### filter ProteinsList by mobility or normalized B factor cutoff
-
     logger.debug( 'proteins chains list is %s proteins long :' % len(ProteinsList.proteins) )
     length = len(ProteinsList.proteins)
     if ProteinsList.refinement == 'Mobility':
         logger.info( 'Filtering water oxygen atoms by Mobility' )
         for protein in reversed(ProteinsList.proteins):
-            if not okMobility(os.path.join(temp_dir, 'cwm_%s_Water.pdb' % protein)):
-                ProteinsList.proteins.remove(protein)
+            if str(protein) != str(ProteinsList.selectedPDBChain):
+                if not okMobility(os.path.join(temp_dir, 'cwm_%s_Water.pdb' % protein)):
+                    ProteinsList.proteins.remove(protein)
 
     if ProteinsList.refinement == 'Normalized B-factor': 
         logger.info( 'Filtering water oxygen atoms by Normalized B-factor' )
         for protein in reversed(ProteinsList.proteins):
-            if not okBfactor(os.path.join(temp_dir, 'cwm_%s_Water.pdb' % protein)):
-                ProteinsList.proteins.remove(protein)
-
-    # make sure query structure is not filtered out
-    queryStruct = ':'.join(str(ProteinsList.selectedPDBChain).upper().split('_'))
-    if queryStruct not in ProteinsList.proteins:
-        ProteinsList.add_protein_from_string(queryStruct)
+            if str(protein) != str(ProteinsList.selectedPDBChain):
+                if not okBfactor(os.path.join(temp_dir, 'cwm_%s_Water.pdb' % protein)):
+                    ProteinsList.proteins.remove(protein)
 
     logger.debug( 'filtered proteins chains list is %s proteins long :' % len(ProteinsList.proteins) )
 
@@ -467,6 +463,8 @@ def makePDBwithConservedWaters(ProteinsList, temp_dir, outdir):
                     conservedWaterDic = {}
                     logger.info( 'extracting conserved waters from clusters...' )
                     for clusterNumber, waterMols in fcDic.items():
+                        print '--watermols..'
+                        print waterMols
                         waterMolsNumber = len(waterMols)
                         uniquePDBs = set([a[:6] for a in waterMols])
                         if selectedPDBChain in uniquePDBs:
