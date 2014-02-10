@@ -384,6 +384,7 @@ def makePDBwithConservedWaters(ProteinsList, temp_dir, outdir):
     logger.info( 'loading all pdb chains ...' )
     for protein in ProteinsList:
         cmd.load(os.path.join(temp_dir, protein.pdb_filename),'cwm_%s' % protein.pdb_id)
+        cmd.remove('(hydro) and cwm_%s' % protein.pdb_id)
         cmd.create('cwm_%s' % protein, 'cwm_%s & chain %s' % (protein.pdb_id, protein.chain))
         cmd.delete( 'cwm_%s' % protein.pdb_id )
 
