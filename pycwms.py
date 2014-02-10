@@ -470,7 +470,7 @@ def makePDBwithConservedWaters(ProteinsList, temp_dir, outdir):
                             if uniquePDBslen == waterMolsNumber:
                                 probability = float(uniquePDBslen) / len(ProteinsList)
                                 logger.info( 'Degree of conservation is : %s' % probability )
-                                if probability > ProteinsList.probability:
+                                if probability >= ProteinsList.probability:
                                     logger.info('Here is conserved water molecule...')
                                     cwm_count += 1
                                     for waterMol in waterMols:
