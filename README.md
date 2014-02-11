@@ -23,10 +23,13 @@ Usage:
 ======
 
 
-After installation as plugin. It can be run from commandline in pymol:
+After installation as plugin. It can be run from PyMOL GUI by following the path: `Plugins -> PyCWMs`
+    Enter the required parameters and click on 'Find Conserved Water Molecules'
+
+OR It can be run from commandline in pymol:
     `pycwms [PDB id , Chain id [, sequence identity cutoff [, resolution cutoff [, refinement assessing method [, inconsistency coefficient threshold [, degree of conservation]]]]]]`
 
-Or you can use it directly from your python script.
+OR you can use it directly from your python script.
 
 ```python
 from pymol import cmd
