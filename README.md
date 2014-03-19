@@ -13,10 +13,14 @@ Copyright 2013 Hitesh Patel and B. Gruening
 Installation
 ------------
 
-PyCWMs can be used as PyMOL plugin and you can install from inside PyMOL.
-- Run PyMOL ( on some systems you need to be an administrator.)
-- Install the PyCWMs plugin in pymol by following the path: `Plugins -> Manage Plugins -> install`
-- Restart the PyMol
+PyCWMs can be used as PyMOL plugin and you can install from inside PyMOL.  
+- Run PyMOL ( on some systems you need to be an administrator.)  
+- Install the PyCWMs plugin in pymol by following the path: `Plugins -> Manage Plugins -> install`  
+- Restart the PyMol  
+
+**Enabling Plugins in MacPyMOL**   
+In order to install plug-ins from inside MacPyMOL, you have to rename the "MacPyMOL.app" to "PyMOLX11Hybrid.app" in your Applications folder, which will start PyMOL in the X Window System (X11) mode (requires an installation of [XQuartz](http://xquartz.macosforge.org/landing/)).
+
 
 
 Usage:
@@ -78,3 +82,4 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
+
