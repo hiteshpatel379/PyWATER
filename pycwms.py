@@ -128,10 +128,10 @@ def user_defined_lists_help():
     tkMessageBox.showinfo(title = 'User defined pdb-chains lists',
         message = """The user defined list of pdbchains to superimpose to find conserved waters in query protein structure.
 Enter the pdb chains list in format: xxxx_x,yyyy_y,zzzz_z""")
-def clustering_method_help():
-    tkMessageBox.showinfo(title = 'Clustering method',
-        message = """Choose any of the clustering method. Default method is 'complete'.""")
 
+def clustering_method_help():
+    tkMessageBox.showinfo(title = 'Clustering linkage method',
+        message = """Choose any of the linkage method for hierarchical clustering. Default method is 'complete'.""")
 
 def inconsistency_coefficient_help():
     tkMessageBox.showinfo(title = 'Inconsistency coefficient threshold', 
@@ -156,7 +156,7 @@ def displayInputs(selectedStruturePDB,selectedStrutureChain,seq_id,resolution,re
     logger.info( 'Structure resolution cutoff : %s' % resolution)
     logger.info( 'X-ray structure refinement assessing method : %s' % refinement)
     logger.info( 'User defined protein-chains list : %s' % user_def_list)
-    logger.info( 'Hierarchical clustering method : %s' % clustering_method)
+    logger.info( 'Hierarchical clustering linkage method : %s' % clustering_method)
     logger.info( 'Inconsistency coefficient threshold : %s' % inconsistency_coefficient)
     logger.info( 'probability cutoff : %s' % prob)
 
