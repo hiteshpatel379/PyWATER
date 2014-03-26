@@ -49,3 +49,6 @@ nosetests.xml
 *.bz
 *.bz2
 .hg
+
+# Mac OS specific hidden metadata
+.DS_Store
