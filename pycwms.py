@@ -121,7 +121,17 @@ def resolution_help():
 Maximum suggested structure resolution cutoff is 2.5 A.""")
 
 def refinement_quality_help():
-    tkMessageBox.showinfo(title = 'Filter by refinement quality', message = "Choose either Mobility or Normalized B-factor as criteria to assess the refinement quality of crystal structure. Program will filter out the water molecules with bad refinement quality.")
+    tkMessageBox.showinfo(title = 'Filter by refinement quality', 
+        message = "Choose either Mobility or Normalized B-factor as criteria to assess the refinement quality of crystal structure. Program will filter out the water molecules with bad refinement quality.")
+
+def user_defined_lists_help():
+    tkMessageBox.showinfo(title = 'User defined pdb-chains lists',
+        message = """The user defined list of pdbchains to superimpose to find conserved waters in query protein structure.
+Enter the pdb chains list in format: xxxx_x,yyyy_y,zzzz_z""")
+def clustering_method_help():
+    tkMessageBox.showinfo(title = 'Clustering method',
+        message = """Choose any of the clustering method. Default method is 'complete'.""")
+
 
 def inconsistency_coefficient_help():
     tkMessageBox.showinfo(title = 'Inconsistency coefficient threshold', 
@@ -136,13 +146,17 @@ Minimum suggested value is 0.5
 """)
 
 
-# Display imput parameters
-def displayInputs(selectedStruturePDB, selectedStrutureChain, seq_id, resolution, inconsistency_coefficient, prob):
+# Display imput parameters     
+
+def displayInputs(selectedStruturePDB,selectedStrutureChain,seq_id,resolution,refinement,user_def_list,clustering_method,inconsistency_coefficient,prob):
     logger.info( 'Input values' )
     logger.info( 'PDB id : ' + selectedStruturePDB)
     logger.info( 'Chain id : %s' % selectedStrutureChain)
     logger.info( 'Seqence identity cutoff : %s' % seq_id)
     logger.info( 'Structure resolution cutoff : %s' % resolution)
+    logger.info( 'X-ray structure refinement assessing method : %s' % refinement)
+    logger.info( 'User defined protein-chains list : %s' % user_def_list)
+    logger.info( 'Hierarchical clustering method : %s' % clustering_method)
     logger.info( 'Inconsistency coefficient threshold : %s' % inconsistency_coefficient)
     logger.info( 'probability cutoff : %s' % prob)
 
@@ -451,7 +465,7 @@ def makePDBwithConservedWaters(ProteinsList, temp_dir, outdir):
                     # available optoins: single, complete, average, weighted, median centroid, wards
                     FD = hcluster.fclusterdata(water_coordinates, 
                             t=ProteinsList.inconsistency_coefficient, criterion='distance', 
-                            metric='euclidean', depth=2, method='average')
+                            metric='euclidean', depth=2, method= ProteinsList.clustering_method)
                     FDlist = list(FD)
                     fcDic = {}
                     logger.info( 'making flat cluster dictionary...' )
@@ -462,17 +476,49 @@ def makePDBwithConservedWaters(ProteinsList, temp_dir, outdir):
                             fcDic[b]=[a]
 
                     conservedWaterDic = {}
+                    clusterPresenceDic = {}
+                    clusterPresenceOut = open(os.path.join( outdir, '%s_clusterPresence.txt' % selectedPDBChain ),'w')
+                    clusterPresenceOut.write('Water Conservation Score'+'\t')
+                    proteins_numbers = {}
+                    j=0
+                    for i in ProteinsList.proteins:
+                        proteins_numbers[(str(i))]=j
+                        j += 1
+                        clusterPresenceOut.write('%s' % i +'\t')
+                    clusterPresenceOut.write('\n')
+                    #print proteins_numbers
                     logger.info( 'extracting conserved waters from clusters...' )
+                    #print fcDic
                     for clusterNumber, waterMols in fcDic.items():
                         waterMolsNumber = len(waterMols)
                         uniquePDBs = set([a[:6] for a in waterMols])
-                        if selectedPDBChain in uniquePDBs:
-                            uniquePDBslen = len(set([a[:6] for a in waterMols]))
-                            if uniquePDBslen == waterMolsNumber:
-                                probability = float(uniquePDBslen) / len(ProteinsList)
-                                logger.info( 'Degree of conservation is : %s' % probability )
-                                if probability >= ProteinsList.probability:
-                                    logger.info('Here is conserved water molecule...')
+                        uniquePDBslen = len(uniquePDBs)
+                        if uniquePDBslen == waterMolsNumber:
+                            probability = float(uniquePDBslen) / len(ProteinsList)
+                            logger.info( 'Degree of conservation is : %s' % probability )
+                            if probability >= ProteinsList.probability:
+                                logger.info('Here is conserved water molecule...')
+                                clusterPresenceOut.write(str(probability)+'\t')
+                                atomNumbers = []
+                                k=0
+                                for waterMol in waterMols:
+                                    sr_no = proteins_numbers[waterMol[:6]]
+                                    if sr_no == k:
+                                        clusterPresenceOut.write(str(waterMol[7:])+'\t')
+                                        k += 1
+                                    elif k < sr_no:
+                                        for j in range(sr_no-k):
+                                            clusterPresenceOut.write('NoWater'+'\t')
+                                            k += 1
+                                        clusterPresenceOut.write(str(waterMol[7:])+'\t')
+                                        k += 1
+                                if waterMolsNumber < len(ProteinsList.proteins):
+                                    print 'waterMolsNumber and len(ProteinsList.proteins) are %s and %s : ' % (waterMolsNumber,len(ProteinsList.proteins))
+                                    for j in range(len(ProteinsList.proteins)-waterMolsNumber):
+                                        clusterPresenceOut.write('NoWater'+'\t')
+                                clusterPresenceOut.write('\n')
+                                #if selectedPDBChain in uniquePDBs:
+                                if selectedPDBChain in uniquePDBs:
                                     cwm_count += 1
                                     for waterMol in waterMols:
                                         if conservedWaterDic.has_key(waterMol[:6]):
@@ -480,10 +526,13 @@ def makePDBwithConservedWaters(ProteinsList, temp_dir, outdir):
                                         else:
                                             conservedWaterDic[waterMol[:6]] = ['_'.join([waterMol[7:],str(probability)])]
                                     #logger.debug( 'Updated conserved waters dictionary is : %s' % conservedWaterDic )
-                            elif uniquePDBslen < waterMolsNumber:
-                                logger.debug( 'Warning : cutoff distance is too large...' )
+                        elif uniquePDBslen < waterMolsNumber:
+                            logger.debug( 'Warning : cutoff distance is too large...' )
+                    clusterPresenceOut.close()
 
                     logger.debug( 'conservedWaterDic keys are: %s' % conservedWaterDic.keys() )
+                    #print 'conservedWaterDic are: %s' % conservedWaterDic
+                    #print 'conservedWaterDic keys are: %s' % conservedWaterDic.keys()
                     if selectedPDBChain in conservedWaterDic.keys():
                         # save pdb file of only conserved waters for selected pdb
                         atomNumbersProbDic = {}
@@ -528,6 +577,27 @@ log file "pycwms.log" are saved in %s""" % ( selectedPDBChain, os.path.abspath(o
 
 
 # Check whether the PDB structure is determined by X-ray or not.
+
+def pdbIdFormat(pdbId):
+    if not re.compile('^[a-z0-9]{4}$').match(pdbId):
+        logger.error( 'The entered PDB id %s is not valid..' % pdbId)
+        tkMessageBox.showinfo(title = 'Error message', 
+            message = """The entered PDB id is not valid............""")
+        return False
+    else:
+        return True
+
+
+def chainIdFormat(chainId):
+    if not re.compile('^[A-Z0-9]{1}$').match(chainId):
+        logger.error( 'The entered PDB chain id %s is not valid.' % chainId)
+        tkMessageBox.showinfo(title = 'Error message', 
+            message = """The entered PDB chain id is not valid.""")
+        return False
+    else:
+        return True
+
+
 def isXray(pdb):
     expInfoAddress='http://pdb.org/pdb/rest/customReport?pdbids=%s&customReportColumns=experimentalTechnique&service=wsdisplay&format=xml&ssa=n' % (pdb)
     expInfoURL = urllib.urlopen(expInfoAddress)
@@ -597,26 +667,20 @@ def filterbyResolution(pdbChainsList,resolutionCutoff):
 
 
 # The main function, which run step by step events to identify conserved water molecules in given protein structure.
-def FindConservedWaters(selectedStruturePDB,selectedStrutureChain,seq_id,resolution,refinement,inconsistency_coefficient,prob):# e.g: selectedStruturePDB='3qkl',selectedStrutureChain='A'
+def FindConservedWaters(selectedStruturePDB,selectedStrutureChain,seq_id,resolution,refinement,user_def_list,clustering_method,inconsistency_coefficient,prob):# e.g: selectedStruturePDB='3qkl',selectedStrutureChain='A'
     try:
         response=urllib.urlopen('http://74.125.228.100')
     except:
         logger.error('The PDB webserver is not reachable.')
         return None
-    if not re.compile('^[a-z0-9]{4}$').match(selectedStruturePDB):
-        logger.error( 'The entered PDB id is not valid.' )
-        tkMessageBox.showinfo(title = 'Error message', 
-            message = """The entered PDB id is not valid.""")
+    if not pdbIdFormat(selectedStruturePDB):
         return None
     if not isXray(selectedStruturePDB):
         logger.error( 'The entered PDB structure is not determined by X-ray crystallography.' )
         tkMessageBox.showinfo(title = 'Error message', 
             message = """The entered PDB structure is not determined by X-ray crystallography.""")
         return None
-    if not re.compile('^[A-Z0-9]{1}$').match(selectedStrutureChain):
-        logger.error( 'The entered PDB chain id is not valid.' )
-        tkMessageBox.showinfo(title = 'Error message', 
-            message = """The entered PDB chain id is not valid.""")
+    if not chainIdFormat(selectedStrutureChain):
         return None
     if not chainPresent(selectedStruturePDB,selectedStrutureChain):
         logger.error( 'The entered PDB chain id is not valid for given PDB.' )
@@ -633,6 +697,31 @@ def FindConservedWaters(selectedStruturePDB,selectedStrutureChain,seq_id,resolut
         tkMessageBox.showinfo(title = 'Error message', 
             message = """The maximum allowed resolution cutoff is 3.0 A.""")
         return None
+    UD_pdbChainsList = []
+    if user_def_list != '':
+        print '1.... %s : ' % user_def_list
+        if len(user_def_list.split(',')) != 1:
+            print '2.... : '
+            for i in user_def_list.split(','):
+                if len(i.split('_')) == 2:
+                    pdbid,chainid = i.split('_')[0].lower(),i.split('_')[1].upper()
+                    j = ':'.join([pdbid,chainid])
+                    if not pdbIdFormat(pdbid):
+                        return None
+                    if not chainIdFormat(chainid):
+                        return None
+                    else:
+                        UD_pdbChainsList.append(j)
+                else:
+                    logger.info( 'Please enter atleast two pdb chains identifier in the format: xxxx_x,yyyy_y,zzzz_z' )
+                    tkMessageBox.showinfo(title = 'Error message',
+                        message = """Please enter atleast two pdb chains identifier in the format: xxxx_x,yyyy_y,zzzz_z""")
+                    return None
+        else:
+            logger.info( 'Please enter atleast two pdb chains identifier in the format: xxxx_x,yyyy_y,zzzz_z' )
+            tkMessageBox.showinfo(title = 'Error message', 
+                message = """Please enter atleast two pdb chains identifier in the format: xxxx_x,yyyy_y,zzzz_z""")
+            return None
     if inconsistency_coefficient > 2.4:
         logger.info( 'The maximum allowed inconsistency coefficient threshold is 2.4 A' )
         tkMessageBox.showinfo(title = 'Error message', 
@@ -644,35 +733,39 @@ def FindConservedWaters(selectedStruturePDB,selectedStrutureChain,seq_id,resolut
             message = """The degree of conservation is allowed from 0.4 A to 1.0 A.""")
         return None
     online_pdb_db = 'http://www.pdb.org/pdb/files/%s.pdb'
-    displayInputs(selectedStruturePDB,selectedStrutureChain,seq_id,resolution,inconsistency_coefficient,prob)
+    displayInputs(selectedStruturePDB,selectedStrutureChain,seq_id,resolution,refinement,user_def_list,clustering_method,inconsistency_coefficient,prob)
 
     tmp_dir = tempfile.mkdtemp()
-
+#    if UD_pdbChainsList == []:
     selectedStruture = ".".join([selectedStruturePDB.lower(),selectedStrutureChain.upper()]) # 3qkl.A
     up = ProteinsList(ProteinName = selectedStruture) # ProteinsList class instance up
     up.refinement = refinement
     up.probability = prob
+    up.clustering_method = clustering_method
     up.inconsistency_coefficient = inconsistency_coefficient
     logger.info( 'selectedStruture is : %s' % selectedStruture )
     up.selectedPDBChain = Protein(selectedStruturePDB, selectedStrutureChain) # up.selectedPDBChain = 3qkl_a
     logger.info( 'up selectedPDBChain is : %s' % up.selectedPDBChain )
     selectedPDBChain = str(up.selectedPDBChain)
     logger.info( 'selectedPDBChain name is : %s' % selectedPDBChain )
-    logger.info( """Fetching protein chains list from PDB clusters ...
-    This cluater contains: """ )
-    pdbChainsList = fetchpdbChainsList(selectedStruture,seq_id) # ['3QKL:A', '4EKL:A', '3QKM:A', '3QKK:A', '3OW4:A', '3OW4:B', '3OCB:A', '3OCB:B', '4EKK:A', '4EKK:B']
-    logger.info( 'Protein chains list contains %i pdb chains : %s' % (len(pdbChainsList), pdbChainsList))
-    logger.info( 'Filtering by resolution ...')
-    pdbChainsList = filterbyResolution(pdbChainsList,resolution)
-    # make sure query structure is not filtered out
-    queryStr = ':'.join(selectedStruture.upper().split('.'))
-    if queryStr in pdbChainsList:
-        pdbChainsList.remove(queryStr)
-        pdbChainsList.insert(0,queryStr)
-    if queryStr not in pdbChainsList:
-        pdbChainsList.insert(0,queryStr)
-    # Added again If query structure filtered out..
-    logger.info( 'Filtered protein chains list contains %i pdb chains. : %s' % (len(pdbChainsList), pdbChainsList) )
+    if UD_pdbChainsList == []:
+        logger.info( """Fetching protein chains list from PDB clusters ...
+        This cluater contains: """ )
+        pdbChainsList = fetchpdbChainsList(selectedStruture,seq_id) # ['3QKL:A', '4EKL:A', '3QKM:A', '3QKK:A', '3OW4:A', '3OW4:B', '3OCB:A', '3OCB:B', '4EKK:A', '4EKK:B']
+        logger.info( 'Protein chains list contains %i pdb chains : %s' % (len(pdbChainsList), pdbChainsList))
+        logger.info( 'Filtering by resolution ...')
+        pdbChainsList = filterbyResolution(pdbChainsList,resolution)
+        # make sure query structure is not filtered out
+        queryStr = ':'.join(selectedStruture.upper().split('.'))
+        if queryStr in pdbChainsList:
+            pdbChainsList.remove(queryStr)
+            pdbChainsList.insert(0,queryStr)
+        if queryStr not in pdbChainsList:
+            pdbChainsList.insert(0,queryStr)
+        # Added again If query structure filtered out..
+        logger.info( 'Filtered protein chains list contains %i pdb chains. : %s' % (len(pdbChainsList), pdbChainsList) )
+    else:
+        pdbChainsList = UD_pdbChainsList
     for pdbChain in pdbChainsList:
         up.add_protein_from_string(pdbChain)
 #    logger.debug( 'up is : %s' % up.proteins ) #[3qkl_a, 4ekl_a, 3qkm_a, 3qkk_a, 3ow4_a, 3ow4_b, 3ocb_a, 3ocb_b, 4ekk_a, 4ekk_b]
@@ -701,6 +794,12 @@ class ConservedWaters(Frame):
         self.grid()
         self.makeWindow()
 
+    def varcheck(self,E1,var):
+        if var.get() == 0:
+            E1.configure(state='disabled')
+        else:
+            E1.configure(state='normal') 
+
     def makeWindow(self):
         frame1 = Frame(self.parent)
         frame1.grid()
@@ -711,47 +810,64 @@ class ConservedWaters(Frame):
         v1.set('')
         Entry(frame1,textvariable=v1).grid(row=0, column=1, sticky=W)
 
-        Label(frame1, text="Chain id").grid(row=1, column=0, sticky=W)
-        Button(frame1,text=" Help  ",command=chain_help).grid(row=1, column=2, sticky=W)
+        Label(frame1, text="Chain id").grid(row=0, column=3, sticky=W)
+        Button(frame1,text=" Help  ",command=chain_help).grid(row=0, column=5, sticky=W)
         v2 = StringVar(master=frame1)
         v2.set('')
-        Entry(frame1,textvariable=v2).grid(row=1, column=1, sticky=W)
+        Entry(frame1,textvariable=v2).grid(row=0, column=4, sticky=W)
 
-        Label(frame1, text="Sequence identity cutoff").grid(row=2, column=0, sticky=W)
-        Button(frame1,text=" Help  ",command=seq_id_help).grid(row=2, column=2, sticky=W)
+        Label(frame1, text="Sequence identity cutoff").grid(row=1, column=0, sticky=W)
+        Button(frame1,text=" Help  ",command=seq_id_help).grid(row=1, column=2, sticky=W)
         v3 = StringVar(master=frame1)
         v3.set("95")
-        OptionMenu(frame1, v3, '30', '40', '50', '70', '90', '95', '100').grid(row=2, column=1, sticky=W)
+        OptionMenu(frame1, v3, '30', '40', '50', '70', '90', '95', '100').grid(row=1, column=1, sticky=W)
 
-        Label(frame1, text="Structure resolution cutoff").grid(row=3, column=0, sticky=W)
-        Button(frame1,text=" Help  ",command=resolution_help).grid(row=3, column=2, sticky=W)
+        Label(frame1, text="Structure resolution cutoff").grid(row=2, column=0, sticky=W)
+        Button(frame1,text=" Help  ",command=resolution_help).grid(row=2, column=2, sticky=W)
         v4 = StringVar(master=frame1)
         v4.set("2.0")
-        Entry(frame1,textvariable=v4).grid(row=3, column=1, sticky=W)
+        Entry(frame1,textvariable=v4).grid(row=2, column=1, sticky=W)
 
-        Label(frame1, text="Refinement assessing method").grid(row=4, column=0, sticky=W)
-        Button(frame1,text=" Help  ",command=refinement_quality_help).grid(row=4, column=2, sticky=W)
+        Label(frame1, text="Refinement assessing method").grid(row=3, column=0, sticky=W)
+        Button(frame1,text=" Help  ",command=refinement_quality_help).grid(row=3, column=2, sticky=W)
         v5 = StringVar(master=frame1)
         v5.set('Mobility')
-        OptionMenu(frame1, v5, 'Mobility', 'Normalized B-factor').grid(row=4, column=1, sticky=W)
+        OptionMenu(frame1, v5, 'Mobility', 'Normalized B-factor').grid(row=3, column=1, sticky=W)
+
+        Label(frame1, text="User defined pdb-chains lists").grid(row=2, column=4, sticky=W)
+        v6 = StringVar(master=frame1)
+        v6.set('')
+        E1 = Entry(frame1,textvariable=v6,state=DISABLED)
+        E1.grid(row=3, column=4, columnspan=2, rowspan=2, sticky=W+E+N+S)
+
+        var = IntVar(master=frame1)
+        Checkbutton(frame1, text="User defined pdb-chains list", variable=var,command=lambda: self.varcheck(E1,var)).grid(row=1, column=4, sticky=W)
+        Button(frame1,text=" Help  ",command=user_defined_lists_help).grid(row=1, column=5, sticky=W)
+
+        Label(frame1, text="Clustering method").grid(row=4, column=0, sticky=W)
+        Button(frame1,text=" Help  ",command=clustering_method_help).grid(row=4, column=2, sticky=W)
+        v7 = StringVar(master=frame1)
+        v7.set("complete")
+        OptionMenu(frame1, v7, 'complete', 'average', 'single', 'weighted', 'median centroid', 'wards').grid(row=4, column=1, sticky=W)
 
         Label(frame1, text="Inconsistency coefficient threshold").grid(row=5, column=0, sticky=W)
         Button(frame1,text=" Help  ",command=inconsistency_coefficient_help).grid(row=5, column=2, sticky=W)
-        v6 = StringVar(master=frame1)
-        v6.set("2.0")
-        Entry(frame1,textvariable=v6).grid(row=5, column=1, sticky=W)
+        v8 = StringVar(master=frame1)
+        v8.set("2.0")
+        Entry(frame1,textvariable=v8).grid(row=5, column=1, sticky=W)
 
         Label(frame1, text="Degree of conservation").grid(row=6, column=0, sticky=W)
         Button(frame1,text=" Help  ",command=prob_help).grid(row=6, column=2, sticky=W)
-        v7 = StringVar(master=frame1)
-        v7.set("0.7")
-        Entry(frame1,textvariable=v7).grid(row=6, column=1, sticky=W)
+        v9 = StringVar(master=frame1)
+        v9.set("0.7")
+        Entry(frame1,textvariable=v9).grid(row=6, column=1, sticky=W)
 
         frame2 = Frame(self.parent)
         frame2.grid()
 
         Button(frame2,text=" Find Conserved Water Molecules ",
-            command = lambda: FindConservedWaters(str(v1.get()).lower(),str(v2.get()).upper(),str(v3.get()),float(v4.get()),str(v5.get()),float(v6.get()),float(v7.get()))).grid(row=0, column=1, sticky=W)
+            command = lambda: FindConservedWaters(str(v1.get()).lower(),str(v2.get()).upper(),str(v3.get()),float(v4.get()),str(v5.get()),str(v6.get()),str(v7.get()),float(v8.get()),float(v9.get()))).grid(row=0, column=1, sticky=W)
+
 
 def main():
     root = Tk()
@@ -763,15 +879,17 @@ if __name__ == '__main__':
 
 
 # Convert data types of input parameters given by command line.
-def toPyCWMs(v1,v2,v3='95',v4=2.0,v5='Mobility',v6=2.0,v7=0.7):
+def toPyCWMs(v1,v2,v3='95',v4=2.0,v5='Mobility',v6='',v7='complete',v8=2.0,v9=0.7):
     selectedStruturePDB = str(v1).lower()
     selectedStrutureChain = str(v2).upper()
     seq_id = str(v3)
     resolution = float(v4)
     refinement = str(v5)
-    inconsistency_coefficient = float(v6)
-    prob = float(v7)
-    FindConservedWaters(selectedStruturePDB,selectedStrutureChain,seq_id,resolution,refinement,inconsistency_coefficient,prob)
+    user_def_list = str(v6)
+    clustering_method = str(v7)
+    inconsistency_coefficient = float(v8)
+    prob = float(v9)
+    FindConservedWaters(selectedStruturePDB,selectedStrutureChain,seq_id,resolution,refinement,user_def_list,clustering_method,inconsistency_coefficient,prob)
 
 #Extends PyMOL API to use this tool from command line.
 cmd.extend('pycwms', toPyCWMs)
