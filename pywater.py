@@ -507,6 +507,7 @@ def makePDBwithConservedWaters(ProteinsList, temp_dir, outdir,save_sup_files):
                         waterMolsNumber = len(waterMols)
                         uniquePDBs = set([a[:6] for a in waterMols])
                         uniquePDBslen = len(uniquePDBs)
+                        # Update waterMols if there are two waterMolecules from same PDB is present in waterMols
                         if uniquePDBslen < waterMolsNumber:
                             waterMols.sort()
                             PDBs = [i[:6] for i in waterMols]
@@ -516,36 +517,37 @@ def makePDBwithConservedWaters(ProteinsList, temp_dir, outdir,save_sup_files):
                                     for j in reversed(waterMols):
                                         if j[:6] == i:
                                             waterMols.remove(j)
-                        else:# uniquePDBslen == waterMolsNumber:
-                            probability = float(uniquePDBslen) / len(ProteinsList)
-                            logger.info( 'Degree of conservation is : %s' % probability )
-                            if probability >= ProteinsList.probability:
-                                logger.info('Here is conserved water molecule...')
-                                clusterPresenceOut.write(str(probability)+'\t')
-                                k=0
+
+                        waterMolsNumber = len(waterMols)
+                        uniquePDBs = set([a[:6] for a in waterMols])
+                        uniquePDBslen = len(uniquePDBs)
+                        probability = float(uniquePDBslen) / len(ProteinsList)
+                        logger.info( 'Degree of conservation is : %s' % probability )
+                        if probability >= ProteinsList.probability:
+                            logger.info('Here is conserved water molecule...')
+                            clusterPresenceOut.write(str(probability)+'\t')
+                            k=0
+                            for waterMol in waterMols:
+                                sr_no = proteins_numbers[waterMol[:6]]
+                                if sr_no == k:
+                                    clusterPresenceOut.write(str(waterMol[7:])+'\t')
+                                    k += 1
+                                elif k < sr_no:
+                                    for j in range(sr_no-k):
+                                        clusterPresenceOut.write('NoWater'+'\t')
+                                        k += 1
+                                    clusterPresenceOut.write(str(waterMol[7:])+'\t')
+                                    k += 1
+                            clusterPresenceOut.write('\n')
+                            #if selectedPDBChain in uniquePDBs:
+                            if selectedPDBChain in uniquePDBs:
+                                cwm_count += 1
                                 for waterMol in waterMols:
-                                    sr_no = proteins_numbers[waterMol[:6]]
-                                    if sr_no == k:
-                                        clusterPresenceOut.write(str(waterMol[7:])+'\t')
-                                        k += 1
-                                    elif k < sr_no:
-                                        for j in range(sr_no-k):
-                                            clusterPresenceOut.write('NoWater'+'\t')
-                                            k += 1
-                                        clusterPresenceOut.write(str(waterMol[7:])+'\t')
-                                        k += 1
-                                clusterPresenceOut.write('\n')
-                                #if selectedPDBChain in uniquePDBs:
-                                if selectedPDBChain in uniquePDBs:
-                                    cwm_count += 1
-                                    for waterMol in waterMols:
-                                        if conservedWaterDic.has_key(waterMol[:6]):
-                                            conservedWaterDic[waterMol[:6]].append('_'.join([waterMol[7:],str(probability)]))
-                                        else:
-                                            conservedWaterDic[waterMol[:6]] = ['_'.join([waterMol[7:],str(probability)])]
-                                    #logger.debug( 'Updated conserved waters dictionary is : %s' % conservedWaterDic )
-                        #elif uniquePDBslen < waterMolsNumber:
-                        #    logger.debug( 'Warning : cutoff distance is too large...' )
+                                    if conservedWaterDic.has_key(waterMol[:6]):
+                                        conservedWaterDic[waterMol[:6]].append('_'.join([waterMol[7:],str(probability)]))
+                                    else:
+                                        conservedWaterDic[waterMol[:6]] = ['_'.join([waterMol[7:],str(probability)])]
+                                #logger.debug( 'Updated conserved waters dictionary is : %s' % conservedWaterDic )
                     clusterPresenceOut.close()
 
                     logger.debug( 'conservedWaterDic keys are: %s' % conservedWaterDic.keys() )
