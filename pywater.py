@@ -53,6 +53,7 @@ import glob
 import urllib
 import shutil
 import re
+import collections
 import tempfile
 from xml.dom.minidom import parseString
 from Tkinter import *
@@ -409,7 +410,7 @@ def makePDBwithConservedWaters(ProteinsList, temp_dir, outdir,save_sup_files):
     logger.info( 'Superimposing all pdb chains ...' )
     for protein in ProteinsList[1:]:
         logger.info( 'superimposing %s: ' % protein )
-        cmd.super('cwm_%s' % protein, 'cwm_%s' % ProteinsList[0])
+        cmd.super('cwm_%s////CA' % protein, 'cwm_%s////CA' % ProteinsList[0])
         cmd.orient( 'cwm_%s' % ProteinsList[0] )
 
     logger.info( 'Creating new pymol objects of only water molecules for each pdb chain...' )
@@ -425,22 +426,23 @@ def makePDBwithConservedWaters(ProteinsList, temp_dir, outdir,save_sup_files):
 
     ### filter ProteinsList by mobility or normalized B factor cutoff
     logger.debug( 'proteins chains list is %s proteins long :' % len(ProteinsList.proteins) )
-    length = len(ProteinsList.proteins)
-    if ProteinsList.refinement == 'Mobility':
-        logger.info( 'Filtering water oxygen atoms by Mobility' )
-        for protein in reversed(ProteinsList.proteins):
-            if str(protein) != str(ProteinsList.selectedPDBChain):
-                if not okMobility(os.path.join(temp_dir, 'cwm_%s_Water.pdb' % protein)):
-                    ProteinsList.proteins.remove(protein)
+    if ProteinsList.refinement != 'No refinement':
+        length = len(ProteinsList.proteins)
+        if ProteinsList.refinement == 'Mobility':
+            logger.info( 'Filtering water oxygen atoms by Mobility' )
+            for protein in reversed(ProteinsList.proteins):
+                if str(protein) != str(ProteinsList.selectedPDBChain):
+                    if not okMobility(os.path.join(temp_dir, 'cwm_%s_Water.pdb' % protein)):
+                        ProteinsList.proteins.remove(protein)
 
-    if ProteinsList.refinement == 'Normalized B-factor': 
-        logger.info( 'Filtering water oxygen atoms by Normalized B-factor' )
-        for protein in reversed(ProteinsList.proteins):
-            if str(protein) != str(ProteinsList.selectedPDBChain):
-                if not okBfactor(os.path.join(temp_dir, 'cwm_%s_Water.pdb' % protein)):
-                    ProteinsList.proteins.remove(protein)
+        if ProteinsList.refinement == 'Normalized B-factor': 
+            logger.info( 'Filtering water oxygen atoms by Normalized B-factor' )
+            for protein in reversed(ProteinsList.proteins):
+                if str(protein) != str(ProteinsList.selectedPDBChain):
+                    if not okBfactor(os.path.join(temp_dir, 'cwm_%s_Water.pdb' % protein)):
+                        ProteinsList.proteins.remove(protein)
 
-    logger.debug( 'filtered proteins chains list is %s proteins long :' % len(ProteinsList.proteins) )
+        logger.debug( 'filtered proteins chains list is %s proteins long :' % len(ProteinsList.proteins) )
 
     """ 
         Filtered ProteinsList
@@ -505,13 +507,21 @@ def makePDBwithConservedWaters(ProteinsList, temp_dir, outdir,save_sup_files):
                         waterMolsNumber = len(waterMols)
                         uniquePDBs = set([a[:6] for a in waterMols])
                         uniquePDBslen = len(uniquePDBs)
-                        if uniquePDBslen == waterMolsNumber:
+                        if uniquePDBslen < waterMolsNumber:
+                            waterMols.sort()
+                            PDBs = [i[:6] for i in waterMols]
+                            PDBsCounter = collections.Counter(PDBs)
+                            for i in PDBsCounter.keys():
+                                if PDBsCounter.get(i) > 1:
+                                    for j in reversed(waterMols):
+                                        if j[:6] == i:
+                                            waterMols.remove(j)
+                        else:# uniquePDBslen == waterMolsNumber:
                             probability = float(uniquePDBslen) / len(ProteinsList)
                             logger.info( 'Degree of conservation is : %s' % probability )
                             if probability >= ProteinsList.probability:
                                 logger.info('Here is conserved water molecule...')
                                 clusterPresenceOut.write(str(probability)+'\t')
-                                atomNumbers = []
                                 k=0
                                 for waterMol in waterMols:
                                     sr_no = proteins_numbers[waterMol[:6]]
@@ -524,10 +534,6 @@ def makePDBwithConservedWaters(ProteinsList, temp_dir, outdir,save_sup_files):
                                             k += 1
                                         clusterPresenceOut.write(str(waterMol[7:])+'\t')
                                         k += 1
-                                if waterMolsNumber < len(ProteinsList.proteins):
-                                    print 'waterMolsNumber and len(ProteinsList.proteins) are %s and %s : ' % (waterMolsNumber,len(ProteinsList.proteins))
-                                    for j in range(len(ProteinsList.proteins)-waterMolsNumber):
-                                        clusterPresenceOut.write('NoWater'+'\t')
                                 clusterPresenceOut.write('\n')
                                 #if selectedPDBChain in uniquePDBs:
                                 if selectedPDBChain in uniquePDBs:
@@ -538,8 +544,8 @@ def makePDBwithConservedWaters(ProteinsList, temp_dir, outdir,save_sup_files):
                                         else:
                                             conservedWaterDic[waterMol[:6]] = ['_'.join([waterMol[7:],str(probability)])]
                                     #logger.debug( 'Updated conserved waters dictionary is : %s' % conservedWaterDic )
-                        elif uniquePDBslen < waterMolsNumber:
-                            logger.debug( 'Warning : cutoff distance is too large...' )
+                        #elif uniquePDBslen < waterMolsNumber:
+                        #    logger.debug( 'Warning : cutoff distance is too large...' )
                     clusterPresenceOut.close()
 
                     logger.debug( 'conservedWaterDic keys are: %s' % conservedWaterDic.keys() )
@@ -844,7 +850,7 @@ class ConservedWaters(Frame):
         Button(frame1,text=" Help  ",command=refinement_quality_help).grid(row=3, column=2, sticky=W)
         v5 = StringVar(master=frame1)
         v5.set('Mobility')
-        OptionMenu(frame1, v5, 'Mobility', 'Normalized B-factor').grid(row=3, column=1, sticky=W)
+        OptionMenu(frame1, v5, 'Mobility', 'Normalized B-factor','No refinement').grid(row=3, column=1, sticky=W)
 
         Label(frame1, text="User defined pdb-chains lists").grid(row=2, column=4, sticky=W)
         v6 = StringVar(master=frame1)
