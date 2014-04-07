@@ -814,11 +814,15 @@ class ConservedWaters(Frame):
         self.grid()
         self.makeWindow()
 
-    def varcheck(self,E1,var):
+    def varcheck(self,var,E1,E2,O1):
         if var.get() == 0:
             E1.configure(state='disabled')
+            E2.configure(state='normal')
+            O1.configure(state='normal')
         else:
-            E1.configure(state='normal') 
+            E1.configure(state='normal')
+            E2.configure(state='disabled')
+            O1.configure(state='disabled')
 
     def makeWindow(self):
         frame1 = Frame(self.parent)
@@ -840,47 +844,49 @@ class ConservedWaters(Frame):
         Button(frame1,text=" Help  ",command=seq_id_help).grid(row=1, column=2, sticky=W)
         v3 = StringVar(master=frame1)
         v3.set("95")
-        OptionMenu(frame1, v3, '30', '40', '50', '70', '90', '95', '100').grid(row=1, column=1, sticky=W)
+        O1 = OptionMenu(frame1, v3, '30', '40', '50', '70', '90', '95', '100')
+        O1.grid(row=1, column=1, sticky=W)
 
         Label(frame1, text="Structure resolution cutoff").grid(row=2, column=0, sticky=W)
         Button(frame1,text=" Help  ",command=resolution_help).grid(row=2, column=2, sticky=W)
         v4 = StringVar(master=frame1)
         v4.set("2.0")
-        Entry(frame1,textvariable=v4).grid(row=2, column=1, sticky=W)
+        E2 = Entry(frame1,textvariable=v4)
+        E2.grid(row=2, column=1, sticky=W)
 
-        Label(frame1, text="Refinement assessing method").grid(row=3, column=0, sticky=W)
-        Button(frame1,text=" Help  ",command=refinement_quality_help).grid(row=3, column=2, sticky=W)
+        Label(frame1, text="Refinement assessing method").grid(row=5, column=0, sticky=W)
+        Button(frame1,text=" Help  ",command=refinement_quality_help).grid(row=5, column=2, sticky=W)
         v5 = StringVar(master=frame1)
         v5.set('Mobility')
-        OptionMenu(frame1, v5, 'Mobility', 'Normalized B-factor','No refinement').grid(row=3, column=1, sticky=W)
+        OptionMenu(frame1, v5, 'Mobility', 'Normalized B-factor','No refinement').grid(row=5, column=1, sticky=W)
 
-        Label(frame1, text="User defined pdb-chains lists").grid(row=2, column=4, sticky=W)
+        #Label(frame1, text="User defined pdb-chains lists").grid(row=2, column=4, sticky=W)
         v6 = StringVar(master=frame1)
         v6.set('')
         E1 = Entry(frame1,textvariable=v6,state=DISABLED)
-        E1.grid(row=3, column=4, columnspan=2, rowspan=2, sticky=W+E+N+S)
+        E1.grid(row=2, column=3, columnspan=2, rowspan=2, sticky=W+E+N+S)
 
         var = IntVar(master=frame1)
-        Checkbutton(frame1, text="User defined pdb-chains list", variable=var,command=lambda: self.varcheck(E1,var)).grid(row=1, column=4, sticky=W)
+        Checkbutton(frame1, text="User defined pdb-chains list", variable=var,command=lambda: self.varcheck(var,E1,E2,O1)).grid(row=1, column=3, sticky=W)
         Button(frame1,text=" Help  ",command=user_defined_lists_help).grid(row=1, column=5, sticky=W)
 
-        Label(frame1, text="Clustering method").grid(row=4, column=0, sticky=W)
-        Button(frame1,text=" Help  ",command=clustering_method_help).grid(row=4, column=2, sticky=W)
+        Label(frame1, text="Clustering method").grid(row=6, column=0, sticky=W)
+        Button(frame1,text=" Help  ",command=clustering_method_help).grid(row=6, column=2, sticky=W)
         v7 = StringVar(master=frame1)
         v7.set("complete")
-        OptionMenu(frame1, v7, 'complete', 'average', 'single', 'weighted', 'median centroid', 'wards').grid(row=4, column=1, sticky=W)
+        OptionMenu(frame1, v7, 'complete', 'average', 'single', 'weighted', 'median centroid', 'wards').grid(row=6, column=1, sticky=W)
 
-        Label(frame1, text="Inconsistency coefficient threshold").grid(row=5, column=0, sticky=W)
-        Button(frame1,text=" Help  ",command=inconsistency_coefficient_help).grid(row=5, column=2, sticky=W)
+        Label(frame1, text="Inconsistency coefficient threshold").grid(row=7, column=0, sticky=W)
+        Button(frame1,text=" Help  ",command=inconsistency_coefficient_help).grid(row=7, column=2, sticky=W)
         v8 = StringVar(master=frame1)
         v8.set("2.0")
-        Entry(frame1,textvariable=v8).grid(row=5, column=1, sticky=W)
+        Entry(frame1,textvariable=v8).grid(row=7, column=1, sticky=W)
 
-        Label(frame1, text="Degree of conservation").grid(row=6, column=0, sticky=W)
-        Button(frame1,text=" Help  ",command=prob_help).grid(row=6, column=2, sticky=W)
+        Label(frame1, text="Degree of conservation").grid(row=8, column=0, sticky=W)
+        Button(frame1,text=" Help  ",command=prob_help).grid(row=8, column=2, sticky=W)
         v9 = StringVar(master=frame1)
         v9.set("0.7")
-        Entry(frame1,textvariable=v9).grid(row=6, column=1, sticky=W)
+        Entry(frame1,textvariable=v9).grid(row=8, column=1, sticky=W)
 
         frame2 = Frame(self.parent)
         frame2.grid()
