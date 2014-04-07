@@ -1,8 +1,8 @@
 ======
-PyCWMs
+PyWATER
 ======
 
-PyCWMs finds conserved water molecules in X-ray protein structure (pdb).
+PyWATER finds conserved water molecules in X-ray protein structure (pdb).
 
 
 Important or conserved waters are the water molecules which are present in most or all available pdb structures when superimposed.
@@ -13,9 +13,9 @@ Copyright 2013 Hitesh Patel and B. Gruening
 Installation
 ------------
 
-PyCWMs can be used as PyMOL plugin and you can install from inside PyMOL.  
+PyWATER can be used as PyMOL plugin and you can install from inside PyMOL.  
 - Run PyMOL ( on some systems you need to be an administrator.)  
-- Install the PyCWMs plugin in pymol by following the path: `Plugins -> Manage Plugins -> install`  
+- Install the PyWATER plugin in pymol by following the path: `Plugins -> Manage Plugins -> install`  
 - Restart the PyMol  
 
 **Enabling Plugins in MacPyMOL**   
@@ -27,19 +27,19 @@ Usage:
 ======
 
 
-After installation as plugin. It can be run from PyMOL GUI by following the path: `Plugins -> PyCWMs`
+After installation as plugin. It can be run from PyMOL GUI by following the path: `Plugins -> PyWATER`
 
 Enter the required parameters and click on 'Find Conserved Water Molecules'.
 
 OR It can be run from commandline in pymol:
-    `pycwms [PDB id , Chain id [, sequence identity cutoff [, resolution cutoff [, refinement assessing method [, inconsistency coefficient threshold [, degree of conservation]]]]]]`
+    `pywater [PDB id , Chain id [, sequence identity cutoff [, resolution cutoff [, refinement assessing method [, user defined proteins list [, linkage method [, inconsistency coefficient threshold [, degree of conservation]]]]]]]]`
 
 OR you can use it directly from your python script.
 
 ```python
 from pymol import cmd
 
-cmd.pycwms(PDB id , Chain id [, sequence identity cutoff [, resolution cutoff [, refinement assessing method [, inconsistency coefficient threshold [, degree of conservation]]]]])
+cmd.pywater(PDB id , Chain id [, sequence identity cutoff [, resolution cutoff [, refinement assessing method [, user defined proteins list [, linkage method [, inconsistency coefficient threshold [, degree of conservation]]]]]]])
 
 ```
 
@@ -51,6 +51,8 @@ Chain id | -- | The chain identifier of the protein for which you like to find c
 sequence identity cutoff | 95 % | All the protein structures, clustered by BlastClust, having sequence identity more than given cutoff will be superimposed to find the conserved water molecules in query protein chain.
 resolution cutoff | 2.0 A | All the protein structures to be superimposed will be filtered first according to the structure resolution cutoff. Only structures with better resolution than given cutoff will be used further.
 refinement assessing method | Mobility | Choose either 'Mobility' or 'Normalized B-factor' as criteria to assess the refinement quality of crystal structure. Program will filter out the water molecules with bad refinement quality.
+user defined proteins list | -- | Give a custom list of protein structures to superimpose. Specifying this list will disable 'sequence identity' and 'resolution cutoff' parameters.
+linkage method | complete | Linkage method for hierarchical clustering. Choose one from single, complete, average, weighted, median centroid, ward.
 inconsistency coefficient threshold | 2.0 A | Any two clusters of water molecules will not be closer than given inconsistency coefficient threshold. Value ranges from 0 to 2.4.
 degree of conservation | 0.7 | Water molecules will be considered CONSERVED if their probability of being conserved is above given cutoff. Value ranges from 0.4 to 1.
 
