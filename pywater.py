@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 """
-PyWATER is a tool to find important or conserved waters in X-ray protein structure (pdb).
+PyWATER finds conserved water molecules in X-ray protein structure (pdb).
 version 1.0
 
 Important or conserved waters are the waters molecules which are present in most or all available pdb structures when superimposed.
@@ -17,11 +17,13 @@ Steps to install in PyMOL:
     Restart the PyMol
 
 After installation as plugin. It can be run from command in pymol 
-    pywater [PDB id , Chain id [, sequence identity cutoff [, resolution cutoff [, refinement assessing method [, inconsistency coefficient threshold [, degree of conservation]]]]]] 
+    pywater [PDB id , Chain id [, sequence identity cutoff [, resolution cutoff [, refinement assessing method [, user defined proteins list [, linkage method [, inconsistency coefficient threshold [, degree of conservation]]]]]]]] 
 
     API extension:
 
-    cmd.pywater(PDB id , Chain id [, sequence identity cutoff [, resolution cutoff [, refinement assessing method [, inconsistency coefficient threshold [, degree of conservation]]]]])
+    from pymol import cmd
+    
+    cmd.pywater(PDB id , Chain id [, sequence identity cutoff [, resolution cutoff [, refinement assessing method [, user defined proteins list [, linkage method [, inconsistency coefficient threshold [, degree of conservation]]]]]]])
 
     PDB id
             string: The PDB id of the protein for which you like to find conserved waters. {default: None}
@@ -36,7 +38,13 @@ After installation as plugin. It can be run from command in pymol
             float: All the protein structures to be superimposed will be filtered first according to the structure resolution cutoff. Only structures with better resolution than given cutoff will be used further. {default: 2.0}
 
     refinement assessing method
-            string: Choose either 'Mobility' or 'Normalized B-factor' as criteria to assess the refinement quality of crystal structure. Program will filter out the water molecules with bad refinement quality. {default: 'Mobility'}
+            string: Choose either 'Mobility' or 'Normalized B-factor' or 'No refinement' as criteria to assess the refinement quality of crystal structure. Program will filter out the water molecules with bad refinement quality. {default: 'Mobility'}
+
+    user defined proteins list
+            string: Give a custom list of protein structures to superimpose. Specifying this list will disable 'sequence identity' and 'resolution cutoff' parameters. {default: disabled}
+
+    linkage method
+            string: Linkage method for hierarchical clustering. Choose one from single, complete, average. {default: complete}
 
     inconsistency coefficient threshold
             float: Any two clusters of water molecules will not be closer than given inconsistency coefficient threshold. Value ranges from 0 to 2.4. {default: 2.0} 
@@ -476,7 +484,7 @@ def makePDBwithConservedWaters(ProteinsList, temp_dir, outdir,save_sup_files):
                     cwm_count = 0
                     logger.info( 'clustering the water coordinates...' )
                     # returns a list of clusternumbers
-                    # available optoins: single, complete, average, weighted, median centroid, wards
+                    # available optoins: single, complete, average
                     FD = hcluster.fclusterdata(water_coordinates, 
                             t=ProteinsList.inconsistency_coefficient, criterion='distance', 
                             metric='euclidean', depth=2, method= ProteinsList.clustering_method)
@@ -502,7 +510,7 @@ def makePDBwithConservedWaters(ProteinsList, temp_dir, outdir,save_sup_files):
                     clusterPresenceOut.write('\n')
                     #print proteins_numbers
                     logger.info( 'extracting conserved waters from clusters...' )
-                    #print fcDic
+                    logger.debug( 'Clusters are : %s' % fcDic)
                     for clusterNumber, waterMols in fcDic.items():
                         waterMolsNumber = len(waterMols)
                         uniquePDBs = set([a[:6] for a in waterMols])
@@ -874,7 +882,7 @@ class ConservedWaters(Frame):
         Button(frame1,text=" Help  ",command=clustering_method_help).grid(row=6, column=2, sticky=W)
         v7 = StringVar(master=frame1)
         v7.set("complete")
-        OptionMenu(frame1, v7, 'complete', 'average', 'single', 'weighted', 'median centroid', 'wards').grid(row=6, column=1, sticky=W)
+        OptionMenu(frame1, v7, 'complete', 'average', 'single').grid(row=6, column=1, sticky=W)
 
         Label(frame1, text="Inconsistency coefficient threshold").grid(row=7, column=0, sticky=W)
         Button(frame1,text=" Help  ",command=inconsistency_coefficient_help).grid(row=7, column=2, sticky=W)
