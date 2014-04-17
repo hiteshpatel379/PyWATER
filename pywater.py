@@ -300,7 +300,7 @@ def okBfactor(pdbFile,normBCutoff=1.0):
     stddev = np.sqrt(np.var(Bfactors))
     pdbFileLines = open(pdbFile).readlines()
     nWaters = len(pdbFileLines)-1
-    logger.debug( 'Number of water moolecules is : %s' %nWaters )
+    logger.debug( 'Number of water molecules is : %s' %nWaters )
     count = 0
     for line in reversed(pdbFileLines):
         if line.startswith('HETATM'):
