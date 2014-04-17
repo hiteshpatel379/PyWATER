@@ -1,0 +1,70 @@
+Water Conservation Score	4pti_a	5pti_a	6pti_a	9pti_a	
+0.5	125	NoWater	236	
+1.0	129	129	129	129	
+0.75	NoWater	125	242	125	
+0.75	102	102	NoWater	102	
+1.0	121	121	121	121	
+1.0	156	156	156	156	
+0.5	NoWater	321	206	
+1.0	113	113	113	113	
+1.0	112	112	112	112	
+1.0	111	111	111	111	
+1.0	110	110	110	110	
+0.5	NoWater	204	NoWater	204	
+0.5	NoWater	201	NoWater	201	
+0.75	NoWater	159	204	329	
+1.0	158	158	158	341	
+0.5	NoWater	225	NoWater	225	
+0.5	NoWater	319	245	
+0.75	155	312	NoWater	312	
+0.5	NoWater	NoWater	217	509	
+0.5	NoWater	NoWater	219	512	
+0.5	134	NoWater	134	
+0.75	133	133	NoWater	133	
+1.0	157	157	157	340	
+0.5	NoWater	203	235	
+1.0	122	122	122	122	
+0.75	NoWater	218	230	218	
+0.5	149	NoWater	149	
+0.75	116	116	NoWater	116	
+0.5	147	NoWater	211	
+0.5	NoWater	205	NoWater	205	
+1.0	117	117	203	117	
+0.75	NoWater	200	215	200	
+0.5	NoWater	NoWater	216	91	
+0.5	150	NoWater	207	
+0.5	132	320	
+0.5	NoWater	214	209	
+0.5	154	NoWater	NoWater	325	
+0.5	115	NoWater	115	
+0.5	159	NoWater	159	
+1.0	138	138	138	138	
+0.5	139	NoWater	NoWater	103	
+0.5	108	NoWater	108	
+0.5	NoWater	127	212	
+0.5	NoWater	202	NoWater	202	
+0.75	127	209	213	
+0.5	NoWater	140	221	
+1.0	160	160	160	160	
+0.5	NoWater	212	205	
+0.5	NoWater	NoWater	201	410	
+0.5	146	146	
+0.5	NoWater	145	NoWater	145	
+0.75	153	311	153	
+0.5	NoWater	310	NoWater	310	
+0.5	NoWater	211	NoWater	211	
+1.0	105	105	105	105	
+0.5	NoWater	NoWater	233	334	
+0.5	144	NoWater	144	
+0.75	130	NoWater	130	498	
+0.75	NoWater	210	222	210	
+0.5	NoWater	NoWater	208	402	
+0.75	152	NoWater	152	127	
+1.0	143	143	143	143	
+0.5	NoWater	NoWater	224	508	
+0.75	101	101	NoWater	101	
+0.5	103	NoWater	103	
+0.75	126	126	126	
+0.75	119	119	NoWater	119	
+1.0	148	314	241	314	
+1.0	151	134	151	134	
