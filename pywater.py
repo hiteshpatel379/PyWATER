@@ -504,21 +504,23 @@ def makePDBwithConservedWaters(ProteinsList, temp_dir, outdir,save_sup_files):
                     clusterPresenceOut = open(os.path.join( outdir, selectedPDBChain, '%s_clusterPresence.txt' % selectedPDBChain ),'w')
                     clusterPresenceOut.write('Water Conservation Score'+'\t')
                     proteins_numbers = {}
-                    j=0
+                    l=0
                     for i in ProteinsList.proteins:
-                        proteins_numbers[(str(i))]=j
-                        j += 1
+                        proteins_numbers[(str(i))]=l
+                        l += 1
                         clusterPresenceOut.write('%s' % i +'\t')
                     clusterPresenceOut.write('\n')
                     #print proteins_numbers
                     logger.info( 'extracting conserved waters from clusters...' )
-                    logger.debug( 'Clusters are : %s' % fcDic)
+                    logger.debug( 'Clusters are : ')
                     for clusterNumber, waterMols in fcDic.items():
+                        logger.debug('Cluster No. : %s Atoms : %s' % (clusterNumber,waterMols))
                         waterMolsNumber = len(waterMols)
                         uniquePDBs = set([a[:6] for a in waterMols])
                         uniquePDBslen = len(uniquePDBs)
                         # Update waterMols if there are two waterMolecules from same PDB is present in waterMols
                         if uniquePDBslen < waterMolsNumber:
+                            logger.debug('Removing atoms from the same PDB in a cluster')
                             waterMols.sort()
                             PDBs = [i[:6] for i in waterMols]
                             PDBsCounter = collections.Counter(PDBs)
@@ -527,7 +529,14 @@ def makePDBwithConservedWaters(ProteinsList, temp_dir, outdir,save_sup_files):
                                     for j in reversed(waterMols):
                                         if j[:6] == i:
                                             waterMols.remove(j)
-
+                        c = []
+                        for i in range(len(ProteinsList.proteins)):
+                            for prot in proteins_numbers.keys():
+                                if proteins_numbers[prot] == i:
+                                    for d in waterMols:
+                                        if prot == d[:6]:
+                                            c.append(d)
+                        waterMols = c
                         waterMolsNumber = len(waterMols)
                         uniquePDBs = set([a[:6] for a in waterMols])
                         uniquePDBslen = len(uniquePDBs)
@@ -548,6 +557,10 @@ def makePDBwithConservedWaters(ProteinsList, temp_dir, outdir,save_sup_files):
                                         k += 1
                                     clusterPresenceOut.write(str(waterMol[7:])+'\t')
                                     k += 1
+                            print 'k is:'
+                            print k
+                            for j in range(len(ProteinsList.proteins)-k):
+                                clusterPresenceOut.write('NoWater'+'\t')
                             clusterPresenceOut.write('\n')
                             #if selectedPDBChain in uniquePDBs:
                             if selectedPDBChain in uniquePDBs:
@@ -559,10 +572,9 @@ def makePDBwithConservedWaters(ProteinsList, temp_dir, outdir,save_sup_files):
                                         conservedWaterDic[waterMol[:6]] = ['_'.join([waterMol[7:],str(probability)])]
                                 #logger.debug( 'Updated conserved waters dictionary is : %s' % conservedWaterDic )
                     clusterPresenceOut.close()
-
-                    logger.debug( 'conservedWaterDic keys are: %s' % conservedWaterDic.keys() )
-                    #print 'conservedWaterDic are: %s' % conservedWaterDic
-                    #print 'conservedWaterDic keys are: %s' % conservedWaterDic.keys()
+                    logger.debug( 'conservedWaterDic is: ')
+                    for a,b in conservedWaterDic.items():
+                        logger.debug('PDBid : %s Oxygen atom numbers : %s' % (a,b))
                     if selectedPDBChain in conservedWaterDic.keys():
                         # save pdb file of only conserved waters for selected pdb
                         atomNumbersProbDic = {}
