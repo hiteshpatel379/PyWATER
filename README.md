@@ -53,7 +53,7 @@ resolution cutoff | 2.0 A | All the protein structures to be superimposed will b
 refinement assessing method | Mobility | Choose either 'Mobility' or 'Normalized B-factor' or 'No refinement' as criteria to assess the refinement quality of crystal structure. Program will filter out the water molecules with bad refinement quality.
 user defined proteins list | -- | Give a custom list of protein structures to superimpose. Specifying this list will disable 'sequence identity' and 'resolution cutoff' parameters.
 linkage method | complete | Linkage method for hierarchical clustering. Choose one from single, complete, average.
-inconsistency coefficient threshold | 2.0 A | Any two clusters of water molecules will not be closer than given inconsistency coefficient threshold. Value ranges from 0 to 2.4.
+inconsistency coefficient threshold | 2.4 A | Any two clusters of water molecules will not be closer than given inconsistency coefficient threshold. Value ranges from 0 to 2.8.
 degree of conservation | 0.7 | Water molecules will be considered CONSERVED if their probability of being conserved is above given cutoff. Value ranges from 0.4 to 1.
 
 
