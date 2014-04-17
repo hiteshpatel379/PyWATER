@@ -47,7 +47,7 @@ After installation as plugin. It can be run from command in pymol
             string: Linkage method for hierarchical clustering. Choose one from single, complete, average. {default: complete}
 
     inconsistency coefficient threshold
-            float: Any two clusters of water molecules will not be closer than given inconsistency coefficient threshold. Value ranges from 0 to 2.4. {default: 2.4} 
+            float: Any two clusters of water molecules will not be closer than given inconsistency coefficient threshold. Value ranges from 0 to 2.8. {default: 2.4} 
 
     degree of conservation
             float: Water molecules will be considered CONSERVED if their probability of being conserved is above given cutoff. Value ranges from 0 to 1. {default: 0.7} 
@@ -510,7 +510,6 @@ def makePDBwithConservedWaters(ProteinsList, temp_dir, outdir,save_sup_files):
                         l += 1
                         clusterPresenceOut.write('%s' % i +'\t')
                     clusterPresenceOut.write('\n')
-                    #print proteins_numbers
                     logger.info( 'extracting conserved waters from clusters...' )
                     logger.debug( 'Clusters are : ')
                     for clusterNumber, waterMols in fcDic.items():
