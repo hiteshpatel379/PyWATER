@@ -47,7 +47,7 @@ After installation as plugin. It can be run from command in pymol
             string: Linkage method for hierarchical clustering. Choose one from single, complete, average. {default: complete}
 
     inconsistency coefficient threshold
-            float: Any two clusters of water molecules will not be closer than given inconsistency coefficient threshold. Value ranges from 0 to 2.4. {default: 2.0} 
+            float: Any two clusters of water molecules will not be closer than given inconsistency coefficient threshold. Value ranges from 0 to 2.4. {default: 2.4} 
 
     degree of conservation
             float: Water molecules will be considered CONSERVED if their probability of being conserved is above given cutoff. Value ranges from 0 to 1. {default: 0.7} 
@@ -412,6 +412,8 @@ def makePDBwithConservedWaters(ProteinsList, temp_dir, outdir,save_sup_files):
     for protein in ProteinsList:
         cmd.load(os.path.join(temp_dir, protein.pdb_filename),'cwm_%s' % protein.pdb_id)
         cmd.remove('(hydro) and cwm_%s' % protein.pdb_id)
+        cmd.select('dods','resn dod')
+        cmd.alter('dods', 'resn="HOH"')
         cmd.create('cwm_%s' % protein, 'cwm_%s & chain %s' % (protein.pdb_id, protein.chain))
         cmd.delete( 'cwm_%s' % protein.pdb_id )
 
@@ -887,7 +889,7 @@ class ConservedWaters(Frame):
         Label(frame1, text="Inconsistency coefficient threshold").grid(row=7, column=0, sticky=W)
         Button(frame1,text=" Help  ",command=inconsistency_coefficient_help).grid(row=7, column=2, sticky=W)
         v8 = StringVar(master=frame1)
-        v8.set("2.0")
+        v8.set("2.4")
         Entry(frame1,textvariable=v8).grid(row=7, column=1, sticky=W)
 
         Label(frame1, text="Degree of conservation").grid(row=8, column=0, sticky=W)
