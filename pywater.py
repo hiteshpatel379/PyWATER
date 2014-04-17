@@ -262,7 +262,7 @@ def okMobility(pdbFile, mobilityCutoff=2.0):
     avgO = np.mean(occupancy)
     pdbFileLines = open(pdbFile).readlines()
     nWaters = len(pdbFileLines)-1
-    logger.debug( 'Number of water moolecules is : %s' %nWaters )
+    logger.debug( 'Number of water molecules is : %s' %nWaters )
     count = 0
     for line in reversed(pdbFileLines):
         if line.startswith('HETATM'):
@@ -592,8 +592,7 @@ def makePDBwithConservedWaters(ProteinsList, temp_dir, outdir,save_sup_files):
                         if os.path.exists(os.path.join(outdir, selectedPDBChain, 'cwm_%s_withConservedWaters.pdb' % selectedPDBChain)):
                             logger.info( "%s structure has %s conserved water molecules." % (selectedPDBChain,cwm_count))
                             displayInPyMOL(os.path.join(outdir, selectedPDBChain), 'cwm_%s' % selectedPDBChain, atomNumbersProbDic)
-                        logger.info("""PDB file of query protein with conserved waters "cwm_%s_withConservedWaters.pdb" and 
-log file "pywater.log" are saved in %s""" % ( selectedPDBChain, os.path.abspath(outdir)))
+                        logger.info("""PDB file of query protein with conserved waters "cwm_%s_withConservedWaters.pdb" and logfile (pywater.log) is saved in %s""" % ( selectedPDBChain, os.path.abspath(outdir)))
                     else:
                         logger.info( "%s has no conserved waters" % selectedPDBChain )
                 else:
@@ -780,7 +779,7 @@ def FindConservedWaters(selectedStruturePDB,selectedStrutureChain,seq_id,resolut
     logger.info( 'selectedPDBChain name is : %s' % selectedPDBChain )
     if UD_pdbChainsList == []:
         logger.info( """Fetching protein chains list from PDB clusters ...
-        This cluater contains: """ )
+        This cluster contains: """ )
         pdbChainsList = fetchpdbChainsList(selectedStruture,seq_id) # ['3QKL:A', '4EKL:A', '3QKM:A', '3QKK:A', '3OW4:A', '3OW4:B', '3OCB:A', '3OCB:B', '4EKK:A', '4EKK:B']
         logger.info( 'Protein chains list contains %i pdb chains : %s' % (len(pdbChainsList), pdbChainsList))
         logger.info( 'Filtering by resolution ...')
