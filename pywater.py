@@ -345,8 +345,8 @@ class Protein():
             if line.startswith('HETATM'):
                 # water oxygen atom number
                 key = "%s_%s" % (self.__repr__(), int(line[22:30]))
-                self.waterIDCoordinates[key] = [line[30:38],line[38:46],line[46:54]]
-                self.water_coordinates.append([line[30:38],line[38:46],line[46:54]])
+                self.waterIDCoordinates[key] = [ line[30:38], line[38:46], line[46:54 ]]
+                self.water_coordinates.append([ line[30:38], line[38:46], line[46:54] ])
                 self.water_ids.append( key )
                 i += 1
         return self.waterIDCoordinates
