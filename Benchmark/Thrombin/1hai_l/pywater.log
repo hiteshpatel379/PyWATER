@@ -1,0 +1,339 @@
+2014-04-18 00:24:55,647 - PyWATER - INFO - Input values
+2014-04-18 00:24:55,648 - PyWATER - INFO - PDB id : 1hai
+2014-04-18 00:24:55,648 - PyWATER - INFO - Chain id : L
+2014-04-18 00:24:55,649 - PyWATER - INFO - Seqence identity cutoff : 95
+2014-04-18 00:24:55,649 - PyWATER - INFO - Structure resolution cutoff : 2.0
+2014-04-18 00:24:55,649 - PyWATER - INFO - X-ray structure refinement assessing method : Mobility
+2014-04-18 00:24:55,650 - PyWATER - INFO - User defined protein-chains list : 1HAI_L,1ABJ_L,1PPB_L,1TMB_L,1HAH_L,1TMT_L,1ABI_L,1THR_L,1THS_L,1IHS_L
+2014-04-18 00:24:55,650 - PyWATER - INFO - Hierarchical clustering linkage method : complete
+2014-04-18 00:24:55,650 - PyWATER - INFO - Inconsistency coefficient threshold : 2.4
+2014-04-18 00:24:55,650 - PyWATER - INFO - probability cutoff : 0.5
+2014-04-18 00:24:55,651 - PyWATER - INFO - selectedStruture is : 1hai.L
+2014-04-18 00:24:55,652 - PyWATER - INFO - up selectedPDBChain is : 1hai_l
+2014-04-18 00:24:55,652 - PyWATER - INFO - selectedPDBChain name is : 1hai_l
+2014-04-18 00:24:55,653 - PyWATER - DEBUG - 1hai_l
+2014-04-18 00:24:55,653 - PyWATER - DEBUG - 1hai
+2014-04-18 00:24:55,653 - PyWATER - INFO - retrieving pdb from website : 1hai
+2014-04-18 00:24:56,774 - PyWATER - DEBUG - 1abj_l
+2014-04-18 00:24:56,774 - PyWATER - DEBUG - 1abj
+2014-04-18 00:24:56,774 - PyWATER - INFO - retrieving pdb from website : 1abj
+2014-04-18 00:24:58,291 - PyWATER - DEBUG - 1ppb_l
+2014-04-18 00:24:58,291 - PyWATER - DEBUG - 1ppb
+2014-04-18 00:24:58,292 - PyWATER - INFO - retrieving pdb from website : 1ppb
+2014-04-18 00:25:00,114 - PyWATER - DEBUG - 1tmb_l
+2014-04-18 00:25:00,114 - PyWATER - DEBUG - 1tmb
+2014-04-18 00:25:00,114 - PyWATER - INFO - retrieving pdb from website : 1tmb
+2014-04-18 00:25:01,181 - PyWATER - DEBUG - 1hah_l
+2014-04-18 00:25:01,181 - PyWATER - DEBUG - 1hah
+2014-04-18 00:25:01,181 - PyWATER - INFO - retrieving pdb from website : 1hah
+2014-04-18 00:25:02,288 - PyWATER - DEBUG - 1tmt_l
+2014-04-18 00:25:02,288 - PyWATER - DEBUG - 1tmt
+2014-04-18 00:25:02,288 - PyWATER - INFO - retrieving pdb from website : 1tmt
+2014-04-18 00:25:03,352 - PyWATER - DEBUG - 1abi_l
+2014-04-18 00:25:03,353 - PyWATER - DEBUG - 1abi
+2014-04-18 00:25:03,353 - PyWATER - INFO - retrieving pdb from website : 1abi
+2014-04-18 00:25:04,498 - PyWATER - DEBUG - 1thr_l
+2014-04-18 00:25:04,499 - PyWATER - DEBUG - 1thr
+2014-04-18 00:25:04,499 - PyWATER - INFO - retrieving pdb from website : 1thr
+2014-04-18 00:25:05,545 - PyWATER - DEBUG - 1ths_l
+2014-04-18 00:25:05,546 - PyWATER - DEBUG - 1ths
+2014-04-18 00:25:05,546 - PyWATER - INFO - retrieving pdb from website : 1ths
+2014-04-18 00:25:06,600 - PyWATER - DEBUG - 1ihs_l
+2014-04-18 00:25:06,600 - PyWATER - DEBUG - 1ihs
+2014-04-18 00:25:06,600 - PyWATER - INFO - retrieving pdb from website : 1ihs
+2014-04-18 00:25:07,681 - PyWATER - INFO - making pdb with conserved waters...
+2014-04-18 00:25:07,682 - PyWATER - INFO - Minimum desired degree of conservation is : 0.5
+2014-04-18 00:25:07,682 - PyWATER - INFO - loading all pdb chains ...
+2014-04-18 00:25:07,828 - PyWATER - INFO - Superimposing all pdb chains ...
+2014-04-18 00:25:07,829 - PyWATER - INFO - superimposing 1abj_l: 
+2014-04-18 00:25:07,858 - PyWATER - INFO - superimposing 1ppb_l: 
+2014-04-18 00:25:07,864 - PyWATER - INFO - superimposing 1tmb_l: 
+2014-04-18 00:25:07,869 - PyWATER - INFO - superimposing 1hah_l: 
+2014-04-18 00:25:07,871 - PyWATER - INFO - superimposing 1tmt_l: 
+2014-04-18 00:25:07,873 - PyWATER - INFO - superimposing 1abi_l: 
+2014-04-18 00:25:07,874 - PyWATER - INFO - superimposing 1thr_l: 
+2014-04-18 00:25:07,876 - PyWATER - INFO - superimposing 1ths_l: 
+2014-04-18 00:25:07,878 - PyWATER - INFO - superimposing 1ihs_l: 
+2014-04-18 00:25:07,879 - PyWATER - INFO - Creating new pymol objects of only water molecules for each pdb chain...
+2014-04-18 00:25:07,883 - PyWATER - INFO - saving water molecules and proteins in separate pdb files for each pdb chain...
+2014-04-18 00:25:07,901 - PyWATER - DEBUG - proteins chains list is 10 proteins long :
+2014-04-18 00:25:07,902 - PyWATER - INFO - Filtering water oxygen atoms by Mobility
+2014-04-18 00:25:07,902 - PyWATER - DEBUG - Number of water molecules is : 13
+2014-04-18 00:25:07,902 - PyWATER - INFO - water oxygen atoms having higher mobility are 0: 
+2014-04-18 00:25:07,902 - PyWATER - INFO - /tmp/tmpaf_ldr/cwm_1ihs_l_Water.pdb is considered : True 
+2014-04-18 00:25:07,902 - PyWATER - DEBUG - Number of water molecules is : 17
+2014-04-18 00:25:07,903 - PyWATER - INFO - water oxygen atoms having higher mobility are 0: 
+2014-04-18 00:25:07,903 - PyWATER - INFO - /tmp/tmpaf_ldr/cwm_1ths_l_Water.pdb is considered : True 
+2014-04-18 00:25:07,903 - PyWATER - DEBUG - Number of water molecules is : 25
+2014-04-18 00:25:07,903 - PyWATER - INFO - water oxygen atoms having higher mobility are 1: 
+2014-04-18 00:25:07,903 - PyWATER - INFO - /tmp/tmpaf_ldr/cwm_1thr_l_Water.pdb is considered : True 
+2014-04-18 00:25:07,904 - PyWATER - DEBUG - Number of water molecules is : 29
+2014-04-18 00:25:07,904 - PyWATER - INFO - water oxygen atoms having higher mobility are 1: 
+2014-04-18 00:25:07,904 - PyWATER - INFO - /tmp/tmpaf_ldr/cwm_1abi_l_Water.pdb is considered : True 
+2014-04-18 00:25:07,904 - PyWATER - DEBUG - Number of water molecules is : 9
+2014-04-18 00:25:07,904 - PyWATER - INFO - water oxygen atoms having higher mobility are 0: 
+2014-04-18 00:25:07,904 - PyWATER - INFO - /tmp/tmpaf_ldr/cwm_1tmt_l_Water.pdb is considered : True 
+2014-04-18 00:25:07,905 - PyWATER - DEBUG - Number of water molecules is : 24
+2014-04-18 00:25:07,905 - PyWATER - INFO - water oxygen atoms having higher mobility are 1: 
+2014-04-18 00:25:07,905 - PyWATER - INFO - /tmp/tmpaf_ldr/cwm_1hah_l_Water.pdb is considered : True 
+2014-04-18 00:25:07,905 - PyWATER - DEBUG - Number of water molecules is : 24
+2014-04-18 00:25:07,905 - PyWATER - INFO - water oxygen atoms having higher mobility are 0: 
+2014-04-18 00:25:07,906 - PyWATER - INFO - /tmp/tmpaf_ldr/cwm_1tmb_l_Water.pdb is considered : True 
+2014-04-18 00:25:07,906 - PyWATER - DEBUG - Number of water molecules is : 47
+2014-04-18 00:25:07,906 - PyWATER - INFO - water oxygen atoms having higher mobility are 0: 
+2014-04-18 00:25:07,906 - PyWATER - INFO - /tmp/tmpaf_ldr/cwm_1ppb_l_Water.pdb is considered : True 
+2014-04-18 00:25:07,906 - PyWATER - DEBUG - Number of water molecules is : 14
+2014-04-18 00:25:07,907 - PyWATER - INFO - water oxygen atoms having higher mobility are 0: 
+2014-04-18 00:25:07,907 - PyWATER - INFO - /tmp/tmpaf_ldr/cwm_1abj_l_Water.pdb is considered : True 
+2014-04-18 00:25:07,907 - PyWATER - DEBUG - filtered proteins chains list is 10 proteins long :
+2014-04-18 00:25:07,909 - PyWATER - DEBUG - making water coordinates dictcionary of cwm_1hai_l_Water.pdb.
+2014-04-18 00:25:07,909 - PyWATER - DEBUG - protein 1hai_l coordinates length is :21
+2014-04-18 00:25:07,909 - PyWATER - DEBUG - making water coordinates dictcionary of cwm_1abj_l_Water.pdb.
+2014-04-18 00:25:07,909 - PyWATER - DEBUG - protein 1abj_l coordinates length is :14
+2014-04-18 00:25:07,909 - PyWATER - DEBUG - making water coordinates dictcionary of cwm_1ppb_l_Water.pdb.
+2014-04-18 00:25:07,910 - PyWATER - DEBUG - protein 1ppb_l coordinates length is :47
+2014-04-18 00:25:07,910 - PyWATER - DEBUG - making water coordinates dictcionary of cwm_1tmb_l_Water.pdb.
+2014-04-18 00:25:07,910 - PyWATER - DEBUG - protein 1tmb_l coordinates length is :24
+2014-04-18 00:25:07,910 - PyWATER - DEBUG - making water coordinates dictcionary of cwm_1hah_l_Water.pdb.
+2014-04-18 00:25:07,910 - PyWATER - DEBUG - protein 1hah_l coordinates length is :23
+2014-04-18 00:25:07,910 - PyWATER - DEBUG - making water coordinates dictcionary of cwm_1tmt_l_Water.pdb.
+2014-04-18 00:25:07,910 - PyWATER - DEBUG - protein 1tmt_l coordinates length is :9
+2014-04-18 00:25:07,910 - PyWATER - DEBUG - making water coordinates dictcionary of cwm_1abi_l_Water.pdb.
+2014-04-18 00:25:07,911 - PyWATER - DEBUG - protein 1abi_l coordinates length is :28
+2014-04-18 00:25:07,911 - PyWATER - DEBUG - making water coordinates dictcionary of cwm_1thr_l_Water.pdb.
+2014-04-18 00:25:07,911 - PyWATER - DEBUG - protein 1thr_l coordinates length is :24
+2014-04-18 00:25:07,911 - PyWATER - DEBUG - making water coordinates dictcionary of cwm_1ths_l_Water.pdb.
+2014-04-18 00:25:07,911 - PyWATER - DEBUG - protein 1ths_l coordinates length is :17
+2014-04-18 00:25:07,911 - PyWATER - DEBUG - making water coordinates dictcionary of cwm_1ihs_l_Water.pdb.
+2014-04-18 00:25:07,911 - PyWATER - DEBUG - protein 1ihs_l coordinates length is :13
+2014-04-18 00:25:07,911 - PyWATER - INFO - number of water molecules to cluster : 220
+2014-04-18 00:25:07,911 - PyWATER - INFO - clustering the water coordinates...
+2014-04-18 00:25:07,921 - PyWATER - INFO - making flat cluster dictionary...
+2014-04-18 00:25:07,922 - PyWATER - INFO - extracting conserved waters from clusters...
+2014-04-18 00:25:07,922 - PyWATER - DEBUG - Clusters are : 
+2014-04-18 00:25:07,922 - PyWATER - DEBUG - Cluster No. : 1 Atoms : ['1tmb_l_583', '1abi_l_549']
+2014-04-18 00:25:07,922 - PyWATER - INFO - Degree of conservation is : 0.2
+2014-04-18 00:25:07,922 - PyWATER - DEBUG - Cluster No. : 2 Atoms : ['1abj_l_551']
+2014-04-18 00:25:07,922 - PyWATER - INFO - Degree of conservation is : 0.1
+2014-04-18 00:25:07,923 - PyWATER - DEBUG - Cluster No. : 3 Atoms : ['1hai_l_557', '1tmb_l_576', '1abi_l_597']
+2014-04-18 00:25:07,923 - PyWATER - INFO - Degree of conservation is : 0.3
+2014-04-18 00:25:07,923 - PyWATER - DEBUG - Cluster No. : 4 Atoms : ['1tmt_l_111']
+2014-04-18 00:25:07,923 - PyWATER - INFO - Degree of conservation is : 0.1
+2014-04-18 00:25:07,923 - PyWATER - DEBUG - Cluster No. : 5 Atoms : ['1abi_l_557']
+2014-04-18 00:25:07,923 - PyWATER - INFO - Degree of conservation is : 0.1
+2014-04-18 00:25:07,923 - PyWATER - DEBUG - Cluster No. : 6 Atoms : ['1hai_l_549', '1tmb_l_560']
+2014-04-18 00:25:07,923 - PyWATER - INFO - Degree of conservation is : 0.2
+2014-04-18 00:25:07,923 - PyWATER - DEBUG - Cluster No. : 7 Atoms : ['1ppb_l_353', '1tmb_l_559', '1hah_l_540', '1abi_l_434', '1thr_l_599', '1ths_l_446']
+2014-04-18 00:25:07,923 - PyWATER - INFO - Degree of conservation is : 0.6
+2014-04-18 00:25:07,924 - PyWATER - INFO - Here is conserved water molecule...
+2014-04-18 00:25:07,924 - PyWATER - DEBUG - Cluster No. : 8 Atoms : ['1abi_l_515']
+2014-04-18 00:25:07,924 - PyWATER - INFO - Degree of conservation is : 0.1
+2014-04-18 00:25:07,924 - PyWATER - DEBUG - Cluster No. : 9 Atoms : ['1ppb_l_703']
+2014-04-18 00:25:07,925 - PyWATER - INFO - Degree of conservation is : 0.1
+2014-04-18 00:25:07,925 - PyWATER - DEBUG - Cluster No. : 10 Atoms : ['1tmb_l_446']
+2014-04-18 00:25:07,925 - PyWATER - INFO - Degree of conservation is : 0.1
+2014-04-18 00:25:07,925 - PyWATER - DEBUG - Cluster No. : 11 Atoms : ['1tmb_l_637']
+2014-04-18 00:25:07,925 - PyWATER - INFO - Degree of conservation is : 0.1
+2014-04-18 00:25:07,925 - PyWATER - DEBUG - Cluster No. : 12 Atoms : ['1hai_l_432', '1abj_l_442', '1ppb_l_328', '1tmb_l_415', '1hah_l_474', '1tmt_l_44', '1abi_l_454', '1thr_l_484', '1ths_l_420', '1ihs_l_460']
+2014-04-18 00:25:07,925 - PyWATER - INFO - Degree of conservation is : 1.0
+2014-04-18 00:25:07,925 - PyWATER - INFO - Here is conserved water molecule...
+2014-04-18 00:25:07,925 - PyWATER - DEBUG - Cluster No. : 13 Atoms : ['1thr_l_515', '1ths_l_468']
+2014-04-18 00:25:07,926 - PyWATER - INFO - Degree of conservation is : 0.2
+2014-04-18 00:25:07,926 - PyWATER - DEBUG - Cluster No. : 14 Atoms : ['1ppb_l_580']
+2014-04-18 00:25:07,926 - PyWATER - INFO - Degree of conservation is : 0.1
+2014-04-18 00:25:07,926 - PyWATER - DEBUG - Cluster No. : 15 Atoms : ['1ihs_l_536']
+2014-04-18 00:25:07,926 - PyWATER - INFO - Degree of conservation is : 0.1
+2014-04-18 00:25:07,926 - PyWATER - DEBUG - Cluster No. : 16 Atoms : ['1ppb_l_592']
+2014-04-18 00:25:07,926 - PyWATER - INFO - Degree of conservation is : 0.1
+2014-04-18 00:25:07,926 - PyWATER - DEBUG - Cluster No. : 17 Atoms : ['1hai_l_506', '1tmb_l_499', '1abi_l_546', '1thr_l_521']
+2014-04-18 00:25:07,926 - PyWATER - INFO - Degree of conservation is : 0.4
+2014-04-18 00:25:07,927 - PyWATER - DEBUG - Cluster No. : 18 Atoms : ['1ppb_l_439']
+2014-04-18 00:25:07,927 - PyWATER - INFO - Degree of conservation is : 0.1
+2014-04-18 00:25:07,927 - PyWATER - DEBUG - Cluster No. : 19 Atoms : ['1ppb_l_656']
+2014-04-18 00:25:07,927 - PyWATER - INFO - Degree of conservation is : 0.1
+2014-04-18 00:25:07,927 - PyWATER - DEBUG - Cluster No. : 20 Atoms : ['1hah_l_552', '1abi_l_470', '1thr_l_701', '1ths_l_512']
+2014-04-18 00:25:07,927 - PyWATER - INFO - Degree of conservation is : 0.4
+2014-04-18 00:25:07,927 - PyWATER - DEBUG - Cluster No. : 21 Atoms : ['1hai_l_463', '1tmb_l_443', '1hah_l_599', '1abi_l_450', '1thr_l_421', '1ths_l_449', '1ihs_l_525']
+2014-04-18 00:25:07,927 - PyWATER - INFO - Degree of conservation is : 0.7
+2014-04-18 00:25:07,927 - PyWATER - INFO - Here is conserved water molecule...
+2014-04-18 00:25:07,928 - PyWATER - DEBUG - Cluster No. : 22 Atoms : ['1hah_l_600', '1tmt_l_84']
+2014-04-18 00:25:07,928 - PyWATER - INFO - Degree of conservation is : 0.2
+2014-04-18 00:25:07,928 - PyWATER - DEBUG - Cluster No. : 23 Atoms : ['1hai_l_416', '1hah_l_432']
+2014-04-18 00:25:07,928 - PyWATER - INFO - Degree of conservation is : 0.2
+2014-04-18 00:25:07,928 - PyWATER - DEBUG - Cluster No. : 24 Atoms : ['1hai_l_552', '1abi_l_469']
+2014-04-18 00:25:07,928 - PyWATER - INFO - Degree of conservation is : 0.2
+2014-04-18 00:25:07,928 - PyWATER - DEBUG - Cluster No. : 25 Atoms : ['1abi_l_591']
+2014-04-18 00:25:07,928 - PyWATER - INFO - Degree of conservation is : 0.1
+2014-04-18 00:25:07,928 - PyWATER - DEBUG - Cluster No. : 26 Atoms : ['1ppb_l_655']
+2014-04-18 00:25:07,929 - PyWATER - INFO - Degree of conservation is : 0.1
+2014-04-18 00:25:07,929 - PyWATER - DEBUG - Cluster No. : 27 Atoms : ['1hah_l_543']
+2014-04-18 00:25:07,929 - PyWATER - INFO - Degree of conservation is : 0.1
+2014-04-18 00:25:07,929 - PyWATER - DEBUG - Cluster No. : 28 Atoms : ['1ppb_l_585']
+2014-04-18 00:25:07,929 - PyWATER - INFO - Degree of conservation is : 0.1
+2014-04-18 00:25:07,929 - PyWATER - DEBUG - Cluster No. : 29 Atoms : ['1tmb_l_469', '1thr_l_526']
+2014-04-18 00:25:07,929 - PyWATER - INFO - Degree of conservation is : 0.2
+2014-04-18 00:25:07,930 - PyWATER - DEBUG - Cluster No. : 30 Atoms : ['1thr_l_960']
+2014-04-18 00:25:07,930 - PyWATER - INFO - Degree of conservation is : 0.1
+2014-04-18 00:25:07,930 - PyWATER - DEBUG - Cluster No. : 31 Atoms : ['1ppb_l_445', '1tmb_l_584']
+2014-04-18 00:25:07,930 - PyWATER - INFO - Degree of conservation is : 0.2
+2014-04-18 00:25:07,930 - PyWATER - DEBUG - Cluster No. : 32 Atoms : ['1ppb_l_561']
+2014-04-18 00:25:07,930 - PyWATER - INFO - Degree of conservation is : 0.1
+2014-04-18 00:25:07,930 - PyWATER - DEBUG - Cluster No. : 33 Atoms : ['1abj_l_506', '1ppb_l_687', '1tmb_l_563', '1hah_l_465', '1thr_l_505', '1ihs_l_480']
+2014-04-18 00:25:07,930 - PyWATER - INFO - Degree of conservation is : 0.6
+2014-04-18 00:25:07,930 - PyWATER - INFO - Here is conserved water molecule...
+2014-04-18 00:25:07,930 - PyWATER - DEBUG - Cluster No. : 34 Atoms : ['1thr_l_778']
+2014-04-18 00:25:07,931 - PyWATER - INFO - Degree of conservation is : 0.1
+2014-04-18 00:25:07,931 - PyWATER - DEBUG - Cluster No. : 35 Atoms : ['1ppb_l_696']
+2014-04-18 00:25:07,931 - PyWATER - INFO - Degree of conservation is : 0.1
+2014-04-18 00:25:07,931 - PyWATER - DEBUG - Cluster No. : 36 Atoms : ['1abj_l_448', '1ppb_l_591']
+2014-04-18 00:25:07,931 - PyWATER - INFO - Degree of conservation is : 0.2
+2014-04-18 00:25:07,931 - PyWATER - DEBUG - Cluster No. : 37 Atoms : ['1ppb_l_706']
+2014-04-18 00:25:07,931 - PyWATER - INFO - Degree of conservation is : 0.1
+2014-04-18 00:25:07,931 - PyWATER - DEBUG - Cluster No. : 38 Atoms : ['1hai_l_533', '1ppb_l_582', '1hah_l_560']
+2014-04-18 00:25:07,932 - PyWATER - INFO - Degree of conservation is : 0.3
+2014-04-18 00:25:07,932 - PyWATER - DEBUG - Cluster No. : 39 Atoms : ['1tmb_l_438', '1thr_l_962']
+2014-04-18 00:25:07,932 - PyWATER - INFO - Degree of conservation is : 0.2
+2014-04-18 00:25:07,932 - PyWATER - DEBUG - Cluster No. : 40 Atoms : ['1abj_l_512']
+2014-04-18 00:25:07,932 - PyWATER - INFO - Degree of conservation is : 0.1
+2014-04-18 00:25:07,932 - PyWATER - DEBUG - Cluster No. : 41 Atoms : ['1ppb_l_653', '1ths_l_451']
+2014-04-18 00:25:07,932 - PyWATER - INFO - Degree of conservation is : 0.2
+2014-04-18 00:25:07,932 - PyWATER - DEBUG - Cluster No. : 42 Atoms : ['1abj_l_543']
+2014-04-18 00:25:07,932 - PyWATER - INFO - Degree of conservation is : 0.1
+2014-04-18 00:25:07,932 - PyWATER - DEBUG - Cluster No. : 43 Atoms : ['1hai_l_590', '1tmb_l_626']
+2014-04-18 00:25:07,932 - PyWATER - INFO - Degree of conservation is : 0.2
+2014-04-18 00:25:07,933 - PyWATER - DEBUG - Cluster No. : 44 Atoms : ['1ppb_l_581']
+2014-04-18 00:25:07,933 - PyWATER - INFO - Degree of conservation is : 0.1
+2014-04-18 00:25:07,933 - PyWATER - DEBUG - Cluster No. : 45 Atoms : ['1hai_l_473', '1abj_l_428', '1ppb_l_645', '1tmb_l_447', '1hah_l_439', '1tmt_l_107', '1thr_l_511', '1ths_l_525', '1ihs_l_437']
+2014-04-18 00:25:07,933 - PyWATER - INFO - Degree of conservation is : 0.9
+2014-04-18 00:25:07,933 - PyWATER - INFO - Here is conserved water molecule...
+2014-04-18 00:25:07,933 - PyWATER - DEBUG - Cluster No. : 46 Atoms : ['1tmb_l_444', '1abi_l_467', '1thr_l_491', '1ihs_l_472']
+2014-04-18 00:25:07,933 - PyWATER - INFO - Degree of conservation is : 0.4
+2014-04-18 00:25:07,933 - PyWATER - DEBUG - Cluster No. : 47 Atoms : ['1abi_l_522']
+2014-04-18 00:25:07,933 - PyWATER - INFO - Degree of conservation is : 0.1
+2014-04-18 00:25:07,934 - PyWATER - DEBUG - Cluster No. : 48 Atoms : ['1ppb_l_578']
+2014-04-18 00:25:07,934 - PyWATER - INFO - Degree of conservation is : 0.1
+2014-04-18 00:25:07,934 - PyWATER - DEBUG - Cluster No. : 49 Atoms : ['1ppb_l_451', '1ths_l_526']
+2014-04-18 00:25:07,934 - PyWATER - INFO - Degree of conservation is : 0.2
+2014-04-18 00:25:07,934 - PyWATER - DEBUG - Cluster No. : 50 Atoms : ['1abi_l_463', '1ths_l_433']
+2014-04-18 00:25:07,934 - PyWATER - INFO - Degree of conservation is : 0.2
+2014-04-18 00:25:07,934 - PyWATER - DEBUG - Cluster No. : 51 Atoms : ['1tmb_l_483']
+2014-04-18 00:25:07,934 - PyWATER - INFO - Degree of conservation is : 0.1
+2014-04-18 00:25:07,934 - PyWATER - DEBUG - Cluster No. : 52 Atoms : ['1abi_l_510', '1ths_l_484']
+2014-04-18 00:25:07,935 - PyWATER - INFO - Degree of conservation is : 0.2
+2014-04-18 00:25:07,935 - PyWATER - DEBUG - Cluster No. : 53 Atoms : ['1hah_l_514']
+2014-04-18 00:25:07,935 - PyWATER - INFO - Degree of conservation is : 0.1
+2014-04-18 00:25:07,935 - PyWATER - DEBUG - Cluster No. : 54 Atoms : ['1abi_l_579']
+2014-04-18 00:25:07,935 - PyWATER - INFO - Degree of conservation is : 0.1
+2014-04-18 00:25:07,935 - PyWATER - DEBUG - Cluster No. : 55 Atoms : ['1hah_l_452', '1abi_l_618', '1thr_l_689', '1ths_l_555']
+2014-04-18 00:25:07,935 - PyWATER - INFO - Degree of conservation is : 0.4
+2014-04-18 00:25:07,935 - PyWATER - DEBUG - Cluster No. : 56 Atoms : ['1tmb_l_621', '1ths_l_481']
+2014-04-18 00:25:07,935 - PyWATER - INFO - Degree of conservation is : 0.2
+2014-04-18 00:25:07,935 - PyWATER - DEBUG - Cluster No. : 57 Atoms : ['1abj_l_555', '1thr_l_894']
+2014-04-18 00:25:07,936 - PyWATER - INFO - Degree of conservation is : 0.2
+2014-04-18 00:25:07,936 - PyWATER - DEBUG - Cluster No. : 58 Atoms : ['1ppb_l_630', '1tmb_l_512', '1abi_l_554']
+2014-04-18 00:25:07,936 - PyWATER - INFO - Degree of conservation is : 0.3
+2014-04-18 00:25:07,936 - PyWATER - DEBUG - Cluster No. : 59 Atoms : ['1abi_l_625']
+2014-04-18 00:25:07,936 - PyWATER - INFO - Degree of conservation is : 0.1
+2014-04-18 00:25:07,936 - PyWATER - DEBUG - Cluster No. : 60 Atoms : ['1hai_l_567', '1abi_l_471']
+2014-04-18 00:25:07,936 - PyWATER - INFO - Degree of conservation is : 0.2
+2014-04-18 00:25:07,936 - PyWATER - DEBUG - Cluster No. : 61 Atoms : ['1tmb_l_506', '1abi_l_516', '1thr_l_449', '1ths_l_447']
+2014-04-18 00:25:07,936 - PyWATER - INFO - Degree of conservation is : 0.4
+2014-04-18 00:25:07,937 - PyWATER - DEBUG - Cluster No. : 62 Atoms : ['1abj_l_503']
+2014-04-18 00:25:07,937 - PyWATER - INFO - Degree of conservation is : 0.1
+2014-04-18 00:25:07,937 - PyWATER - DEBUG - Cluster No. : 63 Atoms : ['1hah_l_590', '1ihs_l_508']
+2014-04-18 00:25:07,937 - PyWATER - INFO - Degree of conservation is : 0.2
+2014-04-18 00:25:07,937 - PyWATER - DEBUG - Cluster No. : 64 Atoms : ['1ppb_l_432']
+2014-04-18 00:25:07,937 - PyWATER - INFO - Degree of conservation is : 0.1
+2014-04-18 00:25:07,937 - PyWATER - DEBUG - Cluster No. : 65 Atoms : ['1ppb_l_695']
+2014-04-18 00:25:07,937 - PyWATER - INFO - Degree of conservation is : 0.1
+2014-04-18 00:25:07,937 - PyWATER - DEBUG - Cluster No. : 66 Atoms : ['1ppb_l_588']
+2014-04-18 00:25:07,937 - PyWATER - INFO - Degree of conservation is : 0.1
+2014-04-18 00:25:07,938 - PyWATER - DEBUG - Cluster No. : 67 Atoms : ['1ppb_l_657']
+2014-04-18 00:25:07,938 - PyWATER - INFO - Degree of conservation is : 0.1
+2014-04-18 00:25:07,938 - PyWATER - DEBUG - Cluster No. : 68 Atoms : ['1ppb_l_436']
+2014-04-18 00:25:07,938 - PyWATER - INFO - Degree of conservation is : 0.1
+2014-04-18 00:25:07,938 - PyWATER - DEBUG - Cluster No. : 69 Atoms : ['1ppb_l_583']
+2014-04-18 00:25:07,938 - PyWATER - INFO - Degree of conservation is : 0.1
+2014-04-18 00:25:07,938 - PyWATER - DEBUG - Cluster No. : 70 Atoms : ['1ppb_l_590']
+2014-04-18 00:25:07,938 - PyWATER - INFO - Degree of conservation is : 0.1
+2014-04-18 00:25:07,939 - PyWATER - DEBUG - Cluster No. : 71 Atoms : ['1ppb_l_721']
+2014-04-18 00:25:07,939 - PyWATER - INFO - Degree of conservation is : 0.1
+2014-04-18 00:25:07,939 - PyWATER - DEBUG - Cluster No. : 72 Atoms : ['1hai_l_577', '1tmb_l_552']
+2014-04-18 00:25:07,939 - PyWATER - INFO - Degree of conservation is : 0.2
+2014-04-18 00:25:07,939 - PyWATER - DEBUG - Cluster No. : 73 Atoms : ['1hai_l_493', '1abj_l_484', '1ppb_l_574', '1tmb_l_416', '1hah_l_485', '1ths_l_542']
+2014-04-18 00:25:07,939 - PyWATER - INFO - Degree of conservation is : 0.6
+2014-04-18 00:25:07,939 - PyWATER - INFO - Here is conserved water molecule...
+2014-04-18 00:25:07,939 - PyWATER - DEBUG - Cluster No. : 74 Atoms : ['1ppb_l_437']
+2014-04-18 00:25:07,939 - PyWATER - INFO - Degree of conservation is : 0.1
+2014-04-18 00:25:07,939 - PyWATER - DEBUG - Cluster No. : 75 Atoms : ['1ppb_l_568']
+2014-04-18 00:25:07,940 - PyWATER - INFO - Degree of conservation is : 0.1
+2014-04-18 00:25:07,940 - PyWATER - DEBUG - Cluster No. : 76 Atoms : ['1hai_l_591', '1abj_l_549', '1ppb_l_357']
+2014-04-18 00:25:07,940 - PyWATER - INFO - Degree of conservation is : 0.3
+2014-04-18 00:25:07,940 - PyWATER - DEBUG - Cluster No. : 77 Atoms : ['1hah_l_557']
+2014-04-18 00:25:07,940 - PyWATER - INFO - Degree of conservation is : 0.1
+2014-04-18 00:25:07,940 - PyWATER - DEBUG - Cluster No. : 78 Atoms : ['1ppb_l_577']
+2014-04-18 00:25:07,940 - PyWATER - INFO - Degree of conservation is : 0.1
+2014-04-18 00:25:07,940 - PyWATER - DEBUG - Cluster No. : 79 Atoms : ['1abi_l_526', '1thr_l_534']
+2014-04-18 00:25:07,940 - PyWATER - INFO - Degree of conservation is : 0.2
+2014-04-18 00:25:07,940 - PyWATER - DEBUG - Cluster No. : 80 Atoms : ['1ppb_l_433']
+2014-04-18 00:25:07,941 - PyWATER - INFO - Degree of conservation is : 0.1
+2014-04-18 00:25:07,941 - PyWATER - DEBUG - Cluster No. : 81 Atoms : ['1ppb_l_434']
+2014-04-18 00:25:07,941 - PyWATER - INFO - Degree of conservation is : 0.1
+2014-04-18 00:25:07,941 - PyWATER - DEBUG - Cluster No. : 82 Atoms : ['1hai_l_472', '1abj_l_487', '1ppb_l_394']
+2014-04-18 00:25:07,941 - PyWATER - INFO - Degree of conservation is : 0.3
+2014-04-18 00:25:07,941 - PyWATER - DEBUG - Cluster No. : 83 Atoms : ['1hai_l_588']
+2014-04-18 00:25:07,941 - PyWATER - INFO - Degree of conservation is : 0.1
+2014-04-18 00:25:07,942 - PyWATER - DEBUG - Cluster No. : 84 Atoms : ['1abi_l_486', '1ihs_l_524']
+2014-04-18 00:25:07,942 - PyWATER - INFO - Degree of conservation is : 0.2
+2014-04-18 00:25:07,942 - PyWATER - DEBUG - Cluster No. : 85 Atoms : ['1abj_l_541']
+2014-04-18 00:25:07,942 - PyWATER - INFO - Degree of conservation is : 0.1
+2014-04-18 00:25:07,942 - PyWATER - DEBUG - Cluster No. : 86 Atoms : ['1abj_l_547']
+2014-04-18 00:25:07,942 - PyWATER - INFO - Degree of conservation is : 0.1
+2014-04-18 00:25:07,942 - PyWATER - DEBUG - Cluster No. : 87 Atoms : ['1ppb_l_587']
+2014-04-18 00:25:07,942 - PyWATER - INFO - Degree of conservation is : 0.1
+2014-04-18 00:25:07,942 - PyWATER - DEBUG - Cluster No. : 88 Atoms : ['1ppb_l_435', '1hah_l_602', '1ihs_l_509']
+2014-04-18 00:25:07,942 - PyWATER - INFO - Degree of conservation is : 0.3
+2014-04-18 00:25:07,942 - PyWATER - DEBUG - Cluster No. : 89 Atoms : ['1hai_l_513', '1tmb_l_406', '1hah_l_440', '1tmt_l_32', '1abi_l_416', '1thr_l_414', '1ths_l_411', '1ihs_l_430']
+2014-04-18 00:25:07,943 - PyWATER - INFO - Degree of conservation is : 0.8
+2014-04-18 00:25:07,943 - PyWATER - INFO - Here is conserved water molecule...
+2014-04-18 00:25:07,943 - PyWATER - DEBUG - Cluster No. : 90 Atoms : ['1ppb_l_356', '1hah_l_511', '1thr_l_726', '1ihs_l_542']
+2014-04-18 00:25:07,943 - PyWATER - INFO - Degree of conservation is : 0.4
+2014-04-18 00:25:07,943 - PyWATER - DEBUG - Cluster No. : 91 Atoms : ['1ppb_l_355', '1thr_l_438', '1ths_l_464']
+2014-04-18 00:25:07,943 - PyWATER - INFO - Degree of conservation is : 0.3
+2014-04-18 00:25:07,943 - PyWATER - DEBUG - Cluster No. : 92 Atoms : ['1ppb_l_654']
+2014-04-18 00:25:07,943 - PyWATER - INFO - Degree of conservation is : 0.1
+2014-04-18 00:25:07,944 - PyWATER - DEBUG - Cluster No. : 93 Atoms : ['1ppb_l_704']
+2014-04-18 00:25:07,944 - PyWATER - INFO - Degree of conservation is : 0.1
+2014-04-18 00:25:07,944 - PyWATER - DEBUG - Cluster No. : 94 Atoms : ['1hai_l_425', '1tmb_l_498', '1hah_l_449', '1tmt_l_68', '1abi_l_461', '1thr_l_554', '1ths_l_472', '1ihs_l_449']
+2014-04-18 00:25:07,944 - PyWATER - INFO - Degree of conservation is : 0.8
+2014-04-18 00:25:07,944 - PyWATER - INFO - Here is conserved water molecule...
+2014-04-18 00:25:07,944 - PyWATER - DEBUG - Cluster No. : 95 Atoms : ['1hai_l_484', '1hah_l_567', '1tmt_l_65']
+2014-04-18 00:25:07,944 - PyWATER - INFO - Degree of conservation is : 0.3
+2014-04-18 00:25:07,944 - PyWATER - DEBUG - Cluster No. : 96 Atoms : ['1ppb_l_584', '1thr_l_574']
+2014-04-18 00:25:07,944 - PyWATER - INFO - Degree of conservation is : 0.2
+2014-04-18 00:25:07,945 - PyWATER - DEBUG - Cluster No. : 97 Atoms : ['1tmt_l_101']
+2014-04-18 00:25:07,945 - PyWATER - INFO - Degree of conservation is : 0.1
+2014-04-18 00:25:07,945 - PyWATER - DEBUG - Cluster No. : 98 Atoms : ['1ppb_l_593']
+2014-04-18 00:25:07,945 - PyWATER - INFO - Degree of conservation is : 0.1
+2014-04-18 00:25:07,945 - PyWATER - DEBUG - Cluster No. : 99 Atoms : ['1tmt_l_53']
+2014-04-18 00:25:07,945 - PyWATER - INFO - Degree of conservation is : 0.1
+2014-04-18 00:25:07,945 - PyWATER - DEBUG - Cluster No. : 100 Atoms : ['1hai_l_524', '1hah_l_470', '1abi_l_501', '1thr_l_447']
+2014-04-18 00:25:07,945 - PyWATER - INFO - Degree of conservation is : 0.4
+2014-04-18 00:25:07,945 - PyWATER - DEBUG - Cluster No. : 101 Atoms : ['1hai_l_491', '1hah_l_468', '1abi_l_560', '1thr_l_457']
+2014-04-18 00:25:07,945 - PyWATER - INFO - Degree of conservation is : 0.4
+2014-04-18 00:25:07,946 - PyWATER - DEBUG - Cluster No. : 102 Atoms : ['1ppb_l_441', '1hah_l_534', '1abi_l_620', '1ihs_l_521']
+2014-04-18 00:25:07,946 - PyWATER - INFO - Degree of conservation is : 0.4
+2014-04-18 00:25:07,946 - PyWATER - DEBUG - conservedWaterDic is: 
+2014-04-18 00:25:07,946 - PyWATER - DEBUG - PDBid : 1ppb_l Oxygen atom numbers : ['328_1.0', '645_0.9', '574_0.6']
+2014-04-18 00:25:07,946 - PyWATER - DEBUG - PDBid : 1tmb_l Oxygen atom numbers : ['415_1.0', '443_0.7', '447_0.9', '416_0.6', '406_0.8', '498_0.8']
+2014-04-18 00:25:07,946 - PyWATER - DEBUG - PDBid : 1abi_l Oxygen atom numbers : ['454_1.0', '450_0.7', '416_0.8', '461_0.8']
+2014-04-18 00:25:07,946 - PyWATER - DEBUG - PDBid : 1tmt_l Oxygen atom numbers : ['44_1.0', '107_0.9', '32_0.8', '68_0.8']
+2014-04-18 00:25:07,946 - PyWATER - DEBUG - PDBid : 1hah_l Oxygen atom numbers : ['474_1.0', '599_0.7', '439_0.9', '485_0.6', '440_0.8', '449_0.8']
+2014-04-18 00:25:07,946 - PyWATER - DEBUG - PDBid : 1ths_l Oxygen atom numbers : ['420_1.0', '449_0.7', '525_0.9', '542_0.6', '411_0.8', '472_0.8']
+2014-04-18 00:25:07,946 - PyWATER - DEBUG - PDBid : 1hai_l Oxygen atom numbers : ['432_1.0', '463_0.7', '473_0.9', '493_0.6', '513_0.8', '425_0.8']
+2014-04-18 00:25:07,946 - PyWATER - DEBUG - PDBid : 1thr_l Oxygen atom numbers : ['484_1.0', '421_0.7', '511_0.9', '414_0.8', '554_0.8']
+2014-04-18 00:25:07,946 - PyWATER - DEBUG - PDBid : 1abj_l Oxygen atom numbers : ['442_1.0', '428_0.9', '484_0.6']
+2014-04-18 00:25:07,947 - PyWATER - DEBUG - PDBid : 1ihs_l Oxygen atom numbers : ['460_1.0', '525_0.7', '437_0.9', '430_0.8', '449_0.8']
+2014-04-18 00:25:07,947 - PyWATER - INFO - Degree of conservation for each conserved water molecule in cwm_1hai_l_withConservedWaters.pdb ['atomNumber_DegreeOfConservation']: ['432_1.0', '463_0.7', '473_0.9', '493_0.6', '513_0.8', '425_0.8']
+2014-04-18 00:25:07,951 - PyWATER - INFO - 1hai_l structure has 6 conserved water molecules.
+2014-04-18 00:25:07,965 - PyWATER - INFO - PDB file of query protein with conserved waters "cwm_1hai_l_withConservedWaters.pdb" and logfile (pywater.log) is saved in /home/hitesh/PyWATER_outdir
