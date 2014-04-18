@@ -77,7 +77,7 @@ except:
 try:
     import scipy.cluster.hierarchy as hcluster
 except:
-    sys.exit('Scipy  not found')
+    sys.exit('Scipy not found')
 
 
 # setup output directory
@@ -158,11 +158,13 @@ Minimum suggested value is 0.5
 def save_sup_files_help():
     tkMessageBox.showinfo(title = 'Save superimposed files', message = """Save superimposed intermediate files.""")
 
-# Display imput parameters     
+# Display imput parameters
 
-def displayInputs(selectedStruturePDB,selectedStrutureChain,seq_id,resolution,refinement,user_def_list,clustering_method,inconsistency_coefficient,prob):
+def displayInputs( selectedStruturePDB, selectedStrutureChain,
+        seq_id,resolution, refinement, user_def_list,
+        clustering_method, inconsistency_coefficient, prob):
     logger.info( 'Input values' )
-    logger.info( 'PDB id : ' + selectedStruturePDB)
+    logger.info( 'PDB id : %s' % selectedStruturePDB)
     logger.info( 'Chain id : %s' % selectedStrutureChain)
     logger.info( 'Seqence identity cutoff : %s' % seq_id)
     logger.info( 'Structure resolution cutoff : %s' % resolution)
@@ -171,7 +173,6 @@ def displayInputs(selectedStruturePDB,selectedStrutureChain,seq_id,resolution,re
     logger.info( 'Hierarchical clustering linkage method : %s' % clustering_method)
     logger.info( 'Inconsistency coefficient threshold : %s' % inconsistency_coefficient)
     logger.info( 'probability cutoff : %s' % prob)
-
 
 # display PyMOL session with identified conserved waters, showing H-bonds with other conserved waters, ligands or protein.
 def displayInPyMOL(outdir, selectedPDBChain, atomNumbersProbDic):
@@ -243,7 +244,7 @@ def displayInPyMOL(outdir, selectedPDBChain, atomNumbersProbDic):
     cmd.set('ray_shadows', 0)
 
 
-def okMobility(pdbFile, mobilityCutoff=2.0):
+def okMobility( pdbFile, mobilityCutoff = 2.0 ):
     """
     Check if the mobility of water molecules is acceptable. 
     Water oxygen atoms with mobility >= mobilityCutoff(default=2.0) are 
@@ -283,7 +284,7 @@ def okMobility(pdbFile, mobilityCutoff=2.0):
     logger.info( '%s is considered : %s ' % (pdbFile, considerPDB))
     return considerPDB
 
-def okBfactor(pdbFile,normBCutoff=1.0):
+def okBfactor( pdbFile, normBCutoff = 1.0 ):
     """
     Check if the normalized B-factor of water molecules is acceptable.
     Water oxygen atoms with normalized B-factor >= normBCutoff(default=1.0) 
@@ -295,16 +296,16 @@ def okBfactor(pdbFile,normBCutoff=1.0):
     for line in open(pdbFile):
         line = line.strip()
         if line.startswith('HETATM'):
-            Bfactors.append(float(line[60:66]))
-    avg = np.mean(Bfactors)
-    stddev = np.sqrt(np.var(Bfactors))
+            Bfactors.append( float(line[60:66]) )
+    avg = np.mean( Bfactors )
+    stddev = np.sqrt( np.var(Bfactors) )
     pdbFileLines = open(pdbFile).readlines()
-    nWaters = len(pdbFileLines)-1
+    nWaters = len(pdbFileLines) - 1
     logger.debug( 'Number of water molecules is : %s' %nWaters )
     count = 0
     for line in reversed(pdbFileLines):
         if line.startswith('HETATM'):
-            normB = ((float(line[60:66])-avg)/stddev)
+            normB = ( (float(line[60:66]) - avg) / stddev )
             if normB >= normBCutoff:
                 count+=1
                 pdbFileLines.remove(line)
@@ -342,7 +343,8 @@ class Protein():
         for line in open(path):
             line = line.strip()
             if line.startswith('HETATM'):
-                key = self.__repr__()+'_'+str(int(line[22:30])) # water oxygen atom number
+                # water oxygen atom number
+                key = "%s_%s" % (self.__repr__(), int(line[22:30]))
                 self.waterIDCoordinates[key] = [line[30:38],line[38:46],line[46:54]]
                 self.water_coordinates.append([line[30:38],line[38:46],line[46:54]])
                 self.water_ids.append( key )
