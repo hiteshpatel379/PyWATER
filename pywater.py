@@ -52,8 +52,6 @@ After installation as plugin. It can be run from command in pymol
     degree of conservation
             float: Water molecules will be considered CONSERVED if their probability of being conserved is above given cutoff. Value ranges from 0 to 1. {default: 0.7} 
 
-
-
 """
 
 import os
@@ -467,7 +465,8 @@ def makePDBwithConservedWaters(ProteinsList, temp_dir, outdir,save_sup_files):
         for file in glob.glob(os.path.join(temp_dir, 'cwm_????_?.pdb')):
             shutil.copy(file, os.path.join(outdir,selectedPDBChain))
 
-    if len(ProteinsList.proteins) > 1:# Process further only if ProteinsList to use has more than one protein.
+    # Only if ProteinsList has more than one protein
+    if len(ProteinsList.proteins) > 1:
         water_coordinates = list()
         waterIDCoordinates = {}
         water_ids = list()
@@ -478,18 +477,22 @@ def makePDBwithConservedWaters(ProteinsList, temp_dir, outdir,save_sup_files):
             water_ids += protein.water_ids
 
         if water_coordinates:
-            # Process further only if there are any water molecules list of similar protein structures.
+            # Only if there are any water molecules list of similar protein structures.
             logger.info( 'Number of water molecules to cluster : %i' % len(water_coordinates) )
             if len(water_coordinates) != 1:
+                # Only if the total number of water molecules to cluster is less than 50000.
                 if len(water_coordinates) < 50000:
-                    # Process further only if total number of water molecules to cluster is less than 50000.
                     cwm_count = 0
                     logger.info( 'Clustering the water coordinates...' )
-                    # returns a list of clusternumbers
-                    # available optoins: single, complete, average
+                    # The clustering returns a list of clusternumbers
+                    # Available optoins are: single, complete, average
                     FD = hcluster.fclusterdata(water_coordinates, 
-                            t=ProteinsList.inconsistency_coefficient, criterion='distance', 
-                            metric='euclidean', depth=2, method= ProteinsList.clustering_method)
+                            t = ProteinsList.inconsistency_coefficient,
+                            criterion='distance', 
+                            metric='euclidean',
+                            depth=2,
+                            method= ProteinsList.clustering_method
+                        )
                     FDlist = list(FD)
                     fcDic = {}
                     for a,b in zip(water_ids,FDlist):
@@ -832,18 +835,18 @@ def FindConservedWaters(selectedStruturePDB,selectedStrutureChain,seq_id,resolut
     shutil.rmtree(tmp_dir)
 
 
-class ConservedWaters(Frame):
+class ConservedWaters( Frame ):
     """
         Creates PyMOL plugin GUI
     """
-    def __init__(self,parent):
+    def __init__(self, parent):
         Frame.__init__(self, parent, background="white")
         self.parent=parent
         self.parent.title("PyWATER - Find Conserved Waters")
         self.grid()
         self.makeWindow()
 
-    def varcheck(self,var,E1,E2,O1):
+    def varcheck(self, var, E1, E2, O1):
         if var.get() == 0:
             E1.configure(state='disabled')
             E2.configure(state='normal')
@@ -920,12 +923,24 @@ class ConservedWaters(Frame):
         frame2.grid()
 
         v10 = BooleanVar(master=frame2)
-        Checkbutton(frame2, text="save superimposed pdb files", variable=v10, onvalue = True, offvalue = False).grid(row=0, column=1, sticky=W)
+        Checkbutton(frame2, text="Save superimposed pdb files", variable=v10, onvalue = True, offvalue = False).grid(row=0, column=1, sticky=W)
         v10.set(False)
-        Button(frame2,text=" Help  ",command=save_sup_files_help).grid(row=0, column=2, sticky=W)
+        Button(frame2,text=" Help ", command = save_sup_files_help ).grid(row=0, column=2, sticky=W)
 
         Button(frame2,text=" Find Conserved Water Molecules ",
-            command = lambda: FindConservedWaters(str(v1.get()).lower(),str(v2.get()).upper(),str(v3.get()),float(v4.get()),str(v5.get()),str(v6.get()),str(v7.get()),float(v8.get()),float(v9.get()),bool(v10.get()))).grid(row=1, column=1, sticky=W)
+                command = lambda: FindConservedWaters(
+                    str(v1.get()).lower(),
+                    str(v2.get()).upper(),
+                    str(v3.get()),
+                    float(v4.get()),
+                    str(v5.get()),
+                    str(v6.get()),
+                    str(v7.get()),
+                    float(v8.get()),
+                    float(v9.get()),
+                    bool(v10.get())
+                )
+            ).grid(row=1, column=1, sticky=W)
 
 
 def toPyWATER( v1, v2, v3 = '95', v4 = 2.0, v5 = 'Mobility', v6 = '', v7 = 'complete', v8 = 2.0, v9 = 0.7):
