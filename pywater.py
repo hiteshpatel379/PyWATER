@@ -339,16 +339,15 @@ class Protein():
     def calculate_water_coordinates(self, tmp_dir = False):
         path = os.path.join( tmp_dir, 'cwm_%s_Water.pdb' % self.__repr__() )
         logger.debug( 'making water coordinates dictcionary of cwm_%s_Water.pdb.' % self.__repr__())
-        i = 1
         for line in open(path):
             line = line.strip()
             if line.startswith('HETATM'):
                 # water oxygen atom number
                 key = "%s_%s" % (self.__repr__(), int(line[22:30]))
-                self.waterIDCoordinates[key] = [ line[30:38], line[38:46], line[46:54 ]]
-                self.water_coordinates.append([ line[30:38], line[38:46], line[46:54] ])
+                coordinates = [ line[30:38], line[38:46], line[46:54] ]
+                self.waterIDCoordinates[key] = coordinates
+                self.water_coordinates.append( coordinates )
                 self.water_ids.append( key )
-                i += 1
         return self.waterIDCoordinates
 
 
