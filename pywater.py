@@ -339,7 +339,7 @@ class Protein():
 
     def calculate_water_coordinates(self, tmp_dir = False):
         path = os.path.join( tmp_dir, 'cwm_%s_Water.pdb' % self.__repr__() )
-        logger.debug( 'making water coordinates dictcionary of cwm_%s_Water.pdb.' % self.__repr__())
+        logger.debug( 'Creating water coordinates of cwm_%s_Water.pdb.' % self.__repr__())
         for line in open(path):
             line = line.strip()
             if line.startswith('HETATM'):
@@ -475,18 +475,18 @@ def makePDBwithConservedWaters(ProteinsList, temp_dir, outdir,save_sup_files):
         water_ids = list()
         for protein in ProteinsList:
             protein.calculate_water_coordinates( temp_dir )
-            logger.debug( 'Protein %s coordinates length is :%i' % (protein, len(protein.water_coordinates)))
+            logger.debug( 'Protein %s has %i coordinates.' % (protein, len(protein.water_coordinates)))
             water_coordinates += protein.water_coordinates
             water_ids += protein.water_ids
 
         if water_coordinates:
             # Only if there are any water molecules list of similar protein structures.
-            logger.info( 'Number of water molecules to cluster : %i' % len(water_coordinates) )
+            logger.info( 'Number of water molecules to cluster: %i' % len(water_coordinates) )
             if len(water_coordinates) != 1:
                 # Only if the total number of water molecules to cluster is less than 50000.
                 if len(water_coordinates) < 50000:
                     cwm_count = 0
-                    logger.info( 'Clustering the water coordinates...' )
+                    logger.info( 'Clustering the water coordinates ...' )
                     # The clustering returns a list of clusternumbers
                     # Available optoins are: single, complete, average
                     FD = hcluster.fclusterdata(water_coordinates, 
@@ -516,15 +516,15 @@ def makePDBwithConservedWaters(ProteinsList, temp_dir, outdir,save_sup_files):
                         clusterPresenceOut.write('%s' % i +'\t')
                     clusterPresenceOut.write('\n')
                     logger.info( 'Extracting conserved waters from clusters ...' )
-                    logger.debug( 'Clusters are : ')
+                    logger.debug( 'Start iterating over all clusters ...')
                     for clusterNumber, waterMols in fcDic.items():
-                        logger.debug('Cluster No. : %s Atoms : %s' % (clusterNumber,waterMols))
+                        logger.debug('Cluster No.: %s - Included Water Molecules: %s' % ( clusterNumber, ', '.join( waterMols ) ))
                         waterMolsNumber = len(waterMols)
                         uniquePDBs = set([a[:6] for a in waterMols])
                         uniquePDBslen = len(uniquePDBs)
                         # Update waterMols if there are two waterMolecules from same PDB is present in waterMols
                         if uniquePDBslen < waterMolsNumber:
-                            logger.debug('Removing atoms from the same PDB in a cluster')
+                            logger.debug('Removed water molecules from the same protein in one cluster.')
                             waterMols.sort()
                             PDBs = [i[:6] for i in waterMols]
                             PDBsCounter = collections.Counter(PDBs)
@@ -568,13 +568,13 @@ def makePDBwithConservedWaters(ProteinsList, temp_dir, outdir,save_sup_files):
                                 cwm_count += 1
                                 for waterMol in waterMols:
                                     if conservedWaterDic.has_key(waterMol[:6]):
-                                        conservedWaterDic[waterMol[:6]].append('_'.join([waterMol[7:],str(probability)]))
+                                        conservedWaterDic[waterMol[:6]].append('_'.join([waterMol[7:], str(probability)]))
                                     else:
-                                        conservedWaterDic[waterMol[:6]] = ['_'.join([waterMol[7:],str(probability)])]
+                                        conservedWaterDic[waterMol[:6]] = ['_'.join([waterMol[7:], str(probability)])]
                     clusterPresenceOut.close()
                     logger.debug( 'conservedWaterDic is: ')
-                    for a,b in conservedWaterDic.items():
-                        logger.debug('PDBid : %s Oxygen atom numbers : %s' % (a,b))
+                    for pdb_id, atoms in conservedWaterDic.items():
+                        logger.debug('Oxygen atom numbers for %s: %s' % ( pdb_id, ', '.join( atoms ) ))
                     if selectedPDBChain in conservedWaterDic.keys():
                         # save pdb file of only conserved waters for selected pdb
                         atomNumbersProbDic = {}
