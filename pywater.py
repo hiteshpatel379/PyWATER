@@ -261,7 +261,7 @@ def okMobility( pdbFile, mobilityCutoff = 2.0 ):
     avgO = np.mean(occupancy)
     pdbFileLines = open(pdbFile).readlines()
     nWaters = len(pdbFileLines)-1
-    logger.debug( 'Number of water molecules is : %s' %nWaters )
+    logger.debug( 'Number of water molecules: %s' %nWaters )
     count = 0
     for line in reversed(pdbFileLines):
         if line.startswith('HETATM'):
@@ -269,7 +269,7 @@ def okMobility( pdbFile, mobilityCutoff = 2.0 ):
             if m >= mobilityCutoff:
                 count+=1
                 pdbFileLines.remove(line)
-    logger.info( 'water oxygen atoms having higher mobility are %s: '% count)
+    logger.info( 'Water oxygen atoms with a higher mobility than %s: %s: ' % (mobilityCutoff, count))
     if count > (nWaters/2):
         considerPDB = False
     elif count > 0:
@@ -418,15 +418,15 @@ def makePDBwithConservedWaters(ProteinsList, temp_dir, outdir,save_sup_files):
 
     logger.info( 'Superimposing all pdb chains ...' )
     for protein in ProteinsList[1:]:
-        logger.info( 'Superimposing %s: ' % protein )
+        logger.info( 'Superimposing %s' % protein )
         cmd.super('cwm_%s////CA' % protein, 'cwm_%s////CA' % ProteinsList[0])
         cmd.orient( 'cwm_%s' % ProteinsList[0] )
 
-    logger.info( 'Creating new, water only, pymol objects for each pdb chain...' )
+    logger.info( 'Creating new, water only, pymol objects for each pdb chain ...' )
     for protein in ProteinsList:
         cmd.create('cwm_%s_Water' % protein, 'cwm_%s & resname hoh' % protein)
 
-    logger.info( 'Storing water molecules and proteins in separate pdb files for each pdb chain...' )
+    logger.info( 'Storing water molecules and proteins in separate pdb files for each pdb chain ...' )
     for protein in ProteinsList:
         cmd.save(os.path.join(temp_dir, 'cwm_%s.pdb' % protein), 'cwm_%s' % protein)
         cmd.save(os.path.join(temp_dir, 'cwm_%s_Water.pdb' % protein), 'cwm_%s_Water' % protein)
@@ -434,11 +434,11 @@ def makePDBwithConservedWaters(ProteinsList, temp_dir, outdir,save_sup_files):
     cmd.delete('cwm_*')
 
     ### filter ProteinsList by mobility or normalized B factor cutoff
-    logger.debug( 'Proteins chains list is %s proteins long :' % len(ProteinsList.proteins) )
+    logger.debug( 'Protein chains list is %s proteins long.' % len(ProteinsList.proteins) )
     if ProteinsList.refinement != 'No refinement':
         length = len(ProteinsList.proteins)
         if ProteinsList.refinement == 'Mobility':
-            logger.info( 'Filtering water oxygen atoms by Mobility' )
+            logger.info( 'Filtering water oxygen atoms by mobility ...' )
             for protein in reversed(ProteinsList.proteins):
                 if str(protein) != str(ProteinsList.selectedPDBChain):
                     if not okMobility(os.path.join(temp_dir, 'cwm_%s_Water.pdb' % protein)):
@@ -823,10 +823,10 @@ def FindConservedWaters(selectedStruturePDB,selectedStrutureChain,seq_id,resolut
     if len(up.proteins)>1:
         for protein in up:
             if not os.path.exists(os.path.join(tmp_dir, '%s.pdb' % protein.pdb_id)):
-                logger.info( 'retrieving pdb from website : %s' % protein.pdb_id)
+                logger.info( 'Retrieving structure: %s' % protein.pdb_id)
                 urllib.urlretrieve(online_pdb_db % protein.pdb_id.upper(), os.path.join(tmp_dir, protein.pdb_id+'.pdb'))
-        logger.info( 'making pdb with conserved waters...' )
-        makePDBwithConservedWaters(up, tmp_dir, outdir,save_sup_files)
+        logger.info( 'Save PDB file with conserved water molecules ...' )
+        makePDBwithConservedWaters(up, tmp_dir, outdir, save_sup_files)
     else:
         logger.info( "%s has only one PDB structure. We need atleast 2 structures to superimpose." % selectedPDBChain)
     shutil.rmtree(tmp_dir)
