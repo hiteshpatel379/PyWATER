@@ -579,9 +579,10 @@ def makePDBwithConservedWaters(ProteinsList, temp_dir, outdir,save_sup_files):
                         # save pdb file of only conserved waters for selected pdb
                         atomNumbersProbDic = {}
                         atomNumbers_Prob = conservedWaterDic[selectedPDBChain]
-                        logger.info( """Degree of conservation for each conserved water molecule in cwm_%s_withConservedWaters.pdb ('atomNumber_DegreeOfConservation'): %s""" % ( selectedPDBChain, atomNumbers_Prob ) )
-                        for a in atomNumbers_Prob:
-                            atomNumbersProbDic[a.split('_')[0]]=float(a.split('_')[1])
+                        logger.info( """Degree of conservation for each conserved water molecule is stored in cwm_%s_withConservedWaters.pdb with the format 'atomNumber'_'DegreeOfConservation'""" % ( selectedPDBChain ) )
+                        for probability in atomNumbers_Prob:
+                            atom, prob = probability.split('_')
+                            atomNumbersProbDic[ atom ] = float( prob )
                         atomNumbers = atomNumbersProbDic.keys()
                         selectedPDBChainConservedWatersOut = open(os.path.join(temp_dir, 'cwm_'+selectedPDBChain+'_ConservedWatersOnly.pdb'),'w+')
                         selectedPDBChainIn = open(os.path.join(temp_dir, 'cwm_'+selectedPDBChain+'_Water.pdb'))
