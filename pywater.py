@@ -588,7 +588,7 @@ def makePDBwithConservedWaters(ProteinsList, temp_dir, outdir,save_sup_files):
                         selectedPDBChainIn = open(os.path.join(temp_dir, 'cwm_'+selectedPDBChain+'_Water.pdb'))
                         for line in selectedPDBChainIn:
                             if line.startswith('HETATM'):
-                                if str(int(line[22:30])) in atomNumbers: # 
+                                if str(int(line[22:30])) in atomNumbers:
                                     selectedPDBChainConservedWatersOut.write( line )
                         selectedPDBChainConservedWatersOut.write('END')
                         selectedPDBChainConservedWatersOut.close()
