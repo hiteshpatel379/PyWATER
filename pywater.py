@@ -279,7 +279,10 @@ def okMobility( pdbFile, mobilityCutoff = 2.0 ):
             considerPDB = True
     else:
         considerPDB = True
-    logger.info( '%s is considered : %s ' % (pdbFile, considerPDB))
+    if considerPDB:
+        logger.info( '%s is included in the prediction.' % (pdbFile))
+    else:
+        logger.info( '%s is excluded from the prediction.' % (pdbFile))
     return considerPDB
 
 def okBfactor( pdbFile, normBCutoff = 1.0 ):
