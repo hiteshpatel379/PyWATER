@@ -60,49 +60,53 @@ PyWATER [PDB id , Chain id [, sequence identity cutoff [, resolution cutoff [, r
 Accessing via PyMOL’s API
 -------------------------
 
-```
-from pymol import cmd
-cmd.pywater(PDB id , Chain id [, sequence identity cutoff [, resolution cutoff [, refinement assessing method [, user defined proteins list [, linkage method [, inconsistency coefficient threshold [, degree of conservation]]]]]]])
-```
+.. code-block:: python
+
+  from pymol import cmd
+  cmd.pywater(PDB id , Chain id [, sequence identity cutoff [, resolution cutoff [, refinement assessing method [, user defined proteins list [, linkage method [, inconsistency coefficient threshold [, degree of conservation]]]]]]])
+
 
 
 Table 1: Input parameters and default values
 
-|  Value      | Default value  | Explanation                                                            |   |-------------|----------------|------------------------------------------------------------------------|
++-------------+----------------+------------------------------------------------------------------------+
+|  Value      | Default value  | Explanation                                                            |   
++=============+================+========================================================================+
 | PDB ID      |      --        |The PDB identifier of the protein for which you want to                 |
 |             |                |find conserved waters.                                                  |
-|-------------|----------------|------------------------------------------------------------------------|
++-------------+----------------+------------------------------------------------------------------------+
 | Chain id    |      --        |The chain identifier of the protein for which you want to find conserved| 
 |             |                |water molecules in the above mentioned PDB.                             |
-|-------------|----------------|------------------------------------------------------------------------|
++-------------+----------------+------------------------------------------------------------------------+
 | Sequence    |      95%       |The sequence identity cutoff to find similar proteins clustered         | 
 | Identity    |                |by BlastClust.                                                          |
-|-------------|----------------|------------------------------------------------------------------------|
++-------------+----------------+------------------------------------------------------------------------+
 | Resolution  |      2.0 Å     |All the protein structures will be filtered first according to the      | 
 | cutoff      |                |structure resolution cutoff. Only structures with better resolution     |
 |             |                |than given cutoff will be used further.                                 |
-|-------------|----------------|------------------------------------------------------------------------|
++-------------+----------------+------------------------------------------------------------------------+
 |Refinement   |    Mobility    |Choose either 'Mobility' or 'Normalized B-factor' or 'No refinement'    | 
 |assessing    |                |as criteria to assess the refinement quality of crystal structure.      |
 |method       |                |Program will filter out the water molecules with bad refinement quality.|
-|-------------|----------------|------------------------------------------------------------------------|
++-------------+----------------+------------------------------------------------------------------------+
 |Protein      |      --        |Give a custom list of protein structures to superimpose. Specifying     | 
 |List         |                |this list will disable ‘sequence identity’ and ‘resolution cutoff’      |
 |             |                |parameters.                                                             |
-|-------------|----------------|------------------------------------------------------------------------|
++-------------+----------------+------------------------------------------------------------------------+
 | Linkage     |    complete    |Linkage method for hierarchical clustering. Choose one from single,     | 
 | Method      |                |complete, average.                                                      |
-|-------------|----------------|------------------------------------------------------------------------|
++-------------+----------------+------------------------------------------------------------------------+
 | Sequence    |      95%       |The sequence identity cutoff to find similar proteins clustered         | 
 | Identity    |                |by BlastClust.                                                          |
-|-------------|----------------|------------------------------------------------------------------------|
++-------------+----------------+------------------------------------------------------------------------+
 |Inconsistency|      2.0 Å     |Any two clusters of water molecules will not be closer than given       | 
 |coefficient  |                |inconsistency coefficient threshold. Value ranges from 0 to 2.4.        |
 |threshold    |                |                                                                        |
-|-------------|----------------|------------------------------------------------------------------------|
++-------------+----------------+------------------------------------------------------------------------+
 | degree of   |      0.7       |Water molecules will be considered CONSERVED if their probability       | 
 | conservation|                |of being conserved is above given cutoff. Value ranges from 0.4 to 1.   |
-|-------------|----------------|------------------------------------------------------------------------|
++-------------+----------------+------------------------------------------------------------------------+
+
 
 
 
