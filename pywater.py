@@ -407,7 +407,7 @@ class ProteinsList():
             raise TypeError, "Invalid argument type."
 
 
-def makePDBwithConservedWaters(ProteinsList, temp_dir, outdir,save_sup_files):
+def makePDBwithConservedWaters(ProteinsList, temp_dir, outdir, save_sup_files):
     logger.info( 'Minimum desired degree of conservation is : %s' % ProteinsList.probability )
     cmd.delete('cwm_*')
     logger.info( 'Loading all pdb chains ...' )
