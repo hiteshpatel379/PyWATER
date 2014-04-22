@@ -19,7 +19,7 @@ Scipy and Numpy python modules installed on Python 2.7 are required to run PyWAT
 PyWATER should be installed as a PyMOL plugin.
 
 - Run PyMOL
-- Install the pyWATER plugin in PyMOL by selecting PyWATER.py in the PyMOL Plugin Manager (Plugins -> Manage Plugins -> Install)
+- Install the pyWATER plugin in PyMOL by selecting PyWATER.py in the PyMOL Plugin Manager (Plugins → Manage Plugins → Install)
 - Restart PyMOL to use plugin
 
  - If you start PyMOL with administrator priviliges, PyWATER results and log files will be only accessible by the administrator.
