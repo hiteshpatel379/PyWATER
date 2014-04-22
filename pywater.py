@@ -686,7 +686,6 @@ def fetchpdbChainsList( selectedStruture, seq_id ):
             pdb = pdbChain.split(':')[0]
             if isXray(pdb):
                 pdbChainsList.append(pdbChain)
-                logger.info('%s' % pdbChain)
         return pdbChainsList
 
 
@@ -707,12 +706,12 @@ def filterbyResolution( pdbChainsList, resolutionCutoff ):
         pdbsResolutionXML = parseString( pdbsResolution_string )
         res = str(pdbsResolutionXML.getElementsByTagName('dimStructure.resolution')[0].childNodes[0].nodeValue)
         pdbsResolution[ pdb ] = res
-        logger.info('Resolution of pdb %s is: %s' % (pdb, res))
-    logger.info( 'PDB chains with their resolution: %s' %pdbsResolution )
+        logger.info('Resolution of %s is: %s' % (pdb, res))
 
     for pdbChain in pdbChainsList:
-        if pdbsResolution[pdbChain.split(':')[0]] != 'null':
-            if float(pdbsResolution[pdbChain.split(':')[0]]) <= resolutionCutoff:
+        resolution = pdbsResolution[pdbChain.split(':')[0]]
+        if resolution != 'null':
+            if float(resolution) <= resolutionCutoff:
                 filteredpdbChainsList.append(pdbChain)
 
     return filteredpdbChainsList
@@ -804,7 +803,7 @@ def FindConservedWaters(selectedStruturePDB,selectedStrutureChain,seq_id,resolut
         logger.info( """Fetching protein chains list from PDB clusters ...
         This cluster contains: """ )
         pdbChainsList = fetchpdbChainsList(selectedStruture,seq_id) # ['3QKL:A', '4EKL:A', '3QKM:A', '3QKK:A', '3OW4:A', '3OW4:B', '3OCB:A', '3OCB:B', '4EKK:A', '4EKK:B']
-        logger.info( 'Protein chains list contains %i pdb chains : %s' % (len(pdbChainsList), pdbChainsList))
+        logger.info( 'Protein chains list contains %i pdb chains: "%s"' % (len(pdbChainsList), ', '.join(pdbChainsList)))
         logger.info( 'Filtering by resolution ...')
         pdbChainsList = filterbyResolution(pdbChainsList,resolution)
         # make sure query structure is not filtered out
@@ -815,7 +814,7 @@ def FindConservedWaters(selectedStruturePDB,selectedStrutureChain,seq_id,resolut
         if queryStr not in pdbChainsList:
             pdbChainsList.insert(0,queryStr)
         # Added again If query structure filtered out..
-        logger.info( 'Filtered protein chains list contains %i pdb chains. : %s' % (len(pdbChainsList), pdbChainsList) )
+        logger.info( 'Filtered protein chains list contains %i pdb chains: "%s"' % (len(pdbChainsList), ', '.join(pdbChainsList)) )
     else:
         pdbChainsList = UD_pdbChainsList
     for pdbChain in pdbChainsList:
