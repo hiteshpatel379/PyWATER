@@ -822,8 +822,6 @@ def FindConservedWaters(selectedStruturePDB,selectedStrutureChain,seq_id,resolut
 
     if len(up.proteins)>1:
         for protein in up:
-            logger.debug( protein )
-            logger.debug( protein.pdb_id )
             if not os.path.exists(os.path.join(tmp_dir, '%s.pdb' % protein.pdb_id)):
                 logger.info( 'retrieving pdb from website : %s' % protein.pdb_id)
                 urllib.urlretrieve(online_pdb_db % protein.pdb_id.upper(), os.path.join(tmp_dir, protein.pdb_id+'.pdb'))
