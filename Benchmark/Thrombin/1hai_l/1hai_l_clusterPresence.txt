@@ -1,0 +1,9 @@
+Water Conservation Score	1hai_l	1abj_l	1ppb_l	1tmb_l	1hah_l	1tmt_l	1abi_l	1thr_l	1ths_l	1ihs_l	
+0.6	NoWater	NoWater	353	559	540	NoWater	434	599	446	NoWater	
+1.0	432	442	328	415	474	44	454	484	420	460	
+0.7	463	NoWater	NoWater	443	599	NoWater	450	421	449	525	
+0.6	NoWater	506	687	563	465	NoWater	NoWater	505	NoWater	480	
+0.9	473	428	645	447	439	107	NoWater	511	525	437	
+0.6	493	484	574	416	485	NoWater	NoWater	NoWater	542	NoWater	
+0.8	513	NoWater	NoWater	406	440	32	416	414	411	430	
+0.8	425	NoWater	NoWater	498	449	68	461	554	472	449	

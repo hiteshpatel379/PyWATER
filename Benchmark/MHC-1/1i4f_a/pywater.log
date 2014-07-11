@@ -1,0 +1,1918 @@
+2014-04-18 15:38:24,721 - PyWATER - INFO - Input values
+2014-04-18 15:38:24,722 - PyWATER - INFO - PDB id : 1i4f
+2014-04-18 15:38:24,722 - PyWATER - INFO - Chain id : A
+2014-04-18 15:38:24,723 - PyWATER - INFO - Seqence identity cutoff : 95
+2014-04-18 15:38:24,723 - PyWATER - INFO - Structure resolution cutoff : 2.0
+2014-04-18 15:38:24,724 - PyWATER - INFO - X-ray structure refinement assessing method : No refinement
+2014-04-18 15:38:24,724 - PyWATER - INFO - User defined protein-chains list : 1I4F_A,1TMC_A,1AGD_A,1HSA_A,1A1N_A,1E27_A,1A1M_A,1QLF_A,1QO3_A,1KBG_H,1ED3_A,1MHC_A
+2014-04-18 15:38:24,724 - PyWATER - INFO - Hierarchical clustering linkage method : complete
+2014-04-18 15:38:24,725 - PyWATER - INFO - Inconsistency coefficient threshold : 2.4
+2014-04-18 15:38:24,725 - PyWATER - INFO - probability cutoff : 0.5
+2014-04-18 15:38:24,726 - PyWATER - INFO - selectedStruture is : 1i4f.A
+2014-04-18 15:38:24,727 - PyWATER - INFO - up selectedPDBChain is : 1i4f_a
+2014-04-18 15:38:24,727 - PyWATER - INFO - selectedPDBChain name is : 1i4f_a
+2014-04-18 15:38:24,728 - PyWATER - DEBUG - 1i4f_a
+2014-04-18 15:38:24,728 - PyWATER - DEBUG - 1i4f
+2014-04-18 15:38:24,728 - PyWATER - INFO - retrieving pdb from website : 1i4f
+2014-04-18 15:38:26,160 - PyWATER - DEBUG - 1tmc_a
+2014-04-18 15:38:26,161 - PyWATER - DEBUG - 1tmc
+2014-04-18 15:38:26,161 - PyWATER - INFO - retrieving pdb from website : 1tmc
+2014-04-18 15:38:27,367 - PyWATER - DEBUG - 1agd_a
+2014-04-18 15:38:27,368 - PyWATER - DEBUG - 1agd
+2014-04-18 15:38:27,368 - PyWATER - INFO - retrieving pdb from website : 1agd
+2014-04-18 15:38:28,756 - PyWATER - DEBUG - 1hsa_a
+2014-04-18 15:38:28,756 - PyWATER - DEBUG - 1hsa
+2014-04-18 15:38:28,756 - PyWATER - INFO - retrieving pdb from website : 1hsa
+2014-04-18 15:38:30,510 - PyWATER - DEBUG - 1a1n_a
+2014-04-18 15:38:30,510 - PyWATER - DEBUG - 1a1n
+2014-04-18 15:38:30,511 - PyWATER - INFO - retrieving pdb from website : 1a1n
+2014-04-18 15:38:33,223 - PyWATER - DEBUG - 1e27_a
+2014-04-18 15:38:33,223 - PyWATER - DEBUG - 1e27
+2014-04-18 15:38:33,223 - PyWATER - INFO - retrieving pdb from website : 1e27
+2014-04-18 15:38:34,881 - PyWATER - DEBUG - 1a1m_a
+2014-04-18 15:38:34,881 - PyWATER - DEBUG - 1a1m
+2014-04-18 15:38:34,881 - PyWATER - INFO - retrieving pdb from website : 1a1m
+2014-04-18 15:38:36,511 - PyWATER - DEBUG - 1qlf_a
+2014-04-18 15:38:36,512 - PyWATER - DEBUG - 1qlf
+2014-04-18 15:38:36,512 - PyWATER - INFO - retrieving pdb from website : 1qlf
+2014-04-18 15:38:38,214 - PyWATER - DEBUG - 1qo3_a
+2014-04-18 15:38:38,214 - PyWATER - DEBUG - 1qo3
+2014-04-18 15:38:38,214 - PyWATER - INFO - retrieving pdb from website : 1qo3
+2014-04-18 15:38:40,378 - PyWATER - DEBUG - 1kbg_h
+2014-04-18 15:38:40,378 - PyWATER - DEBUG - 1kbg
+2014-04-18 15:38:40,378 - PyWATER - INFO - retrieving pdb from website : 1kbg
+2014-04-18 15:38:42,274 - PyWATER - DEBUG - 1ed3_a
+2014-04-18 15:38:42,274 - PyWATER - DEBUG - 1ed3
+2014-04-18 15:38:42,275 - PyWATER - INFO - retrieving pdb from website : 1ed3
+2014-04-18 15:38:45,105 - PyWATER - DEBUG - 1mhc_a
+2014-04-18 15:38:45,106 - PyWATER - DEBUG - 1mhc
+2014-04-18 15:38:45,106 - PyWATER - INFO - retrieving pdb from website : 1mhc
+2014-04-18 15:38:48,127 - PyWATER - INFO - making pdb with conserved waters...
+2014-04-18 15:38:48,128 - PyWATER - INFO - Minimum desired degree of conservation is : 0.5
+2014-04-18 15:38:48,129 - PyWATER - INFO - loading all pdb chains ...
+2014-04-18 15:38:48,591 - PyWATER - INFO - Superimposing all pdb chains ...
+2014-04-18 15:38:48,592 - PyWATER - INFO - superimposing 1tmc_a: 
+2014-04-18 15:38:48,664 - PyWATER - INFO - superimposing 1agd_a: 
+2014-04-18 15:38:48,833 - PyWATER - INFO - superimposing 1hsa_a: 
+2014-04-18 15:38:48,949 - PyWATER - INFO - superimposing 1a1n_a: 
+2014-04-18 15:38:49,093 - PyWATER - INFO - superimposing 1e27_a: 
+2014-04-18 15:38:49,213 - PyWATER - INFO - superimposing 1a1m_a: 
+2014-04-18 15:38:49,361 - PyWATER - INFO - superimposing 1qlf_a: 
+2014-04-18 15:38:49,482 - PyWATER - INFO - superimposing 1qo3_a: 
+2014-04-18 15:38:49,627 - PyWATER - INFO - superimposing 1kbg_h: 
+2014-04-18 15:38:49,742 - PyWATER - INFO - superimposing 1ed3_a: 
+2014-04-18 15:38:49,895 - PyWATER - INFO - superimposing 1mhc_a: 
+2014-04-18 15:38:50,015 - PyWATER - INFO - Creating new pymol objects of only water molecules for each pdb chain...
+2014-04-18 15:38:50,093 - PyWATER - INFO - saving water molecules and proteins in separate pdb files for each pdb chain...
+2014-04-18 15:38:50,328 - PyWATER - DEBUG - proteins chains list is 12 proteins long :
+2014-04-18 15:38:50,333 - PyWATER - DEBUG - making water coordinates dictcionary of cwm_1i4f_a_Water.pdb.
+2014-04-18 15:38:50,334 - PyWATER - DEBUG - protein 1i4f_a coordinates length is :319
+2014-04-18 15:38:50,334 - PyWATER - DEBUG - making water coordinates dictcionary of cwm_1tmc_a_Water.pdb.
+2014-04-18 15:38:50,335 - PyWATER - DEBUG - protein 1tmc_a coordinates length is :70
+2014-04-18 15:38:50,335 - PyWATER - DEBUG - making water coordinates dictcionary of cwm_1agd_a_Water.pdb.
+2014-04-18 15:38:50,336 - PyWATER - DEBUG - protein 1agd_a coordinates length is :311
+2014-04-18 15:38:50,336 - PyWATER - DEBUG - making water coordinates dictcionary of cwm_1hsa_a_Water.pdb.
+2014-04-18 15:38:50,337 - PyWATER - DEBUG - protein 1hsa_a coordinates length is :149
+2014-04-18 15:38:50,337 - PyWATER - DEBUG - making water coordinates dictcionary of cwm_1a1n_a_Water.pdb.
+2014-04-18 15:38:50,338 - PyWATER - DEBUG - protein 1a1n_a coordinates length is :275
+2014-04-18 15:38:50,338 - PyWATER - DEBUG - making water coordinates dictcionary of cwm_1e27_a_Water.pdb.
+2014-04-18 15:38:50,339 - PyWATER - DEBUG - protein 1e27_a coordinates length is :282
+2014-04-18 15:38:50,339 - PyWATER - DEBUG - making water coordinates dictcionary of cwm_1a1m_a_Water.pdb.
+2014-04-18 15:38:50,340 - PyWATER - DEBUG - protein 1a1m_a coordinates length is :133
+2014-04-18 15:38:50,340 - PyWATER - DEBUG - making water coordinates dictcionary of cwm_1qlf_a_Water.pdb.
+2014-04-18 15:38:50,341 - PyWATER - DEBUG - protein 1qlf_a coordinates length is :80
+2014-04-18 15:38:50,341 - PyWATER - DEBUG - making water coordinates dictcionary of cwm_1qo3_a_Water.pdb.
+2014-04-18 15:38:50,341 - PyWATER - DEBUG - protein 1qo3_a coordinates length is :157
+2014-04-18 15:38:50,342 - PyWATER - DEBUG - making water coordinates dictcionary of cwm_1kbg_h_Water.pdb.
+2014-04-18 15:38:50,342 - PyWATER - DEBUG - protein 1kbg_h coordinates length is :81
+2014-04-18 15:38:50,342 - PyWATER - DEBUG - making water coordinates dictcionary of cwm_1ed3_a_Water.pdb.
+2014-04-18 15:38:50,342 - PyWATER - DEBUG - protein 1ed3_a coordinates length is :49
+2014-04-18 15:38:50,342 - PyWATER - DEBUG - making water coordinates dictcionary of cwm_1mhc_a_Water.pdb.
+2014-04-18 15:38:50,343 - PyWATER - DEBUG - protein 1mhc_a coordinates length is :127
+2014-04-18 15:38:50,343 - PyWATER - INFO - number of water molecules to cluster : 2033
+2014-04-18 15:38:50,343 - PyWATER - INFO - clustering the water coordinates...
+2014-04-18 15:38:55,717 - PyWATER - INFO - making flat cluster dictionary...
+2014-04-18 15:38:55,719 - PyWATER - INFO - extracting conserved waters from clusters...
+2014-04-18 15:38:55,720 - PyWATER - DEBUG - Clusters are : 
+2014-04-18 15:38:55,720 - PyWATER - DEBUG - Cluster No. : 1 Atoms : ['1e27_a_2233']
+2014-04-18 15:38:55,720 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,720 - PyWATER - DEBUG - Cluster No. : 2 Atoms : ['1kbg_h_1147']
+2014-04-18 15:38:55,720 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,720 - PyWATER - DEBUG - Cluster No. : 3 Atoms : ['1qlf_a_2059']
+2014-04-18 15:38:55,720 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,720 - PyWATER - DEBUG - Cluster No. : 4 Atoms : ['1agd_a_552']
+2014-04-18 15:38:55,720 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,721 - PyWATER - DEBUG - Cluster No. : 5 Atoms : ['1a1m_a_348']
+2014-04-18 15:38:55,721 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,721 - PyWATER - DEBUG - Cluster No. : 6 Atoms : ['1i4f_a_764']
+2014-04-18 15:38:55,721 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,721 - PyWATER - DEBUG - Cluster No. : 7 Atoms : ['1e27_a_2229']
+2014-04-18 15:38:55,721 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,721 - PyWATER - DEBUG - Cluster No. : 8 Atoms : ['1ed3_a_302']
+2014-04-18 15:38:55,721 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,722 - PyWATER - DEBUG - Cluster No. : 9 Atoms : ['1i4f_a_708']
+2014-04-18 15:38:55,722 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,722 - PyWATER - DEBUG - Cluster No. : 10 Atoms : ['1hsa_a_602']
+2014-04-18 15:38:55,722 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,722 - PyWATER - DEBUG - Cluster No. : 11 Atoms : ['1i4f_a_808']
+2014-04-18 15:38:55,722 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,722 - PyWATER - DEBUG - Cluster No. : 12 Atoms : ['1agd_a_445', '1hsa_a_568']
+2014-04-18 15:38:55,722 - PyWATER - INFO - Degree of conservation is : 0.166666666667
+2014-04-18 15:38:55,723 - PyWATER - DEBUG - Cluster No. : 13 Atoms : ['1i4f_a_674', '1hsa_a_866', '1mhc_a_354']
+2014-04-18 15:38:55,723 - PyWATER - INFO - Degree of conservation is : 0.25
+2014-04-18 15:38:55,723 - PyWATER - DEBUG - Cluster No. : 14 Atoms : ['1i4f_a_572']
+2014-04-18 15:38:55,723 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,723 - PyWATER - DEBUG - Cluster No. : 15 Atoms : ['1agd_a_505', '1hsa_a_557', '1e27_a_2265']
+2014-04-18 15:38:55,723 - PyWATER - INFO - Degree of conservation is : 0.25
+2014-04-18 15:38:55,723 - PyWATER - DEBUG - Cluster No. : 16 Atoms : ['1hsa_a_569', '1mhc_a_362']
+2014-04-18 15:38:55,723 - PyWATER - INFO - Degree of conservation is : 0.166666666667
+2014-04-18 15:38:55,723 - PyWATER - DEBUG - Cluster No. : 17 Atoms : ['1mhc_a_407']
+2014-04-18 15:38:55,723 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,724 - PyWATER - DEBUG - Cluster No. : 18 Atoms : ['1e27_a_2228', '1a1m_a_450']
+2014-04-18 15:38:55,724 - PyWATER - INFO - Degree of conservation is : 0.166666666667
+2014-04-18 15:38:55,724 - PyWATER - DEBUG - Cluster No. : 19 Atoms : ['1kbg_h_1129']
+2014-04-18 15:38:55,724 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,724 - PyWATER - DEBUG - Cluster No. : 20 Atoms : ['1kbg_h_1124']
+2014-04-18 15:38:55,724 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,724 - PyWATER - DEBUG - Cluster No. : 21 Atoms : ['1i4f_a_669', '1a1m_a_375']
+2014-04-18 15:38:55,725 - PyWATER - INFO - Degree of conservation is : 0.166666666667
+2014-04-18 15:38:55,725 - PyWATER - DEBUG - Cluster No. : 22 Atoms : ['1i4f_a_650']
+2014-04-18 15:38:55,725 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,725 - PyWATER - DEBUG - Cluster No. : 23 Atoms : ['1i4f_a_751']
+2014-04-18 15:38:55,725 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,725 - PyWATER - DEBUG - Cluster No. : 24 Atoms : ['1i4f_a_723']
+2014-04-18 15:38:55,725 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,725 - PyWATER - DEBUG - Cluster No. : 25 Atoms : ['1a1n_a_1022']
+2014-04-18 15:38:55,725 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,725 - PyWATER - DEBUG - Cluster No. : 26 Atoms : ['1i4f_a_817']
+2014-04-18 15:38:55,725 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,726 - PyWATER - DEBUG - Cluster No. : 27 Atoms : ['1i4f_a_534']
+2014-04-18 15:38:55,726 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,726 - PyWATER - DEBUG - Cluster No. : 28 Atoms : ['1i4f_a_618']
+2014-04-18 15:38:55,726 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,726 - PyWATER - DEBUG - Cluster No. : 29 Atoms : ['1qlf_a_2074']
+2014-04-18 15:38:55,726 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,726 - PyWATER - DEBUG - Cluster No. : 30 Atoms : ['1i4f_a_644']
+2014-04-18 15:38:55,727 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,727 - PyWATER - DEBUG - Cluster No. : 31 Atoms : ['1i4f_a_816']
+2014-04-18 15:38:55,727 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,727 - PyWATER - DEBUG - Cluster No. : 32 Atoms : ['1agd_a_443', '1hsa_a_733']
+2014-04-18 15:38:55,727 - PyWATER - INFO - Degree of conservation is : 0.166666666667
+2014-04-18 15:38:55,727 - PyWATER - DEBUG - Cluster No. : 33 Atoms : ['1i4f_a_684', '1agd_a_442', '1a1n_a_1018', '1e27_a_2268', '1mhc_a_387']
+2014-04-18 15:38:55,727 - PyWATER - INFO - Degree of conservation is : 0.416666666667
+2014-04-18 15:38:55,727 - PyWATER - DEBUG - Cluster No. : 34 Atoms : ['1agd_a_444', '1a1m_a_466', '1qlf_a_2073']
+2014-04-18 15:38:55,727 - PyWATER - INFO - Degree of conservation is : 0.25
+2014-04-18 15:38:55,727 - PyWATER - DEBUG - Cluster No. : 35 Atoms : ['1i4f_a_563']
+2014-04-18 15:38:55,728 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,728 - PyWATER - DEBUG - Cluster No. : 36 Atoms : ['1ed3_a_299']
+2014-04-18 15:38:55,728 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,728 - PyWATER - DEBUG - Cluster No. : 37 Atoms : ['1i4f_a_725']
+2014-04-18 15:38:55,728 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,728 - PyWATER - DEBUG - Cluster No. : 38 Atoms : ['1agd_a_506', '1e27_a_2232', '1a1m_a_465']
+2014-04-18 15:38:55,728 - PyWATER - INFO - Degree of conservation is : 0.25
+2014-04-18 15:38:55,728 - PyWATER - DEBUG - Cluster No. : 39 Atoms : ['1hsa_a_826']
+2014-04-18 15:38:55,728 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,728 - PyWATER - DEBUG - Cluster No. : 40 Atoms : ['1agd_a_555', '1hsa_a_793', '1qo3_a_2152']
+2014-04-18 15:38:55,729 - PyWATER - INFO - Degree of conservation is : 0.25
+2014-04-18 15:38:55,729 - PyWATER - DEBUG - Cluster No. : 41 Atoms : ['1i4f_a_595']
+2014-04-18 15:38:55,729 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,729 - PyWATER - DEBUG - Cluster No. : 42 Atoms : ['1i4f_a_597']
+2014-04-18 15:38:55,729 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,729 - PyWATER - DEBUG - Cluster No. : 43 Atoms : ['1mhc_a_332']
+2014-04-18 15:38:55,729 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,730 - PyWATER - DEBUG - Cluster No. : 44 Atoms : ['1e27_a_2231', '1a1m_a_451']
+2014-04-18 15:38:55,730 - PyWATER - INFO - Degree of conservation is : 0.166666666667
+2014-04-18 15:38:55,730 - PyWATER - DEBUG - Cluster No. : 45 Atoms : ['1hsa_a_570', '1e27_a_2230', '1a1m_a_389']
+2014-04-18 15:38:55,730 - PyWATER - INFO - Degree of conservation is : 0.25
+2014-04-18 15:38:55,730 - PyWATER - DEBUG - Cluster No. : 46 Atoms : ['1hsa_a_653']
+2014-04-18 15:38:55,730 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,730 - PyWATER - DEBUG - Cluster No. : 47 Atoms : ['1i4f_a_548', '1qo3_a_2153']
+2014-04-18 15:38:55,730 - PyWATER - INFO - Degree of conservation is : 0.166666666667
+2014-04-18 15:38:55,730 - PyWATER - DEBUG - Cluster No. : 48 Atoms : ['1e27_a_2267', '1mhc_a_365']
+2014-04-18 15:38:55,730 - PyWATER - INFO - Degree of conservation is : 0.166666666667
+2014-04-18 15:38:55,731 - PyWATER - DEBUG - Cluster No. : 49 Atoms : ['1hsa_a_834', '1e27_a_2266']
+2014-04-18 15:38:55,731 - PyWATER - INFO - Degree of conservation is : 0.166666666667
+2014-04-18 15:38:55,731 - PyWATER - DEBUG - Cluster No. : 50 Atoms : ['1a1m_a_336']
+2014-04-18 15:38:55,731 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,731 - PyWATER - DEBUG - Cluster No. : 51 Atoms : ['1i4f_a_721', '1a1n_a_642', '1e27_a_2247']
+2014-04-18 15:38:55,731 - PyWATER - INFO - Degree of conservation is : 0.25
+2014-04-18 15:38:55,731 - PyWATER - DEBUG - Cluster No. : 52 Atoms : ['1qlf_a_2067']
+2014-04-18 15:38:55,731 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,732 - PyWATER - DEBUG - Cluster No. : 53 Atoms : ['1i4f_a_785', '1qlf_a_2076']
+2014-04-18 15:38:55,732 - PyWATER - INFO - Degree of conservation is : 0.166666666667
+2014-04-18 15:38:55,732 - PyWATER - DEBUG - Cluster No. : 54 Atoms : ['1i4f_a_683']
+2014-04-18 15:38:55,732 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,732 - PyWATER - DEBUG - Cluster No. : 55 Atoms : ['1a1m_a_458']
+2014-04-18 15:38:55,732 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,732 - PyWATER - DEBUG - Cluster No. : 56 Atoms : ['1i4f_a_724']
+2014-04-18 15:38:55,732 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,732 - PyWATER - DEBUG - Cluster No. : 57 Atoms : ['1mhc_a_351']
+2014-04-18 15:38:55,732 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,733 - PyWATER - DEBUG - Cluster No. : 58 Atoms : ['1e27_a_2245']
+2014-04-18 15:38:55,733 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,733 - PyWATER - DEBUG - Cluster No. : 59 Atoms : ['1a1n_a_645']
+2014-04-18 15:38:55,733 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,733 - PyWATER - DEBUG - Cluster No. : 60 Atoms : ['1ed3_a_313', '1mhc_a_350']
+2014-04-18 15:38:55,733 - PyWATER - INFO - Degree of conservation is : 0.166666666667
+2014-04-18 15:38:55,733 - PyWATER - DEBUG - Cluster No. : 61 Atoms : ['1mhc_a_331']
+2014-04-18 15:38:55,733 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,734 - PyWATER - DEBUG - Cluster No. : 62 Atoms : ['1agd_a_516', '1hsa_a_627', '1e27_a_2252']
+2014-04-18 15:38:55,734 - PyWATER - INFO - Degree of conservation is : 0.25
+2014-04-18 15:38:55,734 - PyWATER - DEBUG - Cluster No. : 63 Atoms : ['1qo3_a_2143']
+2014-04-18 15:38:55,734 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,734 - PyWATER - DEBUG - Cluster No. : 64 Atoms : ['1mhc_a_335']
+2014-04-18 15:38:55,734 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,734 - PyWATER - DEBUG - Cluster No. : 65 Atoms : ['1qlf_a_2066']
+2014-04-18 15:38:55,734 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,734 - PyWATER - DEBUG - Cluster No. : 66 Atoms : ['1i4f_a_812']
+2014-04-18 15:38:55,735 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,735 - PyWATER - DEBUG - Cluster No. : 67 Atoms : ['1a1n_a_516']
+2014-04-18 15:38:55,735 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,735 - PyWATER - DEBUG - Cluster No. : 68 Atoms : ['1agd_a_402', '1a1m_a_392']
+2014-04-18 15:38:55,735 - PyWATER - INFO - Degree of conservation is : 0.166666666667
+2014-04-18 15:38:55,735 - PyWATER - DEBUG - Cluster No. : 69 Atoms : ['1i4f_a_547', '1agd_a_449', '1hsa_a_860', '1a1n_a_515', '1e27_a_2243', '1a1m_a_341']
+2014-04-18 15:38:55,735 - PyWATER - INFO - Degree of conservation is : 0.5
+2014-04-18 15:38:55,735 - PyWATER - INFO - Here is conserved water molecule...
+2014-04-18 15:38:55,735 - PyWATER - DEBUG - Cluster No. : 70 Atoms : ['1a1n_a_757', '1a1m_a_457']
+2014-04-18 15:38:55,736 - PyWATER - INFO - Degree of conservation is : 0.166666666667
+2014-04-18 15:38:55,736 - PyWATER - DEBUG - Cluster No. : 71 Atoms : ['1i4f_a_752', '1agd_a_554']
+2014-04-18 15:38:55,736 - PyWATER - INFO - Degree of conservation is : 0.166666666667
+2014-04-18 15:38:55,736 - PyWATER - DEBUG - Cluster No. : 72 Atoms : ['1agd_a_514', '1mhc_a_386']
+2014-04-18 15:38:55,736 - PyWATER - INFO - Degree of conservation is : 0.166666666667
+2014-04-18 15:38:55,736 - PyWATER - DEBUG - Cluster No. : 73 Atoms : ['1mhc_a_364']
+2014-04-18 15:38:55,736 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,736 - PyWATER - DEBUG - Cluster No. : 74 Atoms : ['1mhc_a_310']
+2014-04-18 15:38:55,737 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,737 - PyWATER - DEBUG - Cluster No. : 75 Atoms : ['1mhc_a_390']
+2014-04-18 15:38:55,737 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,737 - PyWATER - DEBUG - Cluster No. : 76 Atoms : ['1e27_a_2244']
+2014-04-18 15:38:55,737 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,737 - PyWATER - DEBUG - Cluster No. : 77 Atoms : ['1i4f_a_515', '1agd_a_559', '1a1n_a_512', '1e27_a_2270', '1ed3_a_281']
+2014-04-18 15:38:55,737 - PyWATER - INFO - Degree of conservation is : 0.416666666667
+2014-04-18 15:38:55,737 - PyWATER - DEBUG - Cluster No. : 78 Atoms : ['1a1n_a_756', '1qlf_a_2065']
+2014-04-18 15:38:55,737 - PyWATER - INFO - Degree of conservation is : 0.166666666667
+2014-04-18 15:38:55,738 - PyWATER - DEBUG - Cluster No. : 79 Atoms : ['1mhc_a_388']
+2014-04-18 15:38:55,738 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,738 - PyWATER - DEBUG - Cluster No. : 80 Atoms : ['1i4f_a_766', '1e27_a_2278']
+2014-04-18 15:38:55,738 - PyWATER - INFO - Degree of conservation is : 0.166666666667
+2014-04-18 15:38:55,738 - PyWATER - DEBUG - Cluster No. : 81 Atoms : ['1qo3_a_2142']
+2014-04-18 15:38:55,738 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,738 - PyWATER - DEBUG - Cluster No. : 82 Atoms : ['1kbg_h_1118']
+2014-04-18 15:38:55,738 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,739 - PyWATER - DEBUG - Cluster No. : 83 Atoms : ['1agd_a_556', '1hsa_a_896', '1e27_a_2109', '1a1m_a_456']
+2014-04-18 15:38:55,739 - PyWATER - INFO - Degree of conservation is : 0.333333333333
+2014-04-18 15:38:55,739 - PyWATER - DEBUG - Cluster No. : 84 Atoms : ['1i4f_a_678']
+2014-04-18 15:38:55,739 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,739 - PyWATER - DEBUG - Cluster No. : 85 Atoms : ['1i4f_a_568', '1agd_a_513', '1hsa_a_644', '1a1n_a_513', '1e27_a_2248', '1a1m_a_327']
+2014-04-18 15:38:55,739 - PyWATER - INFO - Degree of conservation is : 0.5
+2014-04-18 15:38:55,739 - PyWATER - INFO - Here is conserved water molecule...
+2014-04-18 15:38:55,739 - PyWATER - DEBUG - Cluster No. : 86 Atoms : ['1a1n_a_758']
+2014-04-18 15:38:55,739 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,740 - PyWATER - DEBUG - Cluster No. : 87 Atoms : ['1a1n_a_514']
+2014-04-18 15:38:55,740 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,740 - PyWATER - DEBUG - Cluster No. : 88 Atoms : ['1agd_a_503', '1hsa_a_625', '1a1n_a_507', '1e27_a_2281', '1a1m_a_318', '1mhc_a_306']
+2014-04-18 15:38:55,740 - PyWATER - INFO - Degree of conservation is : 0.5
+2014-04-18 15:38:55,740 - PyWATER - INFO - Here is conserved water molecule...
+2014-04-18 15:38:55,740 - PyWATER - DEBUG - Cluster No. : 89 Atoms : ['1i4f_a_564', '1agd_a_501', '1hsa_a_637', '1a1n_a_1017', '1e27_a_2225', '1mhc_a_307']
+2014-04-18 15:38:55,740 - PyWATER - INFO - Degree of conservation is : 0.5
+2014-04-18 15:38:55,740 - PyWATER - INFO - Here is conserved water molecule...
+2014-04-18 15:38:55,741 - PyWATER - DEBUG - Cluster No. : 90 Atoms : ['1e27_a_2282']
+2014-04-18 15:38:55,741 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,741 - PyWATER - DEBUG - Cluster No. : 91 Atoms : ['1ed3_a_279']
+2014-04-18 15:38:55,741 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,741 - PyWATER - DEBUG - Cluster No. : 92 Atoms : ['1mhc_a_389']
+2014-04-18 15:38:55,741 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,741 - PyWATER - DEBUG - Cluster No. : 93 Atoms : ['1mhc_a_406']
+2014-04-18 15:38:55,741 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,741 - PyWATER - DEBUG - Cluster No. : 94 Atoms : ['1i4f_a_706']
+2014-04-18 15:38:55,742 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,742 - PyWATER - DEBUG - Cluster No. : 95 Atoms : ['1qo3_a_2156']
+2014-04-18 15:38:55,742 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,742 - PyWATER - DEBUG - Cluster No. : 96 Atoms : ['1i4f_a_735', '1agd_a_502', '1hsa_a_862', '1a1n_a_773', '1a1m_a_468']
+2014-04-18 15:38:55,742 - PyWATER - INFO - Degree of conservation is : 0.416666666667
+2014-04-18 15:38:55,742 - PyWATER - DEBUG - Cluster No. : 97 Atoms : ['1a1m_a_317']
+2014-04-18 15:38:55,742 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,742 - PyWATER - DEBUG - Cluster No. : 98 Atoms : ['1a1m_a_469']
+2014-04-18 15:38:55,742 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,742 - PyWATER - DEBUG - Cluster No. : 99 Atoms : ['1i4f_a_529', '1agd_a_403', '1a1n_a_641', '1e27_a_2269', '1mhc_a_314']
+2014-04-18 15:38:55,743 - PyWATER - INFO - Degree of conservation is : 0.416666666667
+2014-04-18 15:38:55,743 - PyWATER - DEBUG - Cluster No. : 100 Atoms : ['1qlf_a_2075']
+2014-04-18 15:38:55,743 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,743 - PyWATER - DEBUG - Cluster No. : 101 Atoms : ['1agd_a_560']
+2014-04-18 15:38:55,743 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,743 - PyWATER - DEBUG - Cluster No. : 102 Atoms : ['1e27_a_2279']
+2014-04-18 15:38:55,743 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,744 - PyWATER - DEBUG - Cluster No. : 103 Atoms : ['1agd_a_558', '1e27_a_2280']
+2014-04-18 15:38:55,744 - PyWATER - INFO - Degree of conservation is : 0.166666666667
+2014-04-18 15:38:55,744 - PyWATER - DEBUG - Cluster No. : 104 Atoms : ['1a1n_a_1019']
+2014-04-18 15:38:55,744 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,744 - PyWATER - DEBUG - Cluster No. : 105 Atoms : ['1mhc_a_333']
+2014-04-18 15:38:55,744 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,744 - PyWATER - DEBUG - Cluster No. : 106 Atoms : ['1i4f_a_767']
+2014-04-18 15:38:55,744 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,744 - PyWATER - DEBUG - Cluster No. : 107 Atoms : ['1hsa_a_658']
+2014-04-18 15:38:55,744 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,745 - PyWATER - DEBUG - Cluster No. : 108 Atoms : ['1hsa_a_651']
+2014-04-18 15:38:55,745 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,745 - PyWATER - DEBUG - Cluster No. : 109 Atoms : ['1i4f_a_545', '1a1n_a_744']
+2014-04-18 15:38:55,745 - PyWATER - INFO - Degree of conservation is : 0.166666666667
+2014-04-18 15:38:55,745 - PyWATER - DEBUG - Cluster No. : 110 Atoms : ['1i4f_a_749', '1a1n_a_745', '1e27_a_2222']
+2014-04-18 15:38:55,745 - PyWATER - INFO - Degree of conservation is : 0.25
+2014-04-18 15:38:55,746 - PyWATER - DEBUG - Cluster No. : 111 Atoms : ['1e27_a_2224']
+2014-04-18 15:38:55,746 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,746 - PyWATER - DEBUG - Cluster No. : 112 Atoms : ['1qo3_a_2135']
+2014-04-18 15:38:55,746 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,746 - PyWATER - DEBUG - Cluster No. : 113 Atoms : ['1qo3_a_2057']
+2014-04-18 15:38:55,746 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,746 - PyWATER - DEBUG - Cluster No. : 114 Atoms : ['1i4f_a_673', '1e27_a_2220', '1a1m_a_449']
+2014-04-18 15:38:55,746 - PyWATER - INFO - Degree of conservation is : 0.25
+2014-04-18 15:38:55,747 - PyWATER - DEBUG - Cluster No. : 115 Atoms : ['1i4f_a_511', '1agd_a_551', '1hsa_a_617', '1a1n_a_505', '1e27_a_2223', '1a1m_a_448']
+2014-04-18 15:38:55,747 - PyWATER - INFO - Degree of conservation is : 0.5
+2014-04-18 15:38:55,747 - PyWATER - INFO - Here is conserved water molecule...
+2014-04-18 15:38:55,747 - PyWATER - DEBUG - Cluster No. : 116 Atoms : ['1i4f_a_634']
+2014-04-18 15:38:55,747 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,747 - PyWATER - DEBUG - Cluster No. : 117 Atoms : ['1i4f_a_520', '1qo3_a_2134']
+2014-04-18 15:38:55,747 - PyWATER - INFO - Degree of conservation is : 0.166666666667
+2014-04-18 15:38:55,747 - PyWATER - DEBUG - Cluster No. : 118 Atoms : ['1qo3_a_2055']
+2014-04-18 15:38:55,747 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,748 - PyWATER - DEBUG - Cluster No. : 119 Atoms : ['1e27_a_2221', '1qo3_a_2133', '1ed3_a_305']
+2014-04-18 15:38:55,748 - PyWATER - INFO - Degree of conservation is : 0.25
+2014-04-18 15:38:55,748 - PyWATER - DEBUG - Cluster No. : 120 Atoms : ['1i4f_a_712']
+2014-04-18 15:38:55,748 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,748 - PyWATER - DEBUG - Cluster No. : 121 Atoms : ['1hsa_a_626']
+2014-04-18 15:38:55,749 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,749 - PyWATER - DEBUG - Cluster No. : 122 Atoms : ['1i4f_a_722', '1kbg_h_1130']
+2014-04-18 15:38:55,749 - PyWATER - INFO - Degree of conservation is : 0.166666666667
+2014-04-18 15:38:55,749 - PyWATER - DEBUG - Cluster No. : 123 Atoms : ['1i4f_a_546', '1qlf_a_2057']
+2014-04-18 15:38:55,749 - PyWATER - INFO - Degree of conservation is : 0.166666666667
+2014-04-18 15:38:55,749 - PyWATER - DEBUG - Cluster No. : 124 Atoms : ['1i4f_a_667', '1qo3_a_2136']
+2014-04-18 15:38:55,749 - PyWATER - INFO - Degree of conservation is : 0.166666666667
+2014-04-18 15:38:55,749 - PyWATER - DEBUG - Cluster No. : 125 Atoms : ['1i4f_a_617', '1agd_a_447', '1hsa_a_624', '1a1n_a_509', '1e27_a_2226']
+2014-04-18 15:38:55,749 - PyWATER - INFO - Degree of conservation is : 0.416666666667
+2014-04-18 15:38:55,750 - PyWATER - DEBUG - Cluster No. : 126 Atoms : ['1i4f_a_627']
+2014-04-18 15:38:55,750 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,750 - PyWATER - DEBUG - Cluster No. : 127 Atoms : ['1i4f_a_704']
+2014-04-18 15:38:55,750 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,750 - PyWATER - DEBUG - Cluster No. : 128 Atoms : ['1i4f_a_707', '1mhc_a_308']
+2014-04-18 15:38:55,750 - PyWATER - INFO - Degree of conservation is : 0.166666666667
+2014-04-18 15:38:55,750 - PyWATER - DEBUG - Cluster No. : 129 Atoms : ['1qlf_a_2080']
+2014-04-18 15:38:55,751 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,751 - PyWATER - DEBUG - Cluster No. : 130 Atoms : ['1i4f_a_651', '1i4f_a_787']
+2014-04-18 15:38:55,751 - PyWATER - DEBUG - Removing atoms from the same PDB in a cluster
+2014-04-18 15:38:55,751 - PyWATER - INFO - Degree of conservation is : 0.0
+2014-04-18 15:38:55,751 - PyWATER - DEBUG - Cluster No. : 131 Atoms : ['1ed3_a_283']
+2014-04-18 15:38:55,751 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,751 - PyWATER - DEBUG - Cluster No. : 132 Atoms : ['1i4f_a_607']
+2014-04-18 15:38:55,751 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,751 - PyWATER - DEBUG - Cluster No. : 133 Atoms : ['1agd_a_504', '1hsa_a_588']
+2014-04-18 15:38:55,752 - PyWATER - INFO - Degree of conservation is : 0.166666666667
+2014-04-18 15:38:55,752 - PyWATER - DEBUG - Cluster No. : 134 Atoms : ['1hsa_a_931']
+2014-04-18 15:38:55,752 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,752 - PyWATER - DEBUG - Cluster No. : 135 Atoms : ['1agd_a_450', '1a1n_a_743', '1e27_a_2246', '1a1m_a_352']
+2014-04-18 15:38:55,752 - PyWATER - INFO - Degree of conservation is : 0.333333333333
+2014-04-18 15:38:55,752 - PyWATER - DEBUG - Cluster No. : 136 Atoms : ['1agd_a_508', '1qlf_a_2072']
+2014-04-18 15:38:55,752 - PyWATER - INFO - Degree of conservation is : 0.166666666667
+2014-04-18 15:38:55,752 - PyWATER - DEBUG - Cluster No. : 137 Atoms : ['1i4f_a_711']
+2014-04-18 15:38:55,752 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,752 - PyWATER - DEBUG - Cluster No. : 138 Atoms : ['1i4f_a_645']
+2014-04-18 15:38:55,753 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,753 - PyWATER - DEBUG - Cluster No. : 139 Atoms : ['1i4f_a_709']
+2014-04-18 15:38:55,753 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,753 - PyWATER - DEBUG - Cluster No. : 140 Atoms : ['1agd_a_553', '1a1n_a_742', '1e27_a_2251', '1kbg_h_1139']
+2014-04-18 15:38:55,753 - PyWATER - INFO - Degree of conservation is : 0.333333333333
+2014-04-18 15:38:55,753 - PyWATER - DEBUG - Cluster No. : 141 Atoms : ['1agd_a_515', '1a1m_a_459']
+2014-04-18 15:38:55,753 - PyWATER - INFO - Degree of conservation is : 0.166666666667
+2014-04-18 15:38:55,754 - PyWATER - DEBUG - Cluster No. : 142 Atoms : ['1qlf_a_2068']
+2014-04-18 15:38:55,754 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,754 - PyWATER - DEBUG - Cluster No. : 143 Atoms : ['1e27_a_2249']
+2014-04-18 15:38:55,754 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,754 - PyWATER - DEBUG - Cluster No. : 144 Atoms : ['1hsa_a_642', '1mhc_a_385']
+2014-04-18 15:38:55,754 - PyWATER - INFO - Degree of conservation is : 0.166666666667
+2014-04-18 15:38:55,754 - PyWATER - DEBUG - Cluster No. : 145 Atoms : ['1e27_a_2227', '1qlf_a_2058']
+2014-04-18 15:38:55,754 - PyWATER - INFO - Degree of conservation is : 0.166666666667
+2014-04-18 15:38:55,754 - PyWATER - DEBUG - Cluster No. : 146 Atoms : ['1kbg_h_1142']
+2014-04-18 15:38:55,754 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,755 - PyWATER - DEBUG - Cluster No. : 147 Atoms : ['1kbg_h_1180']
+2014-04-18 15:38:55,755 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,755 - PyWATER - DEBUG - Cluster No. : 148 Atoms : ['1agd_a_446', '1a1n_a_1020']
+2014-04-18 15:38:55,755 - PyWATER - INFO - Degree of conservation is : 0.166666666667
+2014-04-18 15:38:55,755 - PyWATER - DEBUG - Cluster No. : 149 Atoms : ['1qlf_a_2056']
+2014-04-18 15:38:55,755 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,755 - PyWATER - DEBUG - Cluster No. : 150 Atoms : ['1hsa_a_549', '1ed3_a_294', '1mhc_a_330']
+2014-04-18 15:38:55,755 - PyWATER - INFO - Degree of conservation is : 0.25
+2014-04-18 15:38:55,756 - PyWATER - DEBUG - Cluster No. : 151 Atoms : ['1kbg_h_1107']
+2014-04-18 15:38:55,756 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,756 - PyWATER - DEBUG - Cluster No. : 152 Atoms : ['1i4f_a_579', '1a1n_a_1021', '1e27_a_2234']
+2014-04-18 15:38:55,756 - PyWATER - INFO - Degree of conservation is : 0.25
+2014-04-18 15:38:55,756 - PyWATER - DEBUG - Cluster No. : 153 Atoms : ['1agd_a_507', '1hsa_a_911', '1a1n_a_741', '1e27_a_2235', '1a1m_a_366']
+2014-04-18 15:38:55,756 - PyWATER - INFO - Degree of conservation is : 0.416666666667
+2014-04-18 15:38:55,756 - PyWATER - DEBUG - Cluster No. : 154 Atoms : ['1i4f_a_814']
+2014-04-18 15:38:55,756 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,756 - PyWATER - DEBUG - Cluster No. : 155 Atoms : ['1qlf_a_2060']
+2014-04-18 15:38:55,756 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,757 - PyWATER - DEBUG - Cluster No. : 156 Atoms : ['1i4f_a_731', '1e27_a_2028']
+2014-04-18 15:38:55,757 - PyWATER - INFO - Degree of conservation is : 0.166666666667
+2014-04-18 15:38:55,757 - PyWATER - DEBUG - Cluster No. : 157 Atoms : ['1agd_a_295', '1a1n_a_974', '1e27_a_2024']
+2014-04-18 15:38:55,757 - PyWATER - INFO - Degree of conservation is : 0.25
+2014-04-18 15:38:55,757 - PyWATER - DEBUG - Cluster No. : 158 Atoms : ['1agd_a_300']
+2014-04-18 15:38:55,757 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,757 - PyWATER - DEBUG - Cluster No. : 159 Atoms : ['1i4f_a_509']
+2014-04-18 15:38:55,757 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,758 - PyWATER - DEBUG - Cluster No. : 160 Atoms : ['1a1n_a_976', '1e27_a_2129']
+2014-04-18 15:38:55,758 - PyWATER - INFO - Degree of conservation is : 0.166666666667
+2014-04-18 15:38:55,758 - PyWATER - DEBUG - Cluster No. : 161 Atoms : ['1a1n_a_975']
+2014-04-18 15:38:55,758 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,758 - PyWATER - DEBUG - Cluster No. : 162 Atoms : ['1agd_a_298', '1a1m_a_400']
+2014-04-18 15:38:55,758 - PyWATER - INFO - Degree of conservation is : 0.166666666667
+2014-04-18 15:38:55,758 - PyWATER - DEBUG - Cluster No. : 163 Atoms : ['1agd_a_297', '1e27_a_2025', '1mhc_a_376']
+2014-04-18 15:38:55,758 - PyWATER - INFO - Degree of conservation is : 0.25
+2014-04-18 15:38:55,758 - PyWATER - DEBUG - Cluster No. : 164 Atoms : ['1i4f_a_569', '1agd_a_453', '1a1n_a_394', '1e27_a_2030', '1a1m_a_401']
+2014-04-18 15:38:55,759 - PyWATER - INFO - Degree of conservation is : 0.416666666667
+2014-04-18 15:38:55,759 - PyWATER - DEBUG - Cluster No. : 165 Atoms : ['1agd_a_293', '1e27_a_2010', '1a1m_a_405']
+2014-04-18 15:38:55,759 - PyWATER - INFO - Degree of conservation is : 0.25
+2014-04-18 15:38:55,759 - PyWATER - DEBUG - Cluster No. : 166 Atoms : ['1a1n_a_878']
+2014-04-18 15:38:55,759 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,759 - PyWATER - DEBUG - Cluster No. : 167 Atoms : ['1i4f_a_773', '1agd_a_355', '1hsa_a_858', '1a1n_a_393', '1e27_a_2006', '1a1m_a_399', '1mhc_a_337']
+2014-04-18 15:38:55,759 - PyWATER - INFO - Degree of conservation is : 0.583333333333
+2014-04-18 15:38:55,759 - PyWATER - INFO - Here is conserved water molecule...
+2014-04-18 15:38:55,759 - PyWATER - DEBUG - Cluster No. : 168 Atoms : ['1i4f_a_526', '1agd_a_292', '1hsa_a_534', '1a1n_a_386', '1e27_a_2020', '1a1m_a_314', '1qo3_a_2015', '1kbg_h_1145', '1ed3_a_292']
+2014-04-18 15:38:55,760 - PyWATER - INFO - Degree of conservation is : 0.75
+2014-04-18 15:38:55,760 - PyWATER - INFO - Here is conserved water molecule...
+2014-04-18 15:38:55,760 - PyWATER - DEBUG - Cluster No. : 169 Atoms : ['1a1m_a_403', '1qlf_a_2003']
+2014-04-18 15:38:55,760 - PyWATER - INFO - Degree of conservation is : 0.166666666667
+2014-04-18 15:38:55,760 - PyWATER - DEBUG - Cluster No. : 170 Atoms : ['1e27_a_2026']
+2014-04-18 15:38:55,760 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,761 - PyWATER - DEBUG - Cluster No. : 171 Atoms : ['1i4f_a_602']
+2014-04-18 15:38:55,761 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,761 - PyWATER - DEBUG - Cluster No. : 172 Atoms : ['1i4f_a_728']
+2014-04-18 15:38:55,761 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,761 - PyWATER - DEBUG - Cluster No. : 173 Atoms : ['1i4f_a_549']
+2014-04-18 15:38:55,761 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,761 - PyWATER - DEBUG - Cluster No. : 174 Atoms : ['1a1n_a_880']
+2014-04-18 15:38:55,761 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,761 - PyWATER - DEBUG - Cluster No. : 175 Atoms : ['1a1n_a_879']
+2014-04-18 15:38:55,761 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,761 - PyWATER - DEBUG - Cluster No. : 176 Atoms : ['1tmc_a_221', '1a1n_a_529', '1e27_a_2021', '1a1m_a_402']
+2014-04-18 15:38:55,762 - PyWATER - INFO - Degree of conservation is : 0.333333333333
+2014-04-18 15:38:55,762 - PyWATER - DEBUG - Cluster No. : 177 Atoms : ['1tmc_a_227']
+2014-04-18 15:38:55,762 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,762 - PyWATER - DEBUG - Cluster No. : 178 Atoms : ['1qo3_a_2019']
+2014-04-18 15:38:55,762 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,762 - PyWATER - DEBUG - Cluster No. : 179 Atoms : ['1agd_a_356', '1a1n_a_528', '1kbg_h_1104']
+2014-04-18 15:38:55,762 - PyWATER - INFO - Degree of conservation is : 0.25
+2014-04-18 15:38:55,762 - PyWATER - DEBUG - Cluster No. : 180 Atoms : ['1i4f_a_774', '1hsa_a_640']
+2014-04-18 15:38:55,763 - PyWATER - INFO - Degree of conservation is : 0.166666666667
+2014-04-18 15:38:55,763 - PyWATER - DEBUG - Cluster No. : 181 Atoms : ['1agd_a_457']
+2014-04-18 15:38:55,763 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,763 - PyWATER - DEBUG - Cluster No. : 182 Atoms : ['1agd_a_458']
+2014-04-18 15:38:55,763 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,763 - PyWATER - DEBUG - Cluster No. : 183 Atoms : ['1mhc_a_383']
+2014-04-18 15:38:55,763 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,763 - PyWATER - DEBUG - Cluster No. : 184 Atoms : ['1i4f_a_566', '1tmc_a_235', '1hsa_a_600', '1a1n_a_609', '1a1m_a_387', '1qlf_a_2033']
+2014-04-18 15:38:55,763 - PyWATER - INFO - Degree of conservation is : 0.5
+2014-04-18 15:38:55,763 - PyWATER - INFO - Here is conserved water molecule...
+2014-04-18 15:38:55,764 - PyWATER - DEBUG - Cluster No. : 185 Atoms : ['1qo3_a_2029']
+2014-04-18 15:38:55,764 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,764 - PyWATER - DEBUG - Cluster No. : 186 Atoms : ['1i4f_a_553', '1agd_a_405']
+2014-04-18 15:38:55,764 - PyWATER - INFO - Degree of conservation is : 0.166666666667
+2014-04-18 15:38:55,764 - PyWATER - DEBUG - Cluster No. : 187 Atoms : ['1i4f_a_518', '1agd_a_333', '1hsa_a_593', '1a1n_a_474', '1e27_a_2144', '1a1m_a_473', '1qlf_a_2038', '1qo3_a_2093']
+2014-04-18 15:38:55,764 - PyWATER - INFO - Degree of conservation is : 0.666666666667
+2014-04-18 15:38:55,764 - PyWATER - INFO - Here is conserved water molecule...
+2014-04-18 15:38:55,764 - PyWATER - DEBUG - Cluster No. : 188 Atoms : ['1i4f_a_586', '1agd_a_452', '1hsa_a_833', '1a1n_a_475', '1e27_a_2132', '1qo3_a_2085', '1mhc_a_296']
+2014-04-18 15:38:55,765 - PyWATER - INFO - Degree of conservation is : 0.583333333333
+2014-04-18 15:38:55,765 - PyWATER - INFO - Here is conserved water molecule...
+2014-04-18 15:38:55,765 - PyWATER - DEBUG - Cluster No. : 189 Atoms : ['1qo3_a_2086']
+2014-04-18 15:38:55,765 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,765 - PyWATER - DEBUG - Cluster No. : 190 Atoms : ['1agd_a_299', '1e27_a_2128']
+2014-04-18 15:38:55,765 - PyWATER - INFO - Degree of conservation is : 0.166666666667
+2014-04-18 15:38:55,765 - PyWATER - DEBUG - Cluster No. : 191 Atoms : ['1i4f_a_702', '1e27_a_2131', '1kbg_h_1131', '1ed3_a_318']
+2014-04-18 15:38:55,766 - PyWATER - INFO - Degree of conservation is : 0.333333333333
+2014-04-18 15:38:55,766 - PyWATER - DEBUG - Cluster No. : 192 Atoms : ['1e27_a_2011']
+2014-04-18 15:38:55,766 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,766 - PyWATER - DEBUG - Cluster No. : 193 Atoms : ['1a1n_a_476', '1mhc_a_393']
+2014-04-18 15:38:55,766 - PyWATER - INFO - Degree of conservation is : 0.166666666667
+2014-04-18 15:38:55,766 - PyWATER - DEBUG - Cluster No. : 194 Atoms : ['1i4f_a_761', '1qo3_a_2009']
+2014-04-18 15:38:55,766 - PyWATER - INFO - Degree of conservation is : 0.166666666667
+2014-04-18 15:38:55,766 - PyWATER - DEBUG - Cluster No. : 195 Atoms : ['1agd_a_357', '1a1n_a_1010']
+2014-04-18 15:38:55,766 - PyWATER - INFO - Degree of conservation is : 0.166666666667
+2014-04-18 15:38:55,766 - PyWATER - DEBUG - Cluster No. : 196 Atoms : ['1agd_a_311', '1a1m_a_386']
+2014-04-18 15:38:55,766 - PyWATER - INFO - Degree of conservation is : 0.166666666667
+2014-04-18 15:38:55,767 - PyWATER - DEBUG - Cluster No. : 197 Atoms : ['1a1n_a_401']
+2014-04-18 15:38:55,767 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,767 - PyWATER - DEBUG - Cluster No. : 198 Atoms : ['1i4f_a_756']
+2014-04-18 15:38:55,767 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,767 - PyWATER - DEBUG - Cluster No. : 199 Atoms : ['1i4f_a_757']
+2014-04-18 15:38:55,767 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,767 - PyWATER - DEBUG - Cluster No. : 200 Atoms : ['1agd_a_315', '1a1n_a_399']
+2014-04-18 15:38:55,767 - PyWATER - INFO - Degree of conservation is : 0.166666666667
+2014-04-18 15:38:55,768 - PyWATER - DEBUG - Cluster No. : 201 Atoms : ['1i4f_a_649']
+2014-04-18 15:38:55,768 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,768 - PyWATER - DEBUG - Cluster No. : 202 Atoms : ['1agd_a_314']
+2014-04-18 15:38:55,768 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,768 - PyWATER - DEBUG - Cluster No. : 203 Atoms : ['1agd_a_313', '1hsa_a_827', '1qo3_a_2012']
+2014-04-18 15:38:55,768 - PyWATER - INFO - Degree of conservation is : 0.25
+2014-04-18 15:38:55,768 - PyWATER - DEBUG - Cluster No. : 204 Atoms : ['1hsa_a_907']
+2014-04-18 15:38:55,768 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,768 - PyWATER - DEBUG - Cluster No. : 205 Atoms : ['1qlf_a_2017']
+2014-04-18 15:38:55,768 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,769 - PyWATER - DEBUG - Cluster No. : 206 Atoms : ['1i4f_a_508', '1hsa_a_836']
+2014-04-18 15:38:55,769 - PyWATER - INFO - Degree of conservation is : 0.166666666667
+2014-04-18 15:38:55,769 - PyWATER - DEBUG - Cluster No. : 207 Atoms : ['1agd_a_312']
+2014-04-18 15:38:55,769 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,769 - PyWATER - DEBUG - Cluster No. : 208 Atoms : ['1e27_a_2065', '1kbg_h_1128']
+2014-04-18 15:38:55,769 - PyWATER - INFO - Degree of conservation is : 0.166666666667
+2014-04-18 15:38:55,769 - PyWATER - DEBUG - Cluster No. : 209 Atoms : ['1tmc_a_245']
+2014-04-18 15:38:55,769 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,769 - PyWATER - DEBUG - Cluster No. : 210 Atoms : ['1agd_a_305']
+2014-04-18 15:38:55,770 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,770 - PyWATER - DEBUG - Cluster No. : 211 Atoms : ['1agd_a_306']
+2014-04-18 15:38:55,770 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,770 - PyWATER - DEBUG - Cluster No. : 212 Atoms : ['1agd_a_303', '1mhc_a_409']
+2014-04-18 15:38:55,770 - PyWATER - INFO - Degree of conservation is : 0.166666666667
+2014-04-18 15:38:55,770 - PyWATER - DEBUG - Cluster No. : 213 Atoms : ['1agd_a_304']
+2014-04-18 15:38:55,770 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,770 - PyWATER - DEBUG - Cluster No. : 214 Atoms : ['1mhc_a_317']
+2014-04-18 15:38:55,770 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,770 - PyWATER - DEBUG - Cluster No. : 215 Atoms : ['1agd_a_459', '1a1n_a_530']
+2014-04-18 15:38:55,770 - PyWATER - INFO - Degree of conservation is : 0.166666666667
+2014-04-18 15:38:55,770 - PyWATER - DEBUG - Cluster No. : 216 Atoms : ['1agd_a_456']
+2014-04-18 15:38:55,771 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,771 - PyWATER - DEBUG - Cluster No. : 217 Atoms : ['1agd_a_301', '1a1n_a_390', '1e27_a_2027', '1a1m_a_316']
+2014-04-18 15:38:55,771 - PyWATER - INFO - Degree of conservation is : 0.333333333333
+2014-04-18 15:38:55,771 - PyWATER - DEBUG - Cluster No. : 218 Atoms : ['1agd_a_302', '1hsa_a_607', '1a1n_a_391', '1e27_a_2032', '1qo3_a_2016']
+2014-04-18 15:38:55,771 - PyWATER - INFO - Degree of conservation is : 0.416666666667
+2014-04-18 15:38:55,771 - PyWATER - DEBUG - Cluster No. : 219 Atoms : ['1i4f_a_648', '1a1n_a_397', '1a1m_a_324']
+2014-04-18 15:38:55,771 - PyWATER - INFO - Degree of conservation is : 0.25
+2014-04-18 15:38:55,771 - PyWATER - DEBUG - Cluster No. : 220 Atoms : ['1i4f_a_755', '1hsa_a_878']
+2014-04-18 15:38:55,771 - PyWATER - INFO - Degree of conservation is : 0.166666666667
+2014-04-18 15:38:55,771 - PyWATER - DEBUG - Cluster No. : 221 Atoms : ['1i4f_a_697', '1agd_a_310', '1hsa_a_623', '1a1n_a_389', '1e27_a_2058', '1a1m_a_347', '1qo3_a_2032', '1kbg_h_1152']
+2014-04-18 15:38:55,772 - PyWATER - INFO - Degree of conservation is : 0.666666666667
+2014-04-18 15:38:55,772 - PyWATER - INFO - Here is conserved water molecule...
+2014-04-18 15:38:55,772 - PyWATER - DEBUG - Cluster No. : 222 Atoms : ['1mhc_a_378']
+2014-04-18 15:38:55,772 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,772 - PyWATER - DEBUG - Cluster No. : 223 Atoms : ['1agd_a_572', '1a1n_a_882']
+2014-04-18 15:38:55,772 - PyWATER - INFO - Degree of conservation is : 0.166666666667
+2014-04-18 15:38:55,772 - PyWATER - DEBUG - Cluster No. : 224 Atoms : ['1agd_a_475', '1a1m_a_370', '1qo3_a_2069']
+2014-04-18 15:38:55,772 - PyWATER - INFO - Degree of conservation is : 0.25
+2014-04-18 15:38:55,773 - PyWATER - DEBUG - Cluster No. : 225 Atoms : ['1agd_a_412', '1a1n_a_881', '1e27_a_2033', '1mhc_a_336']
+2014-04-18 15:38:55,773 - PyWATER - INFO - Degree of conservation is : 0.333333333333
+2014-04-18 15:38:55,773 - PyWATER - DEBUG - Cluster No. : 226 Atoms : ['1e27_a_2012']
+2014-04-18 15:38:55,773 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,773 - PyWATER - DEBUG - Cluster No. : 227 Atoms : ['1agd_a_294', '1a1m_a_404']
+2014-04-18 15:38:55,773 - PyWATER - INFO - Degree of conservation is : 0.166666666667
+2014-04-18 15:38:55,773 - PyWATER - DEBUG - Cluster No. : 228 Atoms : ['1qlf_a_2004']
+2014-04-18 15:38:55,773 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,773 - PyWATER - DEBUG - Cluster No. : 229 Atoms : ['1mhc_a_343']
+2014-04-18 15:38:55,773 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,773 - PyWATER - DEBUG - Cluster No. : 230 Atoms : ['1i4f_a_504', '1tmc_a_185', '1hsa_a_531', '1qo3_a_2064', '1kbg_h_1119']
+2014-04-18 15:38:55,774 - PyWATER - INFO - Degree of conservation is : 0.416666666667
+2014-04-18 15:38:55,774 - PyWATER - DEBUG - Cluster No. : 231 Atoms : ['1mhc_a_287']
+2014-04-18 15:38:55,774 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,774 - PyWATER - DEBUG - Cluster No. : 232 Atoms : ['1i4f_a_561', '1tmc_a_223', '1hsa_a_556', '1qo3_a_2063', '1kbg_h_1148']
+2014-04-18 15:38:55,774 - PyWATER - INFO - Degree of conservation is : 0.416666666667
+2014-04-18 15:38:55,774 - PyWATER - DEBUG - Cluster No. : 233 Atoms : ['1mhc_a_377']
+2014-04-18 15:38:55,774 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,774 - PyWATER - DEBUG - Cluster No. : 234 Atoms : ['1qo3_a_2066', '1ed3_a_316']
+2014-04-18 15:38:55,775 - PyWATER - INFO - Degree of conservation is : 0.166666666667
+2014-04-18 15:38:55,775 - PyWATER - DEBUG - Cluster No. : 235 Atoms : ['1agd_a_309', '1hsa_a_909', '1a1n_a_395', '1e27_a_2059', '1a1m_a_391', '1qlf_a_2014', '1qo3_a_2033', '1kbg_h_1143']
+2014-04-18 15:38:55,775 - PyWATER - INFO - Degree of conservation is : 0.666666666667
+2014-04-18 15:38:55,775 - PyWATER - INFO - Here is conserved water molecule...
+2014-04-18 15:38:55,775 - PyWATER - DEBUG - Cluster No. : 236 Atoms : ['1i4f_a_694', '1e27_a_2105']
+2014-04-18 15:38:55,775 - PyWATER - INFO - Degree of conservation is : 0.166666666667
+2014-04-18 15:38:55,775 - PyWATER - DEBUG - Cluster No. : 237 Atoms : ['1i4f_a_720', '1agd_a_308', '1a1n_a_978', '1a1m_a_393', '1qo3_a_2065']
+2014-04-18 15:38:55,775 - PyWATER - INFO - Degree of conservation is : 0.416666666667
+2014-04-18 15:38:55,775 - PyWATER - DEBUG - Cluster No. : 238 Atoms : ['1agd_a_329', '1hsa_a_888', '1a1n_a_396', '1a1m_a_303', '1qo3_a_2067', '1mhc_a_323']
+2014-04-18 15:38:55,775 - PyWATER - INFO - Degree of conservation is : 0.5
+2014-04-18 15:38:55,775 - PyWATER - INFO - Here is conserved water molecule...
+2014-04-18 15:38:55,776 - PyWATER - DEBUG - Cluster No. : 239 Atoms : ['1i4f_a_671']
+2014-04-18 15:38:55,776 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,776 - PyWATER - DEBUG - Cluster No. : 240 Atoms : ['1agd_a_538']
+2014-04-18 15:38:55,776 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,776 - PyWATER - DEBUG - Cluster No. : 241 Atoms : ['1a1n_a_440']
+2014-04-18 15:38:55,776 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,776 - PyWATER - DEBUG - Cluster No. : 242 Atoms : ['1agd_a_571', '1mhc_a_324']
+2014-04-18 15:38:55,777 - PyWATER - INFO - Degree of conservation is : 0.166666666667
+2014-04-18 15:38:55,777 - PyWATER - DEBUG - Cluster No. : 243 Atoms : ['1i4f_a_583']
+2014-04-18 15:38:55,777 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,777 - PyWATER - DEBUG - Cluster No. : 244 Atoms : ['1mhc_a_358']
+2014-04-18 15:38:55,777 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,777 - PyWATER - DEBUG - Cluster No. : 245 Atoms : ['1mhc_a_373']
+2014-04-18 15:38:55,777 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,777 - PyWATER - DEBUG - Cluster No. : 246 Atoms : ['1mhc_a_384']
+2014-04-18 15:38:55,777 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,778 - PyWATER - DEBUG - Cluster No. : 247 Atoms : ['1mhc_a_290']
+2014-04-18 15:38:55,778 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,778 - PyWATER - DEBUG - Cluster No. : 248 Atoms : ['1mhc_a_291']
+2014-04-18 15:38:55,778 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,778 - PyWATER - DEBUG - Cluster No. : 249 Atoms : ['1i4f_a_646', '1agd_a_533', '1agd_a_569', '1e27_a_2107']
+2014-04-18 15:38:55,778 - PyWATER - DEBUG - Removing atoms from the same PDB in a cluster
+2014-04-18 15:38:55,778 - PyWATER - INFO - Degree of conservation is : 0.166666666667
+2014-04-18 15:38:55,778 - PyWATER - DEBUG - Cluster No. : 250 Atoms : ['1agd_a_282', '1hsa_a_510', '1a1m_a_323', '1kbg_h_1136']
+2014-04-18 15:38:55,778 - PyWATER - INFO - Degree of conservation is : 0.333333333333
+2014-04-18 15:38:55,778 - PyWATER - DEBUG - Cluster No. : 251 Atoms : ['1qo3_a_2068', '1kbg_h_1163']
+2014-04-18 15:38:55,779 - PyWATER - INFO - Degree of conservation is : 0.166666666667
+2014-04-18 15:38:55,779 - PyWATER - DEBUG - Cluster No. : 252 Atoms : ['1tmc_a_231', '1agd_a_566', '1qo3_a_2007']
+2014-04-18 15:38:55,779 - PyWATER - INFO - Degree of conservation is : 0.25
+2014-04-18 15:38:55,779 - PyWATER - DEBUG - Cluster No. : 253 Atoms : ['1agd_a_567']
+2014-04-18 15:38:55,779 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,780 - PyWATER - DEBUG - Cluster No. : 254 Atoms : ['1i4f_a_525', '1tmc_a_183', '1agd_a_565', '1a1n_a_700', '1e27_a_2101', '1qo3_a_2060']
+2014-04-18 15:38:55,780 - PyWATER - INFO - Degree of conservation is : 0.5
+2014-04-18 15:38:55,780 - PyWATER - INFO - Here is conserved water molecule...
+2014-04-18 15:38:55,780 - PyWATER - DEBUG - Cluster No. : 255 Atoms : ['1i4f_a_668', '1agd_a_570', '1a1n_a_701', '1e27_a_2103', '1qo3_a_2022', '1kbg_h_1178']
+2014-04-18 15:38:55,780 - PyWATER - INFO - Degree of conservation is : 0.5
+2014-04-18 15:38:55,780 - PyWATER - INFO - Here is conserved water molecule...
+2014-04-18 15:38:55,780 - PyWATER - DEBUG - Cluster No. : 256 Atoms : ['1i4f_a_726']
+2014-04-18 15:38:55,780 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,781 - PyWATER - DEBUG - Cluster No. : 257 Atoms : ['1i4f_a_732']
+2014-04-18 15:38:55,781 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,781 - PyWATER - DEBUG - Cluster No. : 258 Atoms : ['1e27_a_2183']
+2014-04-18 15:38:55,781 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,781 - PyWATER - DEBUG - Cluster No. : 259 Atoms : ['1a1n_a_498', '1a1m_a_440']
+2014-04-18 15:38:55,781 - PyWATER - INFO - Degree of conservation is : 0.166666666667
+2014-04-18 15:38:55,781 - PyWATER - DEBUG - Cluster No. : 260 Atoms : ['1i4f_a_689', '1agd_a_427', '1ed3_a_276']
+2014-04-18 15:38:55,781 - PyWATER - INFO - Degree of conservation is : 0.25
+2014-04-18 15:38:55,781 - PyWATER - DEBUG - Cluster No. : 261 Atoms : ['1tmc_a_208']
+2014-04-18 15:38:55,782 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,782 - PyWATER - DEBUG - Cluster No. : 262 Atoms : ['1a1n_a_961']
+2014-04-18 15:38:55,782 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,782 - PyWATER - DEBUG - Cluster No. : 263 Atoms : ['1i4f_a_700', '1agd_a_426', '1a1n_a_587', '1qo3_a_2113']
+2014-04-18 15:38:55,782 - PyWATER - INFO - Degree of conservation is : 0.333333333333
+2014-04-18 15:38:55,782 - PyWATER - DEBUG - Cluster No. : 264 Atoms : ['1i4f_a_558', '1tmc_a_187', '1agd_a_424', '1e27_a_2176', '1qo3_a_2109', '1kbg_h_1170']
+2014-04-18 15:38:55,782 - PyWATER - INFO - Degree of conservation is : 0.5
+2014-04-18 15:38:55,782 - PyWATER - INFO - Here is conserved water molecule...
+2014-04-18 15:38:55,783 - PyWATER - DEBUG - Cluster No. : 265 Atoms : ['1a1n_a_956']
+2014-04-18 15:38:55,783 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,783 - PyWATER - DEBUG - Cluster No. : 266 Atoms : ['1agd_a_388', '1qo3_a_2110']
+2014-04-18 15:38:55,783 - PyWATER - INFO - Degree of conservation is : 0.166666666667
+2014-04-18 15:38:55,783 - PyWATER - DEBUG - Cluster No. : 267 Atoms : ['1a1n_a_781', '1e27_a_2178']
+2014-04-18 15:38:55,783 - PyWATER - INFO - Degree of conservation is : 0.166666666667
+2014-04-18 15:38:55,783 - PyWATER - DEBUG - Cluster No. : 268 Atoms : ['1a1n_a_780']
+2014-04-18 15:38:55,783 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,783 - PyWATER - DEBUG - Cluster No. : 269 Atoms : ['1a1n_a_952']
+2014-04-18 15:38:55,783 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,783 - PyWATER - DEBUG - Cluster No. : 270 Atoms : ['1a1n_a_955']
+2014-04-18 15:38:55,784 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,784 - PyWATER - DEBUG - Cluster No. : 271 Atoms : ['1i4f_a_626', '1agd_a_531', '1a1n_a_954']
+2014-04-18 15:38:55,784 - PyWATER - INFO - Degree of conservation is : 0.25
+2014-04-18 15:38:55,784 - PyWATER - DEBUG - Cluster No. : 272 Atoms : ['1i4f_a_517', '1tmc_a_209', '1agd_a_423', '1hsa_a_584', '1e27_a_2179', '1qo3_a_2111']
+2014-04-18 15:38:55,784 - PyWATER - INFO - Degree of conservation is : 0.5
+2014-04-18 15:38:55,784 - PyWATER - INFO - Here is conserved water molecule...
+2014-04-18 15:38:55,785 - PyWATER - DEBUG - Cluster No. : 273 Atoms : ['1i4f_a_661', '1agd_a_425', '1a1n_a_953']
+2014-04-18 15:38:55,785 - PyWATER - INFO - Degree of conservation is : 0.25
+2014-04-18 15:38:55,785 - PyWATER - DEBUG - Cluster No. : 274 Atoms : ['1a1n_a_497', '1e27_a_2172']
+2014-04-18 15:38:55,785 - PyWATER - INFO - Degree of conservation is : 0.166666666667
+2014-04-18 15:38:55,785 - PyWATER - DEBUG - Cluster No. : 275 Atoms : ['1e27_a_2181']
+2014-04-18 15:38:55,785 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,785 - PyWATER - DEBUG - Cluster No. : 276 Atoms : ['1i4f_a_613', '1e27_a_2175']
+2014-04-18 15:38:55,785 - PyWATER - INFO - Degree of conservation is : 0.166666666667
+2014-04-18 15:38:55,785 - PyWATER - DEBUG - Cluster No. : 277 Atoms : ['1a1n_a_947']
+2014-04-18 15:38:55,785 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,785 - PyWATER - DEBUG - Cluster No. : 278 Atoms : ['1agd_a_487', '1a1n_a_628', '1a1m_a_329']
+2014-04-18 15:38:55,786 - PyWATER - INFO - Degree of conservation is : 0.25
+2014-04-18 15:38:55,786 - PyWATER - DEBUG - Cluster No. : 279 Atoms : ['1i4f_a_672', '1agd_a_347', '1hsa_a_540', '1a1n_a_349', '1e27_a_2182', '1a1m_a_325', '1qlf_a_2048']
+2014-04-18 15:38:55,786 - PyWATER - INFO - Degree of conservation is : 0.583333333333
+2014-04-18 15:38:55,786 - PyWATER - INFO - Here is conserved water molecule...
+2014-04-18 15:38:55,786 - PyWATER - DEBUG - Cluster No. : 280 Atoms : ['1agd_a_485', '1hsa_a_843', '1a1n_a_945', '1e27_a_2161', '1kbg_h_1150']
+2014-04-18 15:38:55,786 - PyWATER - INFO - Degree of conservation is : 0.416666666667
+2014-04-18 15:38:55,786 - PyWATER - DEBUG - Cluster No. : 281 Atoms : ['1agd_a_389', '1a1n_a_626']
+2014-04-18 15:38:55,786 - PyWATER - INFO - Degree of conservation is : 0.166666666667
+2014-04-18 15:38:55,787 - PyWATER - DEBUG - Cluster No. : 282 Atoms : ['1a1n_a_625']
+2014-04-18 15:38:55,787 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,787 - PyWATER - DEBUG - Cluster No. : 283 Atoms : ['1agd_a_390', '1e27_a_2180']
+2014-04-18 15:38:55,787 - PyWATER - INFO - Degree of conservation is : 0.166666666667
+2014-04-18 15:38:55,787 - PyWATER - DEBUG - Cluster No. : 284 Atoms : ['1agd_a_391']
+2014-04-18 15:38:55,787 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,787 - PyWATER - DEBUG - Cluster No. : 285 Atoms : ['1mhc_a_302']
+2014-04-18 15:38:55,787 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,787 - PyWATER - DEBUG - Cluster No. : 286 Atoms : ['1a1n_a_731']
+2014-04-18 15:38:55,787 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,788 - PyWATER - DEBUG - Cluster No. : 287 Atoms : ['1a1n_a_734']
+2014-04-18 15:38:55,788 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,788 - PyWATER - DEBUG - Cluster No. : 288 Atoms : ['1tmc_a_197']
+2014-04-18 15:38:55,788 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,788 - PyWATER - DEBUG - Cluster No. : 289 Atoms : ['1i4f_a_506', '1tmc_a_189', '1agd_a_349', '1hsa_a_563', '1a1n_a_347', '1e27_a_2185', '1a1m_a_332', '1qlf_a_2049', '1qo3_a_2112', '1kbg_h_1146']
+2014-04-18 15:38:55,788 - PyWATER - INFO - Degree of conservation is : 0.833333333333
+2014-04-18 15:38:55,788 - PyWATER - INFO - Here is conserved water molecule...
+2014-04-18 15:38:55,788 - PyWATER - DEBUG - Cluster No. : 290 Atoms : ['1i4f_a_587', '1tmc_a_220', '1e27_a_2160']
+2014-04-18 15:38:55,788 - PyWATER - INFO - Degree of conservation is : 0.25
+2014-04-18 15:38:55,788 - PyWATER - DEBUG - Cluster No. : 291 Atoms : ['1i4f_a_666', '1agd_a_484', '1a1n_a_1001', '1e27_a_2186', '1a1m_a_315']
+2014-04-18 15:38:55,789 - PyWATER - INFO - Degree of conservation is : 0.416666666667
+2014-04-18 15:38:55,789 - PyWATER - DEBUG - Cluster No. : 292 Atoms : ['1agd_a_492', '1e27_a_2190']
+2014-04-18 15:38:55,789 - PyWATER - INFO - Degree of conservation is : 0.166666666667
+2014-04-18 15:38:55,789 - PyWATER - DEBUG - Cluster No. : 293 Atoms : ['1e27_a_2192']
+2014-04-18 15:38:55,789 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,789 - PyWATER - DEBUG - Cluster No. : 294 Atoms : ['1agd_a_491', '1mhc_a_361']
+2014-04-18 15:38:55,789 - PyWATER - INFO - Degree of conservation is : 0.166666666667
+2014-04-18 15:38:55,790 - PyWATER - DEBUG - Cluster No. : 295 Atoms : ['1i4f_a_802']
+2014-04-18 15:38:55,790 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,790 - PyWATER - DEBUG - Cluster No. : 296 Atoms : ['1hsa_a_839']
+2014-04-18 15:38:55,790 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,790 - PyWATER - DEBUG - Cluster No. : 297 Atoms : ['1i4f_a_562', '1tmc_a_186', '1agd_a_335', '1hsa_a_657', '1a1n_a_337', '1a1m_a_302', '1kbg_h_1151', '1ed3_a_280', '1mhc_a_327']
+2014-04-18 15:38:55,790 - PyWATER - INFO - Degree of conservation is : 0.75
+2014-04-18 15:38:55,790 - PyWATER - INFO - Here is conserved water molecule...
+2014-04-18 15:38:55,790 - PyWATER - DEBUG - Cluster No. : 298 Atoms : ['1agd_a_419', '1a1n_a_336', '1e27_a_2154']
+2014-04-18 15:38:55,790 - PyWATER - INFO - Degree of conservation is : 0.25
+2014-04-18 15:38:55,790 - PyWATER - DEBUG - Cluster No. : 299 Atoms : ['1i4f_a_792', '1ed3_a_304']
+2014-04-18 15:38:55,790 - PyWATER - INFO - Degree of conservation is : 0.166666666667
+2014-04-18 15:38:55,791 - PyWATER - DEBUG - Cluster No. : 300 Atoms : ['1i4f_a_686']
+2014-04-18 15:38:55,791 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,791 - PyWATER - DEBUG - Cluster No. : 301 Atoms : ['1mhc_a_368']
+2014-04-18 15:38:55,791 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,791 - PyWATER - DEBUG - Cluster No. : 302 Atoms : ['1e27_a_2195']
+2014-04-18 15:38:55,791 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,791 - PyWATER - DEBUG - Cluster No. : 303 Atoms : ['1agd_a_481', '1mhc_a_299']
+2014-04-18 15:38:55,791 - PyWATER - INFO - Degree of conservation is : 0.166666666667
+2014-04-18 15:38:55,792 - PyWATER - DEBUG - Cluster No. : 304 Atoms : ['1a1n_a_998', '1e27_a_2155']
+2014-04-18 15:38:55,792 - PyWATER - INFO - Degree of conservation is : 0.166666666667
+2014-04-18 15:38:55,792 - PyWATER - DEBUG - Cluster No. : 305 Atoms : ['1mhc_a_319']
+2014-04-18 15:38:55,792 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,792 - PyWATER - DEBUG - Cluster No. : 306 Atoms : ['1a1n_a_999']
+2014-04-18 15:38:55,792 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,792 - PyWATER - DEBUG - Cluster No. : 307 Atoms : ['1e27_a_2068', '1ed3_a_284']
+2014-04-18 15:38:55,792 - PyWATER - INFO - Degree of conservation is : 0.166666666667
+2014-04-18 15:38:55,792 - PyWATER - DEBUG - Cluster No. : 308 Atoms : ['1i4f_a_635', '1tmc_a_200', '1e27_a_2158', '1qo3_a_2104', '1mhc_a_300']
+2014-04-18 15:38:55,792 - PyWATER - INFO - Degree of conservation is : 0.416666666667
+2014-04-18 15:38:55,792 - PyWATER - DEBUG - Cluster No. : 309 Atoms : ['1i4f_a_782']
+2014-04-18 15:38:55,793 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,793 - PyWATER - DEBUG - Cluster No. : 310 Atoms : ['1hsa_a_807']
+2014-04-18 15:38:55,793 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,793 - PyWATER - DEBUG - Cluster No. : 311 Atoms : ['1i4f_a_688', '1a1n_a_490', '1qlf_a_2042', '1qo3_a_2102', '1ed3_a_285']
+2014-04-18 15:38:55,793 - PyWATER - INFO - Degree of conservation is : 0.416666666667
+2014-04-18 15:38:55,793 - PyWATER - DEBUG - Cluster No. : 312 Atoms : ['1i4f_a_801', '1agd_a_546', '1a1n_a_944']
+2014-04-18 15:38:55,793 - PyWATER - INFO - Degree of conservation is : 0.25
+2014-04-18 15:38:55,793 - PyWATER - DEBUG - Cluster No. : 313 Atoms : ['1hsa_a_601', '1qlf_a_2043']
+2014-04-18 15:38:55,793 - PyWATER - INFO - Degree of conservation is : 0.166666666667
+2014-04-18 15:38:55,793 - PyWATER - DEBUG - Cluster No. : 314 Atoms : ['1hsa_a_800']
+2014-04-18 15:38:55,793 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,794 - PyWATER - DEBUG - Cluster No. : 315 Atoms : ['1i4f_a_753', '1agd_a_337', '1a1n_a_342', '1e27_a_2139', '1a1m_a_438', '1qo3_a_2090']
+2014-04-18 15:38:55,794 - PyWATER - INFO - Degree of conservation is : 0.5
+2014-04-18 15:38:55,794 - PyWATER - INFO - Here is conserved water molecule...
+2014-04-18 15:38:55,794 - PyWATER - DEBUG - Cluster No. : 316 Atoms : ['1i4f_a_523', '1tmc_a_196', '1agd_a_336', '1hsa_a_587', '1a1n_a_338', '1e27_a_2153', '1qo3_a_2099', '1ed3_a_320', '1mhc_a_297']
+2014-04-18 15:38:55,794 - PyWATER - INFO - Degree of conservation is : 0.75
+2014-04-18 15:38:55,794 - PyWATER - INFO - Here is conserved water molecule...
+2014-04-18 15:38:55,795 - PyWATER - DEBUG - Cluster No. : 317 Atoms : ['1i4f_a_570', '1hsa_a_571', '1a1m_a_432', '1kbg_h_1176', '1ed3_a_310', '1mhc_a_402']
+2014-04-18 15:38:55,795 - PyWATER - INFO - Degree of conservation is : 0.5
+2014-04-18 15:38:55,795 - PyWATER - INFO - Here is conserved water molecule...
+2014-04-18 15:38:55,795 - PyWATER - DEBUG - Cluster No. : 318 Atoms : ['1qo3_a_2089']
+2014-04-18 15:38:55,795 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,795 - PyWATER - DEBUG - Cluster No. : 319 Atoms : ['1i4f_a_790', '1agd_a_386', '1a1n_a_341']
+2014-04-18 15:38:55,795 - PyWATER - INFO - Degree of conservation is : 0.25
+2014-04-18 15:38:55,795 - PyWATER - DEBUG - Cluster No. : 320 Atoms : ['1hsa_a_631', '1a1n_a_623', '1qo3_a_2101', '1mhc_a_403']
+2014-04-18 15:38:55,795 - PyWATER - INFO - Degree of conservation is : 0.333333333333
+2014-04-18 15:38:55,796 - PyWATER - DEBUG - Cluster No. : 321 Atoms : ['1agd_a_382', '1a1n_a_619']
+2014-04-18 15:38:55,796 - PyWATER - INFO - Degree of conservation is : 0.166666666667
+2014-04-18 15:38:55,796 - PyWATER - DEBUG - Cluster No. : 322 Atoms : ['1i4f_a_685', '1a1n_a_994', '1e27_a_2138', '1qo3_a_2100', '1kbg_h_1156']
+2014-04-18 15:38:55,796 - PyWATER - INFO - Degree of conservation is : 0.416666666667
+2014-04-18 15:38:55,796 - PyWATER - DEBUG - Cluster No. : 323 Atoms : ['1a1n_a_995']
+2014-04-18 15:38:55,796 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,796 - PyWATER - DEBUG - Cluster No. : 324 Atoms : ['1agd_a_482', '1qo3_a_2088']
+2014-04-18 15:38:55,797 - PyWATER - INFO - Degree of conservation is : 0.166666666667
+2014-04-18 15:38:55,797 - PyWATER - DEBUG - Cluster No. : 325 Atoms : ['1agd_a_547', '1a1n_a_997', '1a1m_a_434']
+2014-04-18 15:38:55,797 - PyWATER - INFO - Degree of conservation is : 0.25
+2014-04-18 15:38:55,797 - PyWATER - DEBUG - Cluster No. : 326 Atoms : ['1a1m_a_433']
+2014-04-18 15:38:55,797 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,797 - PyWATER - DEBUG - Cluster No. : 327 Atoms : ['1a1n_a_996', '1e27_a_2157', '1qo3_a_2103']
+2014-04-18 15:38:55,797 - PyWATER - INFO - Degree of conservation is : 0.25
+2014-04-18 15:38:55,797 - PyWATER - DEBUG - Cluster No. : 328 Atoms : ['1a1n_a_1000', '1e27_a_2156']
+2014-04-18 15:38:55,797 - PyWATER - INFO - Degree of conservation is : 0.166666666667
+2014-04-18 15:38:55,798 - PyWATER - DEBUG - Cluster No. : 329 Atoms : ['1a1m_a_435']
+2014-04-18 15:38:55,798 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,798 - PyWATER - DEBUG - Cluster No. : 330 Atoms : ['1tmc_a_179', '1a1m_a_321']
+2014-04-18 15:38:55,798 - PyWATER - INFO - Degree of conservation is : 0.166666666667
+2014-04-18 15:38:55,798 - PyWATER - DEBUG - Cluster No. : 331 Atoms : ['1i4f_a_727', '1a1n_a_306']
+2014-04-18 15:38:55,798 - PyWATER - INFO - Degree of conservation is : 0.166666666667
+2014-04-18 15:38:55,798 - PyWATER - DEBUG - Cluster No. : 332 Atoms : ['1a1n_a_303']
+2014-04-18 15:38:55,798 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,798 - PyWATER - DEBUG - Cluster No. : 333 Atoms : ['1tmc_a_177', '1agd_a_334', '1hsa_a_513']
+2014-04-18 15:38:55,798 - PyWATER - INFO - Degree of conservation is : 0.25
+2014-04-18 15:38:55,799 - PyWATER - DEBUG - Cluster No. : 334 Atoms : ['1tmc_a_193']
+2014-04-18 15:38:55,799 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,799 - PyWATER - DEBUG - Cluster No. : 335 Atoms : ['1i4f_a_636', '1hsa_a_509']
+2014-04-18 15:38:55,799 - PyWATER - INFO - Degree of conservation is : 0.166666666667
+2014-04-18 15:38:55,799 - PyWATER - DEBUG - Cluster No. : 336 Atoms : ['1agd_a_283']
+2014-04-18 15:38:55,799 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,800 - PyWATER - DEBUG - Cluster No. : 337 Atoms : ['1qlf_a_2034']
+2014-04-18 15:38:55,800 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,800 - PyWATER - DEBUG - Cluster No. : 338 Atoms : ['1i4f_a_535', '1tmc_a_191', '1ed3_a_288']
+2014-04-18 15:38:55,800 - PyWATER - INFO - Degree of conservation is : 0.25
+2014-04-18 15:38:55,800 - PyWATER - DEBUG - Cluster No. : 339 Atoms : ['1hsa_a_504', '1kbg_h_1106']
+2014-04-18 15:38:55,800 - PyWATER - INFO - Degree of conservation is : 0.166666666667
+2014-04-18 15:38:55,800 - PyWATER - DEBUG - Cluster No. : 340 Atoms : ['1tmc_a_178']
+2014-04-18 15:38:55,800 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,800 - PyWATER - DEBUG - Cluster No. : 341 Atoms : ['1hsa_a_512', '1a1n_a_307', '1a1m_a_427']
+2014-04-18 15:38:55,800 - PyWATER - INFO - Degree of conservation is : 0.25
+2014-04-18 15:38:55,801 - PyWATER - DEBUG - Cluster No. : 342 Atoms : ['1ed3_a_324', '1mhc_a_347']
+2014-04-18 15:38:55,801 - PyWATER - INFO - Degree of conservation is : 0.166666666667
+2014-04-18 15:38:55,801 - PyWATER - DEBUG - Cluster No. : 343 Atoms : ['1agd_a_278', '1hsa_a_505', '1ed3_a_289']
+2014-04-18 15:38:55,801 - PyWATER - INFO - Degree of conservation is : 0.25
+2014-04-18 15:38:55,801 - PyWATER - DEBUG - Cluster No. : 344 Atoms : ['1a1m_a_426', '1qlf_a_2051']
+2014-04-18 15:38:55,801 - PyWATER - INFO - Degree of conservation is : 0.166666666667
+2014-04-18 15:38:55,802 - PyWATER - DEBUG - Cluster No. : 345 Atoms : ['1agd_a_277', '1ed3_a_321']
+2014-04-18 15:38:55,802 - PyWATER - INFO - Degree of conservation is : 0.166666666667
+2014-04-18 15:38:55,802 - PyWATER - DEBUG - Cluster No. : 346 Atoms : ['1i4f_a_821', '1agd_a_279', '1e27_a_2141']
+2014-04-18 15:38:55,802 - PyWATER - INFO - Degree of conservation is : 0.25
+2014-04-18 15:38:55,802 - PyWATER - DEBUG - Cluster No. : 347 Atoms : ['1tmc_a_188', '1e27_a_2084']
+2014-04-18 15:38:55,802 - PyWATER - INFO - Degree of conservation is : 0.166666666667
+2014-04-18 15:38:55,803 - PyWATER - DEBUG - Cluster No. : 348 Atoms : ['1i4f_a_738', '1tmc_a_202', '1agd_a_488', '1e27_a_2187', '1qlf_a_2050', '1qo3_a_2114']
+2014-04-18 15:38:55,803 - PyWATER - INFO - Degree of conservation is : 0.5
+2014-04-18 15:38:55,803 - PyWATER - INFO - Here is conserved water molecule...
+2014-04-18 15:38:55,803 - PyWATER - DEBUG - Cluster No. : 349 Atoms : ['1i4f_a_690', '1tmc_a_210', '1agd_a_489', '1a1n_a_725', '1e27_a_2197']
+2014-04-18 15:38:55,803 - PyWATER - INFO - Degree of conservation is : 0.416666666667
+2014-04-18 15:38:55,803 - PyWATER - DEBUG - Cluster No. : 350 Atoms : ['1agd_a_490', '1a1n_a_733']
+2014-04-18 15:38:55,803 - PyWATER - INFO - Degree of conservation is : 0.166666666667
+2014-04-18 15:38:55,803 - PyWATER - DEBUG - Cluster No. : 351 Atoms : ['1agd_a_393', '1a1n_a_724', '1e27_a_2191']
+2014-04-18 15:38:55,803 - PyWATER - INFO - Degree of conservation is : 0.25
+2014-04-18 15:38:55,804 - PyWATER - DEBUG - Cluster No. : 352 Atoms : ['1i4f_a_781', '1agd_a_392', '1a1n_a_345', '1e27_a_2159', '1a1m_a_350', '1qlf_a_2044', '1qo3_a_2105']
+2014-04-18 15:38:55,804 - PyWATER - INFO - Degree of conservation is : 0.583333333333
+2014-04-18 15:38:55,804 - PyWATER - INFO - Here is conserved water molecule...
+2014-04-18 15:38:55,804 - PyWATER - DEBUG - Cluster No. : 353 Atoms : ['1i4f_a_623', '1agd_a_483', '1qlf_a_2045']
+2014-04-18 15:38:55,804 - PyWATER - INFO - Degree of conservation is : 0.25
+2014-04-18 15:38:55,804 - PyWATER - DEBUG - Cluster No. : 354 Atoms : ['1i4f_a_527', '1a1n_a_730']
+2014-04-18 15:38:55,805 - PyWATER - INFO - Degree of conservation is : 0.166666666667
+2014-04-18 15:38:55,805 - PyWATER - DEBUG - Cluster No. : 355 Atoms : ['1a1n_a_729']
+2014-04-18 15:38:55,805 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,805 - PyWATER - DEBUG - Cluster No. : 356 Atoms : ['1i4f_a_762', '1a1n_a_351', '1e27_a_2193', '1a1m_a_442', '1qo3_a_2116']
+2014-04-18 15:38:55,805 - PyWATER - INFO - Degree of conservation is : 0.416666666667
+2014-04-18 15:38:55,805 - PyWATER - DEBUG - Cluster No. : 357 Atoms : ['1agd_a_429', '1a1n_a_967']
+2014-04-18 15:38:55,805 - PyWATER - INFO - Degree of conservation is : 0.166666666667
+2014-04-18 15:38:55,805 - PyWATER - DEBUG - Cluster No. : 358 Atoms : ['1a1n_a_966']
+2014-04-18 15:38:55,805 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,806 - PyWATER - DEBUG - Cluster No. : 359 Atoms : ['1agd_a_428', '1a1n_a_968', '1qo3_a_2117']
+2014-04-18 15:38:55,806 - PyWATER - INFO - Degree of conservation is : 0.25
+2014-04-18 15:38:55,806 - PyWATER - DEBUG - Cluster No. : 360 Atoms : ['1e27_a_2083']
+2014-04-18 15:38:55,806 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,807 - PyWATER - DEBUG - Cluster No. : 361 Atoms : ['1i4f_a_739', '1tmc_a_203']
+2014-04-18 15:38:55,807 - PyWATER - INFO - Degree of conservation is : 0.166666666667
+2014-04-18 15:38:55,807 - PyWATER - DEBUG - Cluster No. : 362 Atoms : ['1i4f_a_608', '1agd_a_394', '1hsa_a_656', '1qo3_a_2115', '1kbg_h_1153']
+2014-04-18 15:38:55,807 - PyWATER - INFO - Degree of conservation is : 0.416666666667
+2014-04-18 15:38:55,808 - PyWATER - DEBUG - Cluster No. : 363 Atoms : ['1tmc_a_201', '1e27_a_2184']
+2014-04-18 15:38:55,808 - PyWATER - INFO - Degree of conservation is : 0.166666666667
+2014-04-18 15:38:55,808 - PyWATER - DEBUG - Cluster No. : 364 Atoms : ['1agd_a_414', '1e27_a_2054']
+2014-04-18 15:38:55,808 - PyWATER - INFO - Degree of conservation is : 0.166666666667
+2014-04-18 15:38:55,808 - PyWATER - DEBUG - Cluster No. : 365 Atoms : ['1i4f_a_584', '1qo3_a_2157']
+2014-04-18 15:38:55,808 - PyWATER - INFO - Degree of conservation is : 0.166666666667
+2014-04-18 15:38:55,808 - PyWATER - DEBUG - Cluster No. : 366 Atoms : ['1e27_a_2133']
+2014-04-18 15:38:55,808 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,809 - PyWATER - DEBUG - Cluster No. : 367 Atoms : ['1tmc_a_198', '1hsa_a_515']
+2014-04-18 15:38:55,809 - PyWATER - INFO - Degree of conservation is : 0.166666666667
+2014-04-18 15:38:55,809 - PyWATER - DEBUG - Cluster No. : 368 Atoms : ['1agd_a_416', '1a1n_a_500', '1e27_a_2082', '1qo3_a_2119', '1ed3_a_309']
+2014-04-18 15:38:55,809 - PyWATER - INFO - Degree of conservation is : 0.416666666667
+2014-04-18 15:38:55,809 - PyWATER - DEBUG - Cluster No. : 369 Atoms : ['1e27_a_2031']
+2014-04-18 15:38:55,809 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,809 - PyWATER - DEBUG - Cluster No. : 370 Atoms : ['1i4f_a_555', '1tmc_a_217', '1a1n_a_957']
+2014-04-18 15:38:55,810 - PyWATER - INFO - Degree of conservation is : 0.25
+2014-04-18 15:38:55,810 - PyWATER - DEBUG - Cluster No. : 371 Atoms : ['1tmc_a_213']
+2014-04-18 15:38:55,810 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,810 - PyWATER - DEBUG - Cluster No. : 372 Atoms : ['1agd_a_493', '1e27_a_2188']
+2014-04-18 15:38:55,810 - PyWATER - INFO - Degree of conservation is : 0.166666666667
+2014-04-18 15:38:55,810 - PyWATER - DEBUG - Cluster No. : 373 Atoms : ['1i4f_a_657', '1agd_a_415', '1a1n_a_499', '1e27_a_2189', '1kbg_h_1103', '1mhc_a_404']
+2014-04-18 15:38:55,810 - PyWATER - INFO - Degree of conservation is : 0.5
+2014-04-18 15:38:55,810 - PyWATER - INFO - Here is conserved water molecule...
+2014-04-18 15:38:55,811 - PyWATER - DEBUG - Cluster No. : 374 Atoms : ['1i4f_a_503', '1tmc_a_241', '1agd_a_338', '1hsa_a_537', '1a1n_a_335', '1e27_a_2146', '1a1m_a_311', '1qlf_a_2039', '1qo3_a_2087', '1kbg_h_1133', '1ed3_a_278', '1mhc_a_326']
+2014-04-18 15:38:55,811 - PyWATER - INFO - Degree of conservation is : 1.0
+2014-04-18 15:38:55,811 - PyWATER - INFO - Here is conserved water molecule...
+2014-04-18 15:38:55,811 - PyWATER - DEBUG - Cluster No. : 375 Atoms : ['1tmc_a_238', '1hsa_a_553']
+2014-04-18 15:38:55,811 - PyWATER - INFO - Degree of conservation is : 0.166666666667
+2014-04-18 15:38:55,811 - PyWATER - DEBUG - Cluster No. : 376 Atoms : ['1agd_a_342', '1e27_a_2140']
+2014-04-18 15:38:55,811 - PyWATER - INFO - Degree of conservation is : 0.166666666667
+2014-04-18 15:38:55,811 - PyWATER - DEBUG - Cluster No. : 377 Atoms : ['1qlf_a_2040']
+2014-04-18 15:38:55,811 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,812 - PyWATER - DEBUG - Cluster No. : 378 Atoms : ['1a1n_a_943']
+2014-04-18 15:38:55,812 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,812 - PyWATER - DEBUG - Cluster No. : 379 Atoms : ['1mhc_a_356']
+2014-04-18 15:38:55,812 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,812 - PyWATER - DEBUG - Cluster No. : 380 Atoms : ['1hsa_a_929']
+2014-04-18 15:38:55,813 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,813 - PyWATER - DEBUG - Cluster No. : 381 Atoms : ['1agd_a_479', '1a1n_a_942']
+2014-04-18 15:38:55,813 - PyWATER - INFO - Degree of conservation is : 0.166666666667
+2014-04-18 15:38:55,813 - PyWATER - DEBUG - Cluster No. : 382 Atoms : ['1agd_a_377']
+2014-04-18 15:38:55,813 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,813 - PyWATER - DEBUG - Cluster No. : 383 Atoms : ['1i4f_a_531', '1tmc_a_216', '1agd_a_339', '1hsa_a_630', '1a1n_a_621', '1e27_a_2150', '1a1m_a_436', '1qlf_a_2041', '1qo3_a_2097']
+2014-04-18 15:38:55,813 - PyWATER - INFO - Degree of conservation is : 0.75
+2014-04-18 15:38:55,813 - PyWATER - INFO - Here is conserved water molecule...
+2014-04-18 15:38:55,813 - PyWATER - DEBUG - Cluster No. : 384 Atoms : ['1i4f_a_582', '1agd_a_378', '1hsa_a_855', '1a1n_a_493', '1e27_a_2147', '1a1m_a_437', '1qo3_a_2095']
+2014-04-18 15:38:55,814 - PyWATER - INFO - Degree of conservation is : 0.583333333333
+2014-04-18 15:38:55,814 - PyWATER - INFO - Here is conserved water molecule...
+2014-04-18 15:38:55,814 - PyWATER - DEBUG - Cluster No. : 385 Atoms : ['1qo3_a_2094']
+2014-04-18 15:38:55,814 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,814 - PyWATER - DEBUG - Cluster No. : 386 Atoms : ['1agd_a_383']
+2014-04-18 15:38:55,814 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,814 - PyWATER - DEBUG - Cluster No. : 387 Atoms : ['1a1n_a_948']
+2014-04-18 15:38:55,815 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,815 - PyWATER - DEBUG - Cluster No. : 388 Atoms : ['1agd_a_384', '1a1n_a_987', '1e27_a_2064']
+2014-04-18 15:38:55,815 - PyWATER - INFO - Degree of conservation is : 0.25
+2014-04-18 15:38:55,815 - PyWATER - DEBUG - Cluster No. : 389 Atoms : ['1tmc_a_243', '1agd_a_340', '1hsa_a_641', '1a1n_a_986', '1e27_a_2151', '1a1m_a_344', '1qo3_a_2098', '1kbg_h_1144']
+2014-04-18 15:38:55,815 - PyWATER - INFO - Degree of conservation is : 0.666666666667
+2014-04-18 15:38:55,815 - PyWATER - INFO - Here is conserved water molecule...
+2014-04-18 15:38:55,815 - PyWATER - DEBUG - Cluster No. : 390 Atoms : ['1i4f_a_507', '1tmc_a_199', '1agd_a_420', '1hsa_a_560', '1a1n_a_491', '1e27_a_2149', '1qo3_a_2091', '1kbg_h_1157', '1ed3_a_314']
+2014-04-18 15:38:55,816 - PyWATER - INFO - Degree of conservation is : 0.75
+2014-04-18 15:38:55,816 - PyWATER - INFO - Here is conserved water molecule...
+2014-04-18 15:38:55,816 - PyWATER - DEBUG - Cluster No. : 391 Atoms : ['1i4f_a_780', '1tmc_a_229', '1a1n_a_339', '1kbg_h_1183', '1ed3_a_296']
+2014-04-18 15:38:55,816 - PyWATER - INFO - Degree of conservation is : 0.416666666667
+2014-04-18 15:38:55,816 - PyWATER - DEBUG - Cluster No. : 392 Atoms : ['1agd_a_385', '1e27_a_2063']
+2014-04-18 15:38:55,816 - PyWATER - INFO - Degree of conservation is : 0.166666666667
+2014-04-18 15:38:55,816 - PyWATER - DEBUG - Cluster No. : 393 Atoms : ['1tmc_a_181', '1agd_a_343', '1hsa_a_542', '1a1n_a_492', '1e27_a_2163', '1kbg_h_1161', '1mhc_a_298']
+2014-04-18 15:38:55,816 - PyWATER - INFO - Degree of conservation is : 0.583333333333
+2014-04-18 15:38:55,816 - PyWATER - INFO - Here is conserved water molecule...
+2014-04-18 15:38:55,817 - PyWATER - DEBUG - Cluster No. : 394 Atoms : ['1agd_a_480', '1hsa_a_613', '1e27_a_2070']
+2014-04-18 15:38:55,817 - PyWATER - INFO - Degree of conservation is : 0.25
+2014-04-18 15:38:55,817 - PyWATER - DEBUG - Cluster No. : 395 Atoms : ['1agd_a_381', '1e27_a_2023']
+2014-04-18 15:38:55,817 - PyWATER - INFO - Degree of conservation is : 0.166666666667
+2014-04-18 15:38:55,817 - PyWATER - DEBUG - Cluster No. : 396 Atoms : ['1agd_a_380', '1a1n_a_949']
+2014-04-18 15:38:55,817 - PyWATER - INFO - Degree of conservation is : 0.166666666667
+2014-04-18 15:38:55,817 - PyWATER - DEBUG - Cluster No. : 397 Atoms : ['1agd_a_548', '1e27_a_2167']
+2014-04-18 15:38:55,817 - PyWATER - INFO - Degree of conservation is : 0.166666666667
+2014-04-18 15:38:55,818 - PyWATER - DEBUG - Cluster No. : 398 Atoms : ['1agd_a_345', '1e27_a_2072', '1qlf_a_2047', '1kbg_h_1154']
+2014-04-18 15:38:55,818 - PyWATER - INFO - Degree of conservation is : 0.333333333333
+2014-04-18 15:38:55,818 - PyWATER - DEBUG - Cluster No. : 399 Atoms : ['1e27_a_2166', '1qo3_a_2106']
+2014-04-18 15:38:55,818 - PyWATER - INFO - Degree of conservation is : 0.166666666667
+2014-04-18 15:38:55,818 - PyWATER - DEBUG - Cluster No. : 400 Atoms : ['1agd_a_422', '1e27_a_2165', '1a1m_a_379', '1kbg_h_1138']
+2014-04-18 15:38:55,818 - PyWATER - INFO - Degree of conservation is : 0.333333333333
+2014-04-18 15:38:55,818 - PyWATER - DEBUG - Cluster No. : 401 Atoms : ['1e27_a_2071']
+2014-04-18 15:38:55,818 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,818 - PyWATER - DEBUG - Cluster No. : 402 Atoms : ['1e27_a_2164']
+2014-04-18 15:38:55,818 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,818 - PyWATER - DEBUG - Cluster No. : 403 Atoms : ['1i4f_a_736', '1a1n_a_946', '1e27_a_2162']
+2014-04-18 15:38:55,819 - PyWATER - INFO - Degree of conservation is : 0.25
+2014-04-18 15:38:55,819 - PyWATER - DEBUG - Cluster No. : 404 Atoms : ['1i4f_a_537', '1agd_a_421', '1e27_a_2174']
+2014-04-18 15:38:55,819 - PyWATER - INFO - Degree of conservation is : 0.25
+2014-04-18 15:38:55,819 - PyWATER - DEBUG - Cluster No. : 405 Atoms : ['1i4f_a_536', '1tmc_a_212', '1qlf_a_2046', '1mhc_a_301']
+2014-04-18 15:38:55,819 - PyWATER - INFO - Degree of conservation is : 0.333333333333
+2014-04-18 15:38:55,819 - PyWATER - DEBUG - Cluster No. : 406 Atoms : ['1agd_a_387', '1hsa_a_572', '1a1n_a_624', '1e27_a_2177', '1a1m_a_322', '1qo3_a_2108']
+2014-04-18 15:38:55,819 - PyWATER - INFO - Degree of conservation is : 0.5
+2014-04-18 15:38:55,820 - PyWATER - INFO - Here is conserved water molecule...
+2014-04-18 15:38:55,820 - PyWATER - DEBUG - Cluster No. : 407 Atoms : ['1agd_a_486', '1a1n_a_350', '1e27_a_2173']
+2014-04-18 15:38:55,820 - PyWATER - INFO - Degree of conservation is : 0.25
+2014-04-18 15:38:55,820 - PyWATER - DEBUG - Cluster No. : 408 Atoms : ['1e27_a_2078']
+2014-04-18 15:38:55,820 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,820 - PyWATER - DEBUG - Cluster No. : 409 Atoms : ['1agd_a_348', '1hsa_a_798', '1a1n_a_495', '1e27_a_2170', '1qo3_a_2107']
+2014-04-18 15:38:55,820 - PyWATER - INFO - Degree of conservation is : 0.416666666667
+2014-04-18 15:38:55,820 - PyWATER - DEBUG - Cluster No. : 410 Atoms : ['1a1n_a_494']
+2014-04-18 15:38:55,820 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,820 - PyWATER - DEBUG - Cluster No. : 411 Atoms : ['1a1n_a_496']
+2014-04-18 15:38:55,821 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,821 - PyWATER - DEBUG - Cluster No. : 412 Atoms : ['1agd_a_344', '1hsa_a_636', '1a1n_a_333', '1e27_a_2169']
+2014-04-18 15:38:55,821 - PyWATER - INFO - Degree of conservation is : 0.333333333333
+2014-04-18 15:38:55,821 - PyWATER - DEBUG - Cluster No. : 413 Atoms : ['1agd_a_346', '1a1n_a_332', '1e27_a_2171', '1a1m_a_424']
+2014-04-18 15:38:55,821 - PyWATER - INFO - Degree of conservation is : 0.333333333333
+2014-04-18 15:38:55,821 - PyWATER - DEBUG - Cluster No. : 414 Atoms : ['1a1n_a_457', '1e27_a_2073']
+2014-04-18 15:38:55,821 - PyWATER - INFO - Degree of conservation is : 0.166666666667
+2014-04-18 15:38:55,821 - PyWATER - DEBUG - Cluster No. : 415 Atoms : ['1a1n_a_456', '1a1m_a_425']
+2014-04-18 15:38:55,821 - PyWATER - INFO - Degree of conservation is : 0.166666666667
+2014-04-18 15:38:55,821 - PyWATER - DEBUG - Cluster No. : 416 Atoms : ['1a1n_a_331']
+2014-04-18 15:38:55,821 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,822 - PyWATER - DEBUG - Cluster No. : 417 Atoms : ['1agd_a_375', '1a1n_a_706']
+2014-04-18 15:38:55,822 - PyWATER - INFO - Degree of conservation is : 0.166666666667
+2014-04-18 15:38:55,822 - PyWATER - DEBUG - Cluster No. : 418 Atoms : ['1a1n_a_932']
+2014-04-18 15:38:55,822 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,822 - PyWATER - DEBUG - Cluster No. : 419 Atoms : ['1a1n_a_933']
+2014-04-18 15:38:55,822 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,822 - PyWATER - DEBUG - Cluster No. : 420 Atoms : ['1e27_a_2145', '1qlf_a_2037', '1mhc_a_325']
+2014-04-18 15:38:55,822 - PyWATER - INFO - Degree of conservation is : 0.25
+2014-04-18 15:38:55,823 - PyWATER - DEBUG - Cluster No. : 421 Atoms : ['1a1n_a_610']
+2014-04-18 15:38:55,823 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,823 - PyWATER - DEBUG - Cluster No. : 422 Atoms : ['1agd_a_477', '1a1n_a_935', '1e27_a_2120']
+2014-04-18 15:38:55,823 - PyWATER - INFO - Degree of conservation is : 0.25
+2014-04-18 15:38:55,823 - PyWATER - DEBUG - Cluster No. : 423 Atoms : ['1qlf_a_2015']
+2014-04-18 15:38:55,823 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,823 - PyWATER - DEBUG - Cluster No. : 424 Atoms : ['1i4f_a_719']
+2014-04-18 15:38:55,823 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,823 - PyWATER - DEBUG - Cluster No. : 425 Atoms : ['1qo3_a_2034']
+2014-04-18 15:38:55,823 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,823 - PyWATER - DEBUG - Cluster No. : 426 Atoms : ['1i4f_a_625', '1tmc_a_224', '1agd_a_379', '1hsa_a_539', '1a1n_a_334', '1e27_a_2143', '1a1m_a_330', '1qo3_a_2092', '1kbg_h_1114']
+2014-04-18 15:38:55,824 - PyWATER - INFO - Degree of conservation is : 0.75
+2014-04-18 15:38:55,824 - PyWATER - INFO - Here is conserved water molecule...
+2014-04-18 15:38:55,824 - PyWATER - DEBUG - Cluster No. : 427 Atoms : ['1i4f_a_758', '1a1n_a_984', '1e27_a_2061', '1mhc_a_360']
+2014-04-18 15:38:55,824 - PyWATER - INFO - Degree of conservation is : 0.333333333333
+2014-04-18 15:38:55,824 - PyWATER - DEBUG - Cluster No. : 428 Atoms : ['1a1n_a_985']
+2014-04-18 15:38:55,824 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,824 - PyWATER - DEBUG - Cluster No. : 429 Atoms : ['1e27_a_2148', '1kbg_h_1181']
+2014-04-18 15:38:55,825 - PyWATER - INFO - Degree of conservation is : 0.166666666667
+2014-04-18 15:38:55,825 - PyWATER - DEBUG - Cluster No. : 430 Atoms : ['1e27_a_2168', '1a1m_a_439', '1kbg_h_1182']
+2014-04-18 15:38:55,825 - PyWATER - INFO - Degree of conservation is : 0.25
+2014-04-18 15:38:55,825 - PyWATER - DEBUG - Cluster No. : 431 Atoms : ['1i4f_a_675', '1agd_a_478', '1hsa_a_809', '1e27_a_2142', '1kbg_h_1110']
+2014-04-18 15:38:55,825 - PyWATER - INFO - Degree of conservation is : 0.416666666667
+2014-04-18 15:38:55,825 - PyWATER - DEBUG - Cluster No. : 432 Atoms : ['1i4f_a_585', '1tmc_a_204', '1agd_a_341', '1hsa_a_595', '1a1n_a_941', '1e27_a_2152', '1a1m_a_372', '1qo3_a_2096']
+2014-04-18 15:38:55,825 - PyWATER - INFO - Degree of conservation is : 0.666666666667
+2014-04-18 15:38:55,825 - PyWATER - INFO - Here is conserved water molecule...
+2014-04-18 15:38:55,825 - PyWATER - DEBUG - Cluster No. : 433 Atoms : ['1a1n_a_460']
+2014-04-18 15:38:55,826 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,826 - PyWATER - DEBUG - Cluster No. : 434 Atoms : ['1a1n_a_462']
+2014-04-18 15:38:55,826 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,826 - PyWATER - DEBUG - Cluster No. : 435 Atoms : ['1a1n_a_465']
+2014-04-18 15:38:55,826 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,826 - PyWATER - DEBUG - Cluster No. : 436 Atoms : ['1a1n_a_466']
+2014-04-18 15:38:55,826 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,826 - PyWATER - DEBUG - Cluster No. : 437 Atoms : ['1agd_a_376', '1a1n_a_328']
+2014-04-18 15:38:55,826 - PyWATER - INFO - Degree of conservation is : 0.166666666667
+2014-04-18 15:38:55,826 - PyWATER - DEBUG - Cluster No. : 438 Atoms : ['1qo3_a_2080']
+2014-04-18 15:38:55,827 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,827 - PyWATER - DEBUG - Cluster No. : 439 Atoms : ['1a1n_a_988', '1e27_a_2119']
+2014-04-18 15:38:55,827 - PyWATER - INFO - Degree of conservation is : 0.166666666667
+2014-04-18 15:38:55,827 - PyWATER - DEBUG - Cluster No. : 440 Atoms : ['1hsa_a_632']
+2014-04-18 15:38:55,827 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,827 - PyWATER - DEBUG - Cluster No. : 441 Atoms : ['1a1n_a_601']
+2014-04-18 15:38:55,827 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,827 - PyWATER - DEBUG - Cluster No. : 442 Atoms : ['1a1n_a_472']
+2014-04-18 15:38:55,828 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,828 - PyWATER - DEBUG - Cluster No. : 443 Atoms : ['1a1n_a_473']
+2014-04-18 15:38:55,828 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,828 - PyWATER - DEBUG - Cluster No. : 444 Atoms : ['1i4f_a_581', '1tmc_a_222', '1agd_a_371', '1hsa_a_532', '1a1n_a_467', '1e27_a_2121', '1a1m_a_345', '1qo3_a_2082', '1mhc_a_374']
+2014-04-18 15:38:55,828 - PyWATER - INFO - Degree of conservation is : 0.75
+2014-04-18 15:38:55,828 - PyWATER - INFO - Here is conserved water molecule...
+2014-04-18 15:38:55,828 - PyWATER - DEBUG - Cluster No. : 445 Atoms : ['1i4f_a_744', '1agd_a_372', '1a1n_a_934', '1e27_a_2123', '1a1m_a_423', '1qo3_a_2081', '1kbg_h_1105']
+2014-04-18 15:38:55,828 - PyWATER - INFO - Degree of conservation is : 0.583333333333
+2014-04-18 15:38:55,828 - PyWATER - INFO - Here is conserved water molecule...
+2014-04-18 15:38:55,828 - PyWATER - DEBUG - Cluster No. : 446 Atoms : ['1a1n_a_989']
+2014-04-18 15:38:55,829 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,829 - PyWATER - DEBUG - Cluster No. : 447 Atoms : ['1a1n_a_713', '1e27_a_2122']
+2014-04-18 15:38:55,829 - PyWATER - INFO - Degree of conservation is : 0.166666666667
+2014-04-18 15:38:55,829 - PyWATER - DEBUG - Cluster No. : 448 Atoms : ['1agd_a_373', '1a1n_a_329']
+2014-04-18 15:38:55,829 - PyWATER - INFO - Degree of conservation is : 0.166666666667
+2014-04-18 15:38:55,829 - PyWATER - DEBUG - Cluster No. : 449 Atoms : ['1i4f_a_759', '1agd_a_542', '1a1n_a_464']
+2014-04-18 15:38:55,829 - PyWATER - INFO - Degree of conservation is : 0.25
+2014-04-18 15:38:55,830 - PyWATER - DEBUG - Cluster No. : 450 Atoms : ['1agd_a_374']
+2014-04-18 15:38:55,830 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,830 - PyWATER - DEBUG - Cluster No. : 451 Atoms : ['1i4f_a_593', '1agd_a_539', '1hsa_a_811', '1a1n_a_388', '1e27_a_2130', '1qo3_a_2084', '1mhc_a_295']
+2014-04-18 15:38:55,830 - PyWATER - INFO - Degree of conservation is : 0.583333333333
+2014-04-18 15:38:55,830 - PyWATER - INFO - Here is conserved water molecule...
+2014-04-18 15:38:55,830 - PyWATER - DEBUG - Cluster No. : 452 Atoms : ['1i4f_a_505', '1tmc_a_182', '1agd_a_289', '1hsa_a_561', '1a1n_a_327', '1e27_a_2112', '1a1m_a_301', '1qo3_a_2071', '1mhc_a_375']
+2014-04-18 15:38:55,830 - PyWATER - INFO - Degree of conservation is : 0.75
+2014-04-18 15:38:55,830 - PyWATER - INFO - Here is conserved water molecule...
+2014-04-18 15:38:55,830 - PyWATER - DEBUG - Cluster No. : 453 Atoms : ['1i4f_a_559', '1agd_a_290', '1hsa_a_541', '1a1n_a_387', '1e27_a_2019', '1qlf_a_2002', '1qo3_a_2010', '1mhc_a_286']
+2014-04-18 15:38:55,831 - PyWATER - INFO - Degree of conservation is : 0.666666666667
+2014-04-18 15:38:55,831 - PyWATER - INFO - Here is conserved water molecule...
+2014-04-18 15:38:55,831 - PyWATER - DEBUG - Cluster No. : 454 Atoms : ['1e27_a_2125', '1qlf_a_2032']
+2014-04-18 15:38:55,831 - PyWATER - INFO - Degree of conservation is : 0.166666666667
+2014-04-18 15:38:55,831 - PyWATER - DEBUG - Cluster No. : 455 Atoms : ['1qo3_a_2083']
+2014-04-18 15:38:55,831 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,831 - PyWATER - DEBUG - Cluster No. : 456 Atoms : ['1i4f_a_567', '1tmc_a_226', '1agd_a_370', '1a1n_a_392', '1e27_a_2005', '1qo3_a_2004']
+2014-04-18 15:38:55,832 - PyWATER - INFO - Degree of conservation is : 0.5
+2014-04-18 15:38:55,832 - PyWATER - INFO - Here is conserved water molecule...
+2014-04-18 15:38:55,832 - PyWATER - DEBUG - Cluster No. : 457 Atoms : ['1i4f_a_779', '1tmc_a_244', '1agd_a_580', '1e27_a_2049']
+2014-04-18 15:38:55,832 - PyWATER - INFO - Degree of conservation is : 0.333333333333
+2014-04-18 15:38:55,832 - PyWATER - DEBUG - Cluster No. : 458 Atoms : ['1i4f_a_565', '1e27_a_2048']
+2014-04-18 15:38:55,832 - PyWATER - INFO - Degree of conservation is : 0.166666666667
+2014-04-18 15:38:55,832 - PyWATER - DEBUG - Cluster No. : 459 Atoms : ['1e27_a_2126']
+2014-04-18 15:38:55,832 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,833 - PyWATER - DEBUG - Cluster No. : 460 Atoms : ['1i4f_a_540', '1agd_a_291', '1hsa_a_551', '1a1n_a_442', '1e27_a_2108', '1qo3_a_2070']
+2014-04-18 15:38:55,833 - PyWATER - INFO - Degree of conservation is : 0.5
+2014-04-18 15:38:55,833 - PyWATER - INFO - Here is conserved water molecule...
+2014-04-18 15:38:55,833 - PyWATER - DEBUG - Cluster No. : 461 Atoms : ['1agd_a_413', '1e27_a_2034', '1qo3_a_2017']
+2014-04-18 15:38:55,833 - PyWATER - INFO - Degree of conservation is : 0.25
+2014-04-18 15:38:55,833 - PyWATER - DEBUG - Cluster No. : 462 Atoms : ['1i4f_a_620']
+2014-04-18 15:38:55,833 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,833 - PyWATER - DEBUG - Cluster No. : 463 Atoms : ['1e27_a_2013']
+2014-04-18 15:38:55,833 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,833 - PyWATER - DEBUG - Cluster No. : 464 Atoms : ['1agd_a_541', '1a1n_a_991']
+2014-04-18 15:38:55,834 - PyWATER - INFO - Degree of conservation is : 0.166666666667
+2014-04-18 15:38:55,834 - PyWATER - DEBUG - Cluster No. : 465 Atoms : ['1agd_a_543', '1a1n_a_990']
+2014-04-18 15:38:55,834 - PyWATER - INFO - Degree of conservation is : 0.166666666667
+2014-04-18 15:38:55,834 - PyWATER - DEBUG - Cluster No. : 466 Atoms : ['1i4f_a_797', '1agd_a_582', '1e27_a_2041', '1a1m_a_422']
+2014-04-18 15:38:55,834 - PyWATER - INFO - Degree of conservation is : 0.333333333333
+2014-04-18 15:38:55,834 - PyWATER - DEBUG - Cluster No. : 467 Atoms : ['1agd_a_579', '1hsa_a_871', '1e27_a_2115']
+2014-04-18 15:38:55,834 - PyWATER - INFO - Degree of conservation is : 0.25
+2014-04-18 15:38:55,835 - PyWATER - DEBUG - Cluster No. : 468 Atoms : ['1agd_a_540']
+2014-04-18 15:38:55,835 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,835 - PyWATER - DEBUG - Cluster No. : 469 Atoms : ['1i4f_a_760', '1agd_a_296', '1a1n_a_977', '1e27_a_2050']
+2014-04-18 15:38:55,835 - PyWATER - INFO - Degree of conservation is : 0.333333333333
+2014-04-18 15:38:55,835 - PyWATER - DEBUG - Cluster No. : 470 Atoms : ['1tmc_a_218']
+2014-04-18 15:38:55,835 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,837 - PyWATER - DEBUG - Cluster No. : 471 Atoms : ['1agd_a_583', '1a1n_a_712', '1e27_a_2124', '1a1m_a_390']
+2014-04-18 15:38:55,838 - PyWATER - INFO - Degree of conservation is : 0.333333333333
+2014-04-18 15:38:55,838 - PyWATER - DEBUG - Cluster No. : 472 Atoms : ['1agd_a_584']
+2014-04-18 15:38:55,838 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,838 - PyWATER - DEBUG - Cluster No. : 473 Atoms : ['1agd_a_585']
+2014-04-18 15:38:55,838 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,838 - PyWATER - DEBUG - Cluster No. : 474 Atoms : ['1agd_a_586']
+2014-04-18 15:38:55,838 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,838 - PyWATER - DEBUG - Cluster No. : 475 Atoms : ['1agd_a_587']
+2014-04-18 15:38:55,839 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,839 - PyWATER - DEBUG - Cluster No. : 476 Atoms : ['1e27_a_2127']
+2014-04-18 15:38:55,839 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,839 - PyWATER - DEBUG - Cluster No. : 477 Atoms : ['1i4f_a_803']
+2014-04-18 15:38:55,839 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,839 - PyWATER - DEBUG - Cluster No. : 478 Atoms : ['1mhc_a_294']
+2014-04-18 15:38:55,839 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,839 - PyWATER - DEBUG - Cluster No. : 479 Atoms : ['1i4f_a_740', '1agd_a_544', '1e27_a_2116']
+2014-04-18 15:38:55,839 - PyWATER - INFO - Degree of conservation is : 0.25
+2014-04-18 15:38:55,839 - PyWATER - DEBUG - Cluster No. : 480 Atoms : ['1qo3_a_2077']
+2014-04-18 15:38:55,840 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,840 - PyWATER - DEBUG - Cluster No. : 481 Atoms : ['1i4f_a_737', '1agd_a_331', '1a1n_a_451']
+2014-04-18 15:38:55,840 - PyWATER - INFO - Degree of conservation is : 0.25
+2014-04-18 15:38:55,840 - PyWATER - DEBUG - Cluster No. : 482 Atoms : ['1agd_a_545']
+2014-04-18 15:38:55,840 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,840 - PyWATER - DEBUG - Cluster No. : 483 Atoms : ['1mhc_a_371']
+2014-04-18 15:38:55,840 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,841 - PyWATER - DEBUG - Cluster No. : 484 Atoms : ['1agd_a_581', '1e27_a_2114', '1qo3_a_2072']
+2014-04-18 15:38:55,841 - PyWATER - INFO - Degree of conservation is : 0.25
+2014-04-18 15:38:55,841 - PyWATER - DEBUG - Cluster No. : 485 Atoms : ['1agd_a_577', '1hsa_a_578', '1a1m_a_363']
+2014-04-18 15:38:55,841 - PyWATER - INFO - Degree of conservation is : 0.25
+2014-04-18 15:38:55,841 - PyWATER - DEBUG - Cluster No. : 486 Atoms : ['1i4f_a_681', '1agd_a_532', '1a1n_a_454']
+2014-04-18 15:38:55,841 - PyWATER - INFO - Degree of conservation is : 0.25
+2014-04-18 15:38:55,841 - PyWATER - DEBUG - Cluster No. : 487 Atoms : ['1agd_a_476', '1e27_a_2117']
+2014-04-18 15:38:55,841 - PyWATER - INFO - Degree of conservation is : 0.166666666667
+2014-04-18 15:38:55,841 - PyWATER - DEBUG - Cluster No. : 488 Atoms : ['1e27_a_2043']
+2014-04-18 15:38:55,842 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,842 - PyWATER - DEBUG - Cluster No. : 489 Atoms : ['1i4f_a_532', '1agd_a_330', '1a1n_a_450', '1qlf_a_2030']
+2014-04-18 15:38:55,842 - PyWATER - INFO - Degree of conservation is : 0.333333333333
+2014-04-18 15:38:55,842 - PyWATER - DEBUG - Cluster No. : 490 Atoms : ['1i4f_a_665', '1agd_a_332', '1qo3_a_2078']
+2014-04-18 15:38:55,842 - PyWATER - INFO - Degree of conservation is : 0.25
+2014-04-18 15:38:55,842 - PyWATER - DEBUG - Cluster No. : 491 Atoms : ['1agd_a_578']
+2014-04-18 15:38:55,842 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,843 - PyWATER - DEBUG - Cluster No. : 492 Atoms : ['1a1n_a_452', '1mhc_a_397']
+2014-04-18 15:38:55,843 - PyWATER - INFO - Degree of conservation is : 0.166666666667
+2014-04-18 15:38:55,843 - PyWATER - DEBUG - Cluster No. : 493 Atoms : ['1e27_a_2118']
+2014-04-18 15:38:55,843 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,843 - PyWATER - DEBUG - Cluster No. : 494 Atoms : ['1hsa_a_638']
+2014-04-18 15:38:55,843 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,843 - PyWATER - DEBUG - Cluster No. : 495 Atoms : ['1i4f_a_793', '1qlf_a_2031', '1qo3_a_2079']
+2014-04-18 15:38:55,843 - PyWATER - INFO - Degree of conservation is : 0.25
+2014-04-18 15:38:55,843 - PyWATER - DEBUG - Cluster No. : 496 Atoms : ['1a1n_a_982']
+2014-04-18 15:38:55,844 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,844 - PyWATER - DEBUG - Cluster No. : 497 Atoms : ['1a1n_a_983', '1qo3_a_2075']
+2014-04-18 15:38:55,844 - PyWATER - INFO - Degree of conservation is : 0.166666666667
+2014-04-18 15:38:55,844 - PyWATER - DEBUG - Cluster No. : 498 Atoms : ['1a1n_a_962']
+2014-04-18 15:38:55,844 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,844 - PyWATER - DEBUG - Cluster No. : 499 Atoms : ['1i4f_a_679', '1tmc_a_180', '1hsa_a_501', '1qo3_a_2074', '1ed3_a_282']
+2014-04-18 15:38:55,844 - PyWATER - INFO - Degree of conservation is : 0.416666666667
+2014-04-18 15:38:55,844 - PyWATER - DEBUG - Cluster No. : 500 Atoms : ['1a1n_a_958']
+2014-04-18 15:38:55,844 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,845 - PyWATER - DEBUG - Cluster No. : 501 Atoms : ['1agd_a_536', '1e27_a_2106', '1a1m_a_362']
+2014-04-18 15:38:55,845 - PyWATER - INFO - Degree of conservation is : 0.25
+2014-04-18 15:38:55,845 - PyWATER - DEBUG - Cluster No. : 502 Atoms : ['1e27_a_2040']
+2014-04-18 15:38:55,845 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,845 - PyWATER - DEBUG - Cluster No. : 503 Atoms : ['1agd_a_537', '1hsa_a_612', '1qo3_a_2076', '1ed3_a_315']
+2014-04-18 15:38:55,845 - PyWATER - INFO - Degree of conservation is : 0.333333333333
+2014-04-18 15:38:55,846 - PyWATER - DEBUG - Cluster No. : 504 Atoms : ['1i4f_a_519']
+2014-04-18 15:38:55,846 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,846 - PyWATER - DEBUG - Cluster No. : 505 Atoms : ['1e27_a_2113', '1qo3_a_2073']
+2014-04-18 15:38:55,846 - PyWATER - INFO - Degree of conservation is : 0.166666666667
+2014-04-18 15:38:55,846 - PyWATER - DEBUG - Cluster No. : 506 Atoms : ['1i4f_a_601']
+2014-04-18 15:38:55,846 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,846 - PyWATER - DEBUG - Cluster No. : 507 Atoms : ['1i4f_a_588', '1hsa_a_545', '1e27_a_2260', '1a1m_a_328', '1kbg_h_1165']
+2014-04-18 15:38:55,846 - PyWATER - INFO - Degree of conservation is : 0.416666666667
+2014-04-18 15:38:55,846 - PyWATER - DEBUG - Cluster No. : 508 Atoms : ['1i4f_a_609', '1agd_a_323', '1hsa_a_610', '1e27_a_2259', '1a1m_a_343', '1mhc_a_312']
+2014-04-18 15:38:55,846 - PyWATER - INFO - Degree of conservation is : 0.5
+2014-04-18 15:38:55,847 - PyWATER - INFO - Here is conserved water molecule...
+2014-04-18 15:38:55,847 - PyWATER - DEBUG - Cluster No. : 509 Atoms : ['1qo3_a_2151', '1kbg_h_1108']
+2014-04-18 15:38:55,847 - PyWATER - INFO - Degree of conservation is : 0.166666666667
+2014-04-18 15:38:55,847 - PyWATER - DEBUG - Cluster No. : 510 Atoms : ['1i4f_a_577', '1agd_a_324', '1hsa_a_847', '1e27_a_2236', '1kbg_h_1123']
+2014-04-18 15:38:55,847 - PyWATER - INFO - Degree of conservation is : 0.416666666667
+2014-04-18 15:38:55,847 - PyWATER - DEBUG - Cluster No. : 511 Atoms : ['1qo3_a_2147']
+2014-04-18 15:38:55,848 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,848 - PyWATER - DEBUG - Cluster No. : 512 Atoms : ['1a1n_a_930', '1e27_a_2261', '1qo3_a_2148']
+2014-04-18 15:38:55,848 - PyWATER - INFO - Degree of conservation is : 0.25
+2014-04-18 15:38:55,848 - PyWATER - DEBUG - Cluster No. : 513 Atoms : ['1i4f_a_510', '1agd_a_322', '1hsa_a_555', '1a1n_a_365', '1e27_a_2263', '1a1m_a_378', '1qlf_a_2071', '1mhc_a_369']
+2014-04-18 15:38:55,848 - PyWATER - INFO - Degree of conservation is : 0.666666666667
+2014-04-18 15:38:55,848 - PyWATER - INFO - Here is conserved water molecule...
+2014-04-18 15:38:55,848 - PyWATER - DEBUG - Cluster No. : 514 Atoms : ['1i4f_a_621', '1agd_a_321', '1a1n_a_318', '1e27_a_2015', '1a1m_a_406']
+2014-04-18 15:38:55,848 - PyWATER - INFO - Degree of conservation is : 0.416666666667
+2014-04-18 15:38:55,848 - PyWATER - DEBUG - Cluster No. : 515 Atoms : ['1qo3_a_2150', '1kbg_h_1111']
+2014-04-18 15:38:55,849 - PyWATER - INFO - Degree of conservation is : 0.166666666667
+2014-04-18 15:38:55,849 - PyWATER - DEBUG - Cluster No. : 516 Atoms : ['1i4f_a_573', '1agd_a_361', '1hsa_a_538', '1a1n_a_319', '1e27_a_2044', '1a1m_a_335', '1mhc_a_318']
+2014-04-18 15:38:55,849 - PyWATER - INFO - Degree of conservation is : 0.583333333333
+2014-04-18 15:38:55,849 - PyWATER - INFO - Here is conserved water molecule...
+2014-04-18 15:38:55,849 - PyWATER - DEBUG - Cluster No. : 517 Atoms : ['1qlf_a_2009']
+2014-04-18 15:38:55,849 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,849 - PyWATER - DEBUG - Cluster No. : 518 Atoms : ['1i4f_a_606', '1a1n_a_883']
+2014-04-18 15:38:55,849 - PyWATER - INFO - Degree of conservation is : 0.166666666667
+2014-04-18 15:38:55,849 - PyWATER - DEBUG - Cluster No. : 519 Atoms : ['1i4f_a_695', '1agd_a_455', '1hsa_a_566', '1a1n_a_316', '1e27_a_2051', '1a1m_a_407', '1qo3_a_2028', '1mhc_a_316']
+2014-04-18 15:38:55,849 - PyWATER - INFO - Degree of conservation is : 0.666666666667
+2014-04-18 15:38:55,849 - PyWATER - INFO - Here is conserved water molecule...
+2014-04-18 15:38:55,850 - PyWATER - DEBUG - Cluster No. : 520 Atoms : ['1i4f_a_670', '1tmc_a_214', '1agd_a_409', '1hsa_a_628', '1a1n_a_311', '1qlf_a_2008', '1qo3_a_2023']
+2014-04-18 15:38:55,850 - PyWATER - INFO - Degree of conservation is : 0.583333333333
+2014-04-18 15:38:55,850 - PyWATER - INFO - Here is conserved water molecule...
+2014-04-18 15:38:55,850 - PyWATER - DEBUG - Cluster No. : 521 Atoms : ['1kbg_h_1113']
+2014-04-18 15:38:55,850 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,851 - PyWATER - DEBUG - Cluster No. : 522 Atoms : ['1i4f_a_789', '1a1n_a_928']
+2014-04-18 15:38:55,851 - PyWATER - INFO - Degree of conservation is : 0.166666666667
+2014-04-18 15:38:55,851 - PyWATER - DEBUG - Cluster No. : 523 Atoms : ['1agd_a_526', '1a1n_a_929']
+2014-04-18 15:38:55,851 - PyWATER - INFO - Degree of conservation is : 0.166666666667
+2014-04-18 15:38:55,851 - PyWATER - DEBUG - Cluster No. : 524 Atoms : ['1agd_a_557']
+2014-04-18 15:38:55,851 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,851 - PyWATER - DEBUG - Cluster No. : 525 Atoms : ['1i4f_a_556', '1tmc_a_242', '1a1n_a_312', '1e27_a_2075', '1qlf_a_2011', '1mhc_a_341']
+2014-04-18 15:38:55,851 - PyWATER - INFO - Degree of conservation is : 0.5
+2014-04-18 15:38:55,851 - PyWATER - INFO - Here is conserved water molecule...
+2014-04-18 15:38:55,851 - PyWATER - DEBUG - Cluster No. : 526 Atoms : ['1i4f_a_815', '1a1n_a_691', '1e27_a_2077']
+2014-04-18 15:38:55,851 - PyWATER - INFO - Degree of conservation is : 0.25
+2014-04-18 15:38:55,852 - PyWATER - DEBUG - Cluster No. : 527 Atoms : ['1i4f_a_795', '1a1n_a_692', '1e27_a_2029']
+2014-04-18 15:38:55,852 - PyWATER - INFO - Degree of conservation is : 0.25
+2014-04-18 15:38:55,852 - PyWATER - DEBUG - Cluster No. : 528 Atoms : ['1i4f_a_794', '1agd_a_522']
+2014-04-18 15:38:55,852 - PyWATER - INFO - Degree of conservation is : 0.166666666667
+2014-04-18 15:38:55,852 - PyWATER - DEBUG - Cluster No. : 529 Atoms : ['1agd_a_523', '1a1n_a_409', '1e27_a_2258']
+2014-04-18 15:38:55,852 - PyWATER - INFO - Degree of conservation is : 0.25
+2014-04-18 15:38:55,852 - PyWATER - DEBUG - Cluster No. : 530 Atoms : ['1i4f_a_658']
+2014-04-18 15:38:55,853 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,853 - PyWATER - DEBUG - Cluster No. : 531 Atoms : ['1agd_a_362', '1a1n_a_574']
+2014-04-18 15:38:55,853 - PyWATER - INFO - Degree of conservation is : 0.166666666667
+2014-04-18 15:38:55,853 - PyWATER - DEBUG - Cluster No. : 532 Atoms : ['1tmc_a_240', '1agd_a_465', '1a1n_a_404', '1qo3_a_2018', '1mhc_a_292']
+2014-04-18 15:38:55,853 - PyWATER - INFO - Degree of conservation is : 0.416666666667
+2014-04-18 15:38:55,853 - PyWATER - DEBUG - Cluster No. : 533 Atoms : ['1qo3_a_2042']
+2014-04-18 15:38:55,853 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,853 - PyWATER - DEBUG - Cluster No. : 534 Atoms : ['1i4f_a_765', '1agd_a_365', '1a1n_a_406', '1e27_a_2016', '1mhc_a_342']
+2014-04-18 15:38:55,853 - PyWATER - INFO - Degree of conservation is : 0.416666666667
+2014-04-18 15:38:55,853 - PyWATER - DEBUG - Cluster No. : 535 Atoms : ['1i4f_a_653', '1agd_a_316', '1hsa_a_543', '1a1n_a_324', '1e27_a_2052', '1a1m_a_369', '1kbg_h_1149', '1mhc_a_359']
+2014-04-18 15:38:55,853 - PyWATER - INFO - Degree of conservation is : 0.666666666667
+2014-04-18 15:38:55,854 - PyWATER - INFO - Here is conserved water molecule...
+2014-04-18 15:38:55,854 - PyWATER - DEBUG - Cluster No. : 536 Atoms : ['1i4f_a_730', '1hsa_a_634', '1a1n_a_315']
+2014-04-18 15:38:55,854 - PyWATER - INFO - Degree of conservation is : 0.25
+2014-04-18 15:38:55,854 - PyWATER - DEBUG - Cluster No. : 537 Atoms : ['1agd_a_464', '1a1n_a_690', '1e27_a_2079', '1mhc_a_394']
+2014-04-18 15:38:55,854 - PyWATER - INFO - Degree of conservation is : 0.333333333333
+2014-04-18 15:38:55,854 - PyWATER - DEBUG - Cluster No. : 538 Atoms : ['1i4f_a_647', '1agd_a_497', '1e27_a_2208']
+2014-04-18 15:38:55,854 - PyWATER - INFO - Degree of conservation is : 0.25
+2014-04-18 15:38:55,854 - PyWATER - DEBUG - Cluster No. : 539 Atoms : ['1kbg_h_1155']
+2014-04-18 15:38:55,854 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,854 - PyWATER - DEBUG - Cluster No. : 540 Atoms : ['1agd_a_466', '1a1n_a_980']
+2014-04-18 15:38:55,854 - PyWATER - INFO - Degree of conservation is : 0.166666666667
+2014-04-18 15:38:55,855 - PyWATER - DEBUG - Cluster No. : 541 Atoms : ['1i4f_a_552', '1agd_a_317', '1hsa_a_646', '1a1n_a_421', '1e27_a_2210', '1a1m_a_416']
+2014-04-18 15:38:55,855 - PyWATER - INFO - Degree of conservation is : 0.5
+2014-04-18 15:38:55,855 - PyWATER - INFO - Here is conserved water molecule...
+2014-04-18 15:38:55,855 - PyWATER - DEBUG - Cluster No. : 542 Atoms : ['1a1n_a_425']
+2014-04-18 15:38:55,855 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,855 - PyWATER - DEBUG - Cluster No. : 543 Atoms : ['1i4f_a_550', '1agd_a_320', '1hsa_a_547', '1a1n_a_403', '1e27_a_2262', '1a1m_a_309', '1qo3_a_2129']
+2014-04-18 15:38:55,855 - PyWATER - INFO - Degree of conservation is : 0.583333333333
+2014-04-18 15:38:55,856 - PyWATER - INFO - Here is conserved water molecule...
+2014-04-18 15:38:55,856 - PyWATER - DEBUG - Cluster No. : 544 Atoms : ['1agd_a_366', '1a1n_a_405', '1e27_a_2111', '1a1m_a_415']
+2014-04-18 15:38:55,856 - PyWATER - INFO - Degree of conservation is : 0.333333333333
+2014-04-18 15:38:55,856 - PyWATER - DEBUG - Cluster No. : 545 Atoms : ['1i4f_a_522', '1agd_a_319', '1hsa_a_575', '1a1n_a_402', '1e27_a_2209', '1a1m_a_337', '1qo3_a_2043']
+2014-04-18 15:38:55,856 - PyWATER - INFO - Degree of conservation is : 0.583333333333
+2014-04-18 15:38:55,856 - PyWATER - INFO - Here is conserved water molecule...
+2014-04-18 15:38:55,856 - PyWATER - DEBUG - Cluster No. : 546 Atoms : ['1hsa_a_633', '1e27_a_2088']
+2014-04-18 15:38:55,856 - PyWATER - INFO - Degree of conservation is : 0.166666666667
+2014-04-18 15:38:55,856 - PyWATER - DEBUG - Cluster No. : 547 Atoms : ['1qlf_a_2054', '1mhc_a_313']
+2014-04-18 15:38:55,857 - PyWATER - INFO - Degree of conservation is : 0.166666666667
+2014-04-18 15:38:55,857 - PyWATER - DEBUG - Cluster No. : 548 Atoms : ['1qo3_a_2149']
+2014-04-18 15:38:55,857 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,857 - PyWATER - DEBUG - Cluster No. : 549 Atoms : ['1qo3_a_2054']
+2014-04-18 15:38:55,857 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,857 - PyWATER - DEBUG - Cluster No. : 550 Atoms : ['1qo3_a_2130']
+2014-04-18 15:38:55,857 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,857 - PyWATER - DEBUG - Cluster No. : 551 Atoms : ['1hsa_a_635']
+2014-04-18 15:38:55,858 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,858 - PyWATER - DEBUG - Cluster No. : 552 Atoms : ['1e27_a_2097']
+2014-04-18 15:38:55,858 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,858 - PyWATER - DEBUG - Cluster No. : 553 Atoms : ['1e27_a_2219']
+2014-04-18 15:38:55,858 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,858 - PyWATER - DEBUG - Cluster No. : 554 Atoms : ['1agd_a_509', '1e27_a_2218', '1qo3_a_2132']
+2014-04-18 15:38:55,858 - PyWATER - INFO - Degree of conservation is : 0.25
+2014-04-18 15:38:55,858 - PyWATER - DEBUG - Cluster No. : 555 Atoms : ['1qlf_a_2061']
+2014-04-18 15:38:55,858 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,858 - PyWATER - DEBUG - Cluster No. : 556 Atoms : ['1kbg_h_1126']
+2014-04-18 15:38:55,858 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,858 - PyWATER - DEBUG - Cluster No. : 557 Atoms : ['1i4f_a_590', '1e27_a_2237', '1a1m_a_355']
+2014-04-18 15:38:55,859 - PyWATER - INFO - Degree of conservation is : 0.25
+2014-04-18 15:38:55,859 - PyWATER - DEBUG - Cluster No. : 558 Atoms : ['1i4f_a_717', '1agd_a_400', '1e27_a_2093']
+2014-04-18 15:38:55,859 - PyWATER - INFO - Degree of conservation is : 0.25
+2014-04-18 15:38:55,859 - PyWATER - DEBUG - Cluster No. : 559 Atoms : ['1i4f_a_603', '1agd_a_438', '1e27_a_2216']
+2014-04-18 15:38:55,859 - PyWATER - INFO - Degree of conservation is : 0.25
+2014-04-18 15:38:55,859 - PyWATER - DEBUG - Cluster No. : 560 Atoms : ['1agd_a_440', '1a1n_a_503', '1e27_a_2096']
+2014-04-18 15:38:55,859 - PyWATER - INFO - Degree of conservation is : 0.25
+2014-04-18 15:38:55,859 - PyWATER - DEBUG - Cluster No. : 561 Atoms : ['1agd_a_441', '1a1n_a_504', '1e27_a_2217', '1a1m_a_382']
+2014-04-18 15:38:55,859 - PyWATER - INFO - Degree of conservation is : 0.333333333333
+2014-04-18 15:38:55,859 - PyWATER - DEBUG - Cluster No. : 562 Atoms : ['1agd_a_439']
+2014-04-18 15:38:55,860 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,860 - PyWATER - DEBUG - Cluster No. : 563 Atoms : ['1i4f_a_604', '1qlf_a_2055']
+2014-04-18 15:38:55,860 - PyWATER - INFO - Degree of conservation is : 0.166666666667
+2014-04-18 15:38:55,860 - PyWATER - DEBUG - Cluster No. : 564 Atoms : ['1agd_a_398']
+2014-04-18 15:38:55,860 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,860 - PyWATER - DEBUG - Cluster No. : 565 Atoms : ['1i4f_a_716']
+2014-04-18 15:38:55,860 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,860 - PyWATER - DEBUG - Cluster No. : 566 Atoms : ['1e27_a_2274']
+2014-04-18 15:38:55,861 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,861 - PyWATER - DEBUG - Cluster No. : 567 Atoms : ['1i4f_a_659', '1agd_a_397', '1e27_a_2214', '1a1m_a_326']
+2014-04-18 15:38:55,861 - PyWATER - INFO - Degree of conservation is : 0.333333333333
+2014-04-18 15:38:55,861 - PyWATER - DEBUG - Cluster No. : 568 Atoms : ['1ed3_a_301']
+2014-04-18 15:38:55,861 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,861 - PyWATER - DEBUG - Cluster No. : 569 Atoms : ['1i4f_a_703', '1agd_a_399', '1e27_a_2215', '1kbg_h_1174']
+2014-04-18 15:38:55,861 - PyWATER - INFO - Degree of conservation is : 0.333333333333
+2014-04-18 15:38:55,861 - PyWATER - DEBUG - Cluster No. : 570 Atoms : ['1mhc_a_405']
+2014-04-18 15:38:55,861 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,861 - PyWATER - DEBUG - Cluster No. : 571 Atoms : ['1hsa_a_932']
+2014-04-18 15:38:55,861 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,862 - PyWATER - DEBUG - Cluster No. : 572 Atoms : ['1i4f_a_788', '1kbg_h_1168']
+2014-04-18 15:38:55,862 - PyWATER - INFO - Degree of conservation is : 0.166666666667
+2014-04-18 15:38:55,862 - PyWATER - DEBUG - Cluster No. : 573 Atoms : ['1qlf_a_2079']
+2014-04-18 15:38:55,862 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,862 - PyWATER - DEBUG - Cluster No. : 574 Atoms : ['1kbg_h_1169']
+2014-04-18 15:38:55,862 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,862 - PyWATER - DEBUG - Cluster No. : 575 Atoms : ['1i4f_a_611']
+2014-04-18 15:38:55,862 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,863 - PyWATER - DEBUG - Cluster No. : 576 Atoms : ['1i4f_a_598', '1e27_a_2277', '1a1m_a_467']
+2014-04-18 15:38:55,863 - PyWATER - INFO - Degree of conservation is : 0.25
+2014-04-18 15:38:55,863 - PyWATER - DEBUG - Cluster No. : 577 Atoms : ['1mhc_a_334']
+2014-04-18 15:38:55,863 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,863 - PyWATER - DEBUG - Cluster No. : 578 Atoms : ['1i4f_a_578', '1agd_a_524']
+2014-04-18 15:38:55,863 - PyWATER - INFO - Degree of conservation is : 0.166666666667
+2014-04-18 15:38:55,863 - PyWATER - DEBUG - Cluster No. : 579 Atoms : ['1i4f_a_710']
+2014-04-18 15:38:55,863 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,863 - PyWATER - DEBUG - Cluster No. : 580 Atoms : ['1i4f_a_693', '1hsa_a_802']
+2014-04-18 15:38:55,863 - PyWATER - INFO - Degree of conservation is : 0.166666666667
+2014-04-18 15:38:55,863 - PyWATER - DEBUG - Cluster No. : 581 Atoms : ['1e27_a_2275']
+2014-04-18 15:38:55,864 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,864 - PyWATER - DEBUG - Cluster No. : 582 Atoms : ['1e27_a_2276']
+2014-04-18 15:38:55,864 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,864 - PyWATER - DEBUG - Cluster No. : 583 Atoms : ['1i4f_a_592', '1agd_a_518', '1hsa_a_647', '1a1n_a_357', '1e27_a_2264']
+2014-04-18 15:38:55,864 - PyWATER - INFO - Degree of conservation is : 0.416666666667
+2014-04-18 15:38:55,864 - PyWATER - DEBUG - Cluster No. : 584 Atoms : ['1agd_a_519', '1mhc_a_357']
+2014-04-18 15:38:55,864 - PyWATER - INFO - Degree of conservation is : 0.166666666667
+2014-04-18 15:38:55,864 - PyWATER - DEBUG - Cluster No. : 585 Atoms : ['1hsa_a_828', '1e27_a_2253', '1mhc_a_311']
+2014-04-18 15:38:55,864 - PyWATER - INFO - Degree of conservation is : 0.25
+2014-04-18 15:38:55,865 - PyWATER - DEBUG - Cluster No. : 586 Atoms : ['1i4f_a_599']
+2014-04-18 15:38:55,865 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,865 - PyWATER - DEBUG - Cluster No. : 587 Atoms : ['1kbg_h_1121']
+2014-04-18 15:38:55,865 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,865 - PyWATER - DEBUG - Cluster No. : 588 Atoms : ['1agd_a_404', '1hsa_a_592', '1e27_a_2254']
+2014-04-18 15:38:55,865 - PyWATER - INFO - Degree of conservation is : 0.25
+2014-04-18 15:38:55,865 - PyWATER - DEBUG - Cluster No. : 589 Atoms : ['1kbg_h_1164']
+2014-04-18 15:38:55,865 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,865 - PyWATER - DEBUG - Cluster No. : 590 Atoms : ['1a1n_a_361']
+2014-04-18 15:38:55,865 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,866 - PyWATER - DEBUG - Cluster No. : 591 Atoms : ['1kbg_h_1109']
+2014-04-18 15:38:55,866 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,866 - PyWATER - DEBUG - Cluster No. : 592 Atoms : ['1kbg_h_1122']
+2014-04-18 15:38:55,866 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,866 - PyWATER - DEBUG - Cluster No. : 593 Atoms : ['1hsa_a_897', '1a1n_a_759', '1e27_a_2110']
+2014-04-18 15:38:55,866 - PyWATER - INFO - Degree of conservation is : 0.25
+2014-04-18 15:38:55,866 - PyWATER - DEBUG - Cluster No. : 594 Atoms : ['1i4f_a_551', '1agd_a_520', '1hsa_a_608', '1a1n_a_359', '1e27_a_2255', '1a1m_a_461']
+2014-04-18 15:38:55,866 - PyWATER - INFO - Degree of conservation is : 0.5
+2014-04-18 15:38:55,866 - PyWATER - INFO - Here is conserved water molecule...
+2014-04-18 15:38:55,866 - PyWATER - DEBUG - Cluster No. : 595 Atoms : ['1i4f_a_819', '1a1n_a_1014']
+2014-04-18 15:38:55,866 - PyWATER - INFO - Degree of conservation is : 0.166666666667
+2014-04-18 15:38:55,867 - PyWATER - DEBUG - Cluster No. : 596 Atoms : ['1a1n_a_517', '1a1m_a_460']
+2014-04-18 15:38:55,867 - PyWATER - INFO - Degree of conservation is : 0.166666666667
+2014-04-18 15:38:55,867 - PyWATER - DEBUG - Cluster No. : 597 Atoms : ['1qo3_a_2145']
+2014-04-18 15:38:55,867 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,867 - PyWATER - DEBUG - Cluster No. : 598 Atoms : ['1i4f_a_713', '1qo3_a_2144']
+2014-04-18 15:38:55,867 - PyWATER - INFO - Degree of conservation is : 0.166666666667
+2014-04-18 15:38:55,867 - PyWATER - DEBUG - Cluster No. : 599 Atoms : ['1i4f_a_786', '1e27_a_2250', '1mhc_a_352']
+2014-04-18 15:38:55,868 - PyWATER - INFO - Degree of conservation is : 0.25
+2014-04-18 15:38:55,868 - PyWATER - DEBUG - Cluster No. : 600 Atoms : ['1i4f_a_521', '1agd_a_364', '1hsa_a_533', '1a1n_a_323', '1e27_a_2238', '1a1m_a_304', '1kbg_h_1159', '1ed3_a_291', '1mhc_a_289']
+2014-04-18 15:38:55,868 - PyWATER - INFO - Degree of conservation is : 0.75
+2014-04-18 15:38:55,868 - PyWATER - INFO - Here is conserved water molecule...
+2014-04-18 15:38:55,868 - PyWATER - DEBUG - Cluster No. : 601 Atoms : ['1qo3_a_2025']
+2014-04-18 15:38:55,868 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,868 - PyWATER - DEBUG - Cluster No. : 602 Atoms : ['1i4f_a_638', '1agd_a_454', '1a1n_a_320', '1e27_a_2091', '1a1m_a_396', '1mhc_a_283']
+2014-04-18 15:38:55,868 - PyWATER - INFO - Degree of conservation is : 0.5
+2014-04-18 15:38:55,869 - PyWATER - INFO - Here is conserved water molecule...
+2014-04-18 15:38:55,869 - PyWATER - DEBUG - Cluster No. : 603 Atoms : ['1i4f_a_594', '1agd_a_499', '1a1n_a_635', '1e27_a_2213', '1kbg_h_1173']
+2014-04-18 15:38:55,869 - PyWATER - INFO - Degree of conservation is : 0.416666666667
+2014-04-18 15:38:55,869 - PyWATER - DEBUG - Cluster No. : 604 Atoms : ['1qo3_a_2131']
+2014-04-18 15:38:55,869 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,869 - PyWATER - DEBUG - Cluster No. : 605 Atoms : ['1i4f_a_639', '1a1n_a_614', '1e27_a_2272']
+2014-04-18 15:38:55,870 - PyWATER - INFO - Degree of conservation is : 0.25
+2014-04-18 15:38:55,870 - PyWATER - DEBUG - Cluster No. : 606 Atoms : ['1qo3_a_2154']
+2014-04-18 15:38:55,870 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,870 - PyWATER - DEBUG - Cluster No. : 607 Atoms : ['1mhc_a_346']
+2014-04-18 15:38:55,870 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,870 - PyWATER - DEBUG - Cluster No. : 608 Atoms : ['1a1n_a_321']
+2014-04-18 15:38:55,870 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,870 - PyWATER - DEBUG - Cluster No. : 609 Atoms : ['1e27_a_2003']
+2014-04-18 15:38:55,870 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,871 - PyWATER - DEBUG - Cluster No. : 610 Atoms : ['1i4f_a_628', '1agd_a_510', '1a1n_a_378', '1e27_a_2018']
+2014-04-18 15:38:55,871 - PyWATER - INFO - Degree of conservation is : 0.333333333333
+2014-04-18 15:38:55,871 - PyWATER - DEBUG - Cluster No. : 611 Atoms : ['1i4f_a_512', '1agd_a_287', '1hsa_a_589', '1a1n_a_322', '1e27_a_2047', '1kbg_h_1167', '1ed3_a_317']
+2014-04-18 15:38:55,871 - PyWATER - INFO - Degree of conservation is : 0.583333333333
+2014-04-18 15:38:55,871 - PyWATER - INFO - Here is conserved water molecule...
+2014-04-18 15:38:55,871 - PyWATER - DEBUG - Cluster No. : 612 Atoms : ['1qo3_a_2139']
+2014-04-18 15:38:55,871 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,871 - PyWATER - DEBUG - Cluster No. : 613 Atoms : ['1i4f_a_596', '1agd_a_512', '1hsa_a_580', '1a1n_a_511', '1e27_a_2241', '1a1m_a_377', '1ed3_a_308', '1mhc_a_309']
+2014-04-18 15:38:55,871 - PyWATER - INFO - Degree of conservation is : 0.666666666667
+2014-04-18 15:38:55,872 - PyWATER - INFO - Here is conserved water molecule...
+2014-04-18 15:38:55,872 - PyWATER - DEBUG - Cluster No. : 614 Atoms : ['1i4f_a_810']
+2014-04-18 15:38:55,872 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,872 - PyWATER - DEBUG - Cluster No. : 615 Atoms : ['1i4f_a_811']
+2014-04-18 15:38:55,872 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,873 - PyWATER - DEBUG - Cluster No. : 616 Atoms : ['1i4f_a_629', '1agd_a_511', '1e27_a_2104', '1a1m_a_452']
+2014-04-18 15:38:55,873 - PyWATER - INFO - Degree of conservation is : 0.333333333333
+2014-04-18 15:38:55,873 - PyWATER - DEBUG - Cluster No. : 617 Atoms : ['1i4f_a_733']
+2014-04-18 15:38:55,873 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,873 - PyWATER - DEBUG - Cluster No. : 618 Atoms : ['1qo3_a_2138']
+2014-04-18 15:38:55,873 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,873 - PyWATER - DEBUG - Cluster No. : 619 Atoms : ['1i4f_a_734']
+2014-04-18 15:38:55,873 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,873 - PyWATER - DEBUG - Cluster No. : 620 Atoms : ['1i4f_a_616', '1agd_a_451', '1hsa_a_621', '1a1n_a_518', '1e27_a_2240', '1a1m_a_319', '1qlf_a_2062', '1mhc_a_363']
+2014-04-18 15:38:55,874 - PyWATER - INFO - Degree of conservation is : 0.666666666667
+2014-04-18 15:38:55,874 - PyWATER - INFO - Here is conserved water molecule...
+2014-04-18 15:38:55,874 - PyWATER - DEBUG - Cluster No. : 621 Atoms : ['1qo3_a_2155']
+2014-04-18 15:38:55,874 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,874 - PyWATER - DEBUG - Cluster No. : 622 Atoms : ['1i4f_a_643', '1hsa_a_605', '1e27_a_2271', '1qlf_a_2077']
+2014-04-18 15:38:55,874 - PyWATER - INFO - Degree of conservation is : 0.333333333333
+2014-04-18 15:38:55,874 - PyWATER - DEBUG - Cluster No. : 623 Atoms : ['1kbg_h_1120']
+2014-04-18 15:38:55,874 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,874 - PyWATER - DEBUG - Cluster No. : 624 Atoms : ['1a1n_a_519']
+2014-04-18 15:38:55,875 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,875 - PyWATER - DEBUG - Cluster No. : 625 Atoms : ['1i4f_a_533', '1hsa_a_856', '1a1m_a_331']
+2014-04-18 15:38:55,875 - PyWATER - INFO - Degree of conservation is : 0.25
+2014-04-18 15:38:55,875 - PyWATER - DEBUG - Cluster No. : 626 Atoms : ['1i4f_a_718', '1hsa_a_903']
+2014-04-18 15:38:55,875 - PyWATER - INFO - Degree of conservation is : 0.166666666667
+2014-04-18 15:38:55,875 - PyWATER - DEBUG - Cluster No. : 627 Atoms : ['1a1m_a_484']
+2014-04-18 15:38:55,875 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,875 - PyWATER - DEBUG - Cluster No. : 628 Atoms : ['1i4f_a_630']
+2014-04-18 15:38:55,876 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,876 - PyWATER - DEBUG - Cluster No. : 629 Atoms : ['1a1n_a_973']
+2014-04-18 15:38:55,876 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,876 - PyWATER - DEBUG - Cluster No. : 630 Atoms : ['1agd_a_360', '1a1n_a_314']
+2014-04-18 15:38:55,876 - PyWATER - INFO - Degree of conservation is : 0.166666666667
+2014-04-18 15:38:55,876 - PyWATER - DEBUG - Cluster No. : 631 Atoms : ['1i4f_a_664', '1tmc_a_228', '1agd_a_359', '1hsa_a_818', '1a1n_a_313', '1e27_a_2045', '1qo3_a_2027', '1mhc_a_339']
+2014-04-18 15:38:55,876 - PyWATER - INFO - Degree of conservation is : 0.666666666667
+2014-04-18 15:38:55,876 - PyWATER - INFO - Here is conserved water molecule...
+2014-04-18 15:38:55,876 - PyWATER - DEBUG - Cluster No. : 632 Atoms : ['1i4f_a_680', '1a1n_a_379', '1e27_a_2017']
+2014-04-18 15:38:55,877 - PyWATER - INFO - Degree of conservation is : 0.25
+2014-04-18 15:38:55,877 - PyWATER - DEBUG - Cluster No. : 633 Atoms : ['1i4f_a_605', '1e27_a_2046', '1mhc_a_392']
+2014-04-18 15:38:55,877 - PyWATER - INFO - Degree of conservation is : 0.25
+2014-04-18 15:38:55,877 - PyWATER - DEBUG - Cluster No. : 634 Atoms : ['1qo3_a_2137']
+2014-04-18 15:38:55,877 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,877 - PyWATER - DEBUG - Cluster No. : 635 Atoms : ['1agd_a_521', '1hsa_a_615', '1a1n_a_356', '1e27_a_2257', '1a1m_a_334', '1qlf_a_2070', '1ed3_a_286', '1mhc_a_391']
+2014-04-18 15:38:55,877 - PyWATER - INFO - Degree of conservation is : 0.666666666667
+2014-04-18 15:38:55,878 - PyWATER - INFO - Here is conserved water molecule...
+2014-04-18 15:38:55,878 - PyWATER - DEBUG - Cluster No. : 636 Atoms : ['1i4f_a_580']
+2014-04-18 15:38:55,878 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,878 - PyWATER - DEBUG - Cluster No. : 637 Atoms : ['1i4f_a_660', '1agd_a_517', '1a1m_a_455', '1qlf_a_2063']
+2014-04-18 15:38:55,878 - PyWATER - INFO - Degree of conservation is : 0.333333333333
+2014-04-18 15:38:55,878 - PyWATER - DEBUG - Cluster No. : 638 Atoms : ['1qo3_a_2140']
+2014-04-18 15:38:55,878 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,878 - PyWATER - DEBUG - Cluster No. : 639 Atoms : ['1i4f_a_784', '1a1n_a_355']
+2014-04-18 15:38:55,878 - PyWATER - INFO - Degree of conservation is : 0.166666666667
+2014-04-18 15:38:55,878 - PyWATER - DEBUG - Cluster No. : 640 Atoms : ['1i4f_a_543', '1agd_a_401', '1hsa_a_582', '1a1n_a_354', '1e27_a_2256', '1a1m_a_463', '1qlf_a_2069', '1kbg_h_1162', '1ed3_a_306', '1mhc_a_353']
+2014-04-18 15:38:55,879 - PyWATER - INFO - Degree of conservation is : 0.833333333333
+2014-04-18 15:38:55,879 - PyWATER - INFO - Here is conserved water molecule...
+2014-04-18 15:38:55,879 - PyWATER - DEBUG - Cluster No. : 641 Atoms : ['1qo3_a_2146']
+2014-04-18 15:38:55,879 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,879 - PyWATER - DEBUG - Cluster No. : 642 Atoms : ['1i4f_a_750', '1e27_a_2239', '1a1m_a_453', '1qlf_a_2064', '1kbg_h_1125']
+2014-04-18 15:38:55,879 - PyWATER - INFO - Degree of conservation is : 0.416666666667
+2014-04-18 15:38:55,880 - PyWATER - DEBUG - Cluster No. : 643 Atoms : ['1i4f_a_557', '1agd_a_448', '1e27_a_2242', '1a1m_a_454', '1kbg_h_1134', '1mhc_a_321']
+2014-04-18 15:38:55,880 - PyWATER - INFO - Degree of conservation is : 0.5
+2014-04-18 15:38:55,880 - PyWATER - INFO - Here is conserved water molecule...
+2014-04-18 15:38:55,880 - PyWATER - DEBUG - Cluster No. : 644 Atoms : ['1qo3_a_2141']
+2014-04-18 15:38:55,880 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,880 - PyWATER - DEBUG - Cluster No. : 645 Atoms : ['1i4f_a_804', '1mhc_a_315']
+2014-04-18 15:38:55,880 - PyWATER - INFO - Degree of conservation is : 0.166666666667
+2014-04-18 15:38:55,880 - PyWATER - DEBUG - Cluster No. : 646 Atoms : ['1agd_a_351', '1e27_a_2092', '1a1m_a_447', '1qlf_a_2078']
+2014-04-18 15:38:55,880 - PyWATER - INFO - Degree of conservation is : 0.333333333333
+2014-04-18 15:38:55,880 - PyWATER - DEBUG - Cluster No. : 647 Atoms : ['1i4f_a_806', '1e27_a_2273', '1kbg_h_1179']
+2014-04-18 15:38:55,881 - PyWATER - INFO - Degree of conservation is : 0.25
+2014-04-18 15:38:55,881 - PyWATER - DEBUG - Cluster No. : 648 Atoms : ['1mhc_a_366']
+2014-04-18 15:38:55,881 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,881 - PyWATER - DEBUG - Cluster No. : 649 Atoms : ['1mhc_a_367']
+2014-04-18 15:38:55,881 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,881 - PyWATER - DEBUG - Cluster No. : 650 Atoms : ['1i4f_a_805']
+2014-04-18 15:38:55,881 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,881 - PyWATER - DEBUG - Cluster No. : 651 Atoms : ['1agd_a_437', '1e27_a_2001']
+2014-04-18 15:38:55,881 - PyWATER - INFO - Degree of conservation is : 0.166666666667
+2014-04-18 15:38:55,881 - PyWATER - DEBUG - Cluster No. : 652 Atoms : ['1i4f_a_818', '1mhc_a_355']
+2014-04-18 15:38:55,882 - PyWATER - INFO - Degree of conservation is : 0.166666666667
+2014-04-18 15:38:55,882 - PyWATER - DEBUG - Cluster No. : 653 Atoms : ['1agd_a_436', '1mhc_a_305']
+2014-04-18 15:38:55,882 - PyWATER - INFO - Degree of conservation is : 0.166666666667
+2014-04-18 15:38:55,882 - PyWATER - DEBUG - Cluster No. : 654 Atoms : ['1i4f_a_783', '1a1n_a_736']
+2014-04-18 15:38:55,882 - PyWATER - INFO - Degree of conservation is : 0.166666666667
+2014-04-18 15:38:55,882 - PyWATER - DEBUG - Cluster No. : 655 Atoms : ['1i4f_a_701', '1a1n_a_523', '1mhc_a_320']
+2014-04-18 15:38:55,882 - PyWATER - INFO - Degree of conservation is : 0.25
+2014-04-18 15:38:55,882 - PyWATER - DEBUG - Cluster No. : 656 Atoms : ['1i4f_a_809', '1agd_a_500', '1e27_a_2212', '1a1m_a_446', '1qlf_a_2053']
+2014-04-18 15:38:55,883 - PyWATER - INFO - Degree of conservation is : 0.416666666667
+2014-04-18 15:38:55,883 - PyWATER - DEBUG - Cluster No. : 657 Atoms : ['1a1n_a_374']
+2014-04-18 15:38:55,883 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,883 - PyWATER - DEBUG - Cluster No. : 658 Atoms : ['1qo3_a_2048']
+2014-04-18 15:38:55,883 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,883 - PyWATER - DEBUG - Cluster No. : 659 Atoms : ['1qo3_a_2120']
+2014-04-18 15:38:55,883 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,883 - PyWATER - DEBUG - Cluster No. : 660 Atoms : ['1i4f_a_768', '1agd_a_353', '1e27_a_2135']
+2014-04-18 15:38:55,883 - PyWATER - INFO - Degree of conservation is : 0.25
+2014-04-18 15:38:55,883 - PyWATER - DEBUG - Cluster No. : 661 Atoms : ['1agd_a_417', '1a1n_a_376', '1e27_a_2055', '1a1m_a_429']
+2014-04-18 15:38:55,883 - PyWATER - INFO - Degree of conservation is : 0.333333333333
+2014-04-18 15:38:55,884 - PyWATER - DEBUG - Cluster No. : 662 Atoms : ['1a1n_a_377', '1kbg_h_1141']
+2014-04-18 15:38:55,884 - PyWATER - INFO - Degree of conservation is : 0.166666666667
+2014-04-18 15:38:55,884 - PyWATER - DEBUG - Cluster No. : 663 Atoms : ['1i4f_a_610', '1mhc_a_400']
+2014-04-18 15:38:55,884 - PyWATER - INFO - Degree of conservation is : 0.166666666667
+2014-04-18 15:38:55,884 - PyWATER - DEBUG - Cluster No. : 664 Atoms : ['1agd_a_408', '1e27_a_2056']
+2014-04-18 15:38:55,884 - PyWATER - INFO - Degree of conservation is : 0.166666666667
+2014-04-18 15:38:55,884 - PyWATER - DEBUG - Cluster No. : 665 Atoms : ['1i4f_a_742']
+2014-04-18 15:38:55,884 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,884 - PyWATER - DEBUG - Cluster No. : 666 Atoms : ['1mhc_a_329']
+2014-04-18 15:38:55,885 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,885 - PyWATER - DEBUG - Cluster No. : 667 Atoms : ['1i4f_a_538']
+2014-04-18 15:38:55,885 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,885 - PyWATER - DEBUG - Cluster No. : 668 Atoms : ['1tmc_a_215', '1qlf_a_2035', '1qo3_a_2051']
+2014-04-18 15:38:55,885 - PyWATER - INFO - Degree of conservation is : 0.25
+2014-04-18 15:38:55,885 - PyWATER - DEBUG - Cluster No. : 669 Atoms : ['1agd_a_433', '1a1n_a_375', '1e27_a_2211', '1a1m_a_305']
+2014-04-18 15:38:55,885 - PyWATER - INFO - Degree of conservation is : 0.333333333333
+2014-04-18 15:38:55,885 - PyWATER - DEBUG - Cluster No. : 670 Atoms : ['1agd_a_435', '1qo3_a_2123', '1kbg_h_1158']
+2014-04-18 15:38:55,885 - PyWATER - INFO - Degree of conservation is : 0.25
+2014-04-18 15:38:55,885 - PyWATER - DEBUG - Cluster No. : 671 Atoms : ['1agd_a_549', '1e27_a_2207']
+2014-04-18 15:38:55,885 - PyWATER - INFO - Degree of conservation is : 0.166666666667
+2014-04-18 15:38:55,886 - PyWATER - DEBUG - Cluster No. : 672 Atoms : ['1qo3_a_2127']
+2014-04-18 15:38:55,886 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,886 - PyWATER - DEBUG - Cluster No. : 673 Atoms : ['1agd_a_434']
+2014-04-18 15:38:55,886 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,886 - PyWATER - DEBUG - Cluster No. : 674 Atoms : ['1a1m_a_444']
+2014-04-18 15:38:55,886 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,886 - PyWATER - DEBUG - Cluster No. : 675 Atoms : ['1agd_a_550']
+2014-04-18 15:38:55,886 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,887 - PyWATER - DEBUG - Cluster No. : 676 Atoms : ['1agd_a_318', '1hsa_a_906', '1a1n_a_422', '1qo3_a_2126', '1mhc_a_349']
+2014-04-18 15:38:55,887 - PyWATER - INFO - Degree of conservation is : 0.416666666667
+2014-04-18 15:38:55,887 - PyWATER - DEBUG - Cluster No. : 677 Atoms : ['1agd_a_325']
+2014-04-18 15:38:55,887 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,887 - PyWATER - DEBUG - Cluster No. : 678 Atoms : ['1tmc_a_206']
+2014-04-18 15:38:55,887 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,887 - PyWATER - DEBUG - Cluster No. : 679 Atoms : ['1a1n_a_636', '1a1m_a_445']
+2014-04-18 15:38:55,887 - PyWATER - INFO - Degree of conservation is : 0.166666666667
+2014-04-18 15:38:55,887 - PyWATER - DEBUG - Cluster No. : 680 Atoms : ['1qo3_a_2128']
+2014-04-18 15:38:55,887 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,887 - PyWATER - DEBUG - Cluster No. : 681 Atoms : ['1mhc_a_304']
+2014-04-18 15:38:55,887 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,888 - PyWATER - DEBUG - Cluster No. : 682 Atoms : ['1tmc_a_230']
+2014-04-18 15:38:55,888 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,888 - PyWATER - DEBUG - Cluster No. : 683 Atoms : ['1i4f_a_798', '1qlf_a_2036']
+2014-04-18 15:38:55,888 - PyWATER - INFO - Degree of conservation is : 0.166666666667
+2014-04-18 15:38:55,888 - PyWATER - DEBUG - Cluster No. : 684 Atoms : ['1kbg_h_1140', '1ed3_a_290']
+2014-04-18 15:38:55,888 - PyWATER - INFO - Degree of conservation is : 0.166666666667
+2014-04-18 15:38:55,888 - PyWATER - DEBUG - Cluster No. : 685 Atoms : ['1qo3_a_2049', '1ed3_a_287']
+2014-04-18 15:38:55,888 - PyWATER - INFO - Degree of conservation is : 0.166666666667
+2014-04-18 15:38:55,888 - PyWATER - DEBUG - Cluster No. : 686 Atoms : ['1i4f_a_799']
+2014-04-18 15:38:55,888 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,888 - PyWATER - DEBUG - Cluster No. : 687 Atoms : ['1i4f_a_655', '1agd_a_430', '1a1n_a_939', '1qo3_a_2118']
+2014-04-18 15:38:55,889 - PyWATER - INFO - Degree of conservation is : 0.333333333333
+2014-04-18 15:38:55,889 - PyWATER - DEBUG - Cluster No. : 688 Atoms : ['1a1m_a_431']
+2014-04-18 15:38:55,889 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,889 - PyWATER - DEBUG - Cluster No. : 689 Atoms : ['1i4f_a_571', '1agd_a_395', '1a1n_a_936']
+2014-04-18 15:38:55,889 - PyWATER - INFO - Degree of conservation is : 0.25
+2014-04-18 15:38:55,889 - PyWATER - DEBUG - Cluster No. : 690 Atoms : ['1i4f_a_692', '1agd_a_396', '1hsa_a_881', '1a1n_a_937', '1e27_a_2194']
+2014-04-18 15:38:55,889 - PyWATER - INFO - Degree of conservation is : 0.416666666667
+2014-04-18 15:38:55,890 - PyWATER - DEBUG - Cluster No. : 691 Atoms : ['1a1n_a_938', '1e27_a_2196', '1qlf_a_2052']
+2014-04-18 15:38:55,890 - PyWATER - INFO - Degree of conservation is : 0.25
+2014-04-18 15:38:55,890 - PyWATER - DEBUG - Cluster No. : 692 Atoms : ['1mhc_a_303']
+2014-04-18 15:38:55,890 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,890 - PyWATER - DEBUG - Cluster No. : 693 Atoms : ['1i4f_a_746']
+2014-04-18 15:38:55,890 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,890 - PyWATER - DEBUG - Cluster No. : 694 Atoms : ['1agd_a_418']
+2014-04-18 15:38:55,890 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,890 - PyWATER - DEBUG - Cluster No. : 695 Atoms : ['1agd_a_496', '1a1n_a_735', '1e27_a_2086', '1kbg_h_1172']
+2014-04-18 15:38:55,890 - PyWATER - INFO - Degree of conservation is : 0.333333333333
+2014-04-18 15:38:55,890 - PyWATER - DEBUG - Cluster No. : 696 Atoms : ['1agd_a_495', '1e27_a_2198']
+2014-04-18 15:38:55,891 - PyWATER - INFO - Degree of conservation is : 0.166666666667
+2014-04-18 15:38:55,891 - PyWATER - DEBUG - Cluster No. : 697 Atoms : ['1agd_a_573']
+2014-04-18 15:38:55,891 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,891 - PyWATER - DEBUG - Cluster No. : 698 Atoms : ['1a1m_a_443']
+2014-04-18 15:38:55,891 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,891 - PyWATER - DEBUG - Cluster No. : 699 Atoms : ['1agd_a_350', '1hsa_a_598', '1a1n_a_501', '1e27_a_2201', '1a1m_a_367', '1qo3_a_2122']
+2014-04-18 15:38:55,891 - PyWATER - INFO - Degree of conservation is : 0.5
+2014-04-18 15:38:55,892 - PyWATER - INFO - Here is conserved water molecule...
+2014-04-18 15:38:55,892 - PyWATER - DEBUG - Cluster No. : 700 Atoms : ['1a1n_a_992']
+2014-04-18 15:38:55,892 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,892 - PyWATER - DEBUG - Cluster No. : 701 Atoms : ['1i4f_a_539']
+2014-04-18 15:38:55,892 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,892 - PyWATER - DEBUG - Cluster No. : 702 Atoms : ['1i4f_a_530', '1agd_a_494', '1a1n_a_969', '1e27_a_2199', '1qo3_a_2121', '1kbg_h_1166']
+2014-04-18 15:38:55,892 - PyWATER - INFO - Degree of conservation is : 0.5
+2014-04-18 15:38:55,892 - PyWATER - INFO - Here is conserved water molecule...
+2014-04-18 15:38:55,892 - PyWATER - DEBUG - Cluster No. : 703 Atoms : ['1i4f_a_619']
+2014-04-18 15:38:55,893 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,893 - PyWATER - DEBUG - Cluster No. : 704 Atoms : ['1i4f_a_699']
+2014-04-18 15:38:55,893 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,893 - PyWATER - DEBUG - Cluster No. : 705 Atoms : ['1i4f_a_770']
+2014-04-18 15:38:55,893 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,893 - PyWATER - DEBUG - Cluster No. : 706 Atoms : ['1i4f_a_772']
+2014-04-18 15:38:55,893 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,893 - PyWATER - DEBUG - Cluster No. : 707 Atoms : ['1i4f_a_769']
+2014-04-18 15:38:55,893 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,893 - PyWATER - DEBUG - Cluster No. : 708 Atoms : ['1i4f_a_771']
+2014-04-18 15:38:55,893 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,893 - PyWATER - DEBUG - Cluster No. : 709 Atoms : ['1i4f_a_632']
+2014-04-18 15:38:55,894 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,894 - PyWATER - DEBUG - Cluster No. : 710 Atoms : ['1agd_a_286']
+2014-04-18 15:38:55,894 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,894 - PyWATER - DEBUG - Cluster No. : 711 Atoms : ['1i4f_a_528', '1a1n_a_370']
+2014-04-18 15:38:55,894 - PyWATER - INFO - Degree of conservation is : 0.166666666667
+2014-04-18 15:38:55,894 - PyWATER - DEBUG - Cluster No. : 712 Atoms : ['1i4f_a_615']
+2014-04-18 15:38:55,894 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,894 - PyWATER - DEBUG - Cluster No. : 713 Atoms : ['1e27_a_2137']
+2014-04-18 15:38:55,895 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,895 - PyWATER - DEBUG - Cluster No. : 714 Atoms : ['1kbg_h_1175']
+2014-04-18 15:38:55,895 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,895 - PyWATER - DEBUG - Cluster No. : 715 Atoms : ['1i4f_a_641', '1e27_a_2136', '1kbg_h_1112']
+2014-04-18 15:38:55,895 - PyWATER - INFO - Degree of conservation is : 0.25
+2014-04-18 15:38:55,895 - PyWATER - DEBUG - Cluster No. : 716 Atoms : ['1a1m_a_430']
+2014-04-18 15:38:55,895 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,895 - PyWATER - DEBUG - Cluster No. : 717 Atoms : ['1i4f_a_748']
+2014-04-18 15:38:55,895 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,899 - PyWATER - DEBUG - Cluster No. : 718 Atoms : ['1i4f_a_652', '1agd_a_284', '1a1n_a_373', '1e27_a_2004']
+2014-04-18 15:38:55,899 - PyWATER - INFO - Degree of conservation is : 0.333333333333
+2014-04-18 15:38:55,899 - PyWATER - DEBUG - Cluster No. : 719 Atoms : ['1mhc_a_345']
+2014-04-18 15:38:55,899 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,899 - PyWATER - DEBUG - Cluster No. : 720 Atoms : ['1agd_a_528', '1a1n_a_971', '1a1m_a_385']
+2014-04-18 15:38:55,900 - PyWATER - INFO - Degree of conservation is : 0.25
+2014-04-18 15:38:55,900 - PyWATER - DEBUG - Cluster No. : 721 Atoms : ['1i4f_a_614', '1a1n_a_382', '1qo3_a_2003']
+2014-04-18 15:38:55,900 - PyWATER - INFO - Degree of conservation is : 0.25
+2014-04-18 15:38:55,900 - PyWATER - DEBUG - Cluster No. : 722 Atoms : ['1i4f_a_677', '1a1m_a_373']
+2014-04-18 15:38:55,900 - PyWATER - INFO - Degree of conservation is : 0.166666666667
+2014-04-18 15:38:55,900 - PyWATER - DEBUG - Cluster No. : 723 Atoms : ['1agd_a_285', '1a1n_a_663', '1e27_a_2134', '1a1m_a_428']
+2014-04-18 15:38:55,900 - PyWATER - INFO - Degree of conservation is : 0.333333333333
+2014-04-18 15:38:55,900 - PyWATER - DEBUG - Cluster No. : 724 Atoms : ['1mhc_a_401']
+2014-04-18 15:38:55,900 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,900 - PyWATER - DEBUG - Cluster No. : 725 Atoms : ['1i4f_a_575', '1agd_a_288', '1hsa_a_922', '1e27_a_2008', '1mhc_a_340']
+2014-04-18 15:38:55,901 - PyWATER - INFO - Degree of conservation is : 0.416666666667
+2014-04-18 15:38:55,901 - PyWATER - DEBUG - Cluster No. : 726 Atoms : ['1i4f_a_754', '1agd_a_363', '1a1n_a_828', '1e27_a_2042', '1qo3_a_2002', '1ed3_a_307']
+2014-04-18 15:38:55,901 - PyWATER - INFO - Degree of conservation is : 0.5
+2014-04-18 15:38:55,901 - PyWATER - INFO - Here is conserved water molecule...
+2014-04-18 15:38:55,901 - PyWATER - DEBUG - Cluster No. : 727 Atoms : ['1i4f_a_576', '1tmc_a_233', '1agd_a_358', '1a1n_a_380', '1e27_a_2009', '1qo3_a_2026']
+2014-04-18 15:38:55,901 - PyWATER - INFO - Degree of conservation is : 0.5
+2014-04-18 15:38:55,902 - PyWATER - INFO - Here is conserved water molecule...
+2014-04-18 15:38:55,902 - PyWATER - DEBUG - Cluster No. : 728 Atoms : ['1i4f_a_589', '1tmc_a_184', '1hsa_a_546', '1a1n_a_310', '1a1m_a_397', '1qlf_a_2010', '1qo3_a_2001', '1kbg_h_1127']
+2014-04-18 15:38:55,902 - PyWATER - INFO - Degree of conservation is : 0.666666666667
+2014-04-18 15:38:55,902 - PyWATER - INFO - Here is conserved water molecule...
+2014-04-18 15:38:55,902 - PyWATER - DEBUG - Cluster No. : 729 Atoms : ['1agd_a_407', '1a1n_a_972']
+2014-04-18 15:38:55,902 - PyWATER - INFO - Degree of conservation is : 0.166666666667
+2014-04-18 15:38:55,902 - PyWATER - DEBUG - Cluster No. : 730 Atoms : ['1agd_a_406', '1a1n_a_309']
+2014-04-18 15:38:55,902 - PyWATER - INFO - Degree of conservation is : 0.166666666667
+2014-04-18 15:38:55,902 - PyWATER - DEBUG - Cluster No. : 731 Atoms : ['1agd_a_534', '1a1n_a_993', '1mhc_a_398']
+2014-04-18 15:38:55,903 - PyWATER - INFO - Degree of conservation is : 0.25
+2014-04-18 15:38:55,903 - PyWATER - DEBUG - Cluster No. : 732 Atoms : ['1agd_a_527', '1a1n_a_970']
+2014-04-18 15:38:55,903 - PyWATER - INFO - Degree of conservation is : 0.166666666667
+2014-04-18 15:38:55,903 - PyWATER - DEBUG - Cluster No. : 733 Atoms : ['1i4f_a_791', '1kbg_h_1132']
+2014-04-18 15:38:55,903 - PyWATER - INFO - Degree of conservation is : 0.166666666667
+2014-04-18 15:38:55,903 - PyWATER - DEBUG - Cluster No. : 734 Atoms : ['1e27_a_2007', '1mhc_a_399']
+2014-04-18 15:38:55,903 - PyWATER - INFO - Degree of conservation is : 0.166666666667
+2014-04-18 15:38:55,903 - PyWATER - DEBUG - Cluster No. : 735 Atoms : ['1e27_a_2002']
+2014-04-18 15:38:55,903 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,904 - PyWATER - DEBUG - Cluster No. : 736 Atoms : ['1i4f_a_574']
+2014-04-18 15:38:55,904 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,904 - PyWATER - DEBUG - Cluster No. : 737 Atoms : ['1agd_a_432']
+2014-04-18 15:38:55,904 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,904 - PyWATER - DEBUG - Cluster No. : 738 Atoms : ['1i4f_a_729', '1e27_a_2205']
+2014-04-18 15:38:55,905 - PyWATER - INFO - Degree of conservation is : 0.166666666667
+2014-04-18 15:38:55,905 - PyWATER - DEBUG - Cluster No. : 739 Atoms : ['1qo3_a_2124']
+2014-04-18 15:38:55,905 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,905 - PyWATER - DEBUG - Cluster No. : 740 Atoms : ['1agd_a_327']
+2014-04-18 15:38:55,905 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,905 - PyWATER - DEBUG - Cluster No. : 741 Atoms : ['1agd_a_498']
+2014-04-18 15:38:55,905 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,905 - PyWATER - DEBUG - Cluster No. : 742 Atoms : ['1agd_a_431']
+2014-04-18 15:38:55,905 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,905 - PyWATER - DEBUG - Cluster No. : 743 Atoms : ['1agd_a_326', '1e27_a_2206', '1qo3_a_2125']
+2014-04-18 15:38:55,906 - PyWATER - INFO - Degree of conservation is : 0.25
+2014-04-18 15:38:55,906 - PyWATER - DEBUG - Cluster No. : 744 Atoms : ['1i4f_a_763', '1a1n_a_981', '1ed3_a_297', '1mhc_a_328']
+2014-04-18 15:38:55,906 - PyWATER - INFO - Degree of conservation is : 0.333333333333
+2014-04-18 15:38:55,906 - PyWATER - DEBUG - Cluster No. : 745 Atoms : ['1a1n_a_931']
+2014-04-18 15:38:55,906 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,906 - PyWATER - DEBUG - Cluster No. : 746 Atoms : ['1qo3_a_2045']
+2014-04-18 15:38:55,906 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,906 - PyWATER - DEBUG - Cluster No. : 747 Atoms : ['1qo3_a_2046']
+2014-04-18 15:38:55,907 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,907 - PyWATER - DEBUG - Cluster No. : 748 Atoms : ['1mhc_a_396']
+2014-04-18 15:38:55,907 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,907 - PyWATER - DEBUG - Cluster No. : 749 Atoms : ['1i4f_a_541', '1tmc_a_190', '1hsa_a_544', '1a1n_a_326', '1e27_a_2204', '1qlf_a_2021', '1kbg_h_1115', '1mhc_a_395']
+2014-04-18 15:38:55,907 - PyWATER - INFO - Degree of conservation is : 0.666666666667
+2014-04-18 15:38:55,907 - PyWATER - INFO - Here is conserved water molecule...
+2014-04-18 15:38:55,907 - PyWATER - DEBUG - Cluster No. : 750 Atoms : ['1agd_a_368', '1hsa_a_564', '1a1n_a_419', '1e27_a_2085', '1a1m_a_320']
+2014-04-18 15:38:55,907 - PyWATER - INFO - Degree of conservation is : 0.416666666667
+2014-04-18 15:38:55,908 - PyWATER - DEBUG - Cluster No. : 751 Atoms : ['1hsa_a_913', '1a1n_a_428', '1a1m_a_414', '1kbg_h_1117']
+2014-04-18 15:38:55,908 - PyWATER - INFO - Degree of conservation is : 0.333333333333
+2014-04-18 15:38:55,908 - PyWATER - DEBUG - Cluster No. : 752 Atoms : ['1i4f_a_777']
+2014-04-18 15:38:55,908 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,908 - PyWATER - DEBUG - Cluster No. : 753 Atoms : ['1mhc_a_293']
+2014-04-18 15:38:55,908 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,908 - PyWATER - DEBUG - Cluster No. : 754 Atoms : ['1i4f_a_776', '1qo3_a_2020']
+2014-04-18 15:38:55,908 - PyWATER - INFO - Degree of conservation is : 0.166666666667
+2014-04-18 15:38:55,908 - PyWATER - DEBUG - Cluster No. : 755 Atoms : ['1i4f_a_715', '1qlf_a_2022', '1qo3_a_2047']
+2014-04-18 15:38:55,908 - PyWATER - INFO - Degree of conservation is : 0.25
+2014-04-18 15:38:55,909 - PyWATER - DEBUG - Cluster No. : 756 Atoms : ['1i4f_a_691']
+2014-04-18 15:38:55,909 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,909 - PyWATER - DEBUG - Cluster No. : 757 Atoms : ['1qlf_a_2005', '1qo3_a_2006']
+2014-04-18 15:38:55,909 - PyWATER - INFO - Degree of conservation is : 0.166666666667
+2014-04-18 15:38:55,909 - PyWATER - DEBUG - Cluster No. : 758 Atoms : ['1qo3_a_2021']
+2014-04-18 15:38:55,909 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,910 - PyWATER - DEBUG - Cluster No. : 759 Atoms : ['1i4f_a_656', '1tmc_a_225', '1hsa_a_852', '1a1n_a_430', '1e27_a_2081', '1qlf_a_2020', '1qo3_a_2005']
+2014-04-18 15:38:55,910 - PyWATER - INFO - Degree of conservation is : 0.583333333333
+2014-04-18 15:38:55,910 - PyWATER - INFO - Here is conserved water molecule...
+2014-04-18 15:38:55,910 - PyWATER - DEBUG - Cluster No. : 760 Atoms : ['1i4f_a_622', '1tmc_a_195', '1agd_a_463', '1e27_a_2067', '1qlf_a_2018', '1qo3_a_2013']
+2014-04-18 15:38:55,910 - PyWATER - INFO - Degree of conservation is : 0.5
+2014-04-18 15:38:55,910 - PyWATER - INFO - Here is conserved water molecule...
+2014-04-18 15:38:55,910 - PyWATER - DEBUG - Cluster No. : 761 Atoms : ['1e27_a_2202']
+2014-04-18 15:38:55,910 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,910 - PyWATER - DEBUG - Cluster No. : 762 Atoms : ['1e27_a_2203']
+2014-04-18 15:38:55,910 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,911 - PyWATER - DEBUG - Cluster No. : 763 Atoms : ['1hsa_a_910']
+2014-04-18 15:38:55,911 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,911 - PyWATER - DEBUG - Cluster No. : 764 Atoms : ['1a1m_a_418']
+2014-04-18 15:38:55,911 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,911 - PyWATER - DEBUG - Cluster No. : 765 Atoms : ['1tmc_a_192', '1agd_a_574', '1e27_a_2087', '1qo3_a_2052']
+2014-04-18 15:38:55,911 - PyWATER - INFO - Degree of conservation is : 0.333333333333
+2014-04-18 15:38:55,911 - PyWATER - DEBUG - Cluster No. : 766 Atoms : ['1i4f_a_560', '1agd_a_467', '1hsa_a_609', '1a1n_a_963', '1qlf_a_2023', '1qo3_a_2050']
+2014-04-18 15:38:55,911 - PyWATER - INFO - Degree of conservation is : 0.5
+2014-04-18 15:38:55,912 - PyWATER - INFO - Here is conserved water molecule...
+2014-04-18 15:38:55,912 - PyWATER - DEBUG - Cluster No. : 767 Atoms : ['1hsa_a_842', '1a1m_a_417']
+2014-04-18 15:38:55,912 - PyWATER - INFO - Degree of conservation is : 0.166666666667
+2014-04-18 15:38:55,912 - PyWATER - DEBUG - Cluster No. : 768 Atoms : ['1hsa_a_558']
+2014-04-18 15:38:55,912 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,912 - PyWATER - DEBUG - Cluster No. : 769 Atoms : ['1ed3_a_298']
+2014-04-18 15:38:55,912 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,912 - PyWATER - DEBUG - Cluster No. : 770 Atoms : ['1agd_a_468', '1a1m_a_419']
+2014-04-18 15:38:55,912 - PyWATER - INFO - Degree of conservation is : 0.166666666667
+2014-04-18 15:38:55,913 - PyWATER - DEBUG - Cluster No. : 771 Atoms : ['1i4f_a_612', '1ed3_a_303']
+2014-04-18 15:38:55,913 - PyWATER - INFO - Degree of conservation is : 0.166666666667
+2014-04-18 15:38:55,913 - PyWATER - DEBUG - Cluster No. : 772 Atoms : ['1i4f_a_633']
+2014-04-18 15:38:55,913 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,913 - PyWATER - DEBUG - Cluster No. : 773 Atoms : ['1i4f_a_654']
+2014-04-18 15:38:55,913 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,913 - PyWATER - DEBUG - Cluster No. : 774 Atoms : ['1qlf_a_2025']
+2014-04-18 15:38:55,913 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,913 - PyWATER - DEBUG - Cluster No. : 775 Atoms : ['1qlf_a_2026']
+2014-04-18 15:38:55,913 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,913 - PyWATER - DEBUG - Cluster No. : 776 Atoms : ['1qo3_a_2053', '1ed3_a_277']
+2014-04-18 15:38:55,914 - PyWATER - INFO - Degree of conservation is : 0.166666666667
+2014-04-18 15:38:55,914 - PyWATER - DEBUG - Cluster No. : 777 Atoms : ['1tmc_a_194', '1agd_a_469', '1a1n_a_964', '1e27_a_2035']
+2014-04-18 15:38:55,914 - PyWATER - INFO - Degree of conservation is : 0.333333333333
+2014-04-18 15:38:55,914 - PyWATER - DEBUG - Cluster No. : 778 Atoms : ['1i4f_a_544', '1hsa_a_548']
+2014-04-18 15:38:55,914 - PyWATER - INFO - Degree of conservation is : 0.166666666667
+2014-04-18 15:38:55,914 - PyWATER - DEBUG - Cluster No. : 779 Atoms : ['1i4f_a_642']
+2014-04-18 15:38:55,914 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,914 - PyWATER - DEBUG - Cluster No. : 780 Atoms : ['1i4f_a_796', '1e27_a_2089']
+2014-04-18 15:38:55,914 - PyWATER - INFO - Degree of conservation is : 0.166666666667
+2014-04-18 15:38:55,915 - PyWATER - DEBUG - Cluster No. : 781 Atoms : ['1agd_a_461', '1e27_a_2090', '1a1m_a_413']
+2014-04-18 15:38:55,915 - PyWATER - INFO - Degree of conservation is : 0.25
+2014-04-18 15:38:55,915 - PyWATER - DEBUG - Cluster No. : 782 Atoms : ['1i4f_a_663', '1a1n_a_699']
+2014-04-18 15:38:55,915 - PyWATER - INFO - Degree of conservation is : 0.166666666667
+2014-04-18 15:38:55,915 - PyWATER - DEBUG - Cluster No. : 783 Atoms : ['1i4f_a_687']
+2014-04-18 15:38:55,915 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,915 - PyWATER - DEBUG - Cluster No. : 784 Atoms : ['1i4f_a_631', '1tmc_a_207', '1e27_a_2038']
+2014-04-18 15:38:55,915 - PyWATER - INFO - Degree of conservation is : 0.25
+2014-04-18 15:38:55,915 - PyWATER - DEBUG - Cluster No. : 785 Atoms : ['1i4f_a_696']
+2014-04-18 15:38:55,915 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,915 - PyWATER - DEBUG - Cluster No. : 786 Atoms : ['1hsa_a_810', '1ed3_a_311']
+2014-04-18 15:38:55,915 - PyWATER - INFO - Degree of conservation is : 0.166666666667
+2014-04-18 15:38:55,916 - PyWATER - DEBUG - Cluster No. : 787 Atoms : ['1hsa_a_901']
+2014-04-18 15:38:55,916 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,916 - PyWATER - DEBUG - Cluster No. : 788 Atoms : ['1qlf_a_2024']
+2014-04-18 15:38:55,916 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,916 - PyWATER - DEBUG - Cluster No. : 789 Atoms : ['1i4f_a_714']
+2014-04-18 15:38:55,916 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,916 - PyWATER - DEBUG - Cluster No. : 790 Atoms : ['1agd_a_470']
+2014-04-18 15:38:55,916 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,917 - PyWATER - DEBUG - Cluster No. : 791 Atoms : ['1i4f_a_591', '1agd_a_575']
+2014-04-18 15:38:55,917 - PyWATER - INFO - Degree of conservation is : 0.166666666667
+2014-04-18 15:38:55,917 - PyWATER - DEBUG - Cluster No. : 792 Atoms : ['1agd_a_564', '1hsa_a_861']
+2014-04-18 15:38:55,917 - PyWATER - INFO - Degree of conservation is : 0.166666666667
+2014-04-18 15:38:55,917 - PyWATER - DEBUG - Cluster No. : 793 Atoms : ['1i4f_a_516', '1tmc_a_211', '1agd_a_280', '1hsa_a_511', '1a1n_a_301', '1e27_a_2098', '1a1m_a_307', '1qlf_a_2001', '1qo3_a_2058', '1kbg_h_1135', '1ed3_a_295']
+2014-04-18 15:38:55,917 - PyWATER - INFO - Degree of conservation is : 0.916666666667
+2014-04-18 15:38:55,917 - PyWATER - INFO - Here is conserved water molecule...
+2014-04-18 15:38:55,917 - PyWATER - DEBUG - Cluster No. : 794 Atoms : ['1mhc_a_348']
+2014-04-18 15:38:55,917 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,917 - PyWATER - DEBUG - Cluster No. : 795 Atoms : ['1a1n_a_300']
+2014-04-18 15:38:55,918 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,918 - PyWATER - DEBUG - Cluster No. : 796 Atoms : ['1mhc_a_284']
+2014-04-18 15:38:55,918 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,918 - PyWATER - DEBUG - Cluster No. : 797 Atoms : ['1tmc_a_239', '1agd_a_529', '1mhc_a_288']
+2014-04-18 15:38:55,918 - PyWATER - INFO - Degree of conservation is : 0.25
+2014-04-18 15:38:55,918 - PyWATER - DEBUG - Cluster No. : 798 Atoms : ['1agd_a_354', '1hsa_a_506']
+2014-04-18 15:38:55,918 - PyWATER - INFO - Degree of conservation is : 0.166666666667
+2014-04-18 15:38:55,918 - PyWATER - DEBUG - Cluster No. : 799 Atoms : ['1qlf_a_2019']
+2014-04-18 15:38:55,919 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,919 - PyWATER - DEBUG - Cluster No. : 800 Atoms : ['1i4f_a_698', '1agd_a_471']
+2014-04-18 15:38:55,919 - PyWATER - INFO - Degree of conservation is : 0.166666666667
+2014-04-18 15:38:55,919 - PyWATER - DEBUG - Cluster No. : 801 Atoms : ['1i4f_a_800', '1e27_a_2094']
+2014-04-18 15:38:55,919 - PyWATER - INFO - Degree of conservation is : 0.166666666667
+2014-04-18 15:38:55,919 - PyWATER - DEBUG - Cluster No. : 802 Atoms : ['1e27_a_2095', '1kbg_h_1137']
+2014-04-18 15:38:55,919 - PyWATER - INFO - Degree of conservation is : 0.166666666667
+2014-04-18 15:38:55,919 - PyWATER - DEBUG - Cluster No. : 803 Atoms : ['1i4f_a_705', '1qo3_a_2059']
+2014-04-18 15:38:55,919 - PyWATER - INFO - Degree of conservation is : 0.166666666667
+2014-04-18 15:38:55,919 - PyWATER - DEBUG - Cluster No. : 804 Atoms : ['1i4f_a_807']
+2014-04-18 15:38:55,919 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,920 - PyWATER - DEBUG - Cluster No. : 805 Atoms : ['1i4f_a_600', '1qlf_a_2028', '1mhc_a_322']
+2014-04-18 15:38:55,920 - PyWATER - INFO - Degree of conservation is : 0.25
+2014-04-18 15:38:55,920 - PyWATER - DEBUG - Cluster No. : 806 Atoms : ['1agd_a_328']
+2014-04-18 15:38:55,920 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,920 - PyWATER - DEBUG - Cluster No. : 807 Atoms : ['1mhc_a_408']
+2014-04-18 15:38:55,920 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,920 - PyWATER - DEBUG - Cluster No. : 808 Atoms : ['1a1n_a_437', '1e27_a_2200']
+2014-04-18 15:38:55,920 - PyWATER - INFO - Degree of conservation is : 0.166666666667
+2014-04-18 15:38:55,920 - PyWATER - DEBUG - Cluster No. : 809 Atoms : ['1i4f_a_820', '1a1n_a_965', '1ed3_a_322']
+2014-04-18 15:38:55,920 - PyWATER - INFO - Degree of conservation is : 0.25
+2014-04-18 15:38:55,920 - PyWATER - DEBUG - Cluster No. : 810 Atoms : ['1e27_a_2100', '1kbg_h_1177']
+2014-04-18 15:38:55,920 - PyWATER - INFO - Degree of conservation is : 0.166666666667
+2014-04-18 15:38:55,921 - PyWATER - DEBUG - Cluster No. : 811 Atoms : ['1tmc_a_237']
+2014-04-18 15:38:55,921 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,921 - PyWATER - DEBUG - Cluster No. : 812 Atoms : ['1agd_a_563', '1qo3_a_2061']
+2014-04-18 15:38:55,921 - PyWATER - INFO - Degree of conservation is : 0.166666666667
+2014-04-18 15:38:55,921 - PyWATER - DEBUG - Cluster No. : 813 Atoms : ['1tmc_a_234', '1agd_a_472', '1qlf_a_2027', '1qo3_a_2056']
+2014-04-18 15:38:55,921 - PyWATER - INFO - Degree of conservation is : 0.333333333333
+2014-04-18 15:38:55,921 - PyWATER - DEBUG - Cluster No. : 814 Atoms : ['1i4f_a_682', '1agd_a_473', '1a1n_a_438', '1e27_a_2102']
+2014-04-18 15:38:55,922 - PyWATER - INFO - Degree of conservation is : 0.333333333333
+2014-04-18 15:38:55,922 - PyWATER - DEBUG - Cluster No. : 815 Atoms : ['1i4f_a_640', '1agd_a_576', '1ed3_a_323']
+2014-04-18 15:38:55,922 - PyWATER - INFO - Degree of conservation is : 0.25
+2014-04-18 15:38:55,922 - PyWATER - DEBUG - Cluster No. : 816 Atoms : ['1i4f_a_813']
+2014-04-18 15:38:55,922 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,922 - PyWATER - DEBUG - Cluster No. : 817 Atoms : ['1i4f_a_778', '1agd_a_562']
+2014-04-18 15:38:55,922 - PyWATER - INFO - Degree of conservation is : 0.166666666667
+2014-04-18 15:38:55,922 - PyWATER - DEBUG - Cluster No. : 818 Atoms : ['1agd_a_530']
+2014-04-18 15:38:55,922 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,922 - PyWATER - DEBUG - Cluster No. : 819 Atoms : ['1agd_a_568', '1e27_a_2039']
+2014-04-18 15:38:55,922 - PyWATER - INFO - Degree of conservation is : 0.166666666667
+2014-04-18 15:38:55,923 - PyWATER - DEBUG - Cluster No. : 820 Atoms : ['1ed3_a_312']
+2014-04-18 15:38:55,923 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,923 - PyWATER - DEBUG - Cluster No. : 821 Atoms : ['1agd_a_281', '1hsa_a_507', '1qo3_a_2062']
+2014-04-18 15:38:55,923 - PyWATER - INFO - Degree of conservation is : 0.25
+2014-04-18 15:38:55,923 - PyWATER - DEBUG - Cluster No. : 822 Atoms : ['1agd_a_474', '1mhc_a_372']
+2014-04-18 15:38:55,923 - PyWATER - INFO - Degree of conservation is : 0.166666666667
+2014-04-18 15:38:55,923 - PyWATER - DEBUG - Cluster No. : 823 Atoms : ['1qlf_a_2007', '1qo3_a_2024']
+2014-04-18 15:38:55,923 - PyWATER - INFO - Degree of conservation is : 0.166666666667
+2014-04-18 15:38:55,924 - PyWATER - DEBUG - Cluster No. : 824 Atoms : ['1i4f_a_513', '1agd_a_307', '1hsa_a_536', '1a1n_a_385', '1e27_a_2014', '1a1m_a_351', '1qlf_a_2006', '1qo3_a_2008', '1mhc_a_285']
+2014-04-18 15:38:55,924 - PyWATER - INFO - Degree of conservation is : 0.75
+2014-04-18 15:38:55,924 - PyWATER - INFO - Here is conserved water molecule...
+2014-04-18 15:38:55,924 - PyWATER - DEBUG - Cluster No. : 825 Atoms : ['1i4f_a_624']
+2014-04-18 15:38:55,924 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,924 - PyWATER - DEBUG - Cluster No. : 826 Atoms : ['1mhc_a_370']
+2014-04-18 15:38:55,924 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,924 - PyWATER - DEBUG - Cluster No. : 827 Atoms : ['1i4f_a_745']
+2014-04-18 15:38:55,924 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,924 - PyWATER - DEBUG - Cluster No. : 828 Atoms : ['1kbg_h_1160']
+2014-04-18 15:38:55,924 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,925 - PyWATER - DEBUG - Cluster No. : 829 Atoms : ['1i4f_a_676', '1a1m_a_395', '1qlf_a_2012', '1qo3_a_2031']
+2014-04-18 15:38:55,925 - PyWATER - INFO - Degree of conservation is : 0.333333333333
+2014-04-18 15:38:55,925 - PyWATER - DEBUG - Cluster No. : 830 Atoms : ['1agd_a_352']
+2014-04-18 15:38:55,925 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,925 - PyWATER - DEBUG - Cluster No. : 831 Atoms : ['1i4f_a_743', '1agd_a_561']
+2014-04-18 15:38:55,925 - PyWATER - INFO - Degree of conservation is : 0.166666666667
+2014-04-18 15:38:55,925 - PyWATER - DEBUG - Cluster No. : 832 Atoms : ['1agd_a_525']
+2014-04-18 15:38:55,925 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,925 - PyWATER - DEBUG - Cluster No. : 833 Atoms : ['1hsa_a_659', '1a1n_a_1012', '1e27_a_2037']
+2014-04-18 15:38:55,925 - PyWATER - INFO - Degree of conservation is : 0.25
+2014-04-18 15:38:55,926 - PyWATER - DEBUG - Cluster No. : 834 Atoms : ['1e27_a_2036']
+2014-04-18 15:38:55,926 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,926 - PyWATER - DEBUG - Cluster No. : 835 Atoms : ['1e27_a_2053', '1a1m_a_412', '1qo3_a_2041']
+2014-04-18 15:38:55,926 - PyWATER - INFO - Degree of conservation is : 0.25
+2014-04-18 15:38:55,926 - PyWATER - DEBUG - Cluster No. : 836 Atoms : ['1mhc_a_338']
+2014-04-18 15:38:55,926 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,926 - PyWATER - DEBUG - Cluster No. : 837 Atoms : ['1e27_a_2076']
+2014-04-18 15:38:55,926 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,926 - PyWATER - DEBUG - Cluster No. : 838 Atoms : ['1a1n_a_687', '1mhc_a_379']
+2014-04-18 15:38:55,927 - PyWATER - INFO - Degree of conservation is : 0.166666666667
+2014-04-18 15:38:55,927 - PyWATER - DEBUG - Cluster No. : 839 Atoms : ['1hsa_a_835', '1a1n_a_689']
+2014-04-18 15:38:55,927 - PyWATER - INFO - Degree of conservation is : 0.166666666667
+2014-04-18 15:38:55,927 - PyWATER - DEBUG - Cluster No. : 840 Atoms : ['1i4f_a_747', '1agd_a_410', '1a1n_a_688', '1e27_a_2080', '1a1m_a_333', '1qo3_a_2044']
+2014-04-18 15:38:55,927 - PyWATER - INFO - Degree of conservation is : 0.5
+2014-04-18 15:38:55,927 - PyWATER - INFO - Here is conserved water molecule...
+2014-04-18 15:38:55,927 - PyWATER - DEBUG - Cluster No. : 841 Atoms : ['1a1n_a_979', '1e27_a_2074']
+2014-04-18 15:38:55,927 - PyWATER - INFO - Degree of conservation is : 0.166666666667
+2014-04-18 15:38:55,927 - PyWATER - DEBUG - Cluster No. : 842 Atoms : ['1a1n_a_417', '1a1m_a_410', '1ed3_a_319']
+2014-04-18 15:38:55,927 - PyWATER - INFO - Degree of conservation is : 0.25
+2014-04-18 15:38:55,928 - PyWATER - DEBUG - Cluster No. : 843 Atoms : ['1a1m_a_411']
+2014-04-18 15:38:55,928 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,928 - PyWATER - DEBUG - Cluster No. : 844 Atoms : ['1i4f_a_741', '1mhc_a_380']
+2014-04-18 15:38:55,928 - PyWATER - INFO - Degree of conservation is : 0.166666666667
+2014-04-18 15:38:55,928 - PyWATER - DEBUG - Cluster No. : 845 Atoms : ['1tmc_a_219', '1mhc_a_344']
+2014-04-18 15:38:55,928 - PyWATER - INFO - Degree of conservation is : 0.166666666667
+2014-04-18 15:38:55,928 - PyWATER - DEBUG - Cluster No. : 846 Atoms : ['1e27_a_2057', '1qo3_a_2011']
+2014-04-18 15:38:55,928 - PyWATER - INFO - Degree of conservation is : 0.166666666667
+2014-04-18 15:38:55,929 - PyWATER - DEBUG - Cluster No. : 847 Atoms : ['1qlf_a_2013', '1qo3_a_2040']
+2014-04-18 15:38:55,929 - PyWATER - INFO - Degree of conservation is : 0.166666666667
+2014-04-18 15:38:55,929 - PyWATER - DEBUG - Cluster No. : 848 Atoms : ['1i4f_a_775', '1agd_a_369']
+2014-04-18 15:38:55,929 - PyWATER - INFO - Degree of conservation is : 0.166666666667
+2014-04-18 15:38:55,929 - PyWATER - DEBUG - Cluster No. : 849 Atoms : ['1qo3_a_2039']
+2014-04-18 15:38:55,929 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,929 - PyWATER - DEBUG - Cluster No. : 850 Atoms : ['1i4f_a_514', '1tmc_a_176', '1agd_a_367', '1hsa_a_559', '1a1n_a_400', '1e27_a_2066', '1a1m_a_339', '1qo3_a_2036', '1kbg_h_1116']
+2014-04-18 15:38:55,929 - PyWATER - INFO - Degree of conservation is : 0.75
+2014-04-18 15:38:55,929 - PyWATER - INFO - Here is conserved water molecule...
+2014-04-18 15:38:55,930 - PyWATER - DEBUG - Cluster No. : 851 Atoms : ['1i4f_a_542', '1qo3_a_2030']
+2014-04-18 15:38:55,930 - PyWATER - INFO - Degree of conservation is : 0.166666666667
+2014-04-18 15:38:55,930 - PyWATER - DEBUG - Cluster No. : 852 Atoms : ['1hsa_a_567']
+2014-04-18 15:38:55,930 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,930 - PyWATER - DEBUG - Cluster No. : 853 Atoms : ['1i4f_a_637', '1agd_a_460', '1e27_a_2060', '1ed3_a_300']
+2014-04-18 15:38:55,930 - PyWATER - INFO - Degree of conservation is : 0.333333333333
+2014-04-18 15:38:55,931 - PyWATER - DEBUG - Cluster No. : 854 Atoms : ['1e27_a_2022']
+2014-04-18 15:38:55,931 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,931 - PyWATER - DEBUG - Cluster No. : 855 Atoms : ['1i4f_a_524', '1agd_a_411', '1hsa_a_594', '1qo3_a_2038']
+2014-04-18 15:38:55,931 - PyWATER - INFO - Degree of conservation is : 0.333333333333
+2014-04-18 15:38:55,931 - PyWATER - DEBUG - Cluster No. : 856 Atoms : ['1i4f_a_554', '1tmc_a_205', '1e27_a_2069', '1qo3_a_2014']
+2014-04-18 15:38:55,931 - PyWATER - INFO - Degree of conservation is : 0.333333333333
+2014-04-18 15:38:55,931 - PyWATER - DEBUG - Cluster No. : 857 Atoms : ['1agd_a_462', '1a1n_a_582', '1e27_a_2099', '1qlf_a_2029']
+2014-04-18 15:38:55,931 - PyWATER - INFO - Degree of conservation is : 0.333333333333
+2014-04-18 15:38:55,931 - PyWATER - DEBUG - Cluster No. : 858 Atoms : ['1tmc_a_232']
+2014-04-18 15:38:55,932 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,932 - PyWATER - DEBUG - Cluster No. : 859 Atoms : ['1i4f_a_662', '1agd_a_535', '1hsa_a_920', '1e27_a_2062', '1qlf_a_2016', '1qo3_a_2037']
+2014-04-18 15:38:55,932 - PyWATER - INFO - Degree of conservation is : 0.5
+2014-04-18 15:38:55,932 - PyWATER - INFO - Here is conserved water molecule...
+2014-04-18 15:38:55,932 - PyWATER - DEBUG - Cluster No. : 860 Atoms : ['1qo3_a_2035']
+2014-04-18 15:38:55,932 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,932 - PyWATER - DEBUG - Cluster No. : 861 Atoms : ['1ed3_a_293']
+2014-04-18 15:38:55,932 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,932 - PyWATER - DEBUG - Cluster No. : 862 Atoms : ['1tmc_a_236', '1hsa_a_936']
+2014-04-18 15:38:55,933 - PyWATER - INFO - Degree of conservation is : 0.166666666667
+2014-04-18 15:38:55,933 - PyWATER - DEBUG - Cluster No. : 863 Atoms : ['1kbg_h_1171', '1mhc_a_381']
+2014-04-18 15:38:55,933 - PyWATER - INFO - Degree of conservation is : 0.166666666667
+2014-04-18 15:38:55,933 - PyWATER - DEBUG - Cluster No. : 864 Atoms : ['1mhc_a_382']
+2014-04-18 15:38:55,933 - PyWATER - INFO - Degree of conservation is : 0.0833333333333
+2014-04-18 15:38:55,934 - PyWATER - DEBUG - conservedWaterDic is: 
+2014-04-18 15:38:55,934 - PyWATER - DEBUG - PDBid : 1a1m_a Oxygen atom numbers : ['341_0.5', '327_0.5', '448_0.5', '399_0.583333333333', '314_0.75', '387_0.5', '473_0.666666666667', '347_0.666666666667', '325_0.583333333333', '332_0.833333333333', '302_0.75', '438_0.5', '432_0.5', '350_0.583333333333', '311_1.0', '436_0.75', '437_0.583333333333', '330_0.75', '372_0.666666666667', '345_0.75', '423_0.583333333333', '301_0.75', '343_0.5', '378_0.666666666667', '335_0.583333333333', '407_0.666666666667', '369_0.666666666667', '416_0.5', '309_0.583333333333', '337_0.583333333333', '461_0.5', '304_0.75', '396_0.5', '377_0.666666666667', '319_0.666666666667', '463_0.833333333333', '454_0.5', '397_0.666666666667', '307_0.916666666667', '351_0.75', '333_0.5', '339_0.75']
+2014-04-18 15:38:55,934 - PyWATER - DEBUG - PDBid : 1qlf_a Oxygen atom numbers : ['2033_0.5', '2038_0.666666666667', '2048_0.583333333333', '2049_0.833333333333', '2050_0.5', '2044_0.583333333333', '2039_1.0', '2041_0.75', '2002_0.666666666667', '2071_0.666666666667', '2008_0.583333333333', '2011_0.5', '2062_0.666666666667', '2069_0.833333333333', '2010_0.666666666667', '2021_0.666666666667', '2020_0.583333333333', '2018_0.5', '2023_0.5', '2001_0.916666666667', '2006_0.75', '2016_0.5']
+2014-04-18 15:38:55,934 - PyWATER - DEBUG - PDBid : 1mhc_a Oxygen atom numbers : ['307_0.5', '337_0.583333333333', '296_0.583333333333', '327_0.75', '297_0.75', '402_0.5', '404_0.5', '326_1.0', '374_0.75', '295_0.583333333333', '375_0.75', '286_0.666666666667', '312_0.5', '369_0.666666666667', '318_0.583333333333', '316_0.666666666667', '341_0.5', '359_0.666666666667', '289_0.75', '283_0.5', '309_0.666666666667', '363_0.666666666667', '339_0.666666666667', '353_0.833333333333', '321_0.5', '395_0.666666666667', '285_0.75']
+2014-04-18 15:38:55,934 - PyWATER - DEBUG - PDBid : 1agd_a Oxygen atom numbers : ['449_0.5', '513_0.5', '501_0.5', '551_0.5', '355_0.583333333333', '292_0.75', '333_0.666666666667', '452_0.583333333333', '310_0.666666666667', '565_0.5', '570_0.5', '424_0.5', '423_0.5', '347_0.583333333333', '349_0.833333333333', '335_0.75', '337_0.5', '336_0.75', '488_0.5', '392_0.583333333333', '415_0.5', '338_1.0', '339_0.75', '378_0.583333333333', '420_0.75', '379_0.75', '341_0.666666666667', '371_0.75', '372_0.583333333333', '539_0.583333333333', '289_0.75', '290_0.666666666667', '370_0.5', '291_0.5', '323_0.5', '322_0.666666666667', '361_0.583333333333', '455_0.666666666667', '409_0.583333333333', '316_0.666666666667', '317_0.5', '320_0.583333333333', '319_0.583333333333', '520_0.5', '364_0.75', '454_0.5', '287_0.583333333333', '512_0.666666666667', '451_0.666666666667', '359_0.666666666667', '401_0.833333333333', '448_0.5', '494_0.5', '363_0.5', '358_0.5', '463_0.5', '467_0.5', '280_0.916666666667', '307_0.75', '410_0.5', '367_0.75', '535_0.5']
+2014-04-18 15:38:55,934 - PyWATER - DEBUG - PDBid : 1a1n_a Oxygen atom numbers : ['515_0.5', '513_0.5', '1017_0.5', '505_0.5', '393_0.583333333333', '386_0.75', '609_0.5', '474_0.666666666667', '475_0.583333333333', '389_0.666666666667', '700_0.5', '701_0.5', '349_0.583333333333', '347_0.833333333333', '337_0.75', '342_0.5', '338_0.75', '345_0.583333333333', '499_0.5', '335_1.0', '621_0.75', '493_0.583333333333', '491_0.75', '334_0.75', '941_0.666666666667', '467_0.75', '934_0.583333333333', '388_0.583333333333', '327_0.75', '387_0.666666666667', '392_0.5', '442_0.5', '365_0.666666666667', '319_0.583333333333', '316_0.666666666667', '311_0.583333333333', '312_0.5', '324_0.666666666667', '421_0.5', '403_0.583333333333', '402_0.583333333333', '359_0.5', '323_0.75', '320_0.5', '322_0.583333333333', '511_0.666666666667', '518_0.666666666667', '313_0.666666666667', '354_0.833333333333', '969_0.5', '828_0.5', '380_0.5', '310_0.666666666667', '326_0.666666666667', '430_0.583333333333', '963_0.5', '301_0.916666666667', '385_0.75', '688_0.5', '400_0.75']
+2014-04-18 15:38:55,934 - PyWATER - DEBUG - PDBid : 1tmc_a Oxygen atom numbers : ['235_0.5', '183_0.5', '187_0.5', '209_0.5', '189_0.833333333333', '186_0.75', '196_0.75', '202_0.5', '241_1.0', '216_0.75', '199_0.75', '224_0.75', '204_0.666666666667', '222_0.75', '182_0.75', '226_0.5', '214_0.583333333333', '242_0.5', '228_0.666666666667', '233_0.5', '184_0.666666666667', '190_0.666666666667', '225_0.583333333333', '195_0.5', '211_0.916666666667', '176_0.75']
+2014-04-18 15:38:55,934 - PyWATER - DEBUG - PDBid : 1i4f_a Oxygen atom numbers : ['547_0.5', '568_0.5', '564_0.5', '511_0.5', '773_0.583333333333', '526_0.75', '566_0.5', '518_0.666666666667', '586_0.583333333333', '697_0.666666666667', '525_0.5', '668_0.5', '558_0.5', '517_0.5', '672_0.583333333333', '506_0.833333333333', '562_0.75', '753_0.5', '523_0.75', '570_0.5', '738_0.5', '781_0.583333333333', '657_0.5', '503_1.0', '531_0.75', '582_0.583333333333', '507_0.75', '625_0.75', '585_0.666666666667', '581_0.75', '744_0.583333333333', '593_0.583333333333', '505_0.75', '559_0.666666666667', '567_0.5', '540_0.5', '609_0.5', '510_0.666666666667', '573_0.583333333333', '695_0.666666666667', '670_0.583333333333', '556_0.5', '653_0.666666666667', '552_0.5', '550_0.583333333333', '522_0.583333333333', '551_0.5', '521_0.75', '638_0.5', '512_0.583333333333', '596_0.666666666667', '616_0.666666666667', '664_0.666666666667', '543_0.833333333333', '557_0.5', '530_0.5', '754_0.5', '576_0.5', '589_0.666666666667', '541_0.666666666667', '656_0.583333333333', '622_0.5', '560_0.5', '516_0.916666666667', '513_0.75', '747_0.5', '514_0.75', '662_0.5']
+2014-04-18 15:38:55,934 - PyWATER - DEBUG - PDBid : 1ed3_a Oxygen atom numbers : ['292_0.75', '280_0.75', '320_0.75', '310_0.5', '278_1.0', '314_0.75', '291_0.75', '317_0.583333333333', '308_0.666666666667', '306_0.833333333333', '307_0.5', '295_0.916666666667']
+2014-04-18 15:38:55,934 - PyWATER - DEBUG - PDBid : 1hsa_a Oxygen atom numbers : ['860_0.5', '644_0.5', '637_0.5', '617_0.5', '858_0.583333333333', '534_0.75', '600_0.5', '593_0.666666666667', '833_0.583333333333', '623_0.666666666667', '584_0.5', '540_0.583333333333', '563_0.833333333333', '657_0.75', '587_0.75', '571_0.5', '537_1.0', '630_0.75', '855_0.583333333333', '560_0.75', '539_0.75', '595_0.666666666667', '532_0.75', '811_0.583333333333', '561_0.75', '541_0.666666666667', '551_0.5', '610_0.5', '555_0.666666666667', '538_0.583333333333', '566_0.666666666667', '628_0.583333333333', '543_0.666666666667', '646_0.5', '547_0.583333333333', '575_0.583333333333', '608_0.5', '533_0.75', '589_0.583333333333', '580_0.666666666667', '621_0.666666666667', '818_0.666666666667', '582_0.833333333333', '546_0.666666666667', '544_0.666666666667', '852_0.583333333333', '609_0.5', '511_0.916666666667', '536_0.75', '559_0.75', '920_0.5']
+2014-04-18 15:38:55,934 - PyWATER - DEBUG - PDBid : 1kbg_h Oxygen atom numbers : ['1145_0.75', '1152_0.666666666667', '1178_0.5', '1170_0.5', '1146_0.833333333333', '1151_0.75', '1176_0.5', '1103_0.5', '1133_1.0', '1157_0.75', '1114_0.75', '1105_0.583333333333', '1149_0.666666666667', '1159_0.75', '1167_0.583333333333', '1162_0.833333333333', '1134_0.5', '1166_0.5', '1127_0.666666666667', '1115_0.666666666667', '1135_0.916666666667', '1116_0.75']
+2014-04-18 15:38:55,934 - PyWATER - DEBUG - PDBid : 1e27_a Oxygen atom numbers : ['2243_0.5', '2248_0.5', '2225_0.5', '2223_0.5', '2006_0.583333333333', '2020_0.75', '2144_0.666666666667', '2132_0.583333333333', '2058_0.666666666667', '2101_0.5', '2103_0.5', '2176_0.5', '2179_0.5', '2182_0.583333333333', '2185_0.833333333333', '2139_0.5', '2153_0.75', '2187_0.5', '2159_0.583333333333', '2189_0.5', '2146_1.0', '2150_0.75', '2147_0.583333333333', '2149_0.75', '2143_0.75', '2152_0.666666666667', '2121_0.75', '2123_0.583333333333', '2130_0.583333333333', '2112_0.75', '2019_0.666666666667', '2005_0.5', '2108_0.5', '2259_0.5', '2263_0.666666666667', '2044_0.583333333333', '2051_0.666666666667', '2075_0.5', '2052_0.666666666667', '2210_0.5', '2262_0.583333333333', '2209_0.583333333333', '2255_0.5', '2238_0.75', '2091_0.5', '2047_0.583333333333', '2241_0.666666666667', '2240_0.666666666667', '2045_0.666666666667', '2256_0.833333333333', '2242_0.5', '2199_0.5', '2042_0.5', '2009_0.5', '2204_0.666666666667', '2081_0.583333333333', '2067_0.5', '2098_0.916666666667', '2014_0.75', '2080_0.5', '2066_0.75', '2062_0.5']
+2014-04-18 15:38:55,934 - PyWATER - DEBUG - PDBid : 1qo3_a Oxygen atom numbers : ['2015_0.75', '2093_0.666666666667', '2085_0.583333333333', '2032_0.666666666667', '2060_0.5', '2022_0.5', '2109_0.5', '2111_0.5', '2112_0.833333333333', '2090_0.5', '2099_0.75', '2114_0.5', '2105_0.583333333333', '2087_1.0', '2097_0.75', '2095_0.583333333333', '2091_0.75', '2092_0.75', '2096_0.666666666667', '2082_0.75', '2081_0.583333333333', '2084_0.583333333333', '2071_0.75', '2010_0.666666666667', '2004_0.5', '2070_0.5', '2028_0.666666666667', '2023_0.583333333333', '2129_0.583333333333', '2043_0.583333333333', '2027_0.666666666667', '2121_0.5', '2002_0.5', '2026_0.5', '2001_0.666666666667', '2005_0.583333333333', '2013_0.5', '2050_0.5', '2058_0.916666666667', '2008_0.75', '2044_0.5', '2036_0.75', '2037_0.5']
+2014-04-18 15:38:55,934 - PyWATER - INFO - Degree of conservation for each conserved water molecule in cwm_1i4f_a_withConservedWaters.pdb ['atomNumber_DegreeOfConservation']: ['547_0.5', '568_0.5', '564_0.5', '511_0.5', '773_0.583333333333', '526_0.75', '566_0.5', '518_0.666666666667', '586_0.583333333333', '697_0.666666666667', '525_0.5', '668_0.5', '558_0.5', '517_0.5', '672_0.583333333333', '506_0.833333333333', '562_0.75', '753_0.5', '523_0.75', '570_0.5', '738_0.5', '781_0.583333333333', '657_0.5', '503_1.0', '531_0.75', '582_0.583333333333', '507_0.75', '625_0.75', '585_0.666666666667', '581_0.75', '744_0.583333333333', '593_0.583333333333', '505_0.75', '559_0.666666666667', '567_0.5', '540_0.5', '609_0.5', '510_0.666666666667', '573_0.583333333333', '695_0.666666666667', '670_0.583333333333', '556_0.5', '653_0.666666666667', '552_0.5', '550_0.583333333333', '522_0.583333333333', '551_0.5', '521_0.75', '638_0.5', '512_0.583333333333', '596_0.666666666667', '616_0.666666666667', '664_0.666666666667', '543_0.833333333333', '557_0.5', '530_0.5', '754_0.5', '576_0.5', '589_0.666666666667', '541_0.666666666667', '656_0.583333333333', '622_0.5', '560_0.5', '516_0.916666666667', '513_0.75', '747_0.5', '514_0.75', '662_0.5']
+2014-04-18 15:38:55,961 - PyWATER - INFO - 1i4f_a structure has 68 conserved water molecules.
+2014-04-18 15:38:56,196 - PyWATER - INFO - PDB file of query protein with conserved waters "cwm_1i4f_a_withConservedWaters.pdb" and logfile (pywater.log) is saved in /home/hitesh/PyWATER_outdir
