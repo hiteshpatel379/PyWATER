@@ -3,35 +3,35 @@
   <head>
     <meta charset='utf-8'>
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link href='https://fonts.googleapis.com/css?family=Architects+Daughter' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print">
 
-    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen" />
-    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen" />
-    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
 
     <title>PyWATER by hiteshpatel379</title>
   </head>
 
   <body>
-
     <header>
-      <div class="container">
+      <div class="inner">
         <h1>PyWATER</h1>
         <h2></h2>
-
-        <section id="downloads">
-          <a href="https://github.com/hiteshpatel379/PyWATER/zipball/master" class="btn">Download as .zip</a>
-          <a href="https://github.com/hiteshpatel379/PyWATER/tarball/master" class="btn">Download as .tar.gz</a>
-          <a href="https://github.com/hiteshpatel379/PyWATER" class="btn btn-github"><span class="icon"></span>View on GitHub</a>
-        </section>
+        <a href="https://github.com/hiteshpatel379/PyWATER" class="button"><small>View project on</small> GitHub</a>
       </div>
     </header>
 
-    <div class="container">
-      <section id="main_content">
-        <h1></h1>
+    <div id="content-wrapper">
+      <div class="inner clearfix">
+        <section id="main-content">
+          <h1></h1>
 
 <h1>
-<a name="pywater" class="anchor" href="#pywater"><span class="octicon octicon-link"></span></a>PyWATER</h1>
+<a id="pywater" class="anchor" href="#pywater" aria-hidden="true"><span class="octicon octicon-link"></span></a>PyWATER</h1>
 
 <p>PyWATER finds conserved water molecules in X-ray protein structure.</p>
 
@@ -42,7 +42,7 @@ PyMOL is available at <a href="http://www.pymol.org/">http://www.pymol.org/</a> 
 <p>Copyright 2013 Hitesh Patel and B. Gruening</p>
 
 <h1>
-<a name="installation" class="anchor" href="#installation"><span class="octicon octicon-link"></span></a>Installation</h1>
+<a id="installation" class="anchor" href="#installation" aria-hidden="true"><span class="octicon octicon-link"></span></a>Installation</h1>
 
 <p>Scipy and Numpy python modules installed on Python 2.7 are required to run PyWATER.
 PyWATER should be installed as a PyMOL plugin.</p>
@@ -57,16 +57,18 @@ PyWATER should be installed as a PyMOL plugin.</p>
 <li>If you start PyMOL with administrator priviliges, PyWATER results and log files will be only accessible by the administrator.</li>
 </ul>
 </li>
-</ul><p><strong>Enabling Plugins in MacPyMOL</strong><br>
+</ul>
+
+<p><strong>Enabling Plugins in MacPyMOL</strong><br>
 In order to install plug-ins from inside MacPyMOL, you have to rename the "MacPyMOL.app" to "PyMOLX11Hybrid.app" in your Applications folder, which will start PyMOL in the X Window System (X11) mode (requires an installation of <a href="http://xquartz.macosforge.org/landing/">XQuartz</a>).</p>
 
 <h1>
-<a name="user-interface" class="anchor" href="#user-interface"><span class="octicon octicon-link"></span></a>User Interface</h1>
+<a id="user-interface" class="anchor" href="#user-interface" aria-hidden="true"><span class="octicon octicon-link"></span></a>User Interface</h1>
 
 <p>After installation as plugin, PyWATER can be run from PyMOL's Graphical User Interface, via the commandline or PyMOL’s python API.</p>
 
 <h2>
-<a name="graphical-user-interface" class="anchor" href="#graphical-user-interface"><span class="octicon octicon-link"></span></a>Graphical User Interface</h2>
+<a id="graphical-user-interface" class="anchor" href="#graphical-user-interface" aria-hidden="true"><span class="octicon octicon-link"></span></a>Graphical User Interface</h2>
 
 <p>Start PyMOL
 Open PyWATER plugin fromPyMWOLTcl-Tk GUI: Plugin PyWATER
@@ -78,14 +80,14 @@ Figure 1 shows the snapshot of PyWATER as PyMOL plugin.</p>
 Change the default values if desired and click on ‘Find Conserved Water Molecules’</p>
 
 <h2>
-<a name="using-from-command-line-in-pymol" class="anchor" href="#using-from-command-line-in-pymol"><span class="octicon octicon-link"></span></a>Using from command line in PyMOL</h2>
+<a id="using-from-command-line-in-pymol" class="anchor" href="#using-from-command-line-in-pymol" aria-hidden="true"><span class="octicon octicon-link"></span></a>Using from command line in PyMOL</h2>
 
 <p>PyWATER [PDB id , Chain id [, sequence identity cutoff [, resolution cutoff [, refinement assessing method [, user defined proteins list [, linkage method [, inconsistency coefficient threshold [, degree of conservation]]]]]]]]</p>
 
 <p><code>pymol&gt; pywater 4lyw, A, 95</code></p>
 
 <h2>
-<a name="accessing-via-pymols-api" class="anchor" href="#accessing-via-pymols-api"><span class="octicon octicon-link"></span></a>Accessing via PyMOL’s API</h2>
+<a id="accessing-via-pymols-api" class="anchor" href="#accessing-via-pymols-api" aria-hidden="true"><span class="octicon octicon-link"></span></a>Accessing via PyMOL’s API</h2>
 
 <p>.. code-block:: python</p>
 
@@ -133,7 +135,7 @@ Change the default values if desired and click on ‘Find Conserved Water Molecu
 +-------------+----------------+------------------------------------------------------------------------+</p>
 
 <h1>
-<a name="results" class="anchor" href="#results"><span class="octicon octicon-link"></span></a>Results</h1>
+<a id="results" class="anchor" href="#results" aria-hidden="true"><span class="octicon octicon-link"></span></a>Results</h1>
 
 <p>pyWATER will create a bunch of different output files. The most impartant informations are included in your PyMOL session for visual inspection.
 A detailed log file, summary files and optionally intermediate files will be stored under your $HOME directory in a folder called <code>PyWATER_outdir</code>.
@@ -153,12 +155,14 @@ The following list will describe all different result files created by PyWATER:<
 <p>We tried hard to output as many information as possible to enable further post-processing steps. For example, user can analyze the surroundings of a water molecule which is conserved in most proteins but not present in some. Rotameric conformations of side chains of nearby residues may result in displacement of water molecule.</p>
 
 <h1>
-<a name="history" class="anchor" href="#history"><span class="octicon octicon-link"></span></a>History</h1>
+<a id="history" class="anchor" href="#history" aria-hidden="true"><span class="octicon octicon-link"></span></a>History</h1>
 
 <ul>
 <li>v1.0: Initial public release</li>
-</ul><h1>
-<a name="licence-mit" class="anchor" href="#licence-mit"><span class="octicon octicon-link"></span></a>Licence (MIT)</h1>
+</ul>
+
+<h1>
+<a id="licence-mit" class="anchor" href="#licence-mit" aria-hidden="true"><span class="octicon octicon-link"></span></a>Licence (MIT)</h1>
 
 <p>Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -177,9 +181,35 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.</p>
-      </section>
+        </section>
+
+        <aside id="sidebar">
+          <a href="https://github.com/hiteshpatel379/PyWATER/zipball/master" class="button">
+            <small>Download</small>
+            .zip file
+          </a>
+          <a href="https://github.com/hiteshpatel379/PyWATER/tarball/master" class="button">
+            <small>Download</small>
+            .tar.gz file
+          </a>
+
+          <p class="repo-owner"><a href="https://github.com/hiteshpatel379/PyWATER"></a> is maintained by <a href="https://github.com/hiteshpatel379">hiteshpatel379</a>.</p>
+
+          <p>This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the Architect theme by <a href="https://twitter.com/jasonlong">Jason Long</a>.</p>
+        </aside>
+      </div>
     </div>
 
-    
+            <script type="text/javascript">
+            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+          </script>
+          <script type="text/javascript">
+            try {
+              var pageTracker = _gat._getTracker("UA-58743656-1");
+            pageTracker._trackPageview();
+            } catch(err) {}
+          </script>
+
   </body>
 </html>
