@@ -1,0 +1,7 @@
+pywater module
+==============
+
+.. automodule:: pywater
+    :members:
+    :undoc-members:
+    :show-inheritance:

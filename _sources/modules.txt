@@ -1,0 +1,7 @@
+PyWATER
+=======
+
+.. toctree::
+   :maxdepth: 4
+
+   pywater
