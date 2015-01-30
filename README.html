@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Welcome to PyWATER’s documentation! &mdash; PyWATER 1.0 documentation</title>
+    <title>PyWATER &mdash; PyWATER 1.0 documentation</title>
     
     <link rel="stylesheet" href="_static/default.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -23,7 +23,7 @@
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
-    <link rel="top" title="PyWATER 1.0 documentation" href="#" /> 
+    <link rel="top" title="PyWATER 1.0 documentation" href="index.html" /> 
   </head>
   <body>
     <div class="related">
@@ -32,7 +32,7 @@
         <li class="right" style="margin-right: 10px">
           <a href="genindex.html" title="General Index"
              accesskey="I">index</a></li>
-        <li><a href="#">PyWATER 1.0 documentation</a> &raquo;</li> 
+        <li><a href="index.html">PyWATER 1.0 documentation</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -41,16 +41,15 @@
         <div class="bodywrapper">
           <div class="body">
             
-  <div class="section" id="welcome-to-pywater-s-documentation">
-<h1>Welcome to PyWATER&#8217;s documentation!<a class="headerlink" href="#welcome-to-pywater-s-documentation" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="pywater">
+<h1>PyWATER<a class="headerlink" href="#pywater" title="Permalink to this headline">¶</a></h1>
 <p>PyWATER finds conserved water molecules in X-ray protein structure.</p>
 <p>Important or conserved waters are the water molecules which are present in most or all available pdb structures when superimposed.
 PyWATER script and this documentation is available at <a class="reference external" href="https://github.com/hiteshpatel379/PyWATER">https://github.com/hiteshpatel379/PyWATER</a>.
 PyMOL is available at <a class="reference external" href="http://www.pymol.org/">http://www.pymol.org/</a> or <a class="reference external" href="http://sourceforge.net/projects/pymol/">http://sourceforge.net/projects/pymol/</a>.</p>
 <p>Copyright 2013 Hitesh Patel and B. Gruening</p>
-</div>
 <div class="section" id="installation">
-<h1>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h1>
+<h2>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
 <p>Scipy and Numpy python modules installed on Python 2.7 are required to run PyWATER.
 PyWATER should be installed as a PyMOL plugin.</p>
 <ul class="simple">
@@ -67,25 +66,24 @@ PyWATER should be installed as a PyMOL plugin.</p>
 In order to install plug-ins from inside MacPyMOL, you have to rename the &#8220;MacPyMOL.app&#8221; to &#8220;PyMOLX11Hybrid.app&#8221; in your Applications folder, which will start PyMOL in the X Window System (X11) mode (requires an installation of [XQuartz](<a class="reference external" href="http://xquartz.macosforge.org/landing/">http://xquartz.macosforge.org/landing/</a>)).</p>
 </div>
 <div class="section" id="user-interface">
-<h1>User Interface<a class="headerlink" href="#user-interface" title="Permalink to this headline">¶</a></h1>
+<h2>User Interface<a class="headerlink" href="#user-interface" title="Permalink to this headline">¶</a></h2>
 <p>After installation as plugin, PyWATER can be run from PyMOL&#8217;s Graphical User Interface, via the commandline or PyMOL’s python API.</p>
 <div class="section" id="graphical-user-interface">
-<h2>Graphical User Interface<a class="headerlink" href="#graphical-user-interface" title="Permalink to this headline">¶</a></h2>
+<h3>Graphical User Interface<a class="headerlink" href="#graphical-user-interface" title="Permalink to this headline">¶</a></h3>
 <p>Start PyMOL
 Open PyWATER plugin fromPyMWOLTcl-Tk GUI: Plugin PyWATER
 Figure 1 shows the snapshot of PyWATER as PyMOL plugin.</p>
-<a class="reference internal image-reference" href="_images/PyWATER_1.jpg"><img alt="_images/PyWATER_1.jpg" class="align-center" src="_images/PyWATER_1.jpg" style="width: 868.0px; height: 279.0px;" /></a>
 <p>Figure 1. Snapshot of PyWATER plugin</p>
 <p>Enter required input parameters. PDB and chain identifiers are mandatory. The remaining parameters are optional. Consult table 1 for more details of all input parameters and their default values.
 Change the default values if desired and click on ‘Find Conserved Water Molecules’</p>
 </div>
 <div class="section" id="using-from-command-line-in-pymol">
-<h2>Using from command line in PyMOL<a class="headerlink" href="#using-from-command-line-in-pymol" title="Permalink to this headline">¶</a></h2>
+<h3>Using from command line in PyMOL<a class="headerlink" href="#using-from-command-line-in-pymol" title="Permalink to this headline">¶</a></h3>
 <p>PyWATER [PDB id , Chain id [, sequence identity cutoff [, resolution cutoff [, refinement assessing method [, user defined proteins list [, linkage method [, inconsistency coefficient threshold [, degree of conservation]]]]]]]]</p>
 <p><tt class="docutils literal"><span class="pre">pymol&gt;</span> <span class="pre">pywater</span> <span class="pre">4lyw,</span> <span class="pre">A,</span> <span class="pre">95</span></tt></p>
 </div>
 <div class="section" id="accessing-via-pymols-api">
-<h2>Accessing via PyMOL’s API<a class="headerlink" href="#accessing-via-pymols-api" title="Permalink to this headline">¶</a></h2>
+<h3>Accessing via PyMOL’s API<a class="headerlink" href="#accessing-via-pymols-api" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">pymol</span> <span class="kn">import</span> <span class="n">cmd</span>
 <span class="n">cmd</span><span class="o">.</span><span class="n">pywater</span><span class="p">(</span><span class="n">PDB</span> <span class="nb">id</span> <span class="p">,</span> <span class="n">Chain</span> <span class="nb">id</span> <span class="p">[,</span> <span class="n">sequence</span> <span class="n">identity</span> <span class="n">cutoff</span> <span class="p">[,</span> <span class="n">resolution</span> <span class="n">cutoff</span> <span class="p">[,</span> <span class="n">refinement</span> <span class="n">assessing</span> <span class="n">method</span> <span class="p">[,</span> <span class="n">user</span> <span class="n">defined</span> <span class="n">proteins</span> <span class="nb">list</span> <span class="p">[,</span> <span class="n">linkage</span> <span class="n">method</span> <span class="p">[,</span> <span class="n">inconsistency</span> <span class="n">coefficient</span> <span class="n">threshold</span> <span class="p">[,</span> <span class="n">degree</span> <span class="n">of</span> <span class="n">conservation</span><span class="p">]]]]]]])</span>
 </pre></div>
@@ -172,7 +170,7 @@ of being conserved is above given cutoff. Value ranges from 0.4 to 1.</td>
 </div>
 </div>
 <div class="section" id="results">
-<h1>Results<a class="headerlink" href="#results" title="Permalink to this headline">¶</a></h1>
+<h2>Results<a class="headerlink" href="#results" title="Permalink to this headline">¶</a></h2>
 <p>pyWATER will create a bunch of different output files. The most impartant informations are included in your PyMOL session for visual inspection.
 A detailed log file, summary files and optionally intermediate files will be stored under your $HOME directory in a folder called <tt class="docutils literal"><span class="pre">PyWATER_outdir</span></tt>.
 For every run a subfolder with the naming schema <tt class="docutils literal"><span class="pre">PDBid_CHAINid</span></tt> will be created and we recommend to go once through all files to get a feeling of all stored informations.
@@ -198,13 +196,13 @@ The following list will describe all different result files created by PyWATER:<
 <p>We tried hard to output as many information as possible to enable further post-processing steps. For example, user can analyze the surroundings of a water molecule which is conserved in most proteins but not present in some. Rotameric conformations of side chains of nearby residues may result in displacement of water molecule.</p>
 </div>
 <div class="section" id="history">
-<h1>History<a class="headerlink" href="#history" title="Permalink to this headline">¶</a></h1>
+<h2>History<a class="headerlink" href="#history" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li>v1.0: Initial public release</li>
 </ul>
 </div>
 <div class="section" id="licence-mit">
-<h1>Licence (MIT)<a class="headerlink" href="#licence-mit" title="Permalink to this headline">¶</a></h1>
+<h2>Licence (MIT)<a class="headerlink" href="#licence-mit" title="Permalink to this headline">¶</a></h2>
 <p>Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the &#8220;Software&#8221;), to deal
 in the Software without restriction, including without limitation the rights
@@ -221,6 +219,7 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.</p>
 </div>
+</div>
 
 
           </div>
@@ -228,9 +227,9 @@ THE SOFTWARE.</p>
       </div>
       <div class="sphinxsidebar">
         <div class="sphinxsidebarwrapper">
-  <h3><a href="#">Table Of Contents</a></h3>
+  <h3><a href="index.html">Table Of Contents</a></h3>
   <ul>
-<li><a class="reference internal" href="#">Welcome to PyWATER&#8217;s documentation!</a></li>
+<li><a class="reference internal" href="#">PyWATER</a><ul>
 <li><a class="reference internal" href="#installation">Installation</a></li>
 <li><a class="reference internal" href="#user-interface">User Interface</a><ul>
 <li><a class="reference internal" href="#graphical-user-interface">Graphical User Interface</a></li>
@@ -242,10 +241,12 @@ THE SOFTWARE.</p>
 <li><a class="reference internal" href="#history">History</a></li>
 <li><a class="reference internal" href="#licence-mit">Licence (MIT)</a></li>
 </ul>
+</li>
+</ul>
 
   <h3>This Page</h3>
   <ul class="this-page-menu">
-    <li><a href="_sources/index.txt"
+    <li><a href="_sources/README.txt"
            rel="nofollow">Show Source</a></li>
   </ul>
 <div id="searchbox" style="display: none">
@@ -271,7 +272,7 @@ THE SOFTWARE.</p>
         <li class="right" style="margin-right: 10px">
           <a href="genindex.html" title="General Index"
              >index</a></li>
-        <li><a href="#">PyWATER 1.0 documentation</a> &raquo;</li> 
+        <li><a href="index.html">PyWATER 1.0 documentation</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer">

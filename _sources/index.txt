@@ -48,7 +48,7 @@ Open PyWATER plugin fromPyMWOLTcl-Tk GUI: Plugin PyWATER
 Figure 1 shows the snapshot of PyWATER as PyMOL plugin.
 
 .. image:: ./_static/PyWATER_1.jpg
-   :scale: 28 %
+   :scale: 100 %
    :align: center
 
 
