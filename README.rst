@@ -7,6 +7,7 @@ PyWATER finds conserved water molecules in X-ray protein structure.
 Important or conserved waters are the water molecules which are present in most or all available pdb structures when superimposed.
 PyWATER script and this documentation is available at https://github.com/hiteshpatel379/PyWATER. 
 PyMOL is available at http://www.pymol.org/ or http://sourceforge.net/projects/pymol/.
+Tutorial of PyWATER is also availble at http://hiteshpatel379.github.io/PyWATER/.
 
 
 Copyright 2013 Hitesh Patel and B. Gruening
