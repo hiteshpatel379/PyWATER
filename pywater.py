@@ -726,7 +726,7 @@ def FindConservedWaters(selectedStruturePDB,selectedStrutureChain,seq_id,resolut
         The main function: Identification of conserved water molecules from a given protein structure.
     """
     try:
-        response=urllib.urlopen('http://74.125.228.100')
+        response=urllib.urlopen('http://www.rcsb.org')
     except:
         logger.error('The PDB webserver is not reachable.')
         return None
