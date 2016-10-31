@@ -649,6 +649,10 @@ def isXray( pdb ):
         Check whether the PDB structure is determined by X-ray or not.
     """
     expInfoAddress='http://pdb.org/pdb/rest/customReport?pdbids=%s&customReportColumns=experimentalTechnique&service=wsdisplay&format=xml&ssa=n' % (pdb)
+    #the PDB service API have changed
+    expInfoAddress='http://www.rcsb.org/pdb/rest/customReport?pdbids=%s&customReportColumns=experimentalTechnique&service=wsdisplay&format=xml&ssa=n' % (pdb)
+    
+    
     expInfoURL = urllib.urlopen(expInfoAddress)
     url_string = expInfoURL.read()
     expInfoXML = parseString(url_string)
