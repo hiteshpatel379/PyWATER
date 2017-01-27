@@ -327,7 +327,7 @@ def okBfactor( pdbFile, normBCutoff = 1.0 ):
 class Protein():
     def __init__(self, pdb_id, chain=False):
         self.pdb_id = pdb_id.lower()
-        self.chain = chain.lower()
+        self.chain = chain.upper()
         self.pdb_id_folder = self.pdb_id[1:3]
         self.pdb_filename = self.pdb_id + '.pdb'
         self.water_coordinates = list()
