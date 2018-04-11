@@ -56,14 +56,23 @@ After installation as plugin. It can be run from command in pymol
 
 import os
 import glob
-import urllib
 import shutil
 import re
 import collections
 import tempfile
 from xml.dom.minidom import parseString
-from Tkinter import *
-import tkMessageBox
+import sys
+
+if sys.version_info[0] > 2:
+    import urllib.request as urllib
+    from tkinter import *
+    import tkinter.messagebox as tkMessageBox
+    xrange = range
+else:
+    import urllib
+    from Tkinter import *
+    import tkMessageBox
+
 import pymol.cmd as cmd
 import logging
 
@@ -107,7 +116,7 @@ def __init__(self):
     self.menuBar.addmenuitem('Plugin', 'command',
                         'Find Conserved Waters',
                         label = 'PyWATER',
-                        command = main)
+                        command = lambda: main(self.root))
 
 # Display help messages
 def pdb_id_help():
@@ -234,7 +243,7 @@ def displayInPyMOL(outdir, selectedPDBChain, atomNumbersProbDic):
     cmd.set('surface_color', 'gray', 'cwm_protein')
 
     cmd.load(pdb)
-    cmd.create('all waters', 'resn hoh and %s' % selectedPDBChain)
+    cmd.create('all_waters', 'resn hoh and %s' % selectedPDBChain)
     cmd.color('red','ss h and %s' % selectedPDBChain)
     cmd.color('yellow','ss s and %s' % selectedPDBChain)
     cmd.color('green','ss l+ and %s' % selectedPDBChain)
@@ -401,10 +410,10 @@ class ProteinsList():
             if key < 0 :
                 key += len( self.proteins )
             if key >= len( self.proteins ) :
-                raise IndexError, "The index (%d) is out of range." % key
+                raise IndexError("The index (%d) is out of range." % key)
             return self.proteins[key] #Get the data from elsewhere
         else:
-            raise TypeError, "Invalid argument type."
+            raise TypeError("Invalid argument type.")
 
 
 def makePDBwithConservedWaters(ProteinsList, temp_dir, outdir, save_sup_files):
@@ -499,7 +508,7 @@ def makePDBwithConservedWaters(ProteinsList, temp_dir, outdir, save_sup_files):
                     FDlist = list(FD)
                     fcDic = {}
                     for a,b in zip(water_ids,FDlist):
-                        if fcDic.has_key(b):
+                        if b in fcDic:
                             fcDic[b].append(a)
                         else:
                             fcDic[b]=[a]
@@ -567,7 +576,7 @@ def makePDBwithConservedWaters(ProteinsList, temp_dir, outdir, save_sup_files):
                             if selectedPDBChain in uniquePDBs:
                                 cwm_count += 1
                                 for waterMol in waterMols:
-                                    if conservedWaterDic.has_key(waterMol[:6]):
+                                    if waterMol[:6] in conservedWaterDic:
                                         conservedWaterDic[waterMol[:6]].append('_'.join([waterMol[7:], str(probability)]))
                                     else:
                                         conservedWaterDic[waterMol[:6]] = ['_'.join([waterMol[7:], str(probability)])]
@@ -583,7 +592,7 @@ def makePDBwithConservedWaters(ProteinsList, temp_dir, outdir, save_sup_files):
                         for probability in atomNumbers_Prob:
                             atom, prob = probability.split('_')
                             atomNumbersProbDic[ atom ] = float( prob )
-                        atomNumbers = atomNumbersProbDic.keys()
+                        atomNumbers = list(atomNumbersProbDic.keys())
                         selectedPDBChainConservedWatersOut = open(os.path.join(temp_dir, 'cwm_'+selectedPDBChain+'_ConservedWatersOnly.pdb'),'w+')
                         selectedPDBChainIn = open(os.path.join(temp_dir, 'cwm_'+selectedPDBChain+'_Water.pdb'))
                         for line in selectedPDBChainIn:
@@ -685,7 +694,7 @@ def fetchpdbChainsList( selectedStruture, seq_id ):
     seqClustAddress = 'http://pdb.org/pdb/rest/sequenceCluster?cluster=%s&structureId=%s' % (seq_id, selectedStruture)
     seqClustURL = urllib.urlopen(seqClustAddress)
     toursurl_string= seqClustURL.read()
-    if toursurl_string.startswith('An error has occurred'):
+    if toursurl_string.startswith(b'An error has occurred'):
         return pdbChainsList
     else:
         seqCluster = parseString( toursurl_string )
@@ -964,10 +973,9 @@ def toPyWATER( v1, v2, v3 = '95', v4 = 2.0, v5 = 'Mobility', v6 = '', v7 = 'comp
     FindConservedWaters(selectedStruturePDB,selectedStrutureChain,seq_id,resolution,refinement,user_def_list,clustering_method,inconsistency_coefficient,prob)
 
 
-def main():
-    root = Tk()
+def main(parent=None):
+    root = Toplevel(parent)
     app = ConservedWaters(root)
-    root.mainloop()  
 
 
 #Extends PyMOL API to use this tool from command line.
