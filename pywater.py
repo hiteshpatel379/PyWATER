@@ -62,6 +62,7 @@ import collections
 import tempfile
 from xml.dom.minidom import parseString
 import sys
+import json
 
 if sys.version_info[0] > 2:
     import urllib.request as urllib
@@ -655,60 +656,158 @@ def chainIdFormat(chainId):
 
 def isXray( pdb ):
     """
-        Check whether the PDB structure is determined by X-ray or not.
+        Check whether the PDB structure is determined by X-ray or not using the modern RCSB Data API.
     """
-    expInfoAddress='http://pdb.org/pdb/rest/customReport?pdbids=%s&customReportColumns=experimentalTechnique&service=wsdisplay&format=xml&ssa=n' % (pdb)
-    #the PDB service API have changed
-    expInfoAddress='http://www.rcsb.org/pdb/rest/customReport?pdbids=%s&customReportColumns=experimentalTechnique&service=wsdisplay&format=xml&ssa=n' % (pdb)
-    
-    
-    expInfoURL = urllib.urlopen(expInfoAddress)
-    url_string = expInfoURL.read()
-    expInfoXML = parseString(url_string)
-    expMethod = str(expInfoXML.getElementsByTagName('dimStructure.experimentalTechnique')[0].childNodes[0].nodeValue)
-    if expMethod == 'X-RAY DIFFRACTION':
-        return True
-    else:
+    url = "https://data.rcsb.org/rest/v1/core/entry/%s" % pdb.lower()
+    try:
+        req = urllib.urlopen(url)
+        data = json.loads(req.read().decode('utf-8'))
+        for exptl in data.get("exptl", []):
+            if exptl.get("method") == "X-RAY DIFFRACTION":
+                return True
+        return False
+    except Exception as e:
+        logger.error( 'Error checking isXray for %s: %s' % (pdb, e) )
         return False
 
 def chainPresent(pdb,chain):
     """
-        Check whether the given chain id is valid for a given PDB ID.
+        Check whether the given chain id is valid for a given PDB ID using the modern RCSB Data API.
     """
-    chainInfoAddress='http://pdb.org/pdb/rest/customReport?pdbids=%s&customReportColumns=entityId&service=wsdisplay&format=xml&ssa=n' % pdb
-    chainInfoURL = urllib.urlopen(chainInfoAddress)
-    url_string = chainInfoURL.read()
-    chainInfoXML = parseString(url_string)
-    chains = [str(b.childNodes[0].nodeValue) for b in chainInfoXML.getElementsByTagName('dimEntity.chainId')]
-    if chain in chains:
-        return True
+    query = '{"query": "{ entry(entry_id: \\"%s\\") { polymer_entities { rcsb_polymer_entity_container_identifiers { auth_asym_ids } } } }"}' % pdb.upper()
+    graphql_url = "https://data.rcsb.org/graphql"
+    
+    if sys.version_info[0] > 2:
+        req = urllib.Request(graphql_url, data=query.encode("utf-8"), headers={"Content-Type": "application/json"})
     else:
+        import urllib2
+        req = urllib2.Request(graphql_url, data=query, headers={"Content-Type": "application/json"})
+        
+    try:
+        if sys.version_info[0] > 2:
+            response = urllib.urlopen(req)
+        else:
+            response = urllib2.urlopen(req)
+        gql_data = json.loads(response.read().decode('utf-8'))
+        entities = gql_data.get("data", {}).get("entry", {}).get("polymer_entities", [])
+        for entity in entities:
+            identifiers = entity.get("rcsb_polymer_entity_container_identifiers", {})
+            auth_ids = identifiers.get("auth_asym_ids", [])
+            if chain in auth_ids:
+                return True
+        return False
+    except Exception as e:
+        logger.error( 'Error checking chainPresent for %s chain %s: %s' % (pdb, chain, e) )
         return False
 
 def fetchpdbChainsList( selectedStruture, seq_id ):
     """
-        Fetch sequence cluster data from RCSB PDB for a given query protein.
+        Fetch sequence cluster data from RCSB PDB for a given query protein using the modern Data/Search API.
     """
+    pdb_id, chain_id = selectedStruture.split('.')
     pdbChainsList = []
-    # http://pdb.org/pdb/rest/sequenceCluster?cluster=95&structureId=3qkl.A
-    seqClustAddress = 'http://pdb.org/pdb/rest/sequenceCluster?cluster=%s&structureId=%s' % (seq_id, selectedStruture)
-    seqClustURL = urllib.urlopen(seqClustAddress)
-    toursurl_string= seqClustURL.read()
-    if toursurl_string.startswith(b'An error has occurred'):
-        return pdbChainsList
+    
+    query = '{"query": "{ entry(entry_id: \\"%s\\") { polymer_entities { rcsb_polymer_entity_container_identifiers { auth_asym_ids } rcsb_polymer_entity_group_membership { group_id similarity_cutoff } } } }"}' % pdb_id.upper()
+    graphql_url = "https://data.rcsb.org/graphql"
+    
+    if sys.version_info[0] > 2:
+        req = urllib.Request(graphql_url, data=query.encode("utf-8"), headers={"Content-Type": "application/json"})
     else:
-        seqCluster = parseString( toursurl_string )
-        for xmlTag in seqCluster.getElementsByTagName('pdbChain'):
-            pdbChain = str(xmlTag.getAttribute('name')).replace('.', ':')
-            pdb = pdbChain.split(':')[0]
-            if isXray(pdb):
-                pdbChainsList.append(pdbChain)
+        import urllib2
+        req = urllib2.Request(graphql_url, data=query, headers={"Content-Type": "application/json"})
+        
+    cluster_id = None
+    try:
+        if sys.version_info[0] > 2:
+            response = urllib.urlopen(req)
+        else:
+            response = urllib2.urlopen(req)
+        gql_data = json.loads(response.read().decode('utf-8'))
+        entities = gql_data.get("data", {}).get("entry", {}).get("polymer_entities", [])
+        
+        for entity in entities:
+            identifiers = entity.get("rcsb_polymer_entity_container_identifiers", {})
+            auth_ids = identifiers.get("auth_asym_ids", [])
+            if chain_id in auth_ids:
+                memberships = entity.get("rcsb_polymer_entity_group_membership", [])
+                if memberships:
+                    for membership in memberships:
+                        if membership.get("similarity_cutoff") == float(seq_id):
+                            cluster_id = membership.get("group_id")
+                            break
+                break
+    except Exception as e:
+        logger.error( 'Error fetching cluster ID: %s' % e )
+
+    if not cluster_id:
         return pdbChainsList
+
+    search_payload = '{"query": {"type": "terminal", "service": "text", "parameters": {"attribute": "rcsb_polymer_entity_group_membership.group_id", "operator": "exact_match", "value": "%s"}}, "return_type": "polymer_entity", "request_options": {"return_all_hits": true}}' % cluster_id
+    search_url = "https://search.rcsb.org/rcsbsearch/v2/query"
+    
+    if sys.version_info[0] > 2:
+        search_req = urllib.Request(search_url, data=search_payload.encode("utf-8"), headers={"Content-Type": "application/json"})
+    else:
+        search_req = urllib2.Request(search_url, data=search_payload, headers={"Content-Type": "application/json"})
+        
+    try:
+        if sys.version_info[0] > 2:
+            search_resp = urllib.urlopen(search_req)
+        else:
+            search_resp = urllib2.urlopen(search_req)
+        search_data = json.loads(search_resp.read().decode('utf-8'))
+        members = search_data.get("result_set", [])
+        
+        entity_ids = [m.get("identifier") for m in members if m.get("identifier")]
+        
+        if entity_ids:
+            for i in range(0, len(entity_ids), 100):
+                chunk = entity_ids[i:i+100]
+                chunk_str = ", ".join(['"%s"' % e for e in chunk])
+                raw_query = "{ polymer_entities(entity_ids: [%s]) { rcsb_polymer_entity_container_identifiers { entry_id auth_asym_ids } entry { exptl { method } } } }" % chunk_str
+                bulk_payload = json.dumps({"query": raw_query})
+                
+                if sys.version_info[0] > 2:
+                    bulk_req = urllib.Request(graphql_url, data=bulk_payload.encode("utf-8"), headers={"Content-Type": "application/json"})
+                    bulk_resp = urllib.urlopen(bulk_req)
+                else:
+                    bulk_req = urllib2.Request(graphql_url, data=bulk_payload, headers={"Content-Type": "application/json"})
+                    bulk_resp = urllib2.urlopen(bulk_req)
+                    
+                bulk_data = json.loads(bulk_resp.read().decode('utf-8'))
+                bulk_entities = bulk_data.get("data", {}).get("polymer_entities", [])
+                
+                if not bulk_entities:
+                    continue
+                    
+                for poly in bulk_entities:
+                    identifiers = poly.get("rcsb_polymer_entity_container_identifiers", {})
+                    entry_info = poly.get("entry", {})
+                    if not identifiers or not entry_info:
+                        continue
+                        
+                    ent_pdb = identifiers.get("entry_id")
+                    auth_ids = identifiers.get("auth_asym_ids", [])
+                    
+                    is_xray = False
+                    exptl_list = entry_info.get("exptl") or []
+                    for exptl in exptl_list:
+                        if exptl.get("method") == "X-RAY DIFFRACTION":
+                            is_xray = True
+                            break
+                            
+                    if is_xray and ent_pdb:
+                        for auth_id in auth_ids:
+                            pdbChainsList.append("%s:%s" % (ent_pdb.lower(), auth_id))
+    except Exception as e:
+        logger.error( 'Error fetching members of cluster %s: %s' % (cluster_id, e) )
+    
+    return pdbChainsList
 
 
 def filterbyResolution( pdbChainsList, resolutionCutoff ):
     """
-        Filter the list of PDB structures by given resolution cutoff.
+        Filter the list of PDB structures by given resolution cutoff using modern Data API.
     """
     pdbsList = []
     for pdbChain in pdbChainsList:
@@ -717,17 +816,47 @@ def filterbyResolution( pdbChainsList, resolutionCutoff ):
 
     filteredpdbChainsList = []
     pdbsResolution = {}
+    graphql_url = "https://data.rcsb.org/graphql"
+    
+    for i in range(0, len(pdbsList), 100):
+        chunk = pdbsList[i:i+100]
+        chunk_str = ", ".join(['"%s"' % p.upper() for p in chunk])
+        raw_query = "{ entries(entry_ids: [%s]) { rcsb_id rcsb_entry_info { resolution_combined } } }" % chunk_str
+        bulk_payload = json.dumps({"query": raw_query})
+        
+        try:
+            if sys.version_info[0] > 2:
+                req = urllib.Request(graphql_url, data=bulk_payload.encode("utf-8"), headers={"Content-Type": "application/json"})
+                resp = urllib.urlopen(req)
+            else:
+                import urllib2
+                req = urllib2.Request(graphql_url, data=bulk_payload, headers={"Content-Type": "application/json"})
+                resp = urllib2.urlopen(req)
+                
+            data = json.loads(resp.read().decode('utf-8'))
+            entries = data.get("data", {}).get("entries", [])
+            
+            if not entries:
+                continue
+                
+            for entry in entries:
+                pdb = entry.get("rcsb_id", "").lower()
+                res_info = entry.get("rcsb_entry_info", {})
+                if res_info and "resolution_combined" in res_info and res_info["resolution_combined"]:
+                    pdbsResolution[pdb] = res_info["resolution_combined"][0]
+                    logger.info('Resolution of %s is: %s' % (pdb, pdbsResolution[pdb]))
+                else:
+                    pdbsResolution[pdb] = 'null'
+        except Exception:
+            pass
+
     for pdb in pdbsList:
-        getResolutionAddress ='http://pdb.org/pdb/rest/customReport?pdbids=%s&customReportColumns=resolution&service=wsfile&format=xml&ssa=n' % (pdb)
-        pdbsResolution_string = urllib.urlopen( getResolutionAddress ).read()
-        pdbsResolutionXML = parseString( pdbsResolution_string )
-        res = str(pdbsResolutionXML.getElementsByTagName('dimStructure.resolution')[0].childNodes[0].nodeValue)
-        pdbsResolution[ pdb ] = res
-        logger.info('Resolution of %s is: %s' % (pdb, res))
+        if pdb not in pdbsResolution:
+            pdbsResolution[pdb] = 'null'
 
     for pdbChain in pdbChainsList:
         resolution = pdbsResolution[pdbChain.split(':')[0]]
-        if resolution != 'null':
+        if resolution != 'null' and resolution is not None:
             if float(resolution) <= resolutionCutoff:
                 filteredpdbChainsList.append(pdbChain)
 
@@ -800,7 +929,7 @@ def FindConservedWaters(selectedStruturePDB,selectedStrutureChain,seq_id,resolut
         tkMessageBox.showinfo(title = 'Error message', 
             message = """The degree of conservation is allowed from 0.4 A to 1.0 A.""")
         return None
-    online_pdb_db = 'http://www.pdb.org/pdb/files/%s.pdb'
+    online_pdb_db = 'https://files.rcsb.org/download/%s.pdb'
     displayInputs(selectedStruturePDB,selectedStrutureChain,seq_id,resolution,refinement,user_def_list,clustering_method,inconsistency_coefficient,prob)
 
     tmp_dir = tempfile.mkdtemp()
@@ -824,7 +953,7 @@ def FindConservedWaters(selectedStruturePDB,selectedStrutureChain,seq_id,resolut
         logger.info( 'Filtering by resolution ...')
         pdbChainsList = filterbyResolution(pdbChainsList,resolution)
         # make sure query structure is not filtered out
-        queryStr = ':'.join(selectedStruture.upper().split('.'))
+        queryStr = "%s:%s" % (selectedStruturePDB.lower(), selectedStrutureChain.upper())
         if queryStr in pdbChainsList:
             pdbChainsList.remove(queryStr)
             pdbChainsList.insert(0,queryStr)
@@ -838,12 +967,47 @@ def FindConservedWaters(selectedStruturePDB,selectedStrutureChain,seq_id,resolut
         up.add_protein_from_string(pdbChain)
 
     if len(up.proteins)>1:
-        for protein in up:
-            if not os.path.exists(os.path.join(tmp_dir, '%s.pdb' % protein.pdb_id)):
-                logger.info( 'Retrieving structure: %s' % protein.pdb_id)
-                urllib.urlretrieve(online_pdb_db % protein.pdb_id.upper(), os.path.join(tmp_dir, protein.pdb_id+'.pdb'))
-        logger.info( 'Save PDB file with conserved water molecules ...' )
-        makePDBwithConservedWaters(up, tmp_dir, outdir, save_sup_files)
+        def download_pdb(protein):
+            pdb_path = os.path.join(tmp_dir, protein.pdb_id+'.pdb')
+            if not os.path.exists(pdb_path):
+                logger.info('Retrieving structure: %s' % protein.pdb_id)
+                url = online_pdb_db % protein.pdb_id.upper()
+                try:
+                    if sys.version_info[0] > 2:
+                        req = urllib.Request(url, headers={'User-Agent': 'Mozilla/5.0'})
+                        with urllib.urlopen(req, timeout=15) as response, open(pdb_path, 'wb') as out_file:
+                            out_file.write(response.read())
+                    else:
+                        import urllib2
+                        req = urllib2.Request(url, headers={'User-Agent': 'Mozilla/5.0'})
+                        response = urllib2.urlopen(req, timeout=15)
+                        with open(pdb_path, 'wb') as out_file:
+                            out_file.write(response.read())
+                except Exception as e:
+                    logger.error("Failed to download %s: %s" % (protein.pdb_id, e))
+
+        from multiprocessing.dummy import Pool as ThreadPool
+        pool = ThreadPool(min(30, len(up.proteins)))
+        pool.map(download_pdb, up.proteins)
+        pool.close()
+        pool.join()
+        
+        # New check: Filter out any proteins whose downloads failed
+        successful_proteins = []
+        for protein in up.proteins:
+            pdb_path = os.path.join(tmp_dir, protein.pdb_filename)
+            if os.path.exists(pdb_path):
+                successful_proteins.append(protein)
+            else:
+                logger.warning('Excluding %s from superimposition because its PDB file could not be downloaded.' % protein.pdb_id)
+        
+        up.proteins = successful_proteins
+        
+        if len(up.proteins) > 1:
+            logger.info( 'Save PDB file with conserved water molecules ...' )
+            makePDBwithConservedWaters(up, tmp_dir, outdir, save_sup_files)
+        else:
+            logger.error('Not enough valid PDB structures remaining to superimpose.')
     else:
         logger.info( "%s has only one PDB structure. We need atleast 2 structures to superimpose." % selectedPDBChain)
     shutil.rmtree(tmp_dir)
