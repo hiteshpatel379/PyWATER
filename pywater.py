@@ -315,15 +315,17 @@ def okMobility( pdbFile, mobilityCutoff = 2.0 ):
     """
     normBfactors = []
     OccupancyAndBfactor = []
-    for line in open(pdbFile):
-        line = line.strip()
-        if line.startswith('HETATM'):
-            OccupancyAndBfactor.append([float(line[54:60]),float(line[60:66])])
+    with open(pdbFile) as f:
+        for line in f:
+            line = line.strip()
+            if line.startswith('HETATM'):
+                OccupancyAndBfactor.append([float(line[54:60]),float(line[60:66])])
     occupancy = [a[0] for a in OccupancyAndBfactor]
     Bfactors = [a[1] for a in OccupancyAndBfactor]
     avgB = np.mean(Bfactors)
     avgO = np.mean(occupancy)
-    pdbFileLines = open(pdbFile).readlines()
+    with open(pdbFile) as f:
+        pdbFileLines = f.readlines()
     nWaters = len(pdbFileLines)-1
     logger.debug( 'Number of water molecules: %s' %nWaters )
     count = 0
@@ -333,20 +335,19 @@ def okMobility( pdbFile, mobilityCutoff = 2.0 ):
             if m >= mobilityCutoff:
                 count+=1
                 pdbFileLines.remove(line)
-    logger.info( 'Water oxygen atoms with a higher mobility than %s: %s: ' % (mobilityCutoff, count))
+    logger.debug( 'Water oxygen atoms with a higher mobility than %s: %s: ' % (mobilityCutoff, count))
     if count > (nWaters/2):
         considerPDB = False
     elif count > 0:
-            outfile = open(pdbFile,'w')
-            outfile.write("".join(pdbFileLines))
-            outfile.close()
+            with open(pdbFile,'w') as outfile:
+                outfile.write("".join(pdbFileLines))
             considerPDB = True
     else:
         considerPDB = True
     if considerPDB:
-        logger.info( '%s is included in the prediction.' % (pdbFile))
+        logger.debug( '%s is included in the prediction.' % (pdbFile))
     else:
-        logger.info( '%s is excluded from the prediction.' % (pdbFile))
+        logger.debug( '%s is excluded from the prediction.' % (pdbFile))
     return considerPDB
 
 def okBfactor( pdbFile, normBCutoff = 1.0 ):
@@ -358,13 +359,15 @@ def okBfactor( pdbFile, normBCutoff = 1.0 ):
     """
     Bfactors = []
     normBfactors = []
-    for line in open(pdbFile):
-        line = line.strip()
-        if line.startswith('HETATM'):
-            Bfactors.append( float(line[60:66]) )
+    with open(pdbFile) as f:
+        for line in f:
+            line = line.strip()
+            if line.startswith('HETATM'):
+                Bfactors.append( float(line[60:66]) )
     avg = np.mean( Bfactors )
     stddev = np.sqrt( np.var(Bfactors) )
-    pdbFileLines = open(pdbFile).readlines()
+    with open(pdbFile) as f:
+        pdbFileLines = f.readlines()
     nWaters = len(pdbFileLines) - 1
     logger.debug( 'Number of water molecules is : %s' %nWaters )
     count = 0
@@ -374,17 +377,16 @@ def okBfactor( pdbFile, normBCutoff = 1.0 ):
             if normB >= normBCutoff:
                 count+=1
                 pdbFileLines.remove(line)
-    logger.info( 'water oxygen atoms having higher normalized B factor are %s: '% count)
+    logger.debug( 'water oxygen atoms having higher normalized B factor are %s: '% count)
     if count > (nWaters/2):
         considerPDB = False
     elif count > 0:
-            outfile = open(pdbFile,'w')
-            outfile.write("".join(pdbFileLines))
-            outfile.close()
+            with open(pdbFile,'w') as outfile:
+                outfile.write("".join(pdbFileLines))
             considerPDB = True
     else:
         considerPDB = True
-    logger.info( '%s is considered : %s ' % (pdbFile, considerPDB))
+    logger.debug( '%s is considered : %s ' % (pdbFile, considerPDB))
     return considerPDB
 
 
@@ -404,15 +406,16 @@ class Protein():
     def calculate_water_coordinates(self, tmp_dir = False):
         path = os.path.join( tmp_dir, 'cwm_%s_Water.pdb' % self.__repr__() )
         logger.debug( 'Creating water coordinates of cwm_%s_Water.pdb.' % self.__repr__())
-        for line in open(path):
-            line = line.strip()
-            if line.startswith('HETATM'):
-                # water oxygen atom number
-                key = "%s_%s" % (self.__repr__(), int(line[22:30]))
-                coordinates = [ line[30:38], line[38:46], line[46:54] ]
-                self.waterIDCoordinates[key] = coordinates
-                self.water_coordinates.append( coordinates )
-                self.water_ids.append( key )
+        with open(path) as f:
+            for line in f:
+                line = line.strip()
+                if line.startswith('HETATM'):
+                    # water oxygen atom number
+                    key = "%s_%s" % (self.__repr__(), int(line[22:30]))
+                    coordinates = [ line[30:38], line[38:46], line[46:54] ]
+                    self.waterIDCoordinates[key] = coordinates
+                    self.water_coordinates.append( coordinates )
+                    self.water_ids.append( key )
         return self.waterIDCoordinates
 
 
@@ -519,6 +522,8 @@ def makePDBwithConservedWaters(ProteinsList, temp_dir, outdir, save_sup_files):
                     if not okBfactor(os.path.join(temp_dir, 'cwm_%s_Water.pdb' % protein)):
                         ProteinsList.proteins.remove(protein)
 
+        retained = len(ProteinsList.proteins)
+        logger.info( '%s refinement filtering: %i of %i structures retained (%i discarded for poor water refinement).' % (ProteinsList.refinement, retained, length, length - retained) )
         logger.debug( 'filtered proteins chains list is %s proteins long :' % len(ProteinsList.proteins) )
 
     """ 
@@ -571,15 +576,16 @@ def makePDBwithConservedWaters(ProteinsList, temp_dir, outdir, save_sup_files):
 
                     conservedWaterDic = {}
                     clusterPresenceDic = {}
-                    clusterPresenceOut = open(os.path.join( outdir, selectedPDBChain, '%s_clusterPresence.txt' % selectedPDBChain ),'w')
-                    clusterPresenceOut.write('Water Conservation Score'+'\t')
+                    clusterPresencePath = os.path.join( outdir, selectedPDBChain, '%s_clusterPresence.txt' % selectedPDBChain )
+                    clusterPresenceLines = []
+                    clusterPresenceLines.append('Water Conservation Score'+'\t')
                     proteins_numbers = {}
                     l=0
                     for i in ProteinsList.proteins:
                         proteins_numbers[(str(i))]=l
                         l += 1
-                        clusterPresenceOut.write('%s' % i +'\t')
-                    clusterPresenceOut.write('\n')
+                        clusterPresenceLines.append('%s' % i +'\t')
+                    clusterPresenceLines.append('\n')
                     logger.info( 'Extracting conserved waters from clusters ...' )
                     logger.debug( 'Start iterating over all clusters ...')
                     for clusterNumber, waterMols in fcDic.items():
@@ -612,22 +618,22 @@ def makePDBwithConservedWaters(ProteinsList, temp_dir, outdir, save_sup_files):
                         probability = float(uniquePDBslen) / len(ProteinsList)
                         logger.info( 'Degree of conservation is: %s' % probability )
                         if probability >= ProteinsList.probability:
-                            clusterPresenceOut.write(str(probability)+'\t')
+                            clusterPresenceLines.append(str(probability)+'\t')
                             k=0
                             for waterMol in waterMols:
                                 sr_no = proteins_numbers[waterMol[:6]]
                                 if sr_no == k:
-                                    clusterPresenceOut.write(str(waterMol[7:])+'\t')
+                                    clusterPresenceLines.append(str(waterMol[7:])+'\t')
                                     k += 1
                                 elif k < sr_no:
                                     for j in range(sr_no-k):
-                                        clusterPresenceOut.write('NoWater'+'\t')
+                                        clusterPresenceLines.append('NoWater'+'\t')
                                         k += 1
-                                    clusterPresenceOut.write(str(waterMol[7:])+'\t')
+                                    clusterPresenceLines.append(str(waterMol[7:])+'\t')
                                     k += 1
                             for j in range(len(ProteinsList.proteins)-k):
-                                clusterPresenceOut.write('NoWater'+'\t')
-                            clusterPresenceOut.write('\n')
+                                clusterPresenceLines.append('NoWater'+'\t')
+                            clusterPresenceLines.append('\n')
 
                             if selectedPDBChain in uniquePDBs:
                                 cwm_count += 1
@@ -636,7 +642,8 @@ def makePDBwithConservedWaters(ProteinsList, temp_dir, outdir, save_sup_files):
                                         conservedWaterDic[waterMol[:6]].append('_'.join([waterMol[7:], str(probability)]))
                                     else:
                                         conservedWaterDic[waterMol[:6]] = ['_'.join([waterMol[7:], str(probability)])]
-                    clusterPresenceOut.close()
+                    with open(clusterPresencePath, 'w') as clusterPresenceOut:
+                        clusterPresenceOut.write(''.join(clusterPresenceLines))
                     logger.debug( 'conservedWaterDic is: ')
                     for pdb_id, atoms in conservedWaterDic.items():
                         logger.debug('Oxygen atom numbers for %s: %s' % ( pdb_id, ', '.join( atoms ) ))
@@ -649,14 +656,14 @@ def makePDBwithConservedWaters(ProteinsList, temp_dir, outdir, save_sup_files):
                             atom, prob = probability.split('_')
                             atomNumbersProbDic[ atom ] = float( prob )
                         atomNumbers = list(atomNumbersProbDic.keys())
-                        selectedPDBChainConservedWatersOut = open(os.path.join(temp_dir, 'cwm_'+selectedPDBChain+'_ConservedWatersOnly.pdb'),'w+')
-                        selectedPDBChainIn = open(os.path.join(temp_dir, 'cwm_'+selectedPDBChain+'_Water.pdb'))
-                        for line in selectedPDBChainIn:
-                            if line.startswith('HETATM'):
-                                if str(int(line[22:30])) in atomNumbers:
-                                    selectedPDBChainConservedWatersOut.write( line )
-                        selectedPDBChainConservedWatersOut.write('END')
-                        selectedPDBChainConservedWatersOut.close()
+                        conservedWatersPath = os.path.join(temp_dir, 'cwm_'+selectedPDBChain+'_ConservedWatersOnly.pdb')
+                        waterPath = os.path.join(temp_dir, 'cwm_'+selectedPDBChain+'_Water.pdb')
+                        with open(conservedWatersPath,'w+') as selectedPDBChainConservedWatersOut, open(waterPath) as selectedPDBChainIn:
+                            for line in selectedPDBChainIn:
+                                if line.startswith('HETATM'):
+                                    if str(int(line[22:30])) in atomNumbers:
+                                        selectedPDBChainConservedWatersOut.write( line )
+                            selectedPDBChainConservedWatersOut.write('END')
 
                         # add conserved waters to pdb file
                         cmd.delete('cwm_*')
@@ -906,6 +913,25 @@ def filterbyResolution( pdbChainsList, resolutionCutoff ):
 DEFAULT_MAX_STRUCTURES = 200
 
 
+def _prioritize_and_cap(pdbChainsList, queryStr, max_structures):
+    """
+        Force the query chain to the front of the (resolution-sorted) list and
+        cap the list to the best `max_structures` entries so broad sequence
+        clusters stay within the clustering memory limit. Returns
+        (selected_list, capped_from) where capped_from is the pre-cap length if
+        a cap was applied, else None.
+    """
+    pdbChainsList = list(pdbChainsList)
+    if queryStr in pdbChainsList:
+        pdbChainsList.remove(queryStr)
+    pdbChainsList.insert(0, queryStr)
+    capped_from = None
+    if max_structures and len(pdbChainsList) > max_structures:
+        capped_from = len(pdbChainsList)
+        pdbChainsList = pdbChainsList[:max_structures]
+    return pdbChainsList, capped_from
+
+
 def FindConservedWaters(selectedStruturePDB,selectedStrutureChain,seq_id,resolution,refinement,user_def_list,clustering_method,inconsistency_coefficient,prob,save_sup_files=True,max_structures=DEFAULT_MAX_STRUCTURES):# e.g: selectedStruturePDB='3qkl',selectedStrutureChain='A'
     """
         The main function: Identification of conserved water molecules from a given protein structure.
@@ -997,20 +1023,12 @@ def FindConservedWaters(selectedStruturePDB,selectedStrutureChain,seq_id,resolut
             logger.info( 'Filtering by resolution ...')
             pdbChainsList = filterbyResolution(pdbChainsList,resolution)
             resolution_count = len(pdbChainsList)
-            # make sure query structure is not filtered out
+            # make sure query structure is not filtered out, and cap broad
+            # clusters to the best-resolution structures.
             queryStr = "%s:%s" % (selectedStruturePDB.lower(), selectedStrutureChain.upper())
-            if queryStr in pdbChainsList:
-                pdbChainsList.remove(queryStr)
-                pdbChainsList.insert(0,queryStr)
-            if queryStr not in pdbChainsList:
-                pdbChainsList.insert(0,queryStr)
-            # Added again If query structure filtered out..
-            # Cap to the best-resolution structures (the list is resolution-sorted,
-            # with the query forced to the front) so broad clusters stay within the
-            # clustering memory limit instead of failing with "too many waters".
-            if max_structures and len(pdbChainsList) > max_structures:
-                logger.info( 'Limiting to the %i best-resolution structures (out of %i) to keep clustering within memory limits.' % (max_structures, len(pdbChainsList)) )
-                pdbChainsList = pdbChainsList[:max_structures]
+            pdbChainsList, capped_from = _prioritize_and_cap(pdbChainsList, queryStr, max_structures)
+            if capped_from is not None:
+                logger.info( 'Limiting to the %i best-resolution structures (out of %i) to keep clustering within memory limits.' % (max_structures, capped_from) )
             logger.info( 'Structure selection summary: %i candidate chains, %i passed the %.2f A resolution cutoff, %i selected for clustering.' % (candidate_count, resolution_count, resolution, len(pdbChainsList)) )
             logger.debug( 'Filtered protein chains list: "%s"' % ', '.join(pdbChainsList) )
         else:
@@ -1023,28 +1041,36 @@ def FindConservedWaters(selectedStruturePDB,selectedStrutureChain,seq_id,resolut
             def download_pdb(protein):
                 pdb_path = os.path.join(tmp_dir, protein.pdb_id+'.pdb')
                 if not os.path.exists(pdb_path):
-                    logger.info('Retrieving structure: %s' % protein.pdb_id)
+                    logger.debug('Retrieving structure: %s' % protein.pdb_id)
                     url = RCSB_DOWNLOAD_URL % protein.pdb_id.upper()
                     try:
                         req = urllib.Request(url, headers=DOWNLOAD_HEADERS)
                         with urllib.urlopen(req, timeout=HTTP_TIMEOUT) as response, open(pdb_path, 'wb') as out_file:
                             out_file.write(response.read())
                     except Exception as e:
-                        logger.error("Failed to download %s: %s" % (protein.pdb_id, e))
+                        logger.debug("Failed to download %s: %s" % (protein.pdb_id, e))
 
             with ThreadPoolExecutor(max_workers=min(30, len(up.proteins))) as executor:
                 list(executor.map(download_pdb, up.proteins))
 
-            # New check: Filter out any proteins whose downloads failed
+            # Filter out any proteins whose downloads failed. Missing entries
+            # (e.g. RCSB 404s) are common for broad clusters, so each miss is
+            # logged at DEBUG and summarised once at WARNING instead of raising
+            # an alarming per-structure ERROR on otherwise-normal runs.
             successful_proteins = []
+            failed_ids = []
             for protein in up.proteins:
                 pdb_path = os.path.join(tmp_dir, protein.pdb_filename)
                 if os.path.exists(pdb_path):
                     successful_proteins.append(protein)
                 else:
-                    logger.warning('Excluding %s from superimposition because its PDB file could not be downloaded.' % protein.pdb_id)
+                    failed_ids.append(protein.pdb_id)
+                    logger.debug('Excluding %s from superimposition because its PDB file could not be downloaded.' % protein.pdb_id)
 
             up.proteins = successful_proteins
+
+            if failed_ids:
+                logger.warning('%i of %i structures could not be downloaded and were skipped (set logging to DEBUG for the list).' % (len(failed_ids), len(failed_ids) + len(successful_proteins)))
 
             if len(up.proteins) > 1:
                 logger.info( 'Save PDB file with conserved water molecules ...' )
