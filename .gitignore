@@ -1,5 +1,9 @@
 *.py[cod]
 
+# uv virtual environment
+.venv/
+uv.lock
+
 # C extensions
 *.so
 
