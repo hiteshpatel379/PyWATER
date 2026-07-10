@@ -199,8 +199,10 @@ Citation
 
 Please cite the following article if you use PyWATER:
 
-Patel,H. *et al.* (2014) PyWATER: a PyMOL plug-in to find conserved water
-molecules in proteins by clustering. *Bioinformatics*, **30**, 2978-2980.
+Patel,H. *et al.* (2014) `PyWATER: a PyMOL plug-in to find conserved water
+molecules in proteins by clustering
+<https://doi.org/10.1093/bioinformatics/btu424>`_. *Bioinformatics*, **30**,
+2978-2980.
 
 
 Licence (MIT)
