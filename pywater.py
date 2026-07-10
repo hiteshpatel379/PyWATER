@@ -101,7 +101,7 @@ if not os.path.exists(outdir):
 logger = logging.getLogger('PyWATER')
 logger.setLevel(logging.DEBUG)
 fh = logging.FileHandler( os.path.join( outdir, 'pywater.log' ) )
-fh.setLevel(logging.DEBUG)
+fh.setLevel(logging.INFO)
 ch = logging.StreamHandler()
 ch.setLevel(logging.INFO)
 formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
@@ -869,7 +869,7 @@ def filterbyResolution( pdbChainsList, resolutionCutoff ):
                 res_info = entry.get("rcsb_entry_info", {})
                 if res_info and "resolution_combined" in res_info and res_info["resolution_combined"]:
                     pdbsResolution[pdb] = res_info["resolution_combined"][0]
-                    logger.info('Resolution of %s is: %s' % (pdb, pdbsResolution[pdb]))
+                    logger.debug('Resolution of %s is: %s' % (pdb, pdbsResolution[pdb]))
                 else:
                     pdbsResolution[pdb] = 'null'
         except Exception:
@@ -986,9 +986,12 @@ def FindConservedWaters(selectedStruturePDB,selectedStrutureChain,seq_id,resolut
         logger.info( """Fetching protein chains list from PDB clusters ...
         This cluster contains: """ )
         pdbChainsList = fetchpdbChainsList(selectedStruture,seq_id) # ['3QKL:A', '4EKL:A', '3QKM:A', '3QKK:A', '3OW4:A', '3OW4:B', '3OCB:A', '3OCB:B', '4EKK:A', '4EKK:B']
-        logger.info( 'Protein chains list contains %i pdb chains: "%s"' % (len(pdbChainsList), ', '.join(pdbChainsList)))
+        candidate_count = len(pdbChainsList)
+        logger.info( 'Protein chains list contains %i pdb chains.' % candidate_count)
+        logger.debug( 'Protein chains list: "%s"' % ', '.join(pdbChainsList))
         logger.info( 'Filtering by resolution ...')
         pdbChainsList = filterbyResolution(pdbChainsList,resolution)
+        resolution_count = len(pdbChainsList)
         # make sure query structure is not filtered out
         queryStr = "%s:%s" % (selectedStruturePDB.lower(), selectedStrutureChain.upper())
         if queryStr in pdbChainsList:
@@ -1003,9 +1006,11 @@ def FindConservedWaters(selectedStruturePDB,selectedStrutureChain,seq_id,resolut
         if max_structures and len(pdbChainsList) > max_structures:
             logger.info( 'Limiting to the %i best-resolution structures (out of %i) to keep clustering within memory limits.' % (max_structures, len(pdbChainsList)) )
             pdbChainsList = pdbChainsList[:max_structures]
-        logger.info( 'Filtered protein chains list contains %i pdb chains: "%s"' % (len(pdbChainsList), ', '.join(pdbChainsList)) )
+        logger.info( 'Structure selection summary: %i candidate chains, %i passed the %.2f A resolution cutoff, %i selected for clustering.' % (candidate_count, resolution_count, resolution, len(pdbChainsList)) )
+        logger.debug( 'Filtered protein chains list: "%s"' % ', '.join(pdbChainsList) )
     else:
         pdbChainsList = UD_pdbChainsList
+        logger.info( 'Structure selection summary: using %i user-defined pdb chains.' % len(pdbChainsList) )
     for pdbChain in pdbChainsList:
         up.add_protein_from_string(pdbChain)
 
@@ -1079,6 +1084,7 @@ class _LogCollector(logging.Handler):
         return self._find('conserved water molecules.') is not None
 
     def summary(self):
+        selection_summary = self._find('Structure selection summary:')
         for needle in ('conserved water molecules.',
                        'too many waters to cluster',
                        'has no conserved waters',
@@ -1090,7 +1096,11 @@ class _LogCollector(logging.Handler):
                        'is not valid'):
             message = self._find(needle)
             if message:
+                if selection_summary and message != selection_summary:
+                    return '%s\n%s' % (selection_summary, message)
                 return message
+        if selection_summary:
+            return selection_summary
         return 'Finished. See ~/PyWATER_outdir/pywater.log for details.'
 
 
