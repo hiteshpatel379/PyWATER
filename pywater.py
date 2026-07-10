@@ -63,6 +63,7 @@ import tempfile
 from xml.dom.minidom import parseString
 import sys
 import json
+import threading
 
 if sys.version_info[0] > 2:
     import urllib.request as urllib
@@ -1037,6 +1038,44 @@ def FindConservedWaters(selectedStruturePDB,selectedStrutureChain,seq_id,resolut
     shutil.rmtree(tmp_dir)
 
 
+class _LogCollector(logging.Handler):
+    """
+        Collects PyWATER log records emitted during one search so the GUI can
+        report a meaningful outcome (success, "too many waters", etc.) instead
+        of leaving the result only in the console / log file.
+    """
+    def __init__(self):
+        logging.Handler.__init__(self)
+        self.messages = []
+
+    def emit(self, record):
+        self.messages.append(record.getMessage())
+
+    def _find(self, needle):
+        for message in reversed(self.messages):
+            if needle in message:
+                return message
+        return None
+
+    def found_waters(self):
+        return self._find('conserved water molecules.') is not None
+
+    def summary(self):
+        for needle in ('conserved water molecules.',
+                       'too many waters to cluster',
+                       'has no conserved waters',
+                       'do not have any water molecules',
+                       'only one water molecule',
+                       'only one PDB structure',
+                       'not reachable',
+                       'not determined by X-ray',
+                       'is not valid'):
+            message = self._find(needle)
+            if message:
+                return message
+        return 'Finished. See ~/PyWATER_outdir/pywater.log for details.'
+
+
 class ConservedWaters(QtWidgets.QDialog):
     """
         PyWATER input dialog, implemented with Qt (pymol.Qt) so it runs
@@ -1047,10 +1086,15 @@ class ConservedWaters(QtWidgets.QDialog):
     REFINEMENT_CHOICES = ['Mobility', 'Normalized B-factor', 'No refinement']
     CLUSTERING_CHOICES = ['complete', 'average', 'single']
 
+    # Emitted from the worker thread when a search finishes: (message, success).
+    _finished = QtCore.Signal(str, bool)
+
     def __init__(self, parent=None):
         super(ConservedWaters, self).__init__(parent)
         self.setWindowTitle("PyWATER - Find Conserved Waters")
+        self._worker_thread = None
         self.makeWindow()
+        self._finished.connect(self._on_finished)
 
     def _help_button(self, callback):
         button = QtWidgets.QPushButton("Help")
@@ -1139,6 +1183,11 @@ class ConservedWaters(QtWidgets.QDialog):
         self.run_button = QtWidgets.QPushButton("Find Conserved Water Molecules")
         self.run_button.clicked.connect(self.run)
         grid.addWidget(self.run_button, row, 1)
+        row += 1
+
+        self.status_label = QtWidgets.QLabel("")
+        self.status_label.setWordWrap(True)
+        grid.addWidget(self.status_label, row, 0, 1, 6)
 
     def varcheck(self, *args):
         # A user-defined list disables the sequence-identity and resolution filters.
@@ -1148,6 +1197,8 @@ class ConservedWaters(QtWidgets.QDialog):
         self.seq_id.setEnabled(not use)
 
     def run(self):
+        if self._worker_thread is not None and self._worker_thread.is_alive():
+            return
         try:
             resolution = float(self.resolution.text())
             inconsistency = float(self.inconsistency.text())
@@ -1158,24 +1209,51 @@ class ConservedWaters(QtWidgets.QDialog):
                 'conservation must be numbers.')
             return
 
+        args = (
+            str(self.pdb_id.text()).lower(),
+            str(self.chain_id.text()).upper(),
+            str(self.seq_id.currentText()),
+            resolution,
+            str(self.refinement.currentText()),
+            str(self.user_list.text()),
+            str(self.clustering.currentText()),
+            inconsistency,
+            prob,
+            bool(self.save_sup.isChecked()),
+        )
+
         self.run_button.setEnabled(False)
-        QtWidgets.QApplication.setOverrideCursor(QtCore.Qt.WaitCursor)
+        self.status_label.setText(
+            "Searching... fetching, superimposing and clustering structures. "
+            "This can take several minutes for large protein families; the "
+            "window stays responsive. Progress is logged to the PyMOL console "
+            "and ~/PyWATER_outdir/pywater.log.")
+        self._worker_thread = threading.Thread(target=self._worker, args=(args,))
+        self._worker_thread.daemon = True
+        self._worker_thread.start()
+
+    def _worker(self, args):
+        # Runs off the main thread so the Qt GUI does not freeze. PyMOL's cmd
+        # API is thread-safe; UI updates are marshalled back to the main thread
+        # through the _finished signal.
+        records = _LogCollector()
+        logger.addHandler(records)
         try:
-            FindConservedWaters(
-                str(self.pdb_id.text()).lower(),
-                str(self.chain_id.text()).upper(),
-                str(self.seq_id.currentText()),
-                resolution,
-                str(self.refinement.currentText()),
-                str(self.user_list.text()),
-                str(self.clustering.currentText()),
-                inconsistency,
-                prob,
-                bool(self.save_sup.isChecked()),
-            )
+            FindConservedWaters(*args)
+            message = records.summary()
+            success = records.found_waters()
+        except Exception as e:
+            logger.error('PyWATER failed: %s' % e)
+            message = 'PyWATER failed: %s' % e
+            success = False
         finally:
-            QtWidgets.QApplication.restoreOverrideCursor()
-            self.run_button.setEnabled(True)
+            logger.removeHandler(records)
+        self._finished.emit(message, success)
+
+    def _on_finished(self, message, success):
+        self.run_button.setEnabled(True)
+        self.status_label.setText(message)
+        _qt_info('PyWATER', message)
 
 
 def toPyWATER( v1, v2, v3 = '95', v4 = 2.0, v5 = 'Mobility', v6 = '', v7 = 'complete', v8 = 2.0, v9 = 0.7):
