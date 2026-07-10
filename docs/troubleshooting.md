@@ -16,12 +16,16 @@ Checks:
 - Make sure PyWATER was installed into the Python environment used by PyMOL,
   not a separate system Python or virtual environment.
 - Install NumPy and SciPy in PyMOL's Python environment.
+- Use PyMOL with Python 3; current PyWATER no longer supports Python 2.
 - Use a recent PyMOL build with Qt plugin support.
 - Use the latest `pywater.py` from this repository.
 
 PyWATER imports NumPy, SciPy, PyMOL's Qt bindings, and `pymol.cmd` when the
 plugin is loaded. If one of those imports fails, PyMOL may report a generic
 plugin initialization error.
+
+`requirements.txt` and `pyproject.toml` document the Python dependencies for
+modern tooling, but PyMOL itself should come from your PyMOL installation.
 
 ## RCSB HTTP 404 or XML Parse Errors
 

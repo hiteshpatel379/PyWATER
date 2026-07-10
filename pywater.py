@@ -60,16 +60,9 @@ import shutil
 import re
 import collections
 import tempfile
-from xml.dom.minidom import parseString
-import sys
 import json
 import threading
-
-if sys.version_info[0] > 2:
-    import urllib.request as urllib
-    xrange = range
-else:
-    import urllib
+import urllib.request as urllib
 
 from pymol.Qt import QtWidgets, QtCore
 
@@ -78,13 +71,13 @@ import logging
 
 try:
     import numpy as np
-except:
-    sys.exit('Numpy not found')
+except ImportError:
+    raise ImportError('Numpy not found. Install NumPy in PyMOL\'s Python environment.')
 
 try:
     import scipy.cluster.hierarchy as hcluster
-except:
-    sys.exit('Scipy not found')
+except ImportError:
+    raise ImportError('Scipy not found. Install SciPy in PyMOL\'s Python environment.')
 
 
 # setup output directory
@@ -109,6 +102,41 @@ fh.setFormatter(formatter)
 ch.setFormatter(formatter)
 logger.addHandler(fh)
 logger.addHandler(ch)
+
+
+RCSB_DATA_URL = "https://data.rcsb.org"
+RCSB_GRAPHQL_URL = "%s/graphql" % RCSB_DATA_URL
+RCSB_SEARCH_URL = "https://search.rcsb.org/rcsbsearch/v2/query"
+RCSB_DOWNLOAD_URL = "https://files.rcsb.org/download/%s.pdb"
+HTTP_TIMEOUT = 20
+JSON_HEADERS = {"Content-Type": "application/json"}
+DOWNLOAD_HEADERS = {"User-Agent": "Mozilla/5.0"}
+
+
+def _decode_response(response):
+    data = response.read()
+    if isinstance(data, bytes):
+        return data.decode("utf-8")
+    return data
+
+
+def _get_json(url, timeout=HTTP_TIMEOUT):
+    with urllib.urlopen(url, timeout=timeout) as response:
+        return json.loads(_decode_response(response))
+
+
+def _post_json(url, payload, timeout=HTTP_TIMEOUT):
+    request = urllib.Request(
+        url,
+        data=json.dumps(payload).encode("utf-8"),
+        headers=JSON_HEADERS,
+    )
+    with urllib.urlopen(request, timeout=timeout) as response:
+        return json.loads(_decode_response(response))
+
+
+def _graphql(query, timeout=HTTP_TIMEOUT):
+    return _post_json(RCSB_GRAPHQL_URL, {"query": query}, timeout=timeout)
 
 
 # PyMOL plugin registration (modern Qt plugin API).
@@ -410,7 +438,8 @@ class ProteinsList():
         else:
             pdb_id = s
             chain = False
-        assert len(pdb_id) == 4, '%s is not of length 4' % pdb_id
+        if len(pdb_id) != 4:
+            raise ValueError('%s is not of length 4' % pdb_id)
         p = Protein(pdb_id, chain)
         self.proteins.append(p)
 
@@ -430,7 +459,7 @@ class ProteinsList():
     def __getitem__( self, key ) :
         if isinstance( key, slice ) :
             # Get the start, stop, and step from the slice
-            return [self.proteins[ii] for ii in xrange(*key.indices(len(self)))]
+            return [self.proteins[ii] for ii in range(*key.indices(len(self)))]
         elif isinstance( key, int ):
             # Handle negative indices
             if key < 0 :
@@ -683,10 +712,9 @@ def isXray( pdb ):
     """
         Check whether the PDB structure is determined by X-ray or not using the modern RCSB Data API.
     """
-    url = "https://data.rcsb.org/rest/v1/core/entry/%s" % pdb.lower()
+    url = "%s/rest/v1/core/entry/%s" % (RCSB_DATA_URL, pdb.lower())
     try:
-        req = urllib.urlopen(url)
-        data = json.loads(req.read().decode('utf-8'))
+        data = _get_json(url)
         for exptl in data.get("exptl", []):
             if exptl.get("method") == "X-RAY DIFFRACTION":
                 return True
@@ -699,21 +727,19 @@ def chainPresent(pdb,chain):
     """
         Check whether the given chain id is valid for a given PDB ID using the modern RCSB Data API.
     """
-    query = '{"query": "{ entry(entry_id: \\"%s\\") { polymer_entities { rcsb_polymer_entity_container_identifiers { auth_asym_ids } } } }"}' % pdb.upper()
-    graphql_url = "https://data.rcsb.org/graphql"
-    
-    if sys.version_info[0] > 2:
-        req = urllib.Request(graphql_url, data=query.encode("utf-8"), headers={"Content-Type": "application/json"})
-    else:
-        import urllib2
-        req = urllib2.Request(graphql_url, data=query, headers={"Content-Type": "application/json"})
-        
+    query = """
+    {
+      entry(entry_id: "%s") {
+        polymer_entities {
+          rcsb_polymer_entity_container_identifiers {
+            auth_asym_ids
+          }
+        }
+      }
+    }
+    """ % pdb.upper()
     try:
-        if sys.version_info[0] > 2:
-            response = urllib.urlopen(req)
-        else:
-            response = urllib2.urlopen(req)
-        gql_data = json.loads(response.read().decode('utf-8'))
+        gql_data = _graphql(query)
         entities = gql_data.get("data", {}).get("entry", {}).get("polymer_entities", [])
         for entity in entities:
             identifiers = entity.get("rcsb_polymer_entity_container_identifiers", {})
@@ -731,23 +757,24 @@ def fetchpdbChainsList( selectedStruture, seq_id ):
     """
     pdb_id, chain_id = selectedStruture.split('.')
     pdbChainsList = []
-    
-    query = '{"query": "{ entry(entry_id: \\"%s\\") { polymer_entities { rcsb_polymer_entity_container_identifiers { auth_asym_ids } rcsb_polymer_entity_group_membership { group_id similarity_cutoff } } } }"}' % pdb_id.upper()
-    graphql_url = "https://data.rcsb.org/graphql"
-    
-    if sys.version_info[0] > 2:
-        req = urllib.Request(graphql_url, data=query.encode("utf-8"), headers={"Content-Type": "application/json"})
-    else:
-        import urllib2
-        req = urllib2.Request(graphql_url, data=query, headers={"Content-Type": "application/json"})
-        
+    query = """
+    {
+      entry(entry_id: "%s") {
+        polymer_entities {
+          rcsb_polymer_entity_container_identifiers {
+            auth_asym_ids
+          }
+          rcsb_polymer_entity_group_membership {
+            group_id
+            similarity_cutoff
+          }
+        }
+      }
+    }
+    """ % pdb_id.upper()
     cluster_id = None
     try:
-        if sys.version_info[0] > 2:
-            response = urllib.urlopen(req)
-        else:
-            response = urllib2.urlopen(req)
-        gql_data = json.loads(response.read().decode('utf-8'))
+        gql_data = _graphql(query)
         entities = gql_data.get("data", {}).get("entry", {}).get("polymer_entities", [])
         
         for entity in entities:
@@ -767,20 +794,21 @@ def fetchpdbChainsList( selectedStruture, seq_id ):
     if not cluster_id:
         return pdbChainsList
 
-    search_payload = '{"query": {"type": "terminal", "service": "text", "parameters": {"attribute": "rcsb_polymer_entity_group_membership.group_id", "operator": "exact_match", "value": "%s"}}, "return_type": "polymer_entity", "request_options": {"return_all_hits": true}}' % cluster_id
-    search_url = "https://search.rcsb.org/rcsbsearch/v2/query"
-    
-    if sys.version_info[0] > 2:
-        search_req = urllib.Request(search_url, data=search_payload.encode("utf-8"), headers={"Content-Type": "application/json"})
-    else:
-        search_req = urllib2.Request(search_url, data=search_payload, headers={"Content-Type": "application/json"})
-        
+    search_payload = {
+        "query": {
+            "type": "terminal",
+            "service": "text",
+            "parameters": {
+                "attribute": "rcsb_polymer_entity_group_membership.group_id",
+                "operator": "exact_match",
+                "value": cluster_id,
+            },
+        },
+        "return_type": "polymer_entity",
+        "request_options": {"return_all_hits": True},
+    }
     try:
-        if sys.version_info[0] > 2:
-            search_resp = urllib.urlopen(search_req)
-        else:
-            search_resp = urllib2.urlopen(search_req)
-        search_data = json.loads(search_resp.read().decode('utf-8'))
+        search_data = _post_json(RCSB_SEARCH_URL, search_payload)
         members = search_data.get("result_set", [])
         
         entity_ids = [m.get("identifier") for m in members if m.get("identifier")]
@@ -790,16 +818,7 @@ def fetchpdbChainsList( selectedStruture, seq_id ):
                 chunk = entity_ids[i:i+100]
                 chunk_str = ", ".join(['"%s"' % e for e in chunk])
                 raw_query = "{ polymer_entities(entity_ids: [%s]) { rcsb_polymer_entity_container_identifiers { entry_id auth_asym_ids } entry { exptl { method } } } }" % chunk_str
-                bulk_payload = json.dumps({"query": raw_query})
-                
-                if sys.version_info[0] > 2:
-                    bulk_req = urllib.Request(graphql_url, data=bulk_payload.encode("utf-8"), headers={"Content-Type": "application/json"})
-                    bulk_resp = urllib.urlopen(bulk_req)
-                else:
-                    bulk_req = urllib2.Request(graphql_url, data=bulk_payload, headers={"Content-Type": "application/json"})
-                    bulk_resp = urllib2.urlopen(bulk_req)
-                    
-                bulk_data = json.loads(bulk_resp.read().decode('utf-8'))
+                bulk_data = _graphql(raw_query)
                 bulk_entities = bulk_data.get("data", {}).get("polymer_entities", [])
                 
                 if not bulk_entities:
@@ -834,31 +853,17 @@ def filterbyResolution( pdbChainsList, resolutionCutoff ):
     """
         Filter the list of PDB structures by given resolution cutoff using modern Data API.
     """
-    pdbsList = []
-    for pdbChain in pdbChainsList:
-        pdbsList.append(pdbChain.split(':')[0])
-    pdbsList = list( set(pdbsList) )
+    pdbsList = sorted(set([pdbChain.split(':')[0] for pdbChain in pdbChainsList]))
 
-    filteredpdbChainsList = []
     pdbsResolution = {}
-    graphql_url = "https://data.rcsb.org/graphql"
     
     for i in range(0, len(pdbsList), 100):
         chunk = pdbsList[i:i+100]
         chunk_str = ", ".join(['"%s"' % p.upper() for p in chunk])
         raw_query = "{ entries(entry_ids: [%s]) { rcsb_id rcsb_entry_info { resolution_combined } } }" % chunk_str
-        bulk_payload = json.dumps({"query": raw_query})
         
         try:
-            if sys.version_info[0] > 2:
-                req = urllib.Request(graphql_url, data=bulk_payload.encode("utf-8"), headers={"Content-Type": "application/json"})
-                resp = urllib.urlopen(req)
-            else:
-                import urllib2
-                req = urllib2.Request(graphql_url, data=bulk_payload, headers={"Content-Type": "application/json"})
-                resp = urllib2.urlopen(req)
-                
-            data = json.loads(resp.read().decode('utf-8'))
+            data = _graphql(raw_query)
             entries = data.get("data", {}).get("entries", [])
             
             if not entries:
@@ -872,8 +877,8 @@ def filterbyResolution( pdbChainsList, resolutionCutoff ):
                     logger.debug('Resolution of %s is: %s' % (pdb, pdbsResolution[pdb]))
                 else:
                     pdbsResolution[pdb] = 'null'
-        except Exception:
-            pass
+        except Exception as e:
+            logger.error( 'Error fetching resolution data: %s' % e )
 
     for pdb in pdbsList:
         if pdb not in pdbsResolution:
@@ -905,8 +910,9 @@ def FindConservedWaters(selectedStruturePDB,selectedStrutureChain,seq_id,resolut
         The main function: Identification of conserved water molecules from a given protein structure.
     """
     try:
-        response=urllib.urlopen('http://www.rcsb.org')
-    except:
+        with urllib.urlopen(RCSB_DATA_URL, timeout=HTTP_TIMEOUT):
+            pass
+    except Exception:
         logger.error('The PDB webserver is not reachable.')
         return None
     if not pdbIdFormat(selectedStruturePDB):
@@ -966,99 +972,91 @@ def FindConservedWaters(selectedStruturePDB,selectedStrutureChain,seq_id,resolut
         tkMessageBox.showinfo(title = 'Error message', 
             message = """The degree of conservation is allowed from 0.4 A to 1.0 A.""")
         return None
-    online_pdb_db = 'https://files.rcsb.org/download/%s.pdb'
     displayInputs(selectedStruturePDB,selectedStrutureChain,seq_id,resolution,refinement,user_def_list,clustering_method,inconsistency_coefficient,prob)
 
     tmp_dir = tempfile.mkdtemp()
-
-    selectedStruture = ".".join([selectedStruturePDB.lower(),selectedStrutureChain.upper()]) # 3qkl.A
-    up = ProteinsList(ProteinName = selectedStruture) # ProteinsList class instance up
-    up.refinement = refinement
-    up.probability = prob
-    up.clustering_method = clustering_method
-    up.inconsistency_coefficient = inconsistency_coefficient
-    logger.info( 'selectedStruture is : %s' % selectedStruture )
-    up.selectedPDBChain = Protein(selectedStruturePDB, selectedStrutureChain) # up.selectedPDBChain = 3qkl_a
-    logger.info( 'up selectedPDBChain is : %s' % up.selectedPDBChain )
-    selectedPDBChain = str(up.selectedPDBChain)
-    logger.info( 'selectedPDBChain name is : %s' % selectedPDBChain )
-    if UD_pdbChainsList == []:
-        logger.info( """Fetching protein chains list from PDB clusters ...
-        This cluster contains: """ )
-        pdbChainsList = fetchpdbChainsList(selectedStruture,seq_id) # ['3QKL:A', '4EKL:A', '3QKM:A', '3QKK:A', '3OW4:A', '3OW4:B', '3OCB:A', '3OCB:B', '4EKK:A', '4EKK:B']
-        candidate_count = len(pdbChainsList)
-        logger.info( 'Protein chains list contains %i pdb chains.' % candidate_count)
-        logger.debug( 'Protein chains list: "%s"' % ', '.join(pdbChainsList))
-        logger.info( 'Filtering by resolution ...')
-        pdbChainsList = filterbyResolution(pdbChainsList,resolution)
-        resolution_count = len(pdbChainsList)
-        # make sure query structure is not filtered out
-        queryStr = "%s:%s" % (selectedStruturePDB.lower(), selectedStrutureChain.upper())
-        if queryStr in pdbChainsList:
-            pdbChainsList.remove(queryStr)
-            pdbChainsList.insert(0,queryStr)
-        if queryStr not in pdbChainsList:
-            pdbChainsList.insert(0,queryStr)
-        # Added again If query structure filtered out..
-        # Cap to the best-resolution structures (the list is resolution-sorted,
-        # with the query forced to the front) so broad clusters stay within the
-        # clustering memory limit instead of failing with "too many waters".
-        if max_structures and len(pdbChainsList) > max_structures:
-            logger.info( 'Limiting to the %i best-resolution structures (out of %i) to keep clustering within memory limits.' % (max_structures, len(pdbChainsList)) )
-            pdbChainsList = pdbChainsList[:max_structures]
-        logger.info( 'Structure selection summary: %i candidate chains, %i passed the %.2f A resolution cutoff, %i selected for clustering.' % (candidate_count, resolution_count, resolution, len(pdbChainsList)) )
-        logger.debug( 'Filtered protein chains list: "%s"' % ', '.join(pdbChainsList) )
-    else:
-        pdbChainsList = UD_pdbChainsList
-        logger.info( 'Structure selection summary: using %i user-defined pdb chains.' % len(pdbChainsList) )
-    for pdbChain in pdbChainsList:
-        up.add_protein_from_string(pdbChain)
-
-    if len(up.proteins)>1:
-        def download_pdb(protein):
-            pdb_path = os.path.join(tmp_dir, protein.pdb_id+'.pdb')
-            if not os.path.exists(pdb_path):
-                logger.info('Retrieving structure: %s' % protein.pdb_id)
-                url = online_pdb_db % protein.pdb_id.upper()
-                try:
-                    if sys.version_info[0] > 2:
-                        req = urllib.Request(url, headers={'User-Agent': 'Mozilla/5.0'})
-                        with urllib.urlopen(req, timeout=15) as response, open(pdb_path, 'wb') as out_file:
-                            out_file.write(response.read())
-                    else:
-                        import urllib2
-                        req = urllib2.Request(url, headers={'User-Agent': 'Mozilla/5.0'})
-                        response = urllib2.urlopen(req, timeout=15)
-                        with open(pdb_path, 'wb') as out_file:
-                            out_file.write(response.read())
-                except Exception as e:
-                    logger.error("Failed to download %s: %s" % (protein.pdb_id, e))
-
-        from multiprocessing.dummy import Pool as ThreadPool
-        pool = ThreadPool(min(30, len(up.proteins)))
-        pool.map(download_pdb, up.proteins)
-        pool.close()
-        pool.join()
-        
-        # New check: Filter out any proteins whose downloads failed
-        successful_proteins = []
-        for protein in up.proteins:
-            pdb_path = os.path.join(tmp_dir, protein.pdb_filename)
-            if os.path.exists(pdb_path):
-                successful_proteins.append(protein)
-            else:
-                logger.warning('Excluding %s from superimposition because its PDB file could not be downloaded.' % protein.pdb_id)
-        
-        up.proteins = successful_proteins
-        
-        if len(up.proteins) > 1:
-            logger.info( 'Save PDB file with conserved water molecules ...' )
-            makePDBwithConservedWaters(up, tmp_dir, outdir, save_sup_files)
+    try:
+        selectedStruture = ".".join([selectedStruturePDB.lower(),selectedStrutureChain.upper()]) # 3qkl.A
+        up = ProteinsList(ProteinName = selectedStruture) # ProteinsList class instance up
+        up.refinement = refinement
+        up.probability = prob
+        up.clustering_method = clustering_method
+        up.inconsistency_coefficient = inconsistency_coefficient
+        logger.info( 'selectedStruture is : %s' % selectedStruture )
+        up.selectedPDBChain = Protein(selectedStruturePDB, selectedStrutureChain) # up.selectedPDBChain = 3qkl_a
+        logger.info( 'up selectedPDBChain is : %s' % up.selectedPDBChain )
+        selectedPDBChain = str(up.selectedPDBChain)
+        logger.info( 'selectedPDBChain name is : %s' % selectedPDBChain )
+        if UD_pdbChainsList == []:
+            logger.info( 'Fetching protein chains list from PDB clusters ...' )
+            pdbChainsList = fetchpdbChainsList(selectedStruture,seq_id) # ['3QKL:A', '4EKL:A', '3QKM:A', '3QKK:A', '3OW4:A', '3OW4:B', '3OCB:A', '3OCB:B', '4EKK:A', '4EKK:B']
+            candidate_count = len(pdbChainsList)
+            logger.info( 'Protein chains list contains %i pdb chains.' % candidate_count)
+            logger.debug( 'Protein chains list: "%s"' % ', '.join(pdbChainsList))
+            logger.info( 'Filtering by resolution ...')
+            pdbChainsList = filterbyResolution(pdbChainsList,resolution)
+            resolution_count = len(pdbChainsList)
+            # make sure query structure is not filtered out
+            queryStr = "%s:%s" % (selectedStruturePDB.lower(), selectedStrutureChain.upper())
+            if queryStr in pdbChainsList:
+                pdbChainsList.remove(queryStr)
+                pdbChainsList.insert(0,queryStr)
+            if queryStr not in pdbChainsList:
+                pdbChainsList.insert(0,queryStr)
+            # Added again If query structure filtered out..
+            # Cap to the best-resolution structures (the list is resolution-sorted,
+            # with the query forced to the front) so broad clusters stay within the
+            # clustering memory limit instead of failing with "too many waters".
+            if max_structures and len(pdbChainsList) > max_structures:
+                logger.info( 'Limiting to the %i best-resolution structures (out of %i) to keep clustering within memory limits.' % (max_structures, len(pdbChainsList)) )
+                pdbChainsList = pdbChainsList[:max_structures]
+            logger.info( 'Structure selection summary: %i candidate chains, %i passed the %.2f A resolution cutoff, %i selected for clustering.' % (candidate_count, resolution_count, resolution, len(pdbChainsList)) )
+            logger.debug( 'Filtered protein chains list: "%s"' % ', '.join(pdbChainsList) )
         else:
-            logger.error('Not enough valid PDB structures remaining to superimpose.')
-    else:
-        logger.info( "%s has only one PDB structure. We need atleast 2 structures to superimpose." % selectedPDBChain)
-    shutil.rmtree(tmp_dir)
+            pdbChainsList = UD_pdbChainsList
+            logger.info( 'Structure selection summary: using %i user-defined pdb chains.' % len(pdbChainsList) )
+        for pdbChain in pdbChainsList:
+            up.add_protein_from_string(pdbChain)
+
+        if len(up.proteins)>1:
+            def download_pdb(protein):
+                pdb_path = os.path.join(tmp_dir, protein.pdb_id+'.pdb')
+                if not os.path.exists(pdb_path):
+                    logger.info('Retrieving structure: %s' % protein.pdb_id)
+                    url = RCSB_DOWNLOAD_URL % protein.pdb_id.upper()
+                    try:
+                        req = urllib.Request(url, headers=DOWNLOAD_HEADERS)
+                        with urllib.urlopen(req, timeout=HTTP_TIMEOUT) as response, open(pdb_path, 'wb') as out_file:
+                            out_file.write(response.read())
+                    except Exception as e:
+                        logger.error("Failed to download %s: %s" % (protein.pdb_id, e))
+
+            from multiprocessing.dummy import Pool as ThreadPool
+            pool = ThreadPool(min(30, len(up.proteins)))
+            pool.map(download_pdb, up.proteins)
+            pool.close()
+            pool.join()
+
+            # New check: Filter out any proteins whose downloads failed
+            successful_proteins = []
+            for protein in up.proteins:
+                pdb_path = os.path.join(tmp_dir, protein.pdb_filename)
+                if os.path.exists(pdb_path):
+                    successful_proteins.append(protein)
+                else:
+                    logger.warning('Excluding %s from superimposition because its PDB file could not be downloaded.' % protein.pdb_id)
+
+            up.proteins = successful_proteins
+
+            if len(up.proteins) > 1:
+                logger.info( 'Save PDB file with conserved water molecules ...' )
+                makePDBwithConservedWaters(up, tmp_dir, outdir, save_sup_files)
+            else:
+                logger.error('Not enough valid PDB structures remaining to superimpose.')
+        else:
+            logger.info( "%s has only one PDB structure. We need atleast 2 structures to superimpose." % selectedPDBChain)
+    finally:
+        shutil.rmtree(tmp_dir)
 
 
 class _LogCollector(logging.Handler):

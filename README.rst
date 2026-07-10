@@ -28,10 +28,14 @@ into the Python environment used by PyMOL.
 Requirements
 ------------
 
-- PyMOL with plugin support
+- PyMOL with Python 3 and plugin support
 - NumPy installed in PyMOL's Python environment
 - SciPy installed in PyMOL's Python environment
 - Internet access to query RCSB PDB and download PDB structures
+
+Dependencies are listed in ``requirements.txt`` and ``pyproject.toml`` for
+modern Python tooling. PyMOL itself is still provided by your PyMOL
+installation, not by PyPI.
 
 Plugin Installation
 -------------------
