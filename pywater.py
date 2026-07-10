@@ -66,13 +66,11 @@ import json
 
 if sys.version_info[0] > 2:
     import urllib.request as urllib
-    from tkinter import *
-    import tkinter.messagebox as tkMessageBox
     xrange = range
 else:
     import urllib
-    from Tkinter import *
-    import tkMessageBox
+
+from pymol.Qt import QtWidgets, QtCore
 
 import pymol.cmd as cmd
 import logging
@@ -112,59 +110,85 @@ logger.addHandler(fh)
 logger.addHandler(ch)
 
 
-# initialize as PyMOL plugin
-def __init__(self):
-    self.menuBar.addmenuitem('Plugin', 'command',
-                        'Find Conserved Waters',
-                        label = 'PyWATER',
-                        command = lambda: main(self.root))
+# PyMOL plugin registration (modern Qt plugin API).
+def __init_plugin__(app=None):
+    from pymol.plugins import addmenuitemqt
+    addmenuitemqt('PyWATER', main)
+
+
+# ---------------------------------------------------------------------------
+# User messaging
+#
+# PyWATER historically used tkinter.messagebox for help and error dialogs.
+# On macOS, Tk cannot run inside PyMOL's Qt GUI (it aborts the process during
+# Cocoa color allocation), so messaging now goes through Qt and the console.
+# ---------------------------------------------------------------------------
+
+def _qt_info(title, message):
+    """Native Qt information dialog, used by the GUI help buttons."""
+    logger.info('%s: %s' % (title, message))
+    parent = QtWidgets.QApplication.activeWindow()
+    QtWidgets.QMessageBox.information(parent, title, message)
+
+
+class _PopupFreeMessageBox(object):
+    """
+    Drop-in stand-in for tkinter.messagebox that never opens a modal dialog.
+    Validation warnings are written to the PyMOL console / log instead, so the
+    command line stays popup-free and error paths cannot crash PyMOL.
+    """
+    def showinfo(self, title='', message=''):
+        logger.info('%s: %s' % (title, message))
+
+
+tkMessageBox = _PopupFreeMessageBox()
+
 
 # Display help messages
 def pdb_id_help():
-    tkMessageBox.showinfo(title = 'PDB Identifier', 
-        message = "The PDB id of the protein for which you like to find conserved waters, e.g. 4lyw")
+    _qt_info('PDB Identifier',
+        "The PDB id of the protein for which you like to find conserved waters, e.g. 4lyw")
 
 def chain_help():
-    tkMessageBox.showinfo(title = 'Chain Identifier', 
-        message = "The chain identifier of the protein for which you like to find conserved waters in above mentioned PDB, e.g. A.")
+    _qt_info('Chain Identifier',
+        "The chain identifier of the protein for which you like to find conserved waters in above mentioned PDB, e.g. A.")
 
 def seq_id_help():
-    tkMessageBox.showinfo(title = 'Sequence identity cutoff', 
-        message = """All the protein structures, clustered by BlastClust, having sequence identity more than given cutoff will be superimposed to find the conserved water molecules in query protein chain.
+    _qt_info('Sequence identity cutoff',
+        """All the protein structures, clustered by sequence identity, having sequence identity more than given cutoff will be superimposed to find the conserved water molecules in query protein chain.
 Minimum suggested Sequence identity cutoff is 95.""")
 
 def resolution_help():
-    tkMessageBox.showinfo(title = 'Structure resolution cutoff', 
-        message = """All the protein structures to be superimposed will be filtered first according to the structure resolution cutoff. Only structures with better resolution than given cutoff will be used further.
+    _qt_info('Structure resolution cutoff',
+        """All the protein structures to be superimposed will be filtered first according to the structure resolution cutoff. Only structures with better resolution than given cutoff will be used further.
 Maximum suggested structure resolution cutoff is 2.5 A.""")
 
 def refinement_quality_help():
-    tkMessageBox.showinfo(title = 'Filter by refinement quality', 
-        message = "Choose either Mobility or Normalized B-factor as criteria to assess the refinement quality of crystal structure. Program will filter out the water molecules with bad refinement quality.")
+    _qt_info('Filter by refinement quality',
+        "Choose either Mobility or Normalized B-factor as criteria to assess the refinement quality of crystal structure. Program will filter out the water molecules with bad refinement quality.")
 
 def user_defined_lists_help():
-    tkMessageBox.showinfo(title = 'User defined pdb-chains lists',
-        message = """The user defined list of pdbchains to superimpose to find conserved waters in query protein structure.
+    _qt_info('User defined pdb-chains lists',
+        """The user defined list of pdbchains to superimpose to find conserved waters in query protein structure.
 Enter the pdb chains list in format: xxxx_x,yyyy_y,zzzz_z""")
 
 def clustering_method_help():
-    tkMessageBox.showinfo(title = 'Clustering linkage method',
-        message = """Choose any of the linkage method for hierarchical clustering. Default method is 'complete'.""")
+    _qt_info('Clustering linkage method',
+        """Choose any of the linkage method for hierarchical clustering. Default method is 'complete'.""")
 
 def inconsistency_coefficient_help():
-    tkMessageBox.showinfo(title = 'Inconsistency coefficient threshold', 
-        message = """Any two clusters of water molecules will not be closer than given inconsistency coefficient threshold. The less threshold ensures each water molecule in a cluster from different structures.
+    _qt_info('Inconsistency coefficient threshold',
+        """Any two clusters of water molecules will not be closer than given inconsistency coefficient threshold. The less threshold ensures each water molecule in a cluster from different structures.
 Maximum suggested inconsistency coefficient threshold is 2.4 A.""")
 
 def prob_help():
-    tkMessageBox.showinfo(title = 'Degree of conservation', 
-        message = """Water molecules will be considered CONSERVED if their probability of being conserved is above given cutoff.
+    _qt_info('Degree of conservation',
+        """Water molecules will be considered CONSERVED if their probability of being conserved is above given cutoff.
 Value ranges from 0 to 1.
-Minimum suggested value is 0.5
-""")
+Minimum suggested value is 0.5""")
 
 def save_sup_files_help():
-    tkMessageBox.showinfo(title = 'Save superimposed files', message = """Save superimposed intermediate files.""")
+    _qt_info('Save superimposed files', """Save superimposed intermediate files.""")
 
 # Display imput parameters
 
@@ -1013,112 +1037,145 @@ def FindConservedWaters(selectedStruturePDB,selectedStrutureChain,seq_id,resolut
     shutil.rmtree(tmp_dir)
 
 
-class ConservedWaters( Frame ):
+class ConservedWaters(QtWidgets.QDialog):
     """
-        Creates PyMOL plugin GUI
+        PyWATER input dialog, implemented with Qt (pymol.Qt) so it runs
+        natively inside PyMOL's Qt GUI without depending on Tk.
     """
-    def __init__(self, parent):
-        Frame.__init__(self, parent, background="white")
-        self.parent=parent
-        self.parent.title("PyWATER - Find Conserved Waters")
-        self.grid()
+
+    SEQ_ID_CHOICES = ['30', '40', '50', '70', '90', '95', '100']
+    REFINEMENT_CHOICES = ['Mobility', 'Normalized B-factor', 'No refinement']
+    CLUSTERING_CHOICES = ['complete', 'average', 'single']
+
+    def __init__(self, parent=None):
+        super(ConservedWaters, self).__init__(parent)
+        self.setWindowTitle("PyWATER - Find Conserved Waters")
         self.makeWindow()
 
-    def varcheck(self, var, E1, E2, O1):
-        if var.get() == 0:
-            E1.configure(state='disabled')
-            E2.configure(state='normal')
-            O1.configure(state='normal')
-        else:
-            E1.configure(state='normal')
-            E2.configure(state='disabled')
-            O1.configure(state='disabled')
+    def _help_button(self, callback):
+        button = QtWidgets.QPushButton("Help")
+        button.clicked.connect(callback)
+        return button
 
     def makeWindow(self):
-        frame1 = Frame(self.parent)
-        frame1.grid()
+        grid = QtWidgets.QGridLayout(self)
+        row = 0
 
-        Label(frame1, text="PDB id").grid(row=0, column=0, sticky=W)
-        Button(frame1,text=" Help  ",command=pdb_id_help).grid(row=0, column=2, sticky=W)
-        v1 = StringVar(master=frame1)
-        v1.set('')
-        Entry(frame1,textvariable=v1).grid(row=0, column=1, sticky=W)
+        # PDB id / Chain id
+        grid.addWidget(QtWidgets.QLabel("PDB id"), row, 0)
+        self.pdb_id = QtWidgets.QLineEdit()
+        grid.addWidget(self.pdb_id, row, 1)
+        grid.addWidget(self._help_button(pdb_id_help), row, 2)
 
-        Label(frame1, text="Chain id").grid(row=0, column=3, sticky=W)
-        Button(frame1,text=" Help  ",command=chain_help).grid(row=0, column=5, sticky=W)
-        v2 = StringVar(master=frame1)
-        v2.set('')
-        Entry(frame1,textvariable=v2).grid(row=0, column=4, sticky=W)
+        grid.addWidget(QtWidgets.QLabel("Chain id"), row, 3)
+        self.chain_id = QtWidgets.QLineEdit()
+        grid.addWidget(self.chain_id, row, 4)
+        grid.addWidget(self._help_button(chain_help), row, 5)
+        row += 1
 
-        Label(frame1, text="Sequence identity cutoff").grid(row=1, column=0, sticky=W)
-        Button(frame1,text=" Help  ",command=seq_id_help).grid(row=1, column=2, sticky=W)
-        v3 = StringVar(master=frame1)
-        v3.set("95")
-        O1 = OptionMenu(frame1, v3, '30', '40', '50', '70', '90', '95', '100')
-        O1.grid(row=1, column=1, sticky=W)
+        # Sequence identity cutoff + user-defined-list checkbox
+        grid.addWidget(QtWidgets.QLabel("Sequence identity cutoff"), row, 0)
+        self.seq_id = QtWidgets.QComboBox()
+        self.seq_id.addItems(self.SEQ_ID_CHOICES)
+        self.seq_id.setCurrentText("95")
+        grid.addWidget(self.seq_id, row, 1)
+        grid.addWidget(self._help_button(seq_id_help), row, 2)
 
-        Label(frame1, text="Structure resolution cutoff").grid(row=2, column=0, sticky=W)
-        Button(frame1,text=" Help  ",command=resolution_help).grid(row=2, column=2, sticky=W)
-        v4 = StringVar(master=frame1)
-        v4.set("2.0")
-        E2 = Entry(frame1,textvariable=v4)
-        E2.grid(row=2, column=1, sticky=W)
+        self.use_user_list = QtWidgets.QCheckBox("User defined pdb-chains list")
+        self.use_user_list.stateChanged.connect(self.varcheck)
+        grid.addWidget(self.use_user_list, row, 3)
+        grid.addWidget(self._help_button(user_defined_lists_help), row, 5)
+        row += 1
 
-        Label(frame1, text="Refinement assessing method").grid(row=5, column=0, sticky=W)
-        Button(frame1,text=" Help  ",command=refinement_quality_help).grid(row=5, column=2, sticky=W)
-        v5 = StringVar(master=frame1)
-        v5.set('Mobility')
-        OptionMenu(frame1, v5, 'Mobility', 'Normalized B-factor','No refinement').grid(row=5, column=1, sticky=W)
+        # Structure resolution cutoff + user-defined list entry
+        grid.addWidget(QtWidgets.QLabel("Structure resolution cutoff"), row, 0)
+        self.resolution = QtWidgets.QLineEdit("2.0")
+        grid.addWidget(self.resolution, row, 1)
+        grid.addWidget(self._help_button(resolution_help), row, 2)
 
-        v6 = StringVar(master=frame1)
-        v6.set('')
-        E1 = Entry(frame1,textvariable=v6,state=DISABLED)
-        E1.grid(row=2, column=3, columnspan=2, rowspan=2, sticky=W+E+N+S)
+        self.user_list = QtWidgets.QLineEdit()
+        self.user_list.setPlaceholderText("xxxx_x,yyyy_y,zzzz_z")
+        self.user_list.setEnabled(False)
+        grid.addWidget(self.user_list, row, 3, 1, 2)
+        row += 1
 
-        var = IntVar(master=frame1)
-        Checkbutton(frame1, text="User defined pdb-chains list", variable=var,command=lambda: self.varcheck(var,E1,E2,O1)).grid(row=1, column=3, sticky=W)
-        Button(frame1,text=" Help  ",command=user_defined_lists_help).grid(row=1, column=5, sticky=W)
+        # Refinement assessing method
+        grid.addWidget(QtWidgets.QLabel("Refinement assessing method"), row, 0)
+        self.refinement = QtWidgets.QComboBox()
+        self.refinement.addItems(self.REFINEMENT_CHOICES)
+        grid.addWidget(self.refinement, row, 1)
+        grid.addWidget(self._help_button(refinement_quality_help), row, 2)
+        row += 1
 
-        Label(frame1, text="Clustering method").grid(row=6, column=0, sticky=W)
-        Button(frame1,text=" Help  ",command=clustering_method_help).grid(row=6, column=2, sticky=W)
-        v7 = StringVar(master=frame1)
-        v7.set("complete")
-        OptionMenu(frame1, v7, 'complete', 'average', 'single').grid(row=6, column=1, sticky=W)
+        # Clustering method
+        grid.addWidget(QtWidgets.QLabel("Clustering method"), row, 0)
+        self.clustering = QtWidgets.QComboBox()
+        self.clustering.addItems(self.CLUSTERING_CHOICES)
+        grid.addWidget(self.clustering, row, 1)
+        grid.addWidget(self._help_button(clustering_method_help), row, 2)
+        row += 1
 
-        Label(frame1, text="Inconsistency coefficient threshold").grid(row=7, column=0, sticky=W)
-        Button(frame1,text=" Help  ",command=inconsistency_coefficient_help).grid(row=7, column=2, sticky=W)
-        v8 = StringVar(master=frame1)
-        v8.set("2.4")
-        Entry(frame1,textvariable=v8).grid(row=7, column=1, sticky=W)
+        # Inconsistency coefficient threshold
+        grid.addWidget(QtWidgets.QLabel("Inconsistency coefficient threshold"), row, 0)
+        self.inconsistency = QtWidgets.QLineEdit("2.4")
+        grid.addWidget(self.inconsistency, row, 1)
+        grid.addWidget(self._help_button(inconsistency_coefficient_help), row, 2)
+        row += 1
 
-        Label(frame1, text="Degree of conservation").grid(row=8, column=0, sticky=W)
-        Button(frame1,text=" Help  ",command=prob_help).grid(row=8, column=2, sticky=W)
-        v9 = StringVar(master=frame1)
-        v9.set("0.7")
-        Entry(frame1,textvariable=v9).grid(row=8, column=1, sticky=W)
+        # Degree of conservation
+        grid.addWidget(QtWidgets.QLabel("Degree of conservation"), row, 0)
+        self.prob = QtWidgets.QLineEdit("0.7")
+        grid.addWidget(self.prob, row, 1)
+        grid.addWidget(self._help_button(prob_help), row, 2)
+        row += 1
 
-        frame2 = Frame(self.parent)
-        frame2.grid()
+        # Save superimposed files
+        self.save_sup = QtWidgets.QCheckBox("Save superimposed pdb files")
+        grid.addWidget(self.save_sup, row, 1)
+        grid.addWidget(self._help_button(save_sup_files_help), row, 2)
+        row += 1
 
-        v10 = BooleanVar(master=frame2)
-        Checkbutton(frame2, text="Save superimposed pdb files", variable=v10, onvalue = True, offvalue = False).grid(row=0, column=1, sticky=W)
-        v10.set(False)
-        Button(frame2,text=" Help ", command = save_sup_files_help ).grid(row=0, column=2, sticky=W)
+        # Run
+        self.run_button = QtWidgets.QPushButton("Find Conserved Water Molecules")
+        self.run_button.clicked.connect(self.run)
+        grid.addWidget(self.run_button, row, 1)
 
-        Button(frame2,text=" Find Conserved Water Molecules ",
-                command = lambda: FindConservedWaters(
-                    str(v1.get()).lower(),
-                    str(v2.get()).upper(),
-                    str(v3.get()),
-                    float(v4.get()),
-                    str(v5.get()),
-                    str(v6.get()),
-                    str(v7.get()),
-                    float(v8.get()),
-                    float(v9.get()),
-                    bool(v10.get())
-                )
-            ).grid(row=1, column=1, sticky=W)
+    def varcheck(self, *args):
+        # A user-defined list disables the sequence-identity and resolution filters.
+        use = self.use_user_list.isChecked()
+        self.user_list.setEnabled(use)
+        self.resolution.setEnabled(not use)
+        self.seq_id.setEnabled(not use)
+
+    def run(self):
+        try:
+            resolution = float(self.resolution.text())
+            inconsistency = float(self.inconsistency.text())
+            prob = float(self.prob.text())
+        except ValueError:
+            _qt_info('Invalid input',
+                'Resolution, inconsistency coefficient and degree of '
+                'conservation must be numbers.')
+            return
+
+        self.run_button.setEnabled(False)
+        QtWidgets.QApplication.setOverrideCursor(QtCore.Qt.WaitCursor)
+        try:
+            FindConservedWaters(
+                str(self.pdb_id.text()).lower(),
+                str(self.chain_id.text()).upper(),
+                str(self.seq_id.currentText()),
+                resolution,
+                str(self.refinement.currentText()),
+                str(self.user_list.text()),
+                str(self.clustering.currentText()),
+                inconsistency,
+                prob,
+                bool(self.save_sup.isChecked()),
+            )
+        finally:
+            QtWidgets.QApplication.restoreOverrideCursor()
+            self.run_button.setEnabled(True)
 
 
 def toPyWATER( v1, v2, v3 = '95', v4 = 2.0, v5 = 'Mobility', v6 = '', v7 = 'complete', v8 = 2.0, v9 = 0.7):
@@ -1137,15 +1194,20 @@ def toPyWATER( v1, v2, v3 = '95', v4 = 2.0, v5 = 'Mobility', v6 = '', v7 = 'comp
     FindConservedWaters(selectedStruturePDB,selectedStrutureChain,seq_id,resolution,refinement,user_def_list,clustering_method,inconsistency_coefficient,prob)
 
 
+# Keep a reference so the dialog is not garbage-collected while open.
+_dialog = None
+
+
 def main(parent=None):
-    root = Toplevel(parent)
-    app = ConservedWaters(root)
+    """Open the PyWATER input dialog (native Qt)."""
+    global _dialog
+    if parent is None:
+        parent = QtWidgets.QApplication.activeWindow()
+    _dialog = ConservedWaters(parent)
+    _dialog.show()
+    _dialog.raise_()
+    return _dialog
 
 
 #Extends PyMOL API to use this tool from command line.
 cmd.extend('pywater', toPyWATER)
-
-
-if __name__ == '__main__':
-    main()
-
