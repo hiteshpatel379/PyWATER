@@ -63,6 +63,7 @@ import tempfile
 import json
 import threading
 import urllib.request as urllib
+from concurrent.futures import ThreadPoolExecutor
 
 from pymol.Qt import QtWidgets, QtCore
 
@@ -1031,11 +1032,8 @@ def FindConservedWaters(selectedStruturePDB,selectedStrutureChain,seq_id,resolut
                     except Exception as e:
                         logger.error("Failed to download %s: %s" % (protein.pdb_id, e))
 
-            from multiprocessing.dummy import Pool as ThreadPool
-            pool = ThreadPool(min(30, len(up.proteins)))
-            pool.map(download_pdb, up.proteins)
-            pool.close()
-            pool.join()
+            with ThreadPoolExecutor(max_workers=min(30, len(up.proteins))) as executor:
+                list(executor.map(download_pdb, up.proteins))
 
             # New check: Filter out any proteins whose downloads failed
             successful_proteins = []
