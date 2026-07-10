@@ -86,6 +86,35 @@ Example:
 
    PyMOL> pywater 4lyw, A, 95, 2.0, Mobility, , complete, 2.4, 0.7, 200
 
+Shell Command Line
+------------------
+
+If you launch PyMOL from a terminal, pass PyWATER through PyMOL's ``-d``
+command option. Positional shell arguments such as ``pymol 4lyw A`` are treated
+as filenames by PyMOL, not as PyWATER inputs, and will fail with an unsupported
+file type error.
+
+Headless/quiet mode:
+
+.. code-block:: bash
+
+   .venv/bin/pymol -cq -d "run .venv/lib/python3.12/site-packages/pmg_tk/startup/pywater.py; pywater 4lyw, A"
+
+Visible PyMOL window:
+
+.. code-block:: bash
+
+   .venv/bin/pymol -q -d "run .venv/lib/python3.12/site-packages/pmg_tk/startup/pywater.py; pywater 4lyw, A"
+
+With explicit optional parameters:
+
+.. code-block:: bash
+
+   .venv/bin/pymol -q -d "run .venv/lib/python3.12/site-packages/pmg_tk/startup/pywater.py; pywater 4lyw, A, 95, 2.0, Mobility, , complete, 2.4, 0.7, 200"
+
+The ``-c`` flag runs PyMOL without the GUI, ``-q`` quiets startup output, and
+``-d`` executes PyMOL commands after startup.
+
 PyMOL Python API
 ----------------
 
