@@ -2,13 +2,19 @@
 PyWATER
 =======
 
-PyWATER finds conserved water molecules in X-ray protein structure.
+PyWATER is a PyMOL plugin for identifying conserved water molecules in
+X-ray protein structures. Given a query PDB ID and chain, PyWATER fetches
+homologous structures from RCSB PDB, superimposes them in PyMOL, clusters
+their crystallographic waters, and reports waters that recur across the
+structure set.
 
-Important or conserved waters are the water molecules which are present in most or all available pdb structures when superimposed.
-PyWATER script and this documentation is available at https://github.com/hiteshpatel379/PyWATER. 
-PyMOL is available at http://www.pymol.org/ or http://sourceforge.net/projects/pymol/.
-Tutorial of PyWATER is also availble at http://hiteshpatel379.github.io/PyWATER/.
+PyWATER source code and documentation are available at:
 
+https://github.com/hiteshpatel379/PyWATER
+
+PyMOL is available at:
+
+https://www.pymol.org/
 
 Copyright 2013 Hitesh Patel and B. Gruening
 
@@ -16,132 +22,185 @@ Copyright 2013 Hitesh Patel and B. Gruening
 Installation
 ============
 
-Scipy and Numpy python modules installed on Python 2.7 are required to run PyWATER.
-PyWATER should be installed as a PyMOL plugin.
+PyWATER runs inside PyMOL as a plugin. Install the latest ``pywater.py`` file
+into the Python environment used by PyMOL.
 
-- Run PyMOL
-- Install the pyWATER plugin in PyMOL by selecting PyWATER.py in the PyMOL Plugin Manager (Plugins → Manage Plugins → Install)
-- Restart PyMOL to use plugin
+Requirements
+------------
 
- - If you start PyMOL with administrator priviliges, PyWATER results and log files will be only accessible by the administrator.
+- PyMOL with plugin support
+- NumPy installed in PyMOL's Python environment
+- SciPy installed in PyMOL's Python environment
+- Internet access to query RCSB PDB and download PDB structures
 
+Plugin Installation
+-------------------
 
-**Enabling Plugins in MacPyMOL**   
-In order to install plug-ins from inside MacPyMOL, you have to rename the "MacPyMOL.app" to "PyMOLX11Hybrid.app" in your Applications folder, which will start PyMOL in the X Window System (X11) mode (requires an installation of [XQuartz](http://xquartz.macosforge.org/landing/)).
+1. Start PyMOL.
+2. Open ``Plugins -> Plugin Manager -> Install New Plugin``.
+3. Install from the local file ``pywater.py``.
+4. Restart PyMOL.
+5. Open ``Plugins -> PyWATER``.
 
-
-
-User Interface
-==============
-
-After installation as plugin, PyWATER can be run from PyMOL's Graphical User Interface, via the commandline or PyMOL’s python API.
-
-
-Graphical User Interface
-------------------------
-
-Start PyMOL
-Open PyWATER plugin fromPyMWOLTcl-Tk GUI: Plugin PyWATER
-Figure 1 shows the snapshot of PyWATER as PyMOL plugin.
+PyWATER writes results to ``~/PyWATER_outdir``. Avoid launching PyMOL with
+administrator privileges unless necessary, because output files may then be
+owned by the administrator account.
 
 
-Figure 1. Snapshot of PyWATER plugin
+Usage
+=====
 
-Enter required input parameters. PDB and chain identifiers are mandatory. The remaining parameters are optional. Consult table 1 for more details of all input parameters and their default values.
-Change the default values if desired and click on ‘Find Conserved Water Molecules’
+PyWATER can be run from the graphical plugin dialog, the PyMOL command line,
+or PyMOL's Python API.
 
+Graphical Interface
+-------------------
 
-Using from command line in PyMOL
---------------------------------
+Open the plugin from ``Plugins -> PyWATER``. Enter a PDB ID and chain ID, then
+adjust optional parameters as needed. The GUI is implemented with PyMOL's Qt
+plugin API and runs the water search off the main GUI thread so the PyMOL
+window remains responsive during longer searches.
 
-PyWATER [PDB id , Chain id [, sequence identity cutoff [, resolution cutoff [, refinement assessing method [, user defined proteins list [, linkage method [, inconsistency coefficient threshold [, degree of conservation]]]]]]]]
+PyMOL Command Line
+------------------
 
-``pymol> pywater 4lyw, A, 95``
+The shortest form is:
 
-Accessing via PyMOL’s API
--------------------------
+.. code-block:: text
+
+   PyMOL> pywater 4lyw, A
+
+With optional parameters:
+
+.. code-block:: text
+
+   PyMOL> pywater PDB_ID, CHAIN_ID, SEQ_ID, RESOLUTION, REFINEMENT, USER_LIST, LINKAGE, INCONSISTENCY, CONSERVATION, MAX_STRUCTURES
+
+Example:
+
+.. code-block:: text
+
+   PyMOL> pywater 4lyw, A, 95, 2.0, Mobility, , complete, 2.4, 0.7, 200
+
+PyMOL Python API
+----------------
 
 .. code-block:: python
 
-  from pymol import cmd
-  cmd.pywater(PDB id , Chain id [, sequence identity cutoff [, resolution cutoff [, refinement assessing method [, user defined proteins list [, linkage method [, inconsistency coefficient threshold [, degree of conservation]]]]]]])
+   from pymol import cmd
+   cmd.pywater("4lyw", "A")
 
 
+Input Parameters
+================
 
-Table 1: Input parameters and default values
-
-+-------------+----------------+------------------------------------------------------------------------+
-|  Value      | Default value  | Explanation                                                            |   
-+=============+================+========================================================================+
-| PDB ID      |      --        |The PDB identifier of the protein for which you want to                 |
-|             |                |find conserved waters.                                                  |
-+-------------+----------------+------------------------------------------------------------------------+
-| Chain id    |      --        |The chain identifier of the protein for which you want to find conserved| 
-|             |                |water molecules in the above mentioned PDB.                             |
-+-------------+----------------+------------------------------------------------------------------------+
-| Sequence    |      95%       |The sequence identity cutoff to find similar proteins clustered         | 
-| Identity    |                |by BlastClust.                                                          |
-+-------------+----------------+------------------------------------------------------------------------+
-| Resolution  |      2.0 Å     |All the protein structures will be filtered first according to the      | 
-| cutoff      |                |structure resolution cutoff. Only structures with better resolution     |
-|             |                |than given cutoff will be used further.                                 |
-+-------------+----------------+------------------------------------------------------------------------+
-|Refinement   |    Mobility    |Choose either 'Mobility' or 'Normalized B-factor' or 'No refinement'    | 
-|assessing    |                |as criteria to assess the refinement quality of crystal structure.      |
-|method       |                |Program will filter out the water molecules with bad refinement quality.|
-+-------------+----------------+------------------------------------------------------------------------+
-|Protein      |      --        |Give a custom list of protein structures to superimpose. Specifying     | 
-|List         |                |this list will disable ‘sequence identity’ and ‘resolution cutoff’      |
-|             |                |parameters.                                                             |
-+-------------+----------------+------------------------------------------------------------------------+
-| Linkage     |    complete    |Linkage method for hierarchical clustering. Choose one from single,     | 
-| Method      |                |complete, average.                                                      |
-+-------------+----------------+------------------------------------------------------------------------+
-| Sequence    |      95%       |The sequence identity cutoff to find similar proteins clustered         | 
-| Identity    |                |by BlastClust.                                                          |
-+-------------+----------------+------------------------------------------------------------------------+
-|Inconsistency|      2.0 Å     |Any two clusters of water molecules will not be closer than given       | 
-|coefficient  |                |inconsistency coefficient threshold. Value ranges from 0 to 2.4.        |
-|threshold    |                |                                                                        |
-+-------------+----------------+------------------------------------------------------------------------+
-| degree of   |      0.7       |Water molecules will be considered CONSERVED if their probability       | 
-| conservation|                |of being conserved is above given cutoff. Value ranges from 0.4 to 1.   |
-+-------------+----------------+------------------------------------------------------------------------+
++----------------------+----------------+-------------------------------------------------------+
+| Parameter            | Default        | Description                                           |
++======================+================+=======================================================+
+| PDB ID               | required       | PDB identifier for the query protein.                 |
++----------------------+----------------+-------------------------------------------------------+
+| Chain ID             | required       | Chain identifier for the query protein.               |
++----------------------+----------------+-------------------------------------------------------+
+| Sequence identity    | 95             | RCSB sequence-cluster identity cutoff. Allowed        |
+| cutoff               |                | values: 30, 40, 50, 70, 90, 95, 100.                 |
++----------------------+----------------+-------------------------------------------------------+
+| Resolution cutoff    | 2.0            | Keep structures with resolution at or below this      |
+|                      |                | value. Maximum accepted value is 3.0.                 |
++----------------------+----------------+-------------------------------------------------------+
+| Refinement method    | Mobility       | Water filtering method: ``Mobility``,                 |
+|                      |                | ``Normalized B-factor``, or ``No refinement``.        |
++----------------------+----------------+-------------------------------------------------------+
+| User-defined list    | disabled       | Comma-separated list such as ``1abc_A,2def_B``.       |
+|                      |                | When provided, sequence identity and resolution       |
+|                      |                | filtering are skipped.                                |
++----------------------+----------------+-------------------------------------------------------+
+| Linkage method       | complete       | Hierarchical clustering linkage: ``single``,          |
+|                      |                | ``complete``, or ``average``.                         |
++----------------------+----------------+-------------------------------------------------------+
+| Inconsistency        | 2.4            | Distance threshold used for water clustering.         |
+| coefficient          |                | Maximum accepted value is 2.8.                        |
++----------------------+----------------+-------------------------------------------------------+
+| Degree of            | 0.7            | Conservation cutoff. Conserved waters must appear     |
+| conservation         |                | in at least this fraction of selected structures.     |
+|                      |                | Allowed range: 0.4 to 1.0.                            |
++----------------------+----------------+-------------------------------------------------------+
+| Maximum structures   | 200            | Maximum number of sequence-cluster structures used    |
+|                      |                | for clustering. The query is kept first, and the      |
+|                      |                | remaining structures are prioritized by best          |
+|                      |                | resolution. Ignored for user-defined lists.           |
++----------------------+----------------+-------------------------------------------------------+
 
 
+Structure Selection
+===================
+
+For sequence-cluster searches, PyWATER now uses the current RCSB Data and
+Search APIs. The structure list is filtered by resolution, sorted from best
+to worst resolution, and capped by ``Maximum structures`` to keep clustering
+within memory limits for very large protein families.
+
+During a run, the GUI status and ``pywater.log`` include a concise summary:
+
+.. code-block:: text
+
+   Structure selection summary: 438 candidate chains, 217 passed the 2.00 A resolution cutoff, 200 selected for clustering.
 
 
 Results
 =======
 
-pyWATER will create a bunch of different output files. The most impartant informations are included in your PyMOL session for visual inspection.
-A detailed log file, summary files and optionally intermediate files will be stored under your $HOME directory in a folder called ``PyWATER_outdir``.
-For every run a subfolder with the naming schema ``PDBid_CHAINid`` will be created and we recommend to go once through all files to get a feeling of all stored informations.
-The following list will describe all different result files created by PyWATER:
+PyWATER writes output to ``~/PyWATER_outdir``. Each run creates a subfolder
+named for the query structure, for example ``4lyw_A``.
 
-    - The query protein structure is saved with all indentified conserved water molecules in PDB file format
-    - A PyMOL session is given with predifend coloring and highlighting the important water molecules
-    
-        - conserved water molecules, with H-bonds in between them or with protein and/or the ligand are displayed
-        - all conserved water molecules are colored according to their degree of conservation
+Common output files include:
 
-    - A log file ``pywater.log`` with all input parameters, program messages, warning and errors
-    - The degree of conservation of each cluster is given in a tabular file with all atom numbers of water molecules from each superimposed pdb structure
+- ``pywater.log``: input parameters, structure-selection summary, warnings,
+  and final status messages.
+- ``cwm_<PDB>_<CHAIN>.pdb``: the query structure after PyWATER processing.
+- ``cwm_<PDB>_<CHAIN>_withConservedWaters.pdb``: the query structure with
+  conserved waters added.
+- ``<PDB>_<CHAIN>_clusterPresence.txt``: tabular conservation information for
+  water clusters across selected structures.
+- Optional superimposed intermediate PDB files when ``Save superimposed pdb
+  files`` is enabled.
 
-We tried hard to output as many information as possible to enable further post-processing steps. For example, user can analyze the surroundings of a water molecule which is conserved in most proteins but not present in some. Rotameric conformations of side chains of nearby residues may result in displacement of water molecule.
+In PyMOL, conserved waters are displayed as spheres and colored by degree of
+conservation. Hydrogen-bond distance objects are created for interactions
+between conserved waters and nearby protein, ligand, or water atoms.
 
+
+Troubleshooting
+===============
+
+See ``docs/troubleshooting.md`` for common installation and runtime issues.
+
+Quick checks:
+
+- Install NumPy and SciPy into the same Python environment used by PyMOL.
+- Use the latest ``pywater.py`` from this repository.
+- Confirm internet access from the machine running PyMOL.
+- Check ``~/PyWATER_outdir/pywater.log`` for the full run log.
+- If a run fails, include the PyMOL version, Python version, input parameters,
+  and the traceback/log excerpt when reporting an issue.
 
 
 History
 =======
 
-- v1.0: Initial public release
+- v1.0: Initial public release.
+- Current development: migrated RCSB requests to current Data/Search APIs,
+  modernized the plugin GUI for PyMOL Qt, moved long searches off the GUI
+  thread, added best-resolution structure prioritization, and added a
+  configurable structure cap for large sequence clusters.
+
 
 Citation
 ========
-Please cite following article if you have used PyWATER:
 
-Patel,H. *et al.* (2014) PyWATER: a PyMOL plug-in to find conserved water molecules in proteins by clustering. *Bioinformatics*, **30**, 2978−2980. 
+Please cite the following article if you use PyWATER:
+
+Patel,H. *et al.* (2014) PyWATER: a PyMOL plug-in to find conserved water
+molecules in proteins by clustering. *Bioinformatics*, **30**, 2978-2980.
 
 
 Licence (MIT)
