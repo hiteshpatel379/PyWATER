@@ -879,16 +879,28 @@ def filterbyResolution( pdbChainsList, resolutionCutoff ):
         if pdb not in pdbsResolution:
             pdbsResolution[pdb] = 'null'
 
+    scored = []
     for pdbChain in pdbChainsList:
         resolution = pdbsResolution[pdbChain.split(':')[0]]
         if resolution != 'null' and resolution is not None:
             if float(resolution) <= resolutionCutoff:
-                filteredpdbChainsList.append(pdbChain)
+                scored.append((float(resolution), pdbChain))
 
-    return filteredpdbChainsList
+    # Return best (lowest) resolution first, so a later structure cap keeps the
+    # highest-quality structures.
+    scored.sort(key=lambda rc: rc[0])
+    return [pdbChain for resolution, pdbChain in scored]
 
 
-def FindConservedWaters(selectedStruturePDB,selectedStrutureChain,seq_id,resolution,refinement,user_def_list,clustering_method,inconsistency_coefficient,prob,save_sup_files=True):# e.g: selectedStruturePDB='3qkl',selectedStrutureChain='A'
+# Cap on how many structures a sequence-cluster query may use. Popular protein
+# families now return hundreds of homologs, whose pooled waters exceed what the
+# clustering step can hold in memory (see the 50000-water limit in
+# makePDBwithConservedWaters). Keeping the best-resolution structures up to this
+# cap lets broad queries degrade gracefully instead of failing outright.
+DEFAULT_MAX_STRUCTURES = 200
+
+
+def FindConservedWaters(selectedStruturePDB,selectedStrutureChain,seq_id,resolution,refinement,user_def_list,clustering_method,inconsistency_coefficient,prob,save_sup_files=True,max_structures=DEFAULT_MAX_STRUCTURES):# e.g: selectedStruturePDB='3qkl',selectedStrutureChain='A'
     """
         The main function: Identification of conserved water molecules from a given protein structure.
     """
@@ -985,6 +997,12 @@ def FindConservedWaters(selectedStruturePDB,selectedStrutureChain,seq_id,resolut
         if queryStr not in pdbChainsList:
             pdbChainsList.insert(0,queryStr)
         # Added again If query structure filtered out..
+        # Cap to the best-resolution structures (the list is resolution-sorted,
+        # with the query forced to the front) so broad clusters stay within the
+        # clustering memory limit instead of failing with "too many waters".
+        if max_structures and len(pdbChainsList) > max_structures:
+            logger.info( 'Limiting to the %i best-resolution structures (out of %i) to keep clustering within memory limits.' % (max_structures, len(pdbChainsList)) )
+            pdbChainsList = pdbChainsList[:max_structures]
         logger.info( 'Filtered protein chains list contains %i pdb chains: "%s"' % (len(pdbChainsList), ', '.join(pdbChainsList)) )
     else:
         pdbChainsList = UD_pdbChainsList
@@ -1173,6 +1191,17 @@ class ConservedWaters(QtWidgets.QDialog):
         grid.addWidget(self._help_button(prob_help), row, 2)
         row += 1
 
+        # Maximum structures
+        grid.addWidget(QtWidgets.QLabel("Maximum structures"), row, 0)
+        self.max_structures = QtWidgets.QLineEdit(str(DEFAULT_MAX_STRUCTURES))
+        grid.addWidget(self.max_structures, row, 1)
+        grid.addWidget(self._help_button(lambda: _qt_info('Maximum structures',
+            "Upper limit on how many structures a sequence-identity query uses. "
+            "Broad clusters are trimmed to this many best-resolution structures "
+            "so clustering stays within memory. Ignored for a user-defined list.")),
+            row, 2)
+        row += 1
+
         # Save superimposed files
         self.save_sup = QtWidgets.QCheckBox("Save superimposed pdb files")
         grid.addWidget(self.save_sup, row, 1)
@@ -1203,10 +1232,11 @@ class ConservedWaters(QtWidgets.QDialog):
             resolution = float(self.resolution.text())
             inconsistency = float(self.inconsistency.text())
             prob = float(self.prob.text())
+            max_structures = int(self.max_structures.text())
         except ValueError:
             _qt_info('Invalid input',
-                'Resolution, inconsistency coefficient and degree of '
-                'conservation must be numbers.')
+                'Resolution, inconsistency coefficient, degree of conservation '
+                'and maximum structures must be numbers.')
             return
 
         args = (
@@ -1220,6 +1250,7 @@ class ConservedWaters(QtWidgets.QDialog):
             inconsistency,
             prob,
             bool(self.save_sup.isChecked()),
+            max_structures,
         )
 
         self.run_button.setEnabled(False)
@@ -1256,7 +1287,7 @@ class ConservedWaters(QtWidgets.QDialog):
         _qt_info('PyWATER', message)
 
 
-def toPyWATER( v1, v2, v3 = '95', v4 = 2.0, v5 = 'Mobility', v6 = '', v7 = 'complete', v8 = 2.0, v9 = 0.7):
+def toPyWATER( v1, v2, v3 = '95', v4 = 2.0, v5 = 'Mobility', v6 = '', v7 = 'complete', v8 = 2.0, v9 = 0.7, v10 = DEFAULT_MAX_STRUCTURES):
     """
         Convert data types of input parameters given by command line.
     """
@@ -1269,7 +1300,8 @@ def toPyWATER( v1, v2, v3 = '95', v4 = 2.0, v5 = 'Mobility', v6 = '', v7 = 'comp
     clustering_method = str(v7)
     inconsistency_coefficient = float(v8)
     prob = float(v9)
-    FindConservedWaters(selectedStruturePDB,selectedStrutureChain,seq_id,resolution,refinement,user_def_list,clustering_method,inconsistency_coefficient,prob)
+    max_structures = int(v10)
+    FindConservedWaters(selectedStruturePDB,selectedStrutureChain,seq_id,resolution,refinement,user_def_list,clustering_method,inconsistency_coefficient,prob,max_structures=max_structures)
 
 
 # Keep a reference so the dialog is not garbage-collected while open.
