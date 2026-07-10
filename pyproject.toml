@@ -1,0 +1,22 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "pywater-pymol"
+version = "1.0.0"
+description = "PyMOL plugin to find conserved water molecules in protein structures"
+readme = "README.rst"
+requires-python = ">=3.8"
+license = {text = "MIT"}
+authors = [
+  {name = "Hitesh Patel"},
+  {name = "B. Gruening"},
+]
+dependencies = [
+  "numpy",
+  "scipy",
+]
+
+[tool.setuptools]
+py-modules = ["pywater"]
