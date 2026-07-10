@@ -116,6 +116,23 @@ Each run creates a subfolder such as:
 That folder contains the processed query PDB, conserved-water PDB, cluster
 presence table, and optionally the superimposed intermediate PDB files.
 
+## Local Files Mode (unpublished structures)
+
+Using "Use local files (skip RCSB)" / the `pywater_local` command:
+
+- **"Need at least 2 .pdb files"** — the folder must contain two or more `.pdb`
+  files; only files ending in `.pdb` are considered (mmCIF is not yet
+  supported).
+- **"Reference file ... is not among the .pdb files"** — the reference name
+  must match a file in the folder (basename, e.g. `my_apo.pdb`).
+- **"chain X not found" warnings / "reference does not contain chain X"** — the
+  chain id (single character) must exist in the files. All files are analysed
+  with the same chain; files missing it are skipped, and the run stops if the
+  reference itself lacks the chain.
+- Output goes to `~/PyWATER_outdir/lc00_<chain>/`, including
+  `local_files_map.txt` mapping the synthetic ids (`lc00`, `lc01`, ...) back to
+  your original filenames.
+
 ## Reporting a New Issue
 
 When reporting a new problem, include:

@@ -11,8 +11,8 @@ PyWATER is a single-file PyMOL plugin (`pywater.py`) that finds conserved water 
 PyWATER only runs inside PyMOL (it imports `pymol.cmd` at module load and cannot execute standalone). Requires NumPy and SciPy in PyMOL's Python environment.
 
 - **As a plugin**: install `pywater.py` via PyMOL's Plugin Manager (Plugins → Manage Plugins → Install), restart PyMOL. Adds a "PyWATER" GUI entry under the Plugin menu.
-- **From the PyMOL command line**: `pywater 4lyw, A, 95` (registered via `cmd.extend('pywater', toPyWATER)`).
-- **Via PyMOL's Python API**: `cmd.pywater('4lyw', 'A', ...)`.
+- **From the PyMOL command line**: `pywater 4lyw, A, 95` (registered via `cmd.extend('pywater', toPyWATER)`). Note `cmd.extend` registers a *command keyword* usable as `pywater ...` in the PyMOL command language — it is **not** exposed as a `cmd.pywater(...)` attribute (that older doc claim is inaccurate; `hasattr(cmd,'pywater')` is False).
+- **Local / unpublished structures**: `pywater_local /path/to/folder, A, my_ref.pdb` (registered via `cmd.extend('pywater_local', toPyWATERLocal)`) finds conserved waters across local `.pdb` files instead of RCSB homologs. See `LOCAL_FILES_PLAN.md`.
 
 Argument order (all after PDB id and chain are optional): `PDB id, Chain id, seq_id, resolution, refinement, user_def_list, clustering_method, inconsistency_coefficient, prob`. Defaults: seq_id `95`, resolution `2.0`, refinement `Mobility`, clustering `complete`, inconsistency `2.4`, prob `0.7`.
 
@@ -22,7 +22,7 @@ Output goes to `~/PyWATER_outdir/` (created at import time): `pywater.log`, and 
 
 ## Architecture / control flow
 
-The pipeline lives in `FindConservedWaters()` (the entry point that both the GUI and CLI call through) → `makePDBwithConservedWaters()` (the algorithmic core). Reading these two functions top-to-bottom is the fastest way to understand the program.
+The pipeline lives in `FindConservedWaters()` (the RCSB entry point that the GUI and CLI call through) → `makePDBwithConservedWaters()` (the algorithmic core). Reading these two functions top-to-bottom is the fastest way to understand the program. `FindConservedWatersLocal()` is a parallel entry point for local files: it skips every RCSB step (reachability, `isXray`, `chainPresent`, `fetchpdbChainsList`, `filterbyResolution`, the cap, download), assigns each local file a synthetic 4-char id (`lc00`…, reference = `lc00`) via `collectLocalStructures()`, copies files into the temp dir, guards on chain presence (`_chainHasCA`), then converges on the same `makePDBwithConservedWaters()`. The synthetic-id scheme exists because the water-identity slicing (`[:6]`/`[7:]`) and the `cwm_????_?.pdb` glob require a 4-char id + 1-char chain.
 
 1. **Validation & metadata lookup** (`FindConservedWaters`): validate PDB/chain id format, confirm X-ray via `isXray()`, confirm chain exists via `chainPresent()`, range-check numeric params. All error reporting is dual: `logger.error(...)` plus a Tkinter `tkMessageBox` popup.
 2. **Building the structure set**: unless a user-defined list is given, `fetchpdbChainsList()` queries RCSB's sequence-cluster REST API for homologs at the chosen identity cutoff, then `filterbyResolution()` drops low-resolution structures. The query structure is always forced into the list.
