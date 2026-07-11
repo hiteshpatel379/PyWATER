@@ -186,6 +186,15 @@ class LogCollectorTests(unittest.TestCase):
         c.emit(self._record('some unrelated debug line'))
         self.assertIn('pywater.log', c.summary())
 
+    def test_summary_surfaces_logged_error(self):
+        c = pw._LogCollector()
+        rec = logging.LogRecord('PyWATER', logging.ERROR, __file__, 0,
+                                'Please enter a chain id (single character, e.g. A).', None, None)
+        c.emit(rec)
+        summary = c.summary()
+        self.assertIn('chain id', summary)
+        self.assertNotIn('pywater.log', summary)
+
 
 class CollectLocalStructuresTests(unittest.TestCase):
     def test_reference_first_then_sorted_ids(self):
@@ -198,6 +207,26 @@ class CollectLocalStructuresTests(unittest.TestCase):
             names = [os.path.basename(p) for _, p in structures]
             self.assertEqual(ids, ['lc00', 'lc01', 'lc02'])
             self.assertEqual(names, ['b.pdb', 'a.pdb', 'c.pdb'])  # reference first, rest sorted
+
+    def test_uses_real_pdb_ids_from_filenames(self):
+        with tempfile.TemporaryDirectory() as d:
+            for name in ('4lyw_a.pdb', '2oss_a.pdb', '4bw1_a.pdb'):
+                _touch(os.path.join(d, name))
+            structures, query_id = pw.collectLocalStructures(d, '4lyw_a.pdb')
+            ids = [pid for pid, _ in structures]
+            self.assertEqual(query_id, '4lyw')
+            self.assertEqual(ids[0], '4lyw')       # reference first
+            self.assertIn('2oss', ids)
+            self.assertIn('4bw1', ids)
+
+    def test_falls_back_to_synthetic_for_nonpdb_names(self):
+        with tempfile.TemporaryDirectory() as d:
+            for name in ('my_apo.pdb', 'ligand_bound.pdb'):
+                _touch(os.path.join(d, name))
+            structures, query_id = pw.collectLocalStructures(d, 'my_apo.pdb')
+            ids = [pid for pid, _ in structures]
+            self.assertTrue(all(pid.startswith('lc') for pid in ids), ids)
+            self.assertEqual(query_id, ids[0])
 
     def test_accepts_full_path_reference(self):
         with tempfile.TemporaryDirectory() as d:

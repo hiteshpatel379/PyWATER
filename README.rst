@@ -144,10 +144,12 @@ Notes:
 - At least two ``.pdb`` files are required; all files must share the requested
   chain id (single character). Files lacking that chain are skipped with a
   warning; if the reference lacks it, the run stops with an error.
-- Each file is given a short synthetic id (``lc00``, ``lc01``, ...); the
-  reference is ``lc00``. The output folder ``~/PyWATER_outdir/lc00_<chain>/``
-  contains ``local_files_map.txt`` (id → original filename) and the result as
-  both ``cwm_lc00_<chain>_withConservedWaters.pdb`` and a copy named after your
+- Each file gets a 4-char id: the real PDB id when the filename starts with a
+  valid one (e.g. ``4lyw_a.pdb`` → ``4lyw``), otherwise a synthetic
+  ``lc00``/``lc01``/... id. ``local_files_map.txt`` records the id → filename
+  mapping. The output folder ``~/PyWATER_outdir/<query_id>_<chain>/`` contains
+  that map and the result as both
+  ``cwm_<query_id>_<chain>_withConservedWaters.pdb`` and a copy named after your
   reference file (e.g. ``my_apo_withConservedWaters.pdb``).
 - Current limits: ``.pdb`` format only, single-character chain ids, up to 100
   files.
