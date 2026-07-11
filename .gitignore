@@ -56,3 +56,6 @@ nosetests.xml
 
 # Mac OS specific hidden metadata
 .DS_Store
+
+# Local agent handoff/planning files
+.agent/
