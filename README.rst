@@ -37,6 +37,28 @@ Dependencies are listed in ``requirements.txt`` and ``pyproject.toml`` for
 modern Python tooling. PyMOL itself is still provided by your PyMOL
 installation, not by PyPI.
 
+For shell/CLI runs, PyWATER still runs *inside PyMOL*. The terminal examples
+below use ``.venv/bin/pymol``, so that virtual environment must contain a
+working PyMOL executable plus NumPy and SciPy. A typical local setup is:
+
+.. code-block:: bash
+
+   python3 -m venv .venv
+   source .venv/bin/activate
+   python -m ensurepip --upgrade
+   python -m pip install --upgrade pip
+   python -m pip install pymol-open-source numpy scipy
+
+Verify that the environment can import the required modules:
+
+.. code-block:: bash
+
+   .venv/bin/python -c "import pymol, numpy, scipy; print('PyMOL/NumPy/SciPy OK')"
+
+If you use a system, Homebrew, conda, or Schrödinger PyMOL instead, install
+NumPy and SciPy into that same PyMOL Python environment and replace
+``.venv/bin/pymol`` in the examples with the path to that PyMOL executable.
+
 Plugin Installation
 -------------------
 
