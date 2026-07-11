@@ -220,6 +220,12 @@ Minimum suggested value is 0.5""")
 def save_sup_files_help():
     _qt_info('Save superimposed files', """Save superimposed intermediate files.""")
 
+def local_files_help():
+    _qt_info('Use local files (skip RCSB)',
+        """Find conserved waters across your own local .pdb files instead of RCSB homologs (e.g. unpublished structures on your workstation).
+Point 'Local files folder' at a folder containing at least two .pdb files (all are compared), set 'Chain id' to the chain to analyse (applied to every file), and enter the 'Reference file' whose conserved waters are reported.
+Sequence identity, resolution and maximum-structures settings are ignored in this mode. Currently supports .pdb files with single-character chain ids, up to 100 files.""")
+
 # Display imput parameters
 
 def displayInputs( selectedStruturePDB, selectedStrutureChain,
@@ -932,6 +938,143 @@ def _prioritize_and_cap(pdbChainsList, queryStr, max_structures):
     return pdbChainsList, capped_from
 
 
+# Maximum number of local files supported, bounded by the synthetic 4-char id
+# scheme (lc00..lc99). Water identity strings depend on a 4-char id + 1-char
+# chain (see the [:6]/[7:] slicing and the cwm_????_?.pdb glob).
+MAX_LOCAL_STRUCTURES = 100
+
+
+def collectLocalStructures(local_dir, reference_filename):
+    """
+        Gather local .pdb files for a conserved-water search over unpublished
+        structures. Returns an ordered list of (synthetic_id, source_path) with
+        the reference first (synthetic_id 'lc00'), plus the query id 'lc00'.
+        Each file is assigned a synthetic 4-char id (lc00..lc99) so the
+        downstream water-identity slicing keeps working. Raises ValueError on a
+        missing folder, fewer than 2 .pdb files, a reference not in the folder,
+        or more than MAX_LOCAL_STRUCTURES files.
+    """
+    if not os.path.isdir(local_dir):
+        raise ValueError('Local files folder not found: %s' % local_dir)
+    pdb_files = sorted(
+        f for f in os.listdir(local_dir)
+        if f.lower().endswith('.pdb') and os.path.isfile(os.path.join(local_dir, f))
+    )
+    if len(pdb_files) < 2:
+        raise ValueError('Need at least 2 .pdb files in %s (found %i).' % (local_dir, len(pdb_files)))
+    if len(pdb_files) > MAX_LOCAL_STRUCTURES:
+        raise ValueError('Too many local files (%i); the current limit is %i.' % (len(pdb_files), MAX_LOCAL_STRUCTURES))
+    ref_base = os.path.basename(reference_filename)
+    if ref_base not in pdb_files:
+        raise ValueError('Reference file "%s" is not among the .pdb files in %s.' % (ref_base, local_dir))
+    ordered = [ref_base] + [f for f in pdb_files if f != ref_base]
+    structures = [('lc%02d' % idx, os.path.join(local_dir, fname)) for idx, fname in enumerate(ordered)]
+    return structures, 'lc00'
+
+
+def _chainHasCA(pdb_path, chain):
+    """True if the PDB file has at least one CA atom in the given chain."""
+    try:
+        with open(pdb_path) as f:
+            for line in f:
+                if line.startswith(('ATOM', 'HETATM')) and len(line) > 21:
+                    if line[12:16].strip() == 'CA' and line[21] == chain:
+                        return True
+    except (IOError, OSError):
+        return False
+    return False
+
+
+def _writeLocalMap(outdir, selectedPDBChain, structures):
+    """Write the synthetic-id -> original-filename map so results stay legible."""
+    map_dir = os.path.join(outdir, selectedPDBChain)
+    if not os.path.exists(map_dir):
+        os.makedirs(map_dir)
+    lines = ['synthetic_id\toriginal_file']
+    lines += ['%s\t%s' % (pdb_id, os.path.basename(src)) for pdb_id, src in structures]
+    with open(os.path.join(map_dir, 'local_files_map.txt'), 'w') as f:
+        f.write('\n'.join(lines) + '\n')
+    logger.info('Local file id mapping:\n%s' % '\n'.join(lines))
+
+
+def FindConservedWatersLocal(local_files_dir, selectedStrutureChain, local_reference, refinement='Mobility', clustering_method='complete', inconsistency_coefficient=2.4, prob=0.7, save_sup_files=True):
+    """
+        Conserved-water search over a set of LOCAL PDB files (e.g. unpublished
+        structures on the user's workstation) instead of RCSB homologs. Every
+        .pdb in local_files_dir is compared; local_reference is the query whose
+        conserved waters are reported. Reuses the same superimpose/cluster/score
+        pipeline as FindConservedWaters (via makePDBwithConservedWaters).
+    """
+    selectedStrutureChain = str(selectedStrutureChain).upper()
+    if not chainIdFormat(selectedStrutureChain):
+        return None
+    if inconsistency_coefficient > 2.8:
+        logger.info( 'The maximum allowed inconsistency coefficient threshold is 2.8 A' )
+        tkMessageBox.showinfo(title = 'Error message',
+            message = """The maximum allowed inconsistency coefficient threshold is 2.8 A.""")
+        return None
+    if prob > 1.0 or prob < 0.4:
+        logger.info( 'The degree of conservation is allowed from 0.4 A to 1.0 A.' )
+        tkMessageBox.showinfo(title = 'Error message',
+            message = """The degree of conservation is allowed from 0.4 A to 1.0 A.""")
+        return None
+    try:
+        structures, query_id = collectLocalStructures(local_files_dir, local_reference)
+    except ValueError as e:
+        logger.error('Local files error: %s' % e)
+        tkMessageBox.showinfo(title = 'Error message', message = str(e))
+        return None
+
+    displayInputs(query_id, selectedStrutureChain, 'n/a (local)', 'n/a (local)', refinement,
+        ', '.join(os.path.basename(src) for _, src in structures),
+        clustering_method, inconsistency_coefficient, prob)
+
+    tmp_dir = tempfile.mkdtemp()
+    try:
+        up = ProteinsList(ProteinName = '.'.join([query_id, selectedStrutureChain]))
+        up.refinement = refinement
+        up.probability = prob
+        up.clustering_method = clustering_method
+        up.inconsistency_coefficient = inconsistency_coefficient
+        up.selectedPDBChain = Protein(query_id, selectedStrutureChain)
+        selectedPDBChain = str(up.selectedPDBChain)
+        logger.info( 'Local mode: %i structures from %s (query %s = %s, chain %s).' % (
+            len(structures), local_files_dir, query_id, os.path.basename(local_reference), selectedStrutureChain) )
+        for pdb_id, src in structures:
+            up.add_protein_from_string('%s:%s' % (pdb_id, selectedStrutureChain))
+            shutil.copyfile(src, os.path.join(tmp_dir, pdb_id + '.pdb'))
+
+        # Keep only structures that actually contain the requested chain.
+        usable = []
+        skipped = []
+        names = dict((pid, os.path.basename(src)) for pid, src in structures)
+        for protein in up.proteins:
+            pdb_path = os.path.join(tmp_dir, protein.pdb_filename)
+            if _chainHasCA(pdb_path, protein.chain):
+                usable.append(protein)
+            else:
+                skipped.append(protein.pdb_id)
+                logger.warning('Excluding %s (%s): chain %s not found.' % (protein.pdb_id, names.get(protein.pdb_id), protein.chain))
+        up.proteins = usable
+
+        if query_id in skipped:
+            logger.error('The reference structure %s does not contain chain %s. Choose a different reference or chain.' % (os.path.basename(local_reference), selectedStrutureChain))
+            return None
+        if len(up.proteins) > 1:
+            _writeLocalMap(outdir, selectedPDBChain, structures)
+            logger.info( 'Save PDB file with conserved water molecules ...' )
+            makePDBwithConservedWaters(up, tmp_dir, outdir, save_sup_files)
+            # Also expose the result under the reference file's name.
+            produced = os.path.join(outdir, selectedPDBChain, 'cwm_%s_withConservedWaters.pdb' % selectedPDBChain)
+            if os.path.exists(produced):
+                stem = os.path.splitext(os.path.basename(local_reference))[0]
+                shutil.copy(produced, os.path.join(outdir, selectedPDBChain, '%s_withConservedWaters.pdb' % stem))
+        else:
+            logger.error('Not enough local structures with chain %s to superimpose (need at least 2).' % selectedStrutureChain)
+    finally:
+        shutil.rmtree(tmp_dir)
+
+
 def FindConservedWaters(selectedStruturePDB,selectedStrutureChain,seq_id,resolution,refinement,user_def_list,clustering_method,inconsistency_coefficient,prob,save_sup_files=True,max_structures=DEFAULT_MAX_STRUCTURES):# e.g: selectedStruturePDB='3qkl',selectedStrutureChain='A'
     """
         The main function: Identification of conserved water molecules from a given protein structure.
@@ -1234,6 +1377,31 @@ class ConservedWaters(QtWidgets.QDialog):
             row, 2)
         row += 1
 
+        # Local files mode (skip RCSB; use the user's own structures)
+        self.use_local_files = QtWidgets.QCheckBox("Use local files (skip RCSB)")
+        self.use_local_files.stateChanged.connect(self.varcheck)
+        grid.addWidget(self.use_local_files, row, 0)
+        grid.addWidget(self._help_button(local_files_help), row, 2)
+        row += 1
+
+        grid.addWidget(QtWidgets.QLabel("Local files folder"), row, 0)
+        self.local_dir = QtWidgets.QLineEdit()
+        self.local_dir.setPlaceholderText("/path/to/folder containing .pdb files")
+        self.local_dir.setEnabled(False)
+        grid.addWidget(self.local_dir, row, 1, 1, 3)
+        self.browse_button = QtWidgets.QPushButton("Browse...")
+        self.browse_button.clicked.connect(self._browse_local_dir)
+        self.browse_button.setEnabled(False)
+        grid.addWidget(self.browse_button, row, 4)
+        row += 1
+
+        grid.addWidget(QtWidgets.QLabel("Reference file"), row, 0)
+        self.local_reference = QtWidgets.QLineEdit()
+        self.local_reference.setPlaceholderText("my_apo.pdb (query; waters reported on this)")
+        self.local_reference.setEnabled(False)
+        grid.addWidget(self.local_reference, row, 1, 1, 3)
+        row += 1
+
         # Save superimposed files
         self.save_sup = QtWidgets.QCheckBox("Save superimposed pdb files")
         grid.addWidget(self.save_sup, row, 1)
@@ -1251,39 +1419,73 @@ class ConservedWaters(QtWidgets.QDialog):
         grid.addWidget(self.status_label, row, 0, 1, 6)
 
     def varcheck(self, *args):
-        # A user-defined list disables the sequence-identity and resolution filters.
+        # A user-defined list disables the sequence-identity and resolution
+        # filters. Local-files mode disables all the RCSB-only inputs and
+        # enables the folder / reference fields instead.
+        local = self.use_local_files.isChecked()
         use = self.use_user_list.isChecked()
-        self.user_list.setEnabled(use)
-        self.resolution.setEnabled(not use)
-        self.seq_id.setEnabled(not use)
+        # Local-files widgets.
+        self.local_dir.setEnabled(local)
+        self.browse_button.setEnabled(local)
+        self.local_reference.setEnabled(local)
+        # RCSB-only widgets (chain id is used in both modes, so stays enabled).
+        self.pdb_id.setEnabled(not local)
+        self.use_user_list.setEnabled(not local)
+        self.max_structures.setEnabled(not local)
+        self.user_list.setEnabled(use and not local)
+        self.resolution.setEnabled(not use and not local)
+        self.seq_id.setEnabled(not use and not local)
+
+    def _browse_local_dir(self):
+        folder = QtWidgets.QFileDialog.getExistingDirectory(self, "Select folder with .pdb files")
+        if folder:
+            self.local_dir.setText(folder)
 
     def run(self):
         if self._worker_thread is not None and self._worker_thread.is_alive():
             return
         try:
-            resolution = float(self.resolution.text())
             inconsistency = float(self.inconsistency.text())
             prob = float(self.prob.text())
-            max_structures = int(self.max_structures.text())
         except ValueError:
             _qt_info('Invalid input',
-                'Resolution, inconsistency coefficient, degree of conservation '
-                'and maximum structures must be numbers.')
+                'Inconsistency coefficient and degree of conservation must be numbers.')
             return
 
-        args = (
-            str(self.pdb_id.text()).lower(),
-            str(self.chain_id.text()).upper(),
-            str(self.seq_id.currentText()),
-            resolution,
-            str(self.refinement.currentText()),
-            str(self.user_list.text()),
-            str(self.clustering.currentText()),
-            inconsistency,
-            prob,
-            bool(self.save_sup.isChecked()),
-            max_structures,
-        )
+        if self.use_local_files.isChecked():
+            func = FindConservedWatersLocal
+            args = (
+                str(self.local_dir.text()),
+                str(self.chain_id.text()).upper(),
+                str(self.local_reference.text()),
+                str(self.refinement.currentText()),
+                str(self.clustering.currentText()),
+                inconsistency,
+                prob,
+                bool(self.save_sup.isChecked()),
+            )
+        else:
+            try:
+                resolution = float(self.resolution.text())
+                max_structures = int(self.max_structures.text())
+            except ValueError:
+                _qt_info('Invalid input',
+                    'Resolution and maximum structures must be numbers.')
+                return
+            func = FindConservedWaters
+            args = (
+                str(self.pdb_id.text()).lower(),
+                str(self.chain_id.text()).upper(),
+                str(self.seq_id.currentText()),
+                resolution,
+                str(self.refinement.currentText()),
+                str(self.user_list.text()),
+                str(self.clustering.currentText()),
+                inconsistency,
+                prob,
+                bool(self.save_sup.isChecked()),
+                max_structures,
+            )
 
         self.run_button.setEnabled(False)
         self.status_label.setText(
@@ -1291,18 +1493,18 @@ class ConservedWaters(QtWidgets.QDialog):
             "This can take several minutes for large protein families; the "
             "window stays responsive. Progress is logged to the PyMOL console "
             "and ~/PyWATER_outdir/pywater.log.")
-        self._worker_thread = threading.Thread(target=self._worker, args=(args,))
+        self._worker_thread = threading.Thread(target=self._worker, args=(func, args))
         self._worker_thread.daemon = True
         self._worker_thread.start()
 
-    def _worker(self, args):
+    def _worker(self, func, args):
         # Runs off the main thread so the Qt GUI does not freeze. PyMOL's cmd
         # API is thread-safe; UI updates are marshalled back to the main thread
         # through the _finished signal.
         records = _LogCollector()
         logger.addHandler(records)
         try:
-            FindConservedWaters(*args)
+            func(*args)
             message = records.summary()
             success = records.found_waters()
         except Exception as e:
@@ -1336,6 +1538,22 @@ def toPyWATER( v1, v2, v3 = '95', v4 = 2.0, v5 = 'Mobility', v6 = '', v7 = 'comp
     FindConservedWaters(selectedStruturePDB,selectedStrutureChain,seq_id,resolution,refinement,user_def_list,clustering_method,inconsistency_coefficient,prob,max_structures=max_structures)
 
 
+def toPyWATERLocal( v1, v2, v3, v4 = 'Mobility', v5 = 'complete', v6 = 2.4, v7 = 0.7, v8 = False ):
+    """
+        Convert data types for the local-files command line entry point.
+        v1 = folder path, v2 = chain id, v3 = reference filename.
+    """
+    local_files_dir = str(v1)
+    selectedStrutureChain = str(v2).upper()
+    local_reference = str(v3)
+    refinement = str(v4)
+    clustering_method = str(v5)
+    inconsistency_coefficient = float(v6)
+    prob = float(v7)
+    save_sup_files = str(v8).lower() in ('1', 'true', 'yes', 'on') if not isinstance(v8, bool) else v8
+    FindConservedWatersLocal(local_files_dir, selectedStrutureChain, local_reference, refinement, clustering_method, inconsistency_coefficient, prob, save_sup_files)
+
+
 # Keep a reference so the dialog is not garbage-collected while open.
 _dialog = None
 
@@ -1353,3 +1571,4 @@ def main(parent=None):
 
 #Extends PyMOL API to use this tool from command line.
 cmd.extend('pywater', toPyWATER)
+cmd.extend('pywater_local', toPyWATERLocal)

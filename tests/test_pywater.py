@@ -10,9 +10,25 @@ NumPy/SciPy, not a running PyMOL.
 """
 
 import logging
+import os
+import tempfile
 import unittest
 
 from tests.pymol_stubs import pywater as pw
+
+
+def _touch(path, content=''):
+    with open(path, 'w') as f:
+        f.write(content)
+
+
+def _atom_line(atomname, chain):
+    line = list(' ' * 80)
+    line[0:6] = list('ATOM  ')
+    name = atomname.ljust(4)
+    line[12:16] = list(name)
+    line[21] = chain
+    return ''.join(line) + '\n'
 
 
 class DecodeResponseTests(unittest.TestCase):
@@ -169,6 +185,101 @@ class LogCollectorTests(unittest.TestCase):
         c = pw._LogCollector()
         c.emit(self._record('some unrelated debug line'))
         self.assertIn('pywater.log', c.summary())
+
+
+class CollectLocalStructuresTests(unittest.TestCase):
+    def test_reference_first_then_sorted_ids(self):
+        with tempfile.TemporaryDirectory() as d:
+            for name in ('a.pdb', 'b.pdb', 'c.pdb'):
+                _touch(os.path.join(d, name))
+            structures, query_id = pw.collectLocalStructures(d, 'b.pdb')
+            self.assertEqual(query_id, 'lc00')
+            ids = [pid for pid, _ in structures]
+            names = [os.path.basename(p) for _, p in structures]
+            self.assertEqual(ids, ['lc00', 'lc01', 'lc02'])
+            self.assertEqual(names, ['b.pdb', 'a.pdb', 'c.pdb'])  # reference first, rest sorted
+
+    def test_accepts_full_path_reference(self):
+        with tempfile.TemporaryDirectory() as d:
+            for name in ('a.pdb', 'b.pdb'):
+                _touch(os.path.join(d, name))
+            structures, query_id = pw.collectLocalStructures(d, os.path.join(d, 'a.pdb'))
+            self.assertEqual(os.path.basename(structures[0][1]), 'a.pdb')
+
+    def test_ignores_non_pdb(self):
+        with tempfile.TemporaryDirectory() as d:
+            for name in ('a.pdb', 'b.pdb', 'notes.txt'):
+                _touch(os.path.join(d, name))
+            structures, _ = pw.collectLocalStructures(d, 'a.pdb')
+            self.assertEqual(len(structures), 2)
+
+    def test_requires_at_least_two(self):
+        with tempfile.TemporaryDirectory() as d:
+            _touch(os.path.join(d, 'only.pdb'))
+            with self.assertRaises(ValueError):
+                pw.collectLocalStructures(d, 'only.pdb')
+
+    def test_reference_must_exist(self):
+        with tempfile.TemporaryDirectory() as d:
+            for name in ('a.pdb', 'b.pdb'):
+                _touch(os.path.join(d, name))
+            with self.assertRaises(ValueError):
+                pw.collectLocalStructures(d, 'missing.pdb')
+
+    def test_missing_folder(self):
+        with self.assertRaises(ValueError):
+            pw.collectLocalStructures('/no/such/folder/here', 'a.pdb')
+
+    def test_too_many_files(self):
+        with tempfile.TemporaryDirectory() as d:
+            for i in range(pw.MAX_LOCAL_STRUCTURES + 1):
+                _touch(os.path.join(d, 'f%03d.pdb' % i))
+            with self.assertRaises(ValueError):
+                pw.collectLocalStructures(d, 'f000.pdb')
+
+
+class ChainHasCATests(unittest.TestCase):
+    def test_detects_chain(self):
+        with tempfile.TemporaryDirectory() as d:
+            p = os.path.join(d, 's.pdb')
+            _touch(p, _atom_line('CA', 'A') + _atom_line('CB', 'A'))
+            self.assertTrue(pw._chainHasCA(p, 'A'))
+            self.assertFalse(pw._chainHasCA(p, 'B'))
+
+    def test_missing_file(self):
+        self.assertFalse(pw._chainHasCA('/no/such/file.pdb', 'A'))
+
+
+class ToPyWATERLocalArgTests(unittest.TestCase):
+    def setUp(self):
+        self._orig = pw.FindConservedWatersLocal
+        self.captured = {}
+
+        def _spy(*args, **kwargs):
+            self.captured['args'] = args
+            self.captured['kwargs'] = kwargs
+
+        pw.FindConservedWatersLocal = _spy
+
+    def tearDown(self):
+        pw.FindConservedWatersLocal = self._orig
+
+    def test_defaults_and_coercion(self):
+        pw.toPyWATERLocal('/data/mine', 'a', 'ref.pdb')
+        args = self.captured['args']
+        self.assertEqual(args[0], '/data/mine')
+        self.assertEqual(args[1], 'A')            # chain uppercased
+        self.assertEqual(args[2], 'ref.pdb')
+        self.assertEqual(args[3], 'Mobility')
+        self.assertEqual(args[4], 'complete')
+        self.assertEqual(args[5], 2.4)
+        self.assertIsInstance(args[5], float)
+        self.assertEqual(args[6], 0.7)
+        self.assertFalse(args[7])                 # save_sup default off
+
+    def test_save_sup_string_truthy(self):
+        pw.toPyWATERLocal('/d', 'A', 'r.pdb', 'Mobility', 'complete', 2.4, 0.7, 'true')
+        self.assertTrue(self.captured['args'][7])
 
 
 if __name__ == '__main__':

@@ -115,6 +115,43 @@ With explicit optional parameters:
 The ``-c`` flag runs PyMOL without the GUI, ``-q`` quiets startup output, and
 ``-d`` executes PyMOL commands after startup.
 
+Local / Unpublished Structures
+------------------------------
+
+If you have your own structures that are not in the PDB (e.g. unpublished
+crystal forms on your workstation), PyWATER can find conserved waters across
+those local files instead of RCSB homologs.
+
+- **GUI**: tick **"Use local files (skip RCSB)"**, set **Local files folder**
+  to a folder containing your ``.pdb`` files (use *Browse...*), set **Chain id**
+  to the chain to analyse (applied to every file), and enter the **Reference
+  file** whose conserved waters are reported. Sequence identity, resolution and
+  maximum-structures are ignored in this mode.
+
+- **Command line** (``pywater_local FOLDER, CHAIN, REFERENCE`` with optional
+  ``REFINEMENT, LINKAGE, INCONSISTENCY, CONSERVATION, SAVE_SUPERIMPOSED``):
+
+  .. code-block:: text
+
+     PyMOL> pywater_local /path/to/my_structures, A, my_apo.pdb
+
+  .. code-block:: bash
+
+     .venv/bin/pymol -cq -d "run .venv/lib/python3.12/site-packages/pmg_tk/startup/pywater.py; pywater_local /path/to/my_structures, A, my_apo.pdb"
+
+Notes:
+
+- At least two ``.pdb`` files are required; all files must share the requested
+  chain id (single character). Files lacking that chain are skipped with a
+  warning; if the reference lacks it, the run stops with an error.
+- Each file is given a short synthetic id (``lc00``, ``lc01``, ...); the
+  reference is ``lc00``. The output folder ``~/PyWATER_outdir/lc00_<chain>/``
+  contains ``local_files_map.txt`` (id → original filename) and the result as
+  both ``cwm_lc00_<chain>_withConservedWaters.pdb`` and a copy named after your
+  reference file (e.g. ``my_apo_withConservedWaters.pdb``).
+- Current limits: ``.pdb`` format only, single-character chain ids, up to 100
+  files.
+
 PyMOL Python API
 ----------------
 

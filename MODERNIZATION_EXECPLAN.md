@@ -126,4 +126,10 @@ context manager — lower risk, same guarantee (used for `clusterPresence.txt`).
 - 2026-07-10: On `hp_modernization_v2`, converted all file I/O to context
   managers (#5).
 - 2026-07-10: Added `tests/` unit suite (#1) + extracted `_prioritize_and_cap`
-  helper. 16 tests green. Log-noise + file-I/O + tests bundled for one PR.
+  helper. 16 tests green. Log-noise + file-I/O + tests bundled for one PR (#20,
+  merged).
+- 2026-07-10: New feature on `hp_local_files` — conserved waters over local
+  unpublished `.pdb` files (`pywater_local` + GUI "Use local files" mode). See
+  `LOCAL_FILES_PLAN.md`. 27 tests green; verified headless end-to-end. Also
+  corrected the inaccurate `cmd.pywater(...)` API claim (it is a command
+  keyword, not a `cmd` attribute).
