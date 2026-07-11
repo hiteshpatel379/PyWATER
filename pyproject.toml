@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "pywater-pymol"
-version = "1.0.0"
+version = "2.0.0"
 description = "PyMOL plugin to find conserved water molecules in protein structures"
 readme = "README.rst"
 requires-python = ">=3.8"

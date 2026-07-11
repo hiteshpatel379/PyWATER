@@ -2,7 +2,7 @@
 
 """
 PyWATER finds conserved water molecules in X-ray protein structure (pdb).
-version 1.0
+version 2.0.0
 
 Important or conserved waters are the waters molecules which are present in most or all available pdb structures when superimposed.
 

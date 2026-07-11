@@ -59,3 +59,4 @@ nosetests.xml
 
 # Local agent handoff/planning files
 .agent/
+CLAUDE.md

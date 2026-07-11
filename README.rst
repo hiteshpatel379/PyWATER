@@ -259,11 +259,14 @@ Quick checks:
 History
 =======
 
+- v2.0.0: Major modernization release after the original public release.
+  Migrated RCSB access to current Data/Search APIs, modernized the PyMOL Qt
+  GUI, moved long searches off the GUI thread, added best-resolution structure
+  prioritization with a configurable structure cap, documented shell CLI usage,
+  added local-files mode for unpublished/private structures, and refreshed
+  package metadata for modern Python tooling. Removed the outdated PDF tutorial;
+  this README is now the maintained usage reference.
 - v1.0: Initial public release.
-- Current development: migrated RCSB requests to current Data/Search APIs,
-  modernized the plugin GUI for PyMOL Qt, moved long searches off the GUI
-  thread, added best-resolution structure prioritization, and added a
-  configurable structure cap for large sequence clusters.
 
 
 Citation
