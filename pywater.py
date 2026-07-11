@@ -947,12 +947,13 @@ MAX_LOCAL_STRUCTURES = 100
 def collectLocalStructures(local_dir, reference_filename):
     """
         Gather local .pdb files for a conserved-water search over unpublished
-        structures. Returns an ordered list of (synthetic_id, source_path) with
-        the reference first (synthetic_id 'lc00'), plus the query id 'lc00'.
-        Each file is assigned a synthetic 4-char id (lc00..lc99) so the
-        downstream water-identity slicing keeps working. Raises ValueError on a
-        missing folder, fewer than 2 .pdb files, a reference not in the folder,
-        or more than MAX_LOCAL_STRUCTURES files.
+        structures. Returns an ordered list of (id, source_path) with the
+        reference first, plus the query id. Each file gets a 4-char id (required
+        by the water-identity slicing / cwm_????_?.pdb glob): the real PDB id is
+        used when the filename starts with a valid 4-char id (e.g. 4lyw_a.pdb ->
+        '4lyw'), otherwise a synthetic 'lc00'..'lc99' id is assigned. Raises
+        ValueError on a missing folder, fewer than 2 .pdb files, a reference not
+        in the folder, or more than MAX_LOCAL_STRUCTURES files.
     """
     if not os.path.isdir(local_dir):
         raise ValueError('Local files folder not found: %s' % local_dir)
@@ -968,8 +969,24 @@ def collectLocalStructures(local_dir, reference_filename):
     if ref_base not in pdb_files:
         raise ValueError('Reference file "%s" is not among the .pdb files in %s.' % (ref_base, local_dir))
     ordered = [ref_base] + [f for f in pdb_files if f != ref_base]
-    structures = [('lc%02d' % idx, os.path.join(local_dir, fname)) for idx, fname in enumerate(ordered)]
-    return structures, 'lc00'
+
+    id_re = re.compile('^[a-z0-9]{4}$')
+    used = set()
+    synthetic = 0
+    structures = []
+    for fname in ordered:
+        token = os.path.splitext(fname)[0].split('_')[0].lower()
+        if id_re.match(token) and token not in used:
+            pdb_id = token
+        else:
+            pdb_id = 'lc%02d' % synthetic
+            while pdb_id in used:
+                synthetic += 1
+                pdb_id = 'lc%02d' % synthetic
+            synthetic += 1
+        used.add(pdb_id)
+        structures.append((pdb_id, os.path.join(local_dir, fname)))
+    return structures, structures[0][0]
 
 
 def _chainHasCA(pdb_path, chain):
@@ -986,11 +1003,11 @@ def _chainHasCA(pdb_path, chain):
 
 
 def _writeLocalMap(outdir, selectedPDBChain, structures):
-    """Write the synthetic-id -> original-filename map so results stay legible."""
+    """Write the structure-id -> original-filename map so results stay legible."""
     map_dir = os.path.join(outdir, selectedPDBChain)
     if not os.path.exists(map_dir):
         os.makedirs(map_dir)
-    lines = ['synthetic_id\toriginal_file']
+    lines = ['structure_id\toriginal_file']
     lines += ['%s\t%s' % (pdb_id, os.path.basename(src)) for pdb_id, src in structures]
     with open(os.path.join(map_dir, 'local_files_map.txt'), 'w') as f:
         f.write('\n'.join(lines) + '\n')
@@ -1005,7 +1022,14 @@ def FindConservedWatersLocal(local_files_dir, selectedStrutureChain, local_refer
         conserved waters are reported. Reuses the same superimpose/cluster/score
         pipeline as FindConservedWaters (via makePDBwithConservedWaters).
     """
-    selectedStrutureChain = str(selectedStrutureChain).upper()
+    local_files_dir = os.path.expanduser(str(local_files_dir).strip())
+    local_reference = str(local_reference).strip()
+    selectedStrutureChain = str(selectedStrutureChain).strip().upper()
+    if not selectedStrutureChain:
+        logger.error( 'Please enter a chain id (single character, e.g. A) to analyse in the local files.' )
+        tkMessageBox.showinfo(title = 'Error message',
+            message = """Please enter a chain id (single character, e.g. A) to analyse in the local files.""")
+        return None
     if not chainIdFormat(selectedStrutureChain):
         return None
     if inconsistency_coefficient > 2.8:
@@ -1235,9 +1259,13 @@ class _LogCollector(logging.Handler):
     def __init__(self):
         logging.Handler.__init__(self)
         self.messages = []
+        self.errors = []
 
     def emit(self, record):
-        self.messages.append(record.getMessage())
+        message = record.getMessage()
+        self.messages.append(message)
+        if record.levelno >= logging.ERROR:
+            self.errors.append(message)
 
     def _find(self, needle):
         for message in reversed(self.messages):
@@ -1264,6 +1292,13 @@ class _LogCollector(logging.Handler):
                 if selection_summary and message != selection_summary:
                     return '%s\n%s' % (selection_summary, message)
                 return message
+        # Fall back to any error that was logged so validation/other failures
+        # surface in the GUI instead of a misleading "Finished" message.
+        if self.errors:
+            latest_error = self.errors[-1]
+            if selection_summary and latest_error != selection_summary:
+                return '%s\n%s' % (selection_summary, latest_error)
+            return latest_error
         if selection_summary:
             return selection_summary
         return 'Finished. See ~/PyWATER_outdir/pywater.log for details.'
